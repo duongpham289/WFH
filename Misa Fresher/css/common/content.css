@@ -10,8 +10,9 @@
 
 /* Page title */
 .content .header-content{
-    padding: 16px;
+    padding: 24px;
     display: flex;
+    align-items: center;
     background-color: #fff;
     
 }
@@ -20,8 +21,9 @@
         font-weight: bold;
     }
 
-    .content .header-content .page-feature{
-
+    .content .header-content .content-feature{
+        position: absolute;
+        right: 16px;
     }
 
 /* Filter bar */
@@ -36,4 +38,13 @@
 /* Grid */
 .content .grid{
     
+}
+
+
+
+.icon-add{
+    display: flex;
+    width: 16px;
+    height: 16px;
+    background-image: url('../../content/icon/add.png');
 }
