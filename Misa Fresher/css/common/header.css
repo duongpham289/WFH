@@ -1,0 +1,64 @@
+.header{
+    display: flex;
+    width: calc(100% - 221px);
+    height: 60px;
+    border-bottom: 1px solid #e5e5e5;
+    justify-content: space-between;
+}
+    .header .header-left{
+        display: flex;
+        width: 300px;
+        height: 60px;
+    }
+        .header .header-left .header-logo{
+            width: 50px;
+            height: 48px;
+            margin: 5px 5px 5px 24px;
+            align-self: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url('../../content/img/haisanbiendong.png');
+        }
+        .header .header-left .header-name{
+            align-self: center;
+        }
+        .header .header-left .header-arrow{
+            align-self: center;
+            margin: auto 15px;
+            
+        }
+    .header .header-right{
+        display: flex;
+        width: 250px;
+        height: 60px;
+    }
+        .header .header-right .avatar{
+            width: 50px;
+            height: 48px;
+            align-self: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url('../../content/icon/avatar-default.png');
+        }
+        .header .header-right .user-name{
+            align-self: center;
+            margin: 0px 10px;
+        }
+        .header .header-right .user-setting{
+            align-self: center;
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+            background-image: url('../../content/icon/option.png');
+            
+        }
+
+
+.arrow-down{
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
