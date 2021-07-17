@@ -1,5 +1,21 @@
-/* .grid{
+.grid{
     width: 100%;
-    background-color: #808080;
-    height: calc(100vh - 246px);
-} */
+    /* background-color: #808080; */
+}
+
+table th,td{
+    border-bottom: 1px solid #bbbbbb;
+    padding:15px 16px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+table th{
+    font-style: bold;
+}
+.salary{
+    text-align: right;
+}

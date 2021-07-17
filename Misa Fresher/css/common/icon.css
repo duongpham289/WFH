@@ -1,6 +1,7 @@
 .icon-option-default-16{
     width: 16px;
     height: 16px;
+    margin: 0 16px;
     background-position: center;
     background-image: url('../../content/icon/option.png');
     background-repeat: no-repeat;

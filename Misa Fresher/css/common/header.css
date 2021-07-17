@@ -16,23 +16,21 @@
             font-weight: bold;
             font-size: medium;
             font-family: GoogleSans-Regular;
-            margin-left: 16px;
+            margin-left: 24px;
             padding-right: 10px;
         }
     .header .header-right{
         display: flex;
-        padding-right: 16px;
+        padding: 0 16px;
         align-items: center;
     }
         .header .header-right .avatar{
             width: 30px;
             height: 28px;
+            margin: 0 16px;
             background-size: contain;
             background-repeat: no-repeat;
             background-image: url('../../content/icon/avatar-default.png');
-        }
-        .header .header-right .user-name{
-            margin: 0px 10px;
         }
 
 

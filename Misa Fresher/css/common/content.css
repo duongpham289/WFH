@@ -10,7 +10,7 @@
 
 /* Page title */
 .content .header-content{
-    padding: 16px;
+    padding: 16px 0;
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -33,5 +33,5 @@
 /* Paging bar */
 .content .paging-bar{
     height: 56px;
-    background-color: blue;
+    /* background-color: blue; */
 }
