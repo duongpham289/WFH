@@ -1,16 +1,16 @@
 .content{
-    /* float: left; */
     position: absolute;
     top: 61px;
     left: 221px;
-    width: calc(100% - 221px);
+    width: calc(100% - 237px);
     height: calc(100vh - 61px);
-    background-color: #e9ebee;
+    background-color: #ffffff;
+    padding-left: 16px;
 }
 
 /* Page title */
 .content .header-content{
-    padding: 24px;
+    padding: 16px;
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -28,23 +28,10 @@
 
 /* Filter bar */
 .content .filter-bar{
-    
 }
 
 /* Paging bar */
 .content .paging-bar{
-    
-}
-/* Grid */
-.content .grid{
-    
-}
-
-
-
-.icon-add{
-    display: flex;
-    width: 16px;
-    height: 16px;
-    background-image: url('../../content/icon/add.png');
+    height: 56px;
+    background-color: blue;
 }

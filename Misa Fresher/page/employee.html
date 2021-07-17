@@ -7,6 +7,9 @@
 
 	<link href="../css/common/main.css" rel="stylesheet">
 	<link href="../css/common/button.css" rel="stylesheet">
+	<link href="../css/common/input.css" rel="stylesheet">
+	<link href="../css/common/grid.css" rel="stylesheet">
+	<link href="../css/common/icon.css" rel="stylesheet">
 	<link href="../css/common/toolbar.css" rel="stylesheet">
 	<link href="../css/common/content.css" rel="stylesheet">
 	<link href="../css/common/header.css" rel="stylesheet">
@@ -47,17 +50,18 @@
         </div>
     </div>
     <div class="header">
-        <div class="header-left">
-            <select class="header-name">
-                <option>Nhà hàng Biển Đông</option>
-                <option>Nhà hàng Hải Dương</option>
-            </select>
-        </div>
-        <div class="header-right">
-            <div class="avatar"></div>
-            <div class="user-name">Phạm Hải Dương</div>
-            <div class="user-setting"></div>
-        </div>
+            <div class="header-left">
+                <select class="header-name">
+                    <option>Nhà hàng Biển Đông</option>
+                    <option>Nhà hàng Hải Dương</option>
+                </select>
+            </div>
+            <div class="header-right">
+                <div class="avatar"></div>
+                <div class="user-name">Phạm Hải Dương</div>
+                <div class="icon-option-default-16"></div>
+            </div>
+        
     </div>
     <div class="content">
         <div class="header-content">
@@ -71,18 +75,18 @@
         </div>
         <div class="filter-bar">
             <div class="filter-left">
-                <input type="text" placeholder="Tìm kiếm theo Mã, Tên nhân viên">
-                <select>
+                <input type="text" style="width:250px" class="icon-search input-search" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                <select class="m-dropdown">
                     <option>Tất cả phòng ban</option>
                     <option>Phòng đào tạo</option>
                 </select>
-                <select>
+                <select class="m-dropdown">
                     <option>Tất cả vị trí</option>
                     <option>Tổng Giám Đốc</option>
                 </select>
             </div>
             <div class="filter-right">
-                <button></button>
+                <button class="m-btn-refresh"></button>
             </div>
             
         </div>

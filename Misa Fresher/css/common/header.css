@@ -1,6 +1,6 @@
 .header{
     display: flex;
-    width: calc(100% - 221px);
+    width: calc(100% - 222px);
     height: 60px;
     border-bottom: 1px solid #e5e5e5;
     justify-content: space-between;
@@ -9,39 +9,30 @@
         display: flex;
         width: 300px;
         height: 60px;
+        align-items: center;
     }
         .header .header-left .header-name{
-            align-self: center;
             border: none;
             font-weight: bold;
             font-size: medium;
+            font-family: GoogleSans-Regular;
             margin-left: 16px;
             padding-right: 10px;
         }
     .header .header-right{
         display: flex;
-        width: 250px;
-        height: 60px;
+        padding-right: 16px;
+        align-items: center;
     }
         .header .header-right .avatar{
             width: 30px;
             height: 28px;
-            align-self: center;
             background-size: contain;
             background-repeat: no-repeat;
             background-image: url('../../content/icon/avatar-default.png');
         }
         .header .header-right .user-name{
-            align-self: center;
             margin: 0px 10px;
-        }
-        .header .header-right .user-setting{
-            align-self: center;
-            width: 20px;
-            height: 20px;
-            background-size: contain;
-            background-image: url('../../content/icon/option.png');
-            
         }
 
 
