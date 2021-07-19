@@ -33,19 +33,11 @@
     padding-left: 24px;
     padding-right: 24px;
     text-align: center;
-    outline: none;
     cursor: pointer;
 }
 
-.m-dropdown{
-    border: 1px solid #bbbbbb;
-    border-radius: 4px;
-    height: 40px;
-    font-size: 13px;
-    padding: 0 25px 0 16px;
-    font-family: GoogleSans-Regular;
-    margin: 0 10px;
-    cursor: pointer;
+.m-second-button:hover{
+    background-color: #e9ebee;
 }
 
 .m-btn-refresh{
@@ -61,4 +53,19 @@
     padding-right: 24px;
     outline: none;
     cursor: pointer;
+}
+
+.m-btn-cancel{
+    margin: 10px 0;
+    position: absolute;
+    right: 116px;
+    width: 30px;
+    line-height: 40px;
+}
+
+.m-btn-save{
+    margin: 10px 0;
+    position: absolute;
+    right: 24px;
+    width: 45px;
 }

@@ -18,3 +18,10 @@
     background-repeat: no-repeat;
     background-position: 16px center;
 }
+
+.icon-save{
+    background-image: url('../../content/icon/save.png');
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+}
