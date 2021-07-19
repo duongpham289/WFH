@@ -8,6 +8,7 @@
 	<link href="../css/common/main.css" rel="stylesheet">
 	<link href="../css/common/button.css" rel="stylesheet">
 	<link href="../css/common/input.css" rel="stylesheet">
+	<link href="../css/common/popup.css" rel="stylesheet">
 	<link href="../css/common/grid.css" rel="stylesheet">
 	<link href="../css/common/icon.css" rel="stylesheet">
 	<link href="../css/common/toolbar.css" rel="stylesheet">
@@ -107,115 +108,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
-                    <tr>
-                        <td>NV00001</td>
-                        <td>Phạm Hải Dương</td>
-                        <td>Nam</td>
-                        <td>28/09/2000</td>
-                        <td>0966033661</td>
-                        <td>duongph289@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>IT</td>
-                        <td class="salary">1000000</td>
-                        <td>Đang thử việc</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="paging-bar">
-            <div class="paging-record-info">
-                Hiển thị <b>1-10/1000</b> nhân viên
+          <div class="paging-left">
+              <p>Hiển thị 1-10/1000 nhân viên</p>
+          </div>
+          <div class="paging-center">
+              <button class="btn-inline"><i class="fas fa-angle-double-left"></i></button>
+              <button class="btn-inline"><i class="fas fa-angle-left"></i></button>
+              <button class="circle">1</button>
+              <button class="circle">2</button>
+              <button class="circle">3</button>
+              <button class="circle">4</button>
+              <button class="btn-inline"><i class="fas fa-angle-right"></i></button>
+              <button class="btn-inline"><i class="fas fa-angle-double-right"></i></button>
+          </div>
+          <div class="paging-right">
+              <p>10 nhân viên/trang</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="popup">
+        <div class="popup-model"></div>
+        <div class="popup-body">
+          <div class="popup-header">
+            <div class="popup-name">Thông tin nhân viên</div>
+            <div class="popup-close">
+              <button></button>
             </div>
-            <div class="paging-option"></div>
-            <div class="paging-record-option">
-                <b>10</b> nhân viên/trang
-            </div>
+          </div>
+          <div class="popup-navbar">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</div>
+          <div class="popup-content">
+            <div class="info-header"></div>
+            <div ></div>
+          </div>
         </div>
     </div>
+    
+
     <script src="../lib/jquery-3.6.0.min.js"></script>
     <script src="../js/common/common.js"></script>
     <script src="../js/page/employee.js"></script>

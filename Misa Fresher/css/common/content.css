@@ -31,7 +31,46 @@
 }
 
 /* Paging bar */
-.content .paging-bar{
+.content .paging-bar {
+    width: 100%;
     height: 56px;
-    /* background-color: blue; */
+    float: left;
+    position: relative;
 }
+
+
+    .content .paging-bar .paging-left {
+        height: 100%;
+        width: 300px;
+        position: absolute;
+        left: 0;
+    }
+
+        .content .paging-bar .paging-left > p {
+            line-height: 56px;
+        }
+
+    .content .paging-bar .paging-center {
+        width: 400px;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .content .paging-bar .paging-right {
+        height: 100%;
+        width: 300px;
+        position: absolute;
+        right: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .content .paging-bar .paging-right > p {
+        line-height: 56px;
+    }

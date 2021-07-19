@@ -1,21 +1,49 @@
 .grid{
     width: 100%;
-    /* background-color: #808080; */
+    overflow-y: auto;
+    overflow-x: auto;
+    border-bottom: 5px solid #bbbbbb;
 }
-
+table{
+  border-collapse: collapse;
+}
 table th,td{
     border-bottom: 1px solid #bbbbbb;
-    padding:15px 16px;
+    padding:0 16px;
     text-align: left;
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; */
     max-width: 100px;
+    height: 48px;
 }
 
 table th{
-    font-style: bold;
+    background-color: #fff;
+    position: sticky;
+    top: 0px;
+    font-weight: bold;
 }
+
+table tr:nth-child(odd) {
+    background-color: #E4E4E4;
+}
+
+table tr:hover {
+    background-color: #bbbbbb;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: lightgray;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 3px;
+}
+
 .salary{
     text-align: right;
-}
+} 
