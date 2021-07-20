@@ -164,13 +164,7 @@ function demo() {
    document.getElementById('demo' + count++)
       .classList.toggle('hover')
    
-}
-
-function demo2() {
-   if(mousein) return
-   document.getElementById('demo2')
-      .classList.toggle('hover')
-}
+}  
 
 function reset() {
    count = 1
