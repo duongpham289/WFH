@@ -9,6 +9,7 @@
 	<link href="../css/common/button.css" rel="stylesheet">
 	<link href="../css/common/input.css" rel="stylesheet">
 	<link href="../css/common/popup.css" rel="stylesheet">
+	<link href="../css/common/dropdown.css" rel="stylesheet">
 	<link href="../css/common/grid.css" rel="stylesheet">
 	<link href="../css/common/icon.css" rel="stylesheet">
 	<link href="../css/common/toolbar.css" rel="stylesheet">
@@ -16,6 +17,7 @@
 	<link href="../css/common/header.css" rel="stylesheet">
 	<link href="../css/common/navbar.css" rel="stylesheet">
 	<link href="../css/page/employee.css" rel="stylesheet">
+	<link href="../content/font/fontawesome-5.15.1/css/fontawesome.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -68,7 +70,7 @@
         <div class="header-content">
             <div class="title">Danh sách nhân viên</div>
             <div class="content-feature">
-                <button class="m-btn m-btn-default">
+                <button id="myBtn" class="m-btn m-btn-default">
                     <div class="m-btn-icon icon-add"></div>
                     <div class="btn-text">Thêm nhân viên</div>
                 </button>
@@ -131,8 +133,7 @@
       </div>
     </div>
 
-    <div class="popup">
-        <div class="popup-model"></div>
+    <div id="myModal" class="popup">
         <div class="popup-body">
           <div class="popup-header">
             <div class="popup-name">Thông tin nhân viên</div>
@@ -146,7 +147,7 @@
           </div>
           <div class="popup-content">
             <div class="general-info">
-              <div class="gi-title">
+              <div class="info-title">
                 <span>A. Thông tin chung:</span>
                 <div class="title-layout"></div>
               </div>
@@ -167,7 +168,49 @@
                 </div>
                 <div class="info-column info-column-right">
                   <span>Giới tính</span>
-                  <input type="text">
+                  <!-- <div class="dropdown">
+                    <button class="m-dropbtn">Giới tính</button>
+                    <div class="dropdown-content">
+                      <a href="#">Nam</a>
+                      <a href="#">Nữ</a>
+                      <a href="#">Không xác định</a>
+                    </div>
+                  </div> -->
+                  <nav>
+                    <menu>
+                      <menuitem id="demo1">
+                        <a>drop</a>
+                        <menu>
+                          <menuitem><a>about</a></menuitem>
+                               <menuitem>
+                                  <a>settings</a>
+                                  <menu>
+                                     <menuitem><a>Test 1</a></menuitem>
+                                     <menuitem><a>Test 2</a></menuitem>
+                                     <menuitem><a>Test 3</a></menuitem>
+                                     <menuitem><a>Test 4</a></menuitem>
+                                  </menu>  
+                               </menuitem>
+                          <menuitem><a>help</a></menuitem>
+                          <menuitem id="demo2">
+                            <a>more</a>
+                            <menu>
+                              <menuitem id="demo3">
+                                <a>deeper</a>
+                                <menu>
+                                  <menuitem><a>deep 1</a></menuitem>
+                                  <menuitem><a>deep 2</a></menuitem>
+                                  <menuitem><a>deep 3</a></menuitem>
+                                </menu>
+                              </menuitem>
+                              <menuitem><a>test</a></menuitem>
+                            </menu>
+                          </menuitem>
+                        </menu>
+                      </menuitem>
+                         <menuitem><a>no drop</a></menuitem>
+                    </menu>
+                  </nav>
                 </div>
               </div>
               <div class="info-row">
@@ -198,18 +241,33 @@
               </div>
             </div>
             <div class="working-info">
-              <div class="wi-title">
+              <div class="info-title">
                 <span>b. thông tin công việc:</span>
                 <div class="title-layout"></div>
               </div>
               <div class="info-row">
                 <div class="info-column">
                   <span>Vị trí</span>
-                  <input type="text">
+                  <div class="dropdown">
+                    <button class="m-dropbtn">Vị trí</button>
+                    <div class="dropdown-content">
+                      <a href="#">Giám đốc</a>
+                      <a href="#">Trưởng phòng</a>
+                      <a href="#">Nhân viên</a>
+                    </div>
+                  </div>
                 </div>
                 <div class="info-column info-column-right">
                   <span>Phòng ban</span>
-                  <input type="text">
+                  <div class="dropdown">
+                    <button class="m-dropbtn">Phòng ban</button>
+                    <div class="dropdown-content">
+                      <a href="#">Phòng Hành chính</a>
+                      <a href="#">Phòng Nhân sự</a>
+                      <a href="#">Phòng IT</a>
+                      <a href="#">Phòng Marketing</a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="info-row">
@@ -229,7 +287,13 @@
                 </div>
                 <div class="info-column info-column-right">
                   <span>Tình trạng công việc</span>
-                  <input type="text">
+                  <div class="dropdown">
+                    <button class="m-dropbtn">Tình trạng công việc</button>
+                    <div class="dropdown-content">
+                      <a href="#">Đang làm việc</a>
+                      <a href="#">Đang thử việc</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

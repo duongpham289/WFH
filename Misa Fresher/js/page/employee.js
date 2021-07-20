@@ -29,14 +29,14 @@ function loadData() {
             var tr = $(`<tr>
                     <td><div><span>`+ item.EmployeeCode + `</span></div></td>
                     <td><div title="`+ fullName + `"><span>` + fullName + `</span></div></td>
-                    <td><div><span>`+ genderName + `</span></div></td>
+                    <td><div ><span>`+ genderName + `</span></div></td>
                     <td><div><span>`+ dateOfBirth + `</span></div></td>
                     <td><div><span>`+ phoneNumber + `</span></div></td>
-                    <td><div><span>`+ email + `</span></div></td>
-                    <td><div><span>`+ positionName + `</span></div></td>
-                    <td><div><span>`+ departmentName + `</span></div></td>
+                    <td><div title="`+ email + `"><span>`+ email + `</span></div></td>
+                    <td><div  title="`+ positionName + `"><span>`+ positionName + `</span></div></td>
+                    <td><div  title="`+ departmentName + `"><span>`+ departmentName + `</span></div></td>
                     <td class="salary"><div><span>`+ salary + `</span></div></td>
-                    <td><div><span>`+ workStatus + `</span></div></td>
+                    <td><div  title="`+ workStatus + `"><span>`+ workStatus + `</span></div></td>
                 </tr>`);
 
             $('table tbody').append(tr);
@@ -113,3 +113,74 @@ function formatWorkStatus(workStatus) {
     }
     return workStatus = '';
 }
+
+/**
+ * modal
+ */
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("popup-close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+//dropdown
+// For the thumbnail demo! :]
+
+var count = 1
+setTimeout(demo, 500)
+setTimeout(demo, 700)
+setTimeout(demo, 900)
+setTimeout(reset, 2000)
+
+setTimeout(demo, 2500)
+setTimeout(demo, 2750)
+setTimeout(demo, 3050)
+
+
+var mousein = false
+function demo() {
+   if(mousein) return
+   document.getElementById('demo' + count++)
+      .classList.toggle('hover')
+   
+}
+
+function demo2() {
+   if(mousein) return
+   document.getElementById('demo2')
+      .classList.toggle('hover')
+}
+
+function reset() {
+   count = 1
+   var hovers = document.querySelectorAll('.hover')
+   for(var i = 0; i < hovers.length; i++ ) {
+      hovers[i].classList.remove('hover')
+   }
+}
+
+document.addEventListener('mouseover', function() {
+   mousein = true
+   reset()
+})
