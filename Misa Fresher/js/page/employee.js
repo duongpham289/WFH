@@ -145,36 +145,23 @@ window.onclick = function(event) {
 
 
 //dropdown
-// For the thumbnail demo! :]
-
-var count = 1
-setTimeout(demo, 500)
-setTimeout(demo, 700)
-setTimeout(demo, 900)
-setTimeout(reset, 2000)
-
-setTimeout(demo, 2500)
-setTimeout(demo, 2750)
-setTimeout(demo, 3050)
-
-
-var mousein = false
-function demo() {
-   if(mousein) return
-   document.getElementById('demo' + count++)
-      .classList.toggle('hover')
-   
-}  
-
-function reset() {
-   count = 1
-   var hovers = document.querySelectorAll('.hover')
-   for(var i = 0; i < hovers.length; i++ ) {
-      hovers[i].classList.remove('hover')
-   }
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
-document.addEventListener('mouseover', function() {
-   mousein = true
-   reset()
-})
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}

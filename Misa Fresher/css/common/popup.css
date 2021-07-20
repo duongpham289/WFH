@@ -141,6 +141,9 @@
         height: 10px;
         width: 250px;
     }
+    .info-column span{
+        display: flex;
+    }
     .info-column-right{
         position: absolute;
         right: 15px;
