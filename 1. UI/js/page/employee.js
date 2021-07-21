@@ -108,14 +108,15 @@ function formatMoney(salary) {
  */
 function formatWorkStatus(workStatus) {
     var works = ["Đang làm việc", "Đang thử việc", "Đã nghỉ việc", "Đã nghỉ hưu"]
-    if (workStatus != null) {
+    if (workStatus != null && workStatus < 4) { //workStatus 5 6 chưa biết
         return workStatus = works[workStatus];
     }
     return workStatus = '';
 }
 
 /**
- * modal
+ * Hiệu ứng ẩn hiện modal
+ * CreatedBy: PHDUONG (21/07/2021)
  */
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -144,11 +145,19 @@ window.onclick = function(event) {
 }
 
 
-//dropdown
+/**
+ * Ẩn hiện dropdown và xoay mũi tên tương ứng
+ * CreatedBy: PHDUONG (21/07/2021)
+ */
 
 var y = '';
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
+/**
+ * Ẩn hiện dropdown
+ * @param {*} id tag id
+ * CreatedBy: PHDUONG (21/07/2021)
+ */
 function myFunction(id) {
     document.getElementById(id).classList.toggle("show");
     

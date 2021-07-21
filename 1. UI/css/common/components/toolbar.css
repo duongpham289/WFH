@@ -9,9 +9,14 @@
         display: flex;
         width: 100%;
     }
+        .filter-bar .filter-left{
+            display: flex;
+            width: 100%;
+        }
         
-        .filter-bar .filter-left .search-bar .input{
-            border: none;
+        .filter-bar .filter-left input{
+            /* border: none; */
+            width: 250px;
         }
 
     .filter-bar .filter-right{

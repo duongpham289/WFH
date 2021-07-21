@@ -2,7 +2,7 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 999; /* Sit on top */
-    padding-top: 40px; /* Location of the box */
+    padding-top: 10px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -16,10 +16,9 @@
         position: relative;
         margin: auto;
         width: 50%;
-        height: 85%;
+        height: 90%;
         padding: 24px !important;
         background-color: #ffffff;
-        /* z-index: 1000; */
         border-radius: 5px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
         animation-name: animatetop;
@@ -48,7 +47,7 @@
                     border: none;
                     background-color: #FFF;
                     cursor: pointer;
-                    background-image: url(../../content/icon/x.svg);
+                    background-image: url('../../../content/icon/x.svg');
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: 20px;
@@ -65,7 +64,7 @@
             height: 92.4%;
         }
             .popup .popup-body .popup-navbar .avatar{
-                background-image: url('../../content/img/blank-avatar.png');
+                background-image: url('../../../content/img/blank-avatar.png');
                 background-repeat: no-repeat;
                 background-position: center top;
                 background-size: contain;
@@ -111,7 +110,7 @@
         border-radius: 0 0 5px 5px;
     }
 
-     
+
 .info-title{
     font-size: 14px;
     text-transform: uppercase;
@@ -123,28 +122,23 @@
     background-color: #019160;
     height: 5px;
     width: 90px;
-    /* margin-top: 8px; */
 }
 
-/* set up row and column */
 .info-row {
     display: flex;
 }
 
 .info-column {
-    /* padding-top: 10px; */
     width: 270px;
 }
 
     .info-column input{
-        /* margin-top: 5px; */
         border-radius: 4px;
-        
+        /* padding: 0 0 0 16px; */
         border: 1px solid #000;
         height: 40px;
         margin: 0;
-        padding: 0;
-        width: 100%;
+        width: inherit;
     }
     .info-column span{
         display: flex;

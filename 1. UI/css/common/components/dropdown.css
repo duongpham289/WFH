@@ -1,5 +1,5 @@
 .dropdown {
-  display: flex;
+  position: relative;
   align-items: center;
   border: 1px solid #000;
   height: 40px;
@@ -42,6 +42,7 @@
 .filter-bar-dropdown{
   margin: 0 10px;
   padding: 0;
+  position: unset;
   width: 15%;
 }
 
@@ -50,7 +51,7 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 60px;
+  top: 45px;
   width: inherit;
   background-color: #fff;
   z-index: 999;
@@ -63,7 +64,7 @@
 
 .header-dropdown-content{
   top: 54px;
-  width: 15.3%;
+  width: inherit;
   margin-left: 24px;
 }
 
@@ -72,9 +73,9 @@
   top: 100px;
 }
 
-.da-left{
-  top: 108px;
-  width: 47%;
+.drop-left{
+  top: 45px;
+  width: inherit;
 }
 
 .dropdown-content a {

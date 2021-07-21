@@ -5,18 +5,7 @@
   <meta charset="utf-8">
   <title>Misa</title>
 
-
-  <link href="../css/common/main.css" rel="stylesheet">
-  <link href="../css/common/button.css" rel="stylesheet">
-  <link href="../css/common/input.css" rel="stylesheet">
-  <link href="../css/common/popup.css" rel="stylesheet">
-  <link href="../css/common/dropdown.css" rel="stylesheet">
-  <link href="../css/common/grid.css" rel="stylesheet">
-  <link href="../css/common/icon.css" rel="stylesheet">
-  <link href="../css/common/toolbar.css" rel="stylesheet">
-  <link href="../css/common/content.css" rel="stylesheet">
-  <link href="../css/common/header.css" rel="stylesheet">
-  <link href="../css/common/navbar.css" rel="stylesheet">
+  <link href="../css/common/style.css" rel="stylesheet">
   <link href="../css/page/employee.css" rel="stylesheet">
 </head>
 
@@ -57,7 +46,7 @@
     <div class="header-left">
       <div class="dropdown dropdown-header">
         <button onclick="myFunction()" value="header-dropdown" class="dropbtn header-name">Nhà hàng Biển Đông<div id="m-header-dropdown" class="dropdown-arrow"></div></button>
-        <div id="header-dropdown" class="dropdown-content header-dropdown">
+        <div id="header-dropdown" class="dropdown-content header-dropdown-content">
           <a href="#">Nhà hàng Biển Tây</a>
           <a href="#">Nhà hàng Biển Nam</a>
           <a href="#">Nhà hàng Biển Bắc</a>
@@ -83,7 +72,7 @@
     </div>
     <div class="filter-bar">
       <div class="filter-left">
-        <input type="text" style="width:250px" class="icon-search input-icon"
+        <input type="text" class="icon-search input-icon"
           placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
           <div class="dropdown filter-bar-dropdown">
             <button onclick="myFunction()" value="department-search" class="dropbtn">Tất cả phòng ban<div id="m-department-search" class="dropdown-arrow"></div></button>
@@ -95,7 +84,7 @@
             </div>
           </div>
         <div class="dropdown filter-bar-dropdown">
-          <button onclick="myFunction()" value="position-search" class="dropbtn">Tất cả vị trí<div id="m-arrow position-search" class="dropdown-arrow"></div></button>
+          <button onclick="myFunction()" value="position-search" class="dropbtn">Tất cả vị trí<div id="m-position-search" class="dropdown-arrow"></div></button>
           <div id="position-search" class="dropdown-content filterbar-dropdown-content">
             <a href="#">Giám đốc</a>
             <a href="#">Trưởng phòng</a>
@@ -104,7 +93,7 @@
         </div>
       </div>
       <div class="filter-right">
-        <button class="m-btn-refresh"></button>
+        <button onclick="loadData()" class="m-btn-refresh"></button>
       </div>
 
     </div>
@@ -148,7 +137,7 @@
     </div>
   </div>
 
-  <div id="myModal" class="popup" style="display: block">
+  <div id="myModal" class="popup" >
     <div class="popup-body">
       <div class="popup-header">
         <div class="popup-name">Thông tin nhân viên</div>
@@ -169,11 +158,11 @@
           <div class="info-row">
             <div class="info-column">
               <span>Mã nhân viên(*)</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
             <div class="info-column info-column-right">
               <span>Họ và tên(*)</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
           </div>
           <div class="info-row">
@@ -196,7 +185,7 @@
           <div class="info-row">
             <div class="info-column">
               <span>Số CMTND/ Căn cước</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
             <div class="info-column info-column-right">
               <span>Ngày cấp</span>
@@ -206,17 +195,17 @@
           <div class="info-row">
             <div class="info-column">
               <span>Nơi cấp</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
               <span>Email</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
             <div class="info-column info-column-right">
               <span>Số điện thoại (*)</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
           </div>
         </div>
@@ -230,7 +219,7 @@
               <span>Vị trí</span>
               <div class="dropdown">
                 <button onclick="myFunction()" value="position" class="dropbtn">Vị trí<div id="m-position" class="dropdown-arrow"></div></button>
-                <div id="position" class="dropdown-content da-left">
+                <div id="position" class="dropdown-content drop-left">
                   <a href="#">Giám đốc</a>
                   <a href="#">Trưởng phòng</a>
                   <a href="#">Nhân viên</a>
@@ -253,11 +242,11 @@
           <div class="info-row">
             <div class="info-column">
               <span>Mã số thuế cá nhân</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
             <div class="info-column info-column-right">
               <span>Mức lương cơ bản</span>
-              <input type="text">
+              <input type="text" placeholder="Nhập vào đây...">
             </div>
           </div>
           <div class="info-row">
