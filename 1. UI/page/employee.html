@@ -2,286 +2,356 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Misa</title>
+    <meta charset="utf-8">
+    <title>Misa</title>
 
-  <link href="../css/common/style.css" rel="stylesheet">
-  <link href="../css/page/employee.css" rel="stylesheet">
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../content/font/fontawesome-5.15.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="navbar">
-    <div class="logo-site">
-      <div class="toggle-icon"></div>
-      <div class="amis-logo"></div>
-    </div>
-    <div class="navbar-content">
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-dashboard"></div>
-        <div class="nav-item-text">Tổng quan</div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-report"></div>
-        <div class="nav-item-text">Báo cáo</div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-dashboard"></div>
-        <div class="nav-item-text">Mua hàng</div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-dic-employee"></div>
-        <div class="nav-item-text">Danh mục nhân viên</div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-dic-employee"></div>
-        <div class="nav-item-text">Danh mục nhân viên</div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-icon nav-item-setting"></div>
-        <div class="nav-item-text">Thiết lập hệ thống</div>
-      </div>
-    </div>
-  </div>
-  <div class="header">
-    <div class="header-left">
-      <div class="dropdown dropdown-header">
-        <button onclick="myFunction()" value="header-dropdown" class="dropbtn header-name">Nhà hàng Biển Đông<div id="m-header-dropdown" class="dropdown-arrow"></div></button>
-        <div id="header-dropdown" class="dropdown-content header-dropdown-content">
-          <a href="#">Nhà hàng Biển Tây</a>
-          <a href="#">Nhà hàng Biển Nam</a>
-          <a href="#">Nhà hàng Biển Bắc</a>
+    <div class="navbar">
+        <div class="logo-site">
+            <div class="toggle-icon"></div>
+            <div class="amis-logo"></div>
         </div>
-      </div>
+        <div class="navbar-content">
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-dashboard"></div>
+                <div class="nav-item-text">Tổng quan</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-report"></div>
+                <div class="nav-item-text">Báo cáo</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-dashboard"></div>
+                <div class="nav-item-text">Mua hàng</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-dic-employee"></div>
+                <div class="nav-item-text">Danh mục nhân viên</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-dic-employee"></div>
+                <div class="nav-item-text">Danh mục nhân viên</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-item-icon nav-item-setting"></div>
+                <div class="nav-item-text">Thiết lập hệ thống</div>
+            </div>
+        </div>
     </div>
-    <div class="header-right">
-      <div class="avatar"></div>
-      <div class="user-name">Phạm Hải Dương</div>
-      <div class="icon-option-default-16"></div>
-    </div>
+    <div class="header">
+        <div class="header-left">
+            <div class="dropdown">
+                <button class="dropbtn">
+                        <span class="text">Tất cả phòng ban</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                <div class="option">
+                    <div class="option-item">
+                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                    </div>
+                    <div class="option-item">
+                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                    </div>
+                    <div class="option-item" active>
+                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="avatar"></div>
+            <div class="user-name">Phạm Hải Dương</div>
+            <div class="icon-option-default-16"></div>
+        </div>
 
-  </div>
-  <div class="content">
-    <div class="header-content">
-      <div class="title">Danh sách nhân viên</div>
-      <div class="content-feature">
-        <button id="myBtn" class="m-btn m-btn-default">
-          <div class="m-btn-icon icon-add"></div>
-          <div class="btn-text">Thêm nhân viên</div>
+    </div>
+    <div class="content">
+        <div class="header-content">
+            <div class="title">Danh sách nhân viên</div>
+            <button id="myBtn" class="m-btn m-btn-default">
+                <div class="m-btn-icon icon-add"></div>
+                <div class="btn-text">Thêm nhân viên</div>
+              </button>
+        </div>
+        <div class="filter-bar">
+            <input type="text" class="icon-search input-icon" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+            <div class="filter-department">
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <span class="text">Tất cả phòng ban</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="option">
+                        <div class="option-item">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                        </div>
+                        <div class="option-item">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                        </div>
+                        <div class="option-item" active>
+                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-position">
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <span class="text">Tất cả phòng ban</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="option">
+                        <div class="option-item">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                        </div>
+                        <div class="option-item">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                        </div>
+                        <div class="option-item" active>
+                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="m-btn-refresh"></button>
+
+
+        </div>
+        <div class="grid grid-employee">
+            <table width=100%>
+                <thead>
+                    <tr>
+                        <th>Mã nhân viên</th>
+                        <th>Họ và tên</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th>Chức vụ</th>
+                        <th>Phòng ban</th>
+                        <th class="salary">Mức lương cơ bản</th>
+                        <th>Tình trạng công việc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <div class="total">Hiển thị 10/100 nhân viên</div>
+            <div class="current-page">
+                <button class="prev-all">
+          <i class="fas fa-angle-double-left"></i>
         </button>
-      </div>
-    </div>
-    <div class="filter-bar">
-      <div class="filter-left">
-        <input type="text" class="icon-search input-icon"
-          placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-          <div class="dropdown filter-bar-dropdown">
-            <button onclick="myFunction()" value="department-search" class="dropbtn">Tất cả phòng ban<div id="m-department-search" class="dropdown-arrow"></div></button>
-            <div id="department-search" class="dropdown-content filterbar-dropdown-content">
-              <a href="#">Phòng Hành chính</a>
-              <a href="#">Phòng Nhân sự</a>
-              <a href="#">Phòng IT</a>
-              <a href="#">Phòng Marketing</a>
+                <button class="prev"><i class="fas fa-angle-left"></i></button>
+                <button class="page">
+          <span class="number">1</span>
+        </button>
+                <button class="page">
+          <span class="number">2</span>
+        </button>
+                <button class="page">
+          <span class="number">3</span>
+        </button>
+                <button class="page">
+          <span class="number">4</span>
+        </button>
+                <button class="next"><i class="fas fa-angle-right"></i></button>
+                <button class="next-all">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
             </div>
-          </div>
-        <div class="dropdown filter-bar-dropdown">
-          <button onclick="myFunction()" value="position-search" class="dropbtn">Tất cả vị trí<div id="m-position-search" class="dropdown-arrow"></div></button>
-          <div id="position-search" class="dropdown-content filterbar-dropdown-content">
-            <a href="#">Giám đốc</a>
-            <a href="#">Trưởng phòng</a>
-            <a href="#">Nhân viên</a>
-          </div>
+            <div class="per-page">10 nhân viên/trang</div>
         </div>
-      </div>
-      <div class="filter-right">
-        <button onclick="loadData()" class="m-btn-refresh"></button>
-      </div>
+    </div>
 
-    </div>
-    <div class="grid grid-employee">
-      <table width=100%>
-        <thead>
-          <tr>
-            <th>Mã nhân viên</th>
-            <th>Họ và tên</th>
-            <th>Giới tính</th>
-            <th>Ngày sinh</th>
-            <th>Điện thoại</th>
-            <th>Email</th>
-            <th>Chức vụ</th>
-            <th>Phòng ban</th>
-            <th class="salary">Mức lương cơ bản</th>
-            <th>Tình trạng công việc</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
-    <div class="paging-bar">
-      <div class="paging-left">
-        <p>Hiển thị 1-10/1000 nhân viên</p>
-      </div>
-      <div class="paging-center">
-        <button class="btn-inline"><i class="fas fa-angle-double-left"></i></button>
-        <button class="btn-inline"><i class="fas fa-angle-left"></i></button>
-        <button class="circle">1</button>
-        <button class="circle">2</button>
-        <button class="circle">3</button>
-        <button class="circle">4</button>
-        <button class="btn-inline"><i class="fas fa-angle-right"></i></button>
-        <button class="btn-inline"><i class="fas fa-angle-double-right"></i></button>
-      </div>
-      <div class="paging-right">
-        <p>10 nhân viên/trang</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="myModal" class="popup" >
-    <div class="popup-body">
-      <div class="popup-header">
-        <div class="popup-name">Thông tin nhân viên</div>
-        <div class="popup-close">
-          <button></button>
-        </div>
-      </div>
-      <div class="popup-navbar">
-        <div class="avatar"></div>
-        <span>(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</span>
-      </div>
-      <div class="popup-content">
-        <div class="general-info">
-          <div class="info-title">
-            <span>A. Thông tin chung:</span>
-            <div class="title-layout"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Mã nhân viên(*)</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-            <div class="info-column info-column-right">
-              <span>Họ và tên(*)</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Ngày sinh</span>
-              <input type="date">
-            </div>
-            <div class="info-column info-column-right">
-              <span>Giới tính</span>
-              <div class="dropdown">
-                <button onclick="myFunction()" value="gender" class="dropbtn">Giới tính<div id="m-gender" class="dropdown-arrow"></div></button>
-                <div id="gender" class="dropdown-content">
-                  <a href="#">Nam</a>
-                  <a href="#">Nữ</a>
-                  <a href="#">Không xác định</a>
+    <div id="myModal" class="popup">
+        <div class="popup-body">
+            <div class="popup-header">
+                <div class="popup-name">Thông tin nhân viên</div>
+                <div class="popup-close">
+                    <button></button>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Số CMTND/ Căn cước</span>
-              <input type="text" placeholder="Nhập vào đây...">
+            <div class="popup-navbar">
+                <div class="avatar"></div>
+                <span>(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</span>
             </div>
-            <div class="info-column info-column-right">
-              <span>Ngày cấp</span>
-              <input type="date">
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Nơi cấp</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Email</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-            <div class="info-column info-column-right">
-              <span>Số điện thoại (*)</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-          </div>
-        </div>
-        <div class="working-info">
-          <div class="info-title">
-            <span>b. thông tin công việc:</span>
-            <div class="title-layout"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Vị trí</span>
-              <div class="dropdown">
-                <button onclick="myFunction()" value="position" class="dropbtn">Vị trí<div id="m-position" class="dropdown-arrow"></div></button>
-                <div id="position" class="dropdown-content drop-left">
-                  <a href="#">Giám đốc</a>
-                  <a href="#">Trưởng phòng</a>
-                  <a href="#">Nhân viên</a>
+            <div class="popup-content">
+                <div class="general-info">
+                    <div class="info-title">
+                        <span>A. Thông tin chung:</span>
+                        <div class="title-layout"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Mã nhân viên(<span class="required">*</span>)</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                        <div class="info-column">
+                            <span>Họ và tên(<span class="required">*</span>)</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Ngày sinh</span>
+                            <input type="date">
+                        </div>
+                        <div class="info-column">
+                            <span>Giới tính</span>
+                            <div class="dropdown">
+                                <button class="dropbtn custom-dropbtn">
+                                    <span class="text">Tất cả phòng ban</span>
+                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="option">
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                                    </div>
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                                    </div>
+                                    <div class="option-item" active>
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Số CMTND/ Căn cước(<span class="required">*</span>)</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                        <div class="info-column">
+                            <span>Ngày cấp</span>
+                            <input type="date">
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Nơi cấp</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                        <div class="info-column"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Email(<span class="required">*</span>)</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                        <div class="info-column">
+                            <span>Số điện thoại (<span class="required">*</span>)</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                    </div>
+
+                    <div class="info-title">
+                        <span>b. thông tin công việc:</span>
+                        <div class="title-layout"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Vị trí</span>
+                            <div class="dropdown">
+                                <button class="dropbtn custom-dropbtn">
+                                    <span class="text">Tất cả phòng ban</span>
+                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="option">
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                                    </div>
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                                    </div>
+                                    <div class="option-item" active>
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-column">
+                            <span>Phòng ban</span>
+                            <div class="dropdown">
+                                <button class="dropbtn custom-dropbtn">
+                                    <span class="text">Tất cả phòng ban</span>
+                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="option">
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                                    </div>
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                                    </div>
+                                    <div class="option-item" active>
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Mã số thuế cá nhân</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                        <div class="info-column">
+                            <span>Mức lương cơ bản</span>
+                            <input type="text" placeholder="Nhập vào đây...">
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-column">
+                            <span>Ngày gia nhập công ty</span>
+                            <input type="date">
+                        </div>
+                        <div class="info-column">
+                            <span>Tình trạng công việc</span>
+                            <div class="dropdown">
+                                <button class="dropbtn custom-dropbtn">
+                                    <span class="text">Tất cả phòng ban</span>
+                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="option">
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                                    </div>
+                                    <div class="option-item">
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                                    </div>
+                                    <div class="option-item" active>
+                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="info-column info-column-right">
-              <span>Phòng ban</span>
-              <div class="dropdown">
-                <button onclick="myFunction()" value="department" class="dropbtn">Phòng ban<div id="m-department" class="dropdown-arrow"></div></button>
-                <div id="department" class="dropdown-content">
-                  <a href="#">Phòng Hành chính</a>
-                  <a href="#">Phòng Nhân sự</a>
-                  <a href="#">Phòng IT</a>
-                  <a href="#">Phòng Marketing</a>
+            <div class="popup-foot">
+                <div class="m-btn-cancel m-second-button">Hủy</div>
+                <div class="m-btn m-btn-save">
+                    <div class="m-btn-icon icon-save"></div>
+                    <div class="btn-text">Lưu</div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Mã số thuế cá nhân</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-            <div class="info-column info-column-right">
-              <span>Mức lương cơ bản</span>
-              <input type="text" placeholder="Nhập vào đây...">
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-column">
-              <span>Ngày gia nhập công ty</span>
-              <input type="date">
-            </div>
-            <div class="info-column info-column-right">
-              <span>Tình trạng công việc</span>
-              <div class="dropdown">
-                <button onclick="myFunction()" value="work-status" class="dropbtn">Tình trạng công việc<div id="m-work-status" class="dropdown-arrow"></div></button>
-                <div id="work-status" class="dropdown-content">
-                  <a href="#">Đang làm việc</a>
-                  <a href="#">Đang thử việc</a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="popup-foot">
-        <div class="m-btn-cancel m-second-button">Hủy</div>
-        <div class="m-btn m-btn-save">
-          <div class="m-btn-icon icon-save"></div>
-          <div class="btn-text">Lưu</div>
-        </div>
-      </div>
+
     </div>
 
-  </div>
 
-
-  <script src="../lib/jquery-3.6.0.min.js"></script>
-  <script src="../js/common/common.js"></script>
-  <script src="../js/page/employee.js"></script>
+    <script src="../lib/jquery-3.6.0.min.js"></script>
+    <script src="../js/common/common.js"></script>
+    <script src="../js/page/employee.js"></script>
 
 </body>
 

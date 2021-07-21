@@ -1,0 +1,172 @@
+.popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 999;
+    /* Sit on top */
+    padding-top: 50px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Opacity */
+}
+
+.popup .popup-body {
+    position: relative;
+    margin: auto;
+    width: 45%;
+    padding: 24px 24px 0!important;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.popup .popup-body .popup-header {
+    display: flex;
+    height: 15px;
+}
+
+.popup .popup-body .popup-header .popup-name {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.popup .popup-body .popup-header .popup-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.popup .popup-body .popup-header .popup-close button {
+    width: 40px;
+    height: 40px;
+    border-radius: 0 4px 0 0;
+    border: none;
+    background-color: #FFF;
+    cursor: pointer;
+    background-image: url('../../../content/icon/x.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    opacity: .7;
+}
+
+.popup .popup-body .popup-header .popup-close button:hover {
+    background-color: #bbb;
+}
+
+.popup .popup-body .popup-navbar {
+    float: left;
+    width: 150px;
+    height: 92.4%;
+}
+
+.popup .popup-body .popup-navbar .avatar {
+    background-image: url('../../../content/img/blank-avatar.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: contain;
+    margin-top: 14px;
+    width: 100%;
+    height: 150px;
+}
+
+.popup .popup-body .popup-navbar span {
+    display: block;
+    text-align: center;
+}
+
+.popup .popup-body .popup-content {
+    display: flex;
+    padding-left: 10px;
+}
+
+.popup .popup-body .popup-content .general-info {
+    margin-top: 20px;
+}
+
+.popup .popup-foot {
+    /* position: absolute;
+    bottom: 0;
+    right: 0; */
+    position: relative;
+    display: flex;
+    margin: 0 -24px;
+    justify-content: flex-end;
+    background-color: #bbb;
+    height: 60px;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+}
+
+.info-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+
+.title-layout {
+    background-color: #019160;
+    height: 4px;
+    width: 85px;
+    margin-top: 8px;
+}
+
+.info-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.info-column {
+    width: 50%;
+    margin: 5px 0 16px;
+}
+
+.info-column input {
+    border-radius: 4px;
+    padding: 0 0 0 16px;
+    border: 1px solid #bbb;
+    height: 40px;
+    margin: 0;
+    width: 100%;
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}

@@ -1,9 +1,10 @@
 @import url("../common/layouts/main.css");
 @import url("../common/layouts/header.css");
 @import url("../common/layouts/navbar.css");
-@import url("../common/body/popup.css");
-@import url("../common/body/grid.css");
-@import url("../common/body/content.css");
+@import url("../common/layouts/popup.css");
+@import url("../common/layouts/grid.css");
+@import url("../common/layouts/content.css");
+@import url("../common/layouts/pagination.css");
 @import url("../common/components/button.css");
 @import url("../common/components/input.css");
 @import url("../common/components/dropdown.css");

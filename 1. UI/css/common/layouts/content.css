@@ -1,0 +1,25 @@
+.content {
+    position: absolute;
+    top: 61px;
+    left: 221px;
+    width: calc(100% - 237px);
+    height: calc(100vh - 61px);
+    background-color: #ffffff;
+    padding-left: 16px;
+}
+
+
+/* Page title */
+
+.content .header-content {
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.content .header-content .title {
+    font-size: 20px;
+    font-weight: bold;
+}

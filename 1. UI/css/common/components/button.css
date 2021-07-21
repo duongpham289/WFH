@@ -1,4 +1,4 @@
-.m-btn{
+.m-btn {
     display: flex;
     align-items: center;
     background-color: #019160;
@@ -9,23 +9,23 @@
     font-family: GoogleSans-Regular;
     padding-left: 16px;
     padding-right: 16px;
-    border:none;
+    border: none;
     cursor: pointer;
 }
 
-.m-btn:hover{
+.m-btn:hover {
     background-color: #2fbe8e;
 }
 
-.m-btn .m-btn-icon{
+.m-btn .m-btn-icon {
     background-position: center;
 }
 
-.m-btn .btn-text{
+.m-btn .btn-text {
     margin-left: 8px;
 }
 
-.m-second-button{
+.m-second-button {
     border-color: #bbbbbb;
     border-radius: 4px;
     height: 40px;
@@ -36,11 +36,15 @@
     cursor: pointer;
 }
 
-.m-second-button:hover{
+.m-second-button:hover {
     background-color: #e9ebee;
 }
 
-.m-btn-refresh{
+.m-btn-refresh {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
     border: 1px solid #bbbbbb;
@@ -49,13 +53,11 @@
     background-color: #ffffff;
     background-repeat: no-repeat;
     background-position: center;
-    padding-left: 24px;
-    padding-right: 24px;
-    outline: none;
     cursor: pointer;
 }
 
-.m-btn-cancel{
+
+/* .m-btn-cancel {
     margin: 10px 0;
     position: absolute;
     right: 116px;
@@ -63,9 +65,9 @@
     line-height: 40px;
 }
 
-.m-btn-save{
+.m-btn-save {
     margin: 10px 0;
     position: absolute;
     right: 24px;
     width: 45px;
-}
+} */

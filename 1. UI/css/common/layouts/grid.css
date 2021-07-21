@@ -1,16 +1,19 @@
-.grid{
+.grid {
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
+    max-height: calc(100% - 181px);
     border-bottom: 5px solid #bbbbbb;
 }
-table{
-  border-collapse: collapse;
+
+table {
+    border-collapse: collapse;
 }
 
-table th,td{
+table th,
+td {
     border-bottom: 1px solid #bbbbbb;
-    padding:0 16px;
+    padding: 0 16px;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -19,7 +22,7 @@ table th,td{
     height: 48px;
 }
 
-table th{
+table th {
     background-color: #fff;
     position: sticky;
     top: 0px;
@@ -45,6 +48,6 @@ table tr:hover {
     border-radius: 3px;
 }
 
-.salary{
+.salary {
     text-align: right;
-} 
+}

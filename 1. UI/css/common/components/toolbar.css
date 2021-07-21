@@ -1,25 +1,19 @@
-.filter-bar{
-    width: 100%;
+.filter-bar {
+    /* width: 100%; */
     display: flex;
     align-items: center;
     background-color: #fff;
 }
 
-    .filter-bar .filter-left{
-        display: flex;
-        width: 100%;
-    }
-        .filter-bar .filter-left{
-            display: flex;
-            width: 100%;
-        }
-        
-        .filter-bar .filter-left input{
-            /* border: none; */
-            width: 250px;
-        }
+.filter-bar {
+    display: flex;
+    width: 100%;
+}
 
-    .filter-bar .filter-right{
-        position:absolute;
-        right: 16px;
-    }
+.filter-bar .filter-department {
+    margin: 0 10px;
+}
+
+.filter-bar input {
+    width: 250px;
+}
