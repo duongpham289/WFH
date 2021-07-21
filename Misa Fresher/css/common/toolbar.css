@@ -2,17 +2,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    height: 40px;
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
     .filter-bar .filter-left{
-        
+        display: flex;
+        width: 100%;
     }
-
-        .filter-bar .filter-left .search-bar{
-
-        }
         
         .filter-bar .filter-left .search-bar .input{
             border: none;

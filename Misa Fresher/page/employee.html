@@ -55,10 +55,14 @@
   </div>
   <div class="header">
     <div class="header-left">
-      <select class="header-name">
-        <option>Nhà hàng Biển Đông</option>
-        <option>Nhà hàng Hải Dương</option>
-      </select>
+      <div class="dropdown dropdown-header">
+        <button onclick="myFunction()" value="header-dropdown" class="dropbtn header-name">Nhà hàng Biển Đông<div id="m-header-dropdown" class="dropdown-arrow"></div></button>
+        <div id="header-dropdown" class="dropdown-content header-dropdown">
+          <a href="#">Nhà hàng Biển Tây</a>
+          <a href="#">Nhà hàng Biển Nam</a>
+          <a href="#">Nhà hàng Biển Bắc</a>
+        </div>
+      </div>
     </div>
     <div class="header-right">
       <div class="avatar"></div>
@@ -79,16 +83,25 @@
     </div>
     <div class="filter-bar">
       <div class="filter-left">
-        <input type="text" style="width:250px" class="icon-search input-search"
+        <input type="text" style="width:250px" class="icon-search input-icon"
           placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-        <select class="m-dropdown">
-          <option>Tất cả phòng ban</option>
-          <option>Phòng đào tạo</option>
-        </select>
-        <select class="m-dropdown">
-          <option>Tất cả vị trí</option>
-          <option>Tổng Giám Đốc</option>
-        </select>
+          <div class="dropdown filter-bar-dropdown">
+            <button onclick="myFunction()" value="department-search" class="dropbtn">Tất cả phòng ban<div id="m-department-search" class="dropdown-arrow"></div></button>
+            <div id="department-search" class="dropdown-content filterbar-dropdown-content">
+              <a href="#">Phòng Hành chính</a>
+              <a href="#">Phòng Nhân sự</a>
+              <a href="#">Phòng IT</a>
+              <a href="#">Phòng Marketing</a>
+            </div>
+          </div>
+        <div class="dropdown filter-bar-dropdown">
+          <button onclick="myFunction()" value="position-search" class="dropbtn">Tất cả vị trí<div id="m-arrow position-search" class="dropdown-arrow"></div></button>
+          <div id="position-search" class="dropdown-content filterbar-dropdown-content">
+            <a href="#">Giám đốc</a>
+            <a href="#">Trưởng phòng</a>
+            <a href="#">Nhân viên</a>
+          </div>
+        </div>
       </div>
       <div class="filter-right">
         <button class="m-btn-refresh"></button>
@@ -171,8 +184,8 @@
             <div class="info-column info-column-right">
               <span>Giới tính</span>
               <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Giới tính<div class="dropdown-arrow"></div></button>
-                <div id="myDropdown" class="dropdown-content">
+                <button onclick="myFunction()" value="gender" class="dropbtn">Giới tính<div id="m-gender" class="dropdown-arrow"></div></button>
+                <div id="gender" class="dropdown-content">
                   <a href="#">Nam</a>
                   <a href="#">Nữ</a>
                   <a href="#">Không xác định</a>
@@ -216,8 +229,8 @@
             <div class="info-column">
               <span>Vị trí</span>
               <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Vị trí<div class="dropdown-arrow"></div></button>
-                <div id="myDropdown" class="dropdown-content">
+                <button onclick="myFunction()" value="position" class="dropbtn">Vị trí<div id="m-position" class="dropdown-arrow"></div></button>
+                <div id="position" class="dropdown-content da-left">
                   <a href="#">Giám đốc</a>
                   <a href="#">Trưởng phòng</a>
                   <a href="#">Nhân viên</a>
@@ -227,8 +240,8 @@
             <div class="info-column info-column-right">
               <span>Phòng ban</span>
               <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Phòng ban<div class="dropdown-arrow"></div></button>
-                <div id="myDropdown" class="dropdown-content">
+                <button onclick="myFunction()" value="department" class="dropbtn">Phòng ban<div id="m-department" class="dropdown-arrow"></div></button>
+                <div id="department" class="dropdown-content">
                   <a href="#">Phòng Hành chính</a>
                   <a href="#">Phòng Nhân sự</a>
                   <a href="#">Phòng IT</a>
@@ -249,14 +262,14 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>nNgày gia nhập công ty</span>
+              <span>Ngày gia nhập công ty</span>
               <input type="date">
             </div>
             <div class="info-column info-column-right">
               <span>Tình trạng công việc</span>
               <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Tình trạng công việc<div class="dropdown-arrow"></div></button>
-                <div id="myDropdown" class="dropdown-content">
+                <button onclick="myFunction()" value="work-status" class="dropbtn">Tình trạng công việc<div id="m-work-status" class="dropdown-arrow"></div></button>
+                <div id="work-status" class="dropdown-content">
                   <a href="#">Đang làm việc</a>
                   <a href="#">Đang thử việc</a>
                 </div>
