@@ -67,15 +67,23 @@
 
 .dropdown .option-item:hover {
     background: #e9ebee;
+    cursor: pointer;
 }
 
-.dropdown .option-item:active,
+.dropdown .option-item:active {
+    background: #019160;
+    color: #fff;
+}
+
 .dropdown .option-item:focus {
     background: #019160;
     color: #fff;
 }
 
-.dropdown .option-item:active .icon,
+.dropdown .option-item:active .icon {
+    color: #fff;
+}
+
 .dropdown .option-item:focus .icon {
     color: #fff;
 }
