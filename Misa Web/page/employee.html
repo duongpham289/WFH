@@ -45,20 +45,20 @@
     </div>
     <div class="header">
         <div class="header-left">
-            <div class="dropdown">
-                <button class="dropbtn">
-                        <span class="text">Tất cả phòng ban</span>
+            <div class="dropdown header-dropdown">
+                <button class="dropbtn branch-name">
+                        <span class="text">Nhà Hàng Biển Đông</span>
                         <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                    </button>
+                </button>
                 <div class="option">
                     <div class="option-item">
-                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
+                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
                     </div>
                     <div class="option-item">
-                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
+                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
                     </div>
                     <div class="option-item" active>
-                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
                     </div>
                 </div>
             </div>
@@ -190,19 +190,19 @@
                         <div class="title-layout"></div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Mã nhân viên(<span class="required">*</span>)</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="txtEmployeeCode" class="input-hint" value="NV8888...">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Họ và tên(<span class="required">*</span>)</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="txtFullName" class="input-hint" value="Nguyễn Văn A...">
                         </div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Ngày sinh</span>
-                            <input type="date">
+                            <input type="date" id="dDateOfBirth">
                         </div>
                         <div class="info-column">
                             <span>Giới tính</span>
@@ -226,30 +226,30 @@
                         </div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Số CMTND/ Căn cước(<span class="required">*</span>)</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="id-number" class="input-hint" value="0123456789...">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Ngày cấp</span>
                             <input type="date">
                         </div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Nơi cấp</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="issued-by" class="input-hint" value="Hà Nội...">
                         </div>
-                        <div class="info-column"></div>
+                        <div class="info-column field-input-label"></div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Email(<span class="required">*</span>)</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="email" class="input-hint" value="Example@gmail.com...">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Số điện thoại (<span class="required">*</span>)</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="phone" class="input-hint" value="0123456789...">
                         </div>
                     </div>
 
@@ -300,17 +300,17 @@
                         </div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="tax-number" class="input-hint" value="0123456789">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Mức lương cơ bản</span>
-                            <input type="text" placeholder="Nhập vào đây...">
+                            <input type="text" id="basic-salary" class="input-hint" value="10.000.000">
                         </div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column field-input-label">
                             <span>Ngày gia nhập công ty</span>
                             <input type="date">
                         </div>
