@@ -273,7 +273,8 @@ function modalPopup() {
         modal.style.display = "none";
     }
     btnCancel.onclick = function() {
-        modal.style.display = "none";
+        // setTimeout(() => {  modal.style.display = "none"; }, 2000);
+        modal.style.display = "none"; 
     }
 
     // When the user clicks anywhere outside of the modal, close it

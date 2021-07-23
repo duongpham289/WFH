@@ -1,3 +1,4 @@
+/* Base Button */
 .m-btn {
     display: flex;
     align-items: center;
@@ -7,62 +8,67 @@
     font-size: 13px;
     color: #ffffff;
     font-family: GoogleSans-Regular;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 24px;
     border: none;
+    outline: none;
     cursor: pointer;
 }
 
-.m-btn:hover {
-    background-color: #2fbe8e;
+    .m-btn:hover {
+        background-color: #2fbe8e;
+    }
+
+    .m-btn:focus {
+        background-color: #01B075;
+    }
+
+/* Icon Button */
+.m-btn-icon{
+    text-align: left;
+    padding: 0 16px;
 }
 
-.m-btn .m-btn-icon {
-    background-position: center;
-}
+/* Dịch phải 8px đối với text trong button icon */
+    .m-btn-icon .btn-text {
+        margin-left: 8px;
+    }
 
-.m-btn .btn-text {
-    margin-left: 8px;
-}
-
+/* Second button */
 .m-second-button {
-    border-color: #bbbbbb;
-    border-radius: 4px;
-    height: 40px;
+    background-color:unset;
     color: #000000;
-    padding-left: 24px;
-    padding-right: 24px;
-    text-align: center;
-    cursor: pointer;
 }
 
-.m-second-button:hover {
-    background-color: #e9ebee;
-}
+    .m-second-button:hover {
+        background-color: #bbb;
+    }
 
+/* Button Refresh */
 .m-btn-refresh {
     margin-left: auto;
-    display: flex;
-    align-items: center;
     justify-content: center;
     width: 40px;
-    height: 40px;
     border: 1px solid #bbbbbb;
-    border-radius: 4px;
-    background-image: url('../../../content/icon/refresh.png');
     background-color: #ffffff;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
 }
 
+/* Button Close Popup */
+.m-btn-close{
+    width: 40px;
+    border-radius: 0 4px 0 0;
+    background-color: #FFF;
+    background-size: 20px;
+    opacity: .7;
+}
+
+/* Button Cancel */
 .m-btn-cancel {
     margin: 10px 0;
-    position: relative;
-    line-height: 40px;
+    width: 100px;
+    justify-content: center;
 }
 
+/* Button Save */
 .m-btn-save {
     margin: 10px 24px 10px 16px;
-    position: relative;
 }

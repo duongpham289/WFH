@@ -1,3 +1,11 @@
+.m-icon-default{
+    background-position: center;
+    
+    background-repeat: no-repeat;
+}
+
+
+
 .nav-item-icon{
     width: 20px;
     height: 20px;
@@ -6,30 +14,30 @@
     margin-right: 10px;
 }
 
-.icon-option-default-16{
+.icon-option{
     width: 16px;
     height: 16px;
     margin: 0 16px;
-    background-position: center;
     background-image: url('../../../content/icon/option.png');
-    background-repeat: no-repeat;
 }
 
 .icon-add{
     width: 16px;
     height: 16px;
     background-image: url('../../../content/icon/add.png');
+    
 }
 
 .icon-search{
     background-image: url('../../../content/icon/search.png');
-    background-repeat: no-repeat;
     background-position: 16px center;
 }
 
-.icon-save{
-    background-image: url('../../../content/icon/save.png');
-    width: 16px;
-    height: 16px;
-    background-repeat: no-repeat;
+.icon-reload{
+    background-image: url('../../../content/icon/refresh.png');
+    
+}
+.icon-close{
+    background-image: url('../../../content/icon/x.svg');
+    
 }
