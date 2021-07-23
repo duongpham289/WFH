@@ -1,11 +1,108 @@
 $(document).ready(function() {
     loadData();
     modalPopup();
-    clearInput();
     getDepartment();
     getPosition();
+
+    dropdownOnClick();
+
+    $("#btnSave").on("click", addEmployee);
 })
 
+
+
+function dropdownOnClick() {
+    var dropBtn = "";
+    var dropOtion = "";
+    var dropSpan = "";
+
+    $(".dropbtn").on("click", function() {
+        $(".dropbtn").next().hide();
+        $(this).next().show();
+        dropBtn = $(this)[0];
+        dropOtion = ($(this).next())[0];
+        dropSpan = $(this).children()[0];
+    })
+    window.onclick = function(event) {
+        if (event.target != dropBtn && event.target != dropOtion && event.target != dropSpan) {
+            if (event.target.getAttribute('value') == null) {
+                if (dropOtion)
+                    $(".dropbtn").next().hide();
+            } else {
+                // debugger
+                event.target.parentNode.previousElementSibling.firstElementChild.textContent = event.target.innerText
+                    // console.log(event.target.textContent);
+                    // console.log(event.target.parentNode.previousElementSibling.textContent);
+                $(".dropbtn").next().children().css("background-color", "#fff");
+                $(".dropbtn").next().children().css("color", "#000");
+                event.target.style.background = "#019160";
+                event.target.style.color = "#fff";
+            }
+        }
+    }
+}
+
+function styleOption() {
+    var optionItem = $(".option-item");
+    window.onclick = function(event) {
+        if (event.target == optionItem) {
+            console.log(optionItem)
+        }
+
+    }
+}
+
+function addEmployee() {
+    var employee = {
+        CreatedDate: "2021-07-21T08:58:26.162Z",
+        CreatedBy: "John Wick",
+        ModifiedDate: "2021-07-21T08:58:26.162Z",
+        ModifiedBy: "John Wick",
+        EmployeeId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        EmployeeCode: "MFa7843",
+        FirstName: "Wick",
+        LastName: "John",
+        FullName: "string",
+        Gender: 0,
+        DateOfBirth: "2021-07-21T08:58:26.162Z",
+        PhoneNumber: "string",
+        Email: "string",
+        Address: "Ha Noi",
+        IdentityNumber: "string",
+        IdentityDate: "2021-07-21T08:58:26.162Z",
+        IdentityPlace: "string",
+        JoinDate: "2021-07-21T08:58:26.162Z",
+        MartialStatus: 0,
+        EducationalBackground: 0,
+        QualificationId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        DepartmentId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        PositionId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        WorkStatus: 0,
+        PersonalTaxCode: "string",
+        Salary: 0,
+        PositionCode: null,
+        PositionName: null,
+        DepartmentCode: null,
+        DepartmentName: null,
+        QualificationName: "John Wick",
+    };
+    employee.EmployeeCode = $('#txtEmployeeCode').val();
+    employee.FullName = $('#txtFullName').val();
+    // debugger
+    $.ajax({
+        url: "http://cukcuk.manhnv.net/v1/Employees",
+        method: "POST",
+        data: JSON.stringify(employee),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function(result) {
+            alert(result);
+        },
+        fail: function(error) {
+            console.log(employee);
+        }
+    });
+}
 /**
  * Load du lieu len table
  */
@@ -157,44 +254,6 @@ function modalPopup() {
     }
 }
 
-/**
- * Xóa value input khi người dùng ấn vào ô input
- * CreatedBy: PHDUONG (22/07/2021)
- */
-function clearInput() {
-    var x = ["NV8888...", "Nguyễn Văn A...", "0123456789...", "Hà Nội...", "Example@gmail.com...", "0123456789...", "0123456789", "10.000.000"];
-    $(".input-hint").on("focus", function() {
-        for (i = 0; i < 8; i++) {
-            // debugger
-            var $this = $(this);
-            var n = $this.index($this);
-            if (i == n) {
-                if ($this.attr('value', x[n])) {
-                    $this.attr('value', "");
-                }
-            }
-        }
-    });
-
-    var hint = document.getElementsByClassName(".input-hint");
-    window.onclick = function(event) {
-        // if (event.target != hint) {
-        //     debugger
-        //     for (i = 0; i < 8; i++) {
-        //         // debugger
-        //         if ($(".input-hint").eq(i).attr('value', "")) {
-
-        //             $(".input-hint").eq(i).attr('value', x[i])
-        //         }
-        //     }
-        // }
-    }
-
-    //clear input field when submit
-    // $(".button").on("click", function(event) {
-    //     $(".input-hint").val("");
-    // });
-}
 
 /**
  * Lấy dữ liệu Phòng ban
@@ -209,16 +268,19 @@ function getDepartment() {
         //async: true, đồng bộ/bất đồng bộ
     }).done(function(res) {
         var data = res;
+        // var index = 1;
         $.each(data, function(index, item) {
-            var optionItem = $(`<div class="option-item" id=${item.DepartmentId}">
+
+            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}" value="${index}">
                             <span class="icon" ><i class="fas fa-check"></i></span>` + item.DepartmentName + `
                         </div>`);
 
-            $('#department-name').append(optionItem);
+            $('.department-name').append(optionItem);
 
-            $(optionItem).on("click", function() {
-                console.log(1)
+            $(`#${item.DepartmentId}`).on("click", function() {
+                console.log(1);
             })
+            index++;
 
         })
     }).fail(function(res) {
@@ -247,12 +309,16 @@ function getPosition() {
         var data = res;
         $.each(data, function(index, item) {
 
-            var optionItem = $(`<div class="option-item" id="` + item.PositionId + `">
+            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}"  value="${index}">
                             <span class="icon" > <i class="fas fa-check"></i></span>` + item.PositionName + `
                         </div>`);
 
             $('.position-name').append(optionItem);
-            // debugger;
+
+            $(`#${item.DepartmentId}`).on("click", function() {
+                console.log(1);
+            })
+            index++;
         })
 
     }).fail(function(res) {
@@ -263,11 +329,4 @@ function getPosition() {
         // - 500 - lỗi từ phía backend - server 
         alert('Có lỗi xảy ra vui lòng liên hệ MISA');
     })
-}
-
-function setDropdownSelection(state) {
-    var $state = $(
-        '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-    );
-    return $state;
 }

@@ -50,7 +50,7 @@
                         <span class="text">Nhà Hàng Biển Đông</span>
                         <span class="icon"><i class="fas fa-chevron-down"></i></span>
                 </button>
-                <div class="option">
+                <div class="option" id="">
                     <div class="option-item">
                         <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
                     </div>
@@ -86,16 +86,10 @@
                         <span class="text">Tất cả phòng ban</span>
                         <span class="icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
-                    <div class="option department-name" id="department-name">
-                        <!-- <div class="option-item">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng IT
-                        </div>
-                        <div class="option-item">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng Marketing
-                        </div>
-                        <div class="option-item" active>
+                    <div class="option department-name hidden-field" id="department-name">
+                        <div class="option-item" value="0">
                             <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,15 +101,9 @@
                         <span class="icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="option position-name">
-                        <!-- <div class="option-item">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Giám đốc
+                        <div class="option-item" value="0">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả vị trí
                         </div>
-                        <div class="option-item">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
-                        </div>
-                        <div class="option-item" active>
-                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -192,11 +180,11 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Mã nhân viên(<span class="required">*</span>)</span>
-                            <input type="text" id="txtEmployeeCode" class="input-hint" value="NV8888...">
+                            <input type="text" id="txtEmployeeCode" class="input-hint" placeholder="NV8888...">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Họ và tên(<span class="required">*</span>)</span>
-                            <input type="text" id="txtFullName" class="input-hint" value="Nguyễn Văn A...">
+                            <input type="text" id="txtFullName" class="input-hint" placeholder="Nguyễn Văn A...">
                         </div>
                     </div>
                     <div class="info-row">
@@ -212,13 +200,13 @@
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option">
-                                    <div class="option-item">
+                                    <div class="option-item" value="0">
                                         <span class="icon"> <i class="fas fa-check"></i></span>Nam
                                     </div>
-                                    <div class="option-item">
+                                    <div class="option-item" value="1">
                                         <span class="icon"> <i class="fas fa-check"></i></span>Nữ
                                     </div>
-                                    <div class="option-item" active>
+                                    <div class="option-item" value="2">
                                         <span class="icon"> <i class="fas fa-check"></i></span>Không xác định
                                     </div>
                                 </div>
@@ -228,7 +216,7 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Số CMTND/ Căn cước(<span class="required">*</span>)</span>
-                            <input type="text" id="id-number" class="input-hint" value="0123456789...">
+                            <input type="text" id="id-number" class="input-hint" placeholder="0123456789...">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Ngày cấp</span>
@@ -238,18 +226,18 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Nơi cấp</span>
-                            <input type="text" id="issued-by" class="input-hint" value="Hà Nội...">
+                            <input type="text" id="issued-by" class="input-hint" placeholder="Hà Nội...">
                         </div>
                         <div class="info-column field-input-label"></div>
                     </div>
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Email(<span class="required">*</span>)</span>
-                            <input type="text" id="email" class="input-hint" value="Example@gmail.com...">
+                            <input type="text" id="email" class="input-hint" placeholder="Example@gmail.com...">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Số điện thoại (<span class="required">*</span>)</span>
-                            <input type="text" id="phone" class="input-hint" value="0123456789...">
+                            <input type="text" id="phone" class="input-hint" placeholder="0123456789...">
                         </div>
                     </div>
 
@@ -266,15 +254,6 @@
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option position-name">
-                                    <!-- <div class="option-item">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
-                                    </div>
-                                    <div class="option-item">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
-                                    </div>
-                                    <div class="option-item" active>
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -282,19 +261,10 @@
                             <span>Phòng ban</span>
                             <div class="dropdown">
                                 <button class="dropbtn custom-dropbtn">
-                                    <span class="text">Tất cả phòng ban</span>
+                                    <span class="text">Phòng ban</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option department-name">
-                                    <!-- <div class="option-item">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 1
-                                    </div>
-                                    <div class="option-item">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Phòng ban 2
-                                    </div>
-                                    <div class="option-item" active>
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
-                                    </div> -->
                                 </div>
                             </div>
 
@@ -303,11 +273,11 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" id="tax-number" class="input-hint" value="0123456789">
+                            <input type="text" id="tax-number" class="input-hint" placeholder="0123456789">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Mức lương cơ bản</span>
-                            <input type="text" id="basic-salary" class="input-hint" value="10.000.000">
+                            <input type="text" id="basic-salary" class="input-hint" placeholder="10.000.000">
                         </div>
                     </div>
                     <div class="info-row">
@@ -323,10 +293,10 @@
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option">
-                                    <div class="option-item">
+                                    <div class="option-item" value="0">
                                         <span class="icon"> <i class="fas fa-check"></i></span>Đang làm việc
                                     </div>
-                                    <div class="option-item">
+                                    <div class="option-item" value="1">
                                         <span class="icon"> <i class="fas fa-check"></i></span>Đang thử việc
                                     </div>
                                 </div>
@@ -337,7 +307,7 @@
             </div>
             <div class="popup-foot">
                 <div class="m-btn-cancel m-second-button">Hủy</div>
-                <div class="m-btn m-btn-save">
+                <div class="m-btn m-btn-save" id="btnSave">
                     <div class="m-btn-icon icon-save"></div>
                     <div class="btn-text">Lưu</div>
                 </div>

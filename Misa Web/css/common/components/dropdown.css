@@ -40,9 +40,10 @@
     transform: rotate(180deg);
 }
 
-.dropdown .dropbtn:focus+.option {
+
+/* .dropdown .dropbtn:focus+.option {
     display: block;
-}
+} */
 
 .dropdown .option {
     display: none;
@@ -62,7 +63,7 @@
 
 .dropdown .option-item .icon {
     padding: 0 10px;
-    color: transparent;
+    color: #fff;
 }
 
 .dropdown .option-item:hover {
@@ -70,10 +71,12 @@
     cursor: pointer;
 }
 
-.dropdown .option-item:active {
+
+/* .dropdown .option-item:active {
     background: #019160;
     color: #fff;
 }
+
 
 .dropdown .option-item:focus {
     background: #019160;
@@ -84,9 +87,11 @@
     color: #fff;
 }
 
+
+
 .dropdown .option-item:focus .icon {
     color: #fff;
-}
+} */
 
 .header-dropdown .branch-name {
     border: none;

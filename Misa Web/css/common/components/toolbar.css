@@ -22,8 +22,18 @@
     margin: 0;
 }
 
+.filter-bar .filter-department .dropbtn .text {
+    width: 150px;
+    text-align: left;
+}
+
 .filter-bar .filter-position .dropbtn {
     margin: 0;
+}
+
+.filter-bar .filter-position .dropbtn .text {
+    width: 100px;
+    text-align: left;
 }
 
 .filter-bar input {

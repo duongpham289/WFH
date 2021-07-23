@@ -32,6 +32,10 @@ input::placeholder {
     color: #bbb;
 }
 
+.field-input-label input::placeholder {
+    font-size: 11px;
+}
+
 .field-input-label input:focus {
     initial-value: '';
     border: 1px solid #019160;
