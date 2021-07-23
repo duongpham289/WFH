@@ -27,3 +27,8 @@ body {
     font-family: 'GoogleSans-Light';
     src: url('../../../content/font/GoogleSans-Light.otf');
 }
+
+@font-face {
+    font-family: 'GoogleSans-Medium';
+    src: url('../../../content/font/GoogleSans-Medium.otf');
+}

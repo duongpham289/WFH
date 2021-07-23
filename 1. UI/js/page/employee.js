@@ -1,5 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     loadData();
+    modalPopup();
+    clearInput();
 })
 
 /**
@@ -12,9 +14,9 @@ function loadData() {
         //data:'', //tham số sẽ truyền lên cho API qua bpdy request
         //contentType:'json',//kiểu dữ liệu trả về
         //async: true, đồng bộ/bất đồng bộ
-    }).done(function (res) {
+    }).done(function(res) {
         var data = res;
-        $.each(data, function (index, item) {
+        $.each(data, function(index, item) {
 
             var fullName = formatData(item['FullName']);
             var genderName = formatData(item['GenderName']);
@@ -27,23 +29,23 @@ function loadData() {
             var workStatus = formatWorkStatus(item['WorkStatus']);
 
             var tr = $(`<tr>
-                    <td><div><span>`+ item.EmployeeCode + `</span></div></td>
-                    <td><div title="`+ fullName + `"><span>` + fullName + `</span></div></td>
-                    <td><div ><span>`+ genderName + `</span></div></td>
-                    <td><div><span>`+ dateOfBirth + `</span></div></td>
-                    <td><div><span>`+ phoneNumber + `</span></div></td>
-                    <td><div title="`+ email + `"><span>`+ email + `</span></div></td>
-                    <td><div  title="`+ positionName + `"><span>`+ positionName + `</span></div></td>
-                    <td><div  title="`+ departmentName + `"><span>`+ departmentName + `</span></div></td>
-                    <td class="salary"><div><span>`+ salary + `</span></div></td>
-                    <td><div  title="`+ workStatus + `"><span>`+ workStatus + `</span></div></td>
+                    <td><div><span>` + item.EmployeeCode + `</span></div></td>
+                    <td><div title="` + fullName + `"><span>` + fullName + `</span></div></td>
+                    <td><div ><span>` + genderName + `</span></div></td>
+                    <td><div><span>` + dateOfBirth + `</span></div></td>
+                    <td><div><span>` + phoneNumber + `</span></div></td>
+                    <td><div title="` + email + `"><span>` + email + `</span></div></td>
+                    <td><div  title="` + positionName + `"><span>` + positionName + `</span></div></td>
+                    <td><div  title="` + departmentName + `"><span>` + departmentName + `</span></div></td>
+                    <td class="salary"><div><span>` + salary + `</span></div></td>
+                    <td><div  title="` + workStatus + `"><span>` + workStatus + `</span></div></td>
                 </tr>`);
 
             $('table tbody').append(tr);
             // debugger;
         })
 
-    }).fail(function (res) {
+    }).fail(function(res) {
         //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
         //thông thường thì:
         //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
@@ -118,87 +120,76 @@ function formatWorkStatus(workStatus) {
  * Hiệu ứng ẩn hiện modal
  * CreatedBy: PHDUONG (21/07/2021)
  */
+
 // Get the modal
-var modal = document.getElementById("myModal");
+function modalPopup() {
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    var modal = document.getElementById("myModal");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("popup-close")[0];
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+    // Get the <span> element that closes the modal
+    var btnClose = document.getElementsByClassName("popup-close")[0];
+    var btnCancel = document.getElementsByClassName("m-btn-cancel")[0];
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-
-/**
- * Ẩn hiện dropdown và xoay mũi tên tương ứng
- * CreatedBy: PHDUONG (21/07/2021)
- */
-
-var y = '';
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-/**
- * Ẩn hiện dropdown
- * @param {*} id tag id
- * CreatedBy: PHDUONG (21/07/2021)
- */
-function myFunction(id) {
-    document.getElementById(id).classList.toggle("show");
-    
-    var x = document.getElementById('m-'+id);
-    y = x;
-    if($(".show").length){
-        x.style.transform = 'rotate(-135deg)';
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
     }
-}
-//lấy tất cả các button menu
-var buttons = document.getElementsByClassName('dropbtn');
-//lấy tất cả các thẻ chứa menu con
-var contents = document.getElementsByClassName('dropdown-content');
-//lặp qua tất cả các button menu và gán sự kiện
-for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function(){
-        //lấy value của button
-        var id = this.value;
-        //ẩn tất cả các menu con đang được hiển thị
-        for (var i = 0; i < contents.length; i++) {
-            contents[i].classList.remove("show");
+
+    // When the user clicks on <span> (x), close the modal
+    btnClose.onclick = function() {
+        modal.style.display = "none";
+    }
+    btnCancel.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
-        //hiển thị menu vừa được click
-        myFunction(id);
+
+    }
+}
+
+/**
+ * Xóa value input khi người dùng ấn vào ô input
+ * CreatedBy: PHDUONG (22/07/2021)
+ */
+function clearInput() {
+    var x = ["NV8888...", "Nguyễn Văn A...", "0123456789...", "Hà Nội...", "Example@gmail.com...", "0123456789...", "0123456789", "10.000.000"];
+    $(".input-hint").on("focus", function() {
+        for (i = 0; i < 8; i++) {
+            // debugger
+            var $this = $(this);
+            var n = $this.index($this);
+            if (i == n) {
+                if ($this.attr('value', x[n])) {
+                    $this.attr('value', "");
+                }
+            }
+        }
     });
-}
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
 
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-  if($(".show").length == 0){
-    y.style.transform = 'rotate(45deg)';
-    }
-}
+    var hint = document.getElementsByClassName(".input-hint");
+    window.onclick = function(event) {
+        // if (event.target != hint) {
+        //     debugger
+        //     for (i = 0; i < 8; i++) {
+        //         // debugger
+        //         if ($(".input-hint").eq(i).attr('value', "")) {
 
+        //             $(".input-hint").eq(i).attr('value', x[i])
+        //         }
+        //     }
+        // }
+    }
+
+    //clear input field when submit
+    // $(".button").on("click", function(event) {
+    //     $(".input-hint").val("");
+    // });
+}

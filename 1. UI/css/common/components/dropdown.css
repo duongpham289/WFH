@@ -12,6 +12,7 @@
     color: #000000;
     display: flex;
     align-items: center;
+    margin-top: 4px;
     padding-left: 16px;
     padding-right: 0;
     cursor: pointer;
@@ -79,6 +80,19 @@
     color: #fff;
 }
 
-.required {
-    color: red;
+.header-dropdown .branch-name {
+    border: none;
+    margin: 0;
+}
+
+.header-dropdown .branch-name .text {
+    font-weight: bold;
+    font-size: medium;
+    font-family: GoogleSans-Regular;
+    /* margin-left: 24px; */
+    padding-right: 10px;
+}
+
+.header-dropdown .branch-name .icon {
+    padding: 0;
 }

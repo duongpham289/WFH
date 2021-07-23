@@ -56,18 +56,13 @@
     cursor: pointer;
 }
 
-
-/* .m-btn-cancel {
+.m-btn-cancel {
     margin: 10px 0;
-    position: absolute;
-    right: 116px;
-    width: 30px;
+    position: relative;
     line-height: 40px;
 }
 
 .m-btn-save {
-    margin: 10px 0;
-    position: absolute;
-    right: 24px;
-    width: 45px;
-} */
+    margin: 10px 24px 10px 16px;
+    position: relative;
+}
