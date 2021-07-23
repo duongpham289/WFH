@@ -7,51 +7,50 @@ $(document).ready(function() {
     dropdownOnClick();
 
     $("#btnSave").on("click", addEmployee);
+
 })
 
 
-
+/**
+ * Ẩn hiện dropdown khi click
+ * CreatedBy: PHDUONG (23/7/2021)
+ */
 function dropdownOnClick() {
     var dropBtn = "";
     var dropOtion = "";
     var dropSpan = "";
 
     $(".dropbtn").on("click", function() {
-        $(".dropbtn").next().hide();
-        $(this).next().show();
-        dropBtn = $(this)[0];
-        dropOtion = ($(this).next())[0];
-        dropSpan = $(this).children()[0];
+        $(".dropbtn").next().hide(); //đóng tất cả những dropdown đang mở
+        $(this).next().show(); //mở dropdown được lựa chọn
+        dropBtn = $(this)[0]; //lưu lại giá trị của dropdown được chọn
+        dropOtion = ($(this).next())[0]; //lưu lại giá trị của option của dropdown được chọn
+        dropSpan = $(this).children()[0]; //lưu lại giá trị của text span của dropdown được chọn
     })
     window.onclick = function(event) {
-        if (event.target != dropBtn && event.target != dropOtion && event.target != dropSpan) {
-            if (event.target.getAttribute('value') == null) {
+        if (event.target != dropBtn && event.target != dropOtion && event.target != dropSpan) { //đóng dropdown khi click vào những đối tượng khác 
+            if (event.target.getAttribute('value') == null) { //đóng dropdown khi click vào những đối tượng ko có value
                 if (dropOtion)
-                    $(".dropbtn").next().hide();
+                    $(".dropbtn").next().hide(); //đóng tất cả dropdown
             } else {
                 // debugger
-                event.target.parentNode.previousElementSibling.firstElementChild.textContent = event.target.innerText
-                    // console.log(event.target.textContent);
-                    // console.log(event.target.parentNode.previousElementSibling.textContent);
-                $(".dropbtn").next().children().css("background-color", "#fff");
-                $(".dropbtn").next().children().css("color", "#000");
-                event.target.style.background = "#019160";
-                event.target.style.color = "#fff";
+                event.target.parentNode.previousElementSibling.firstElementChild.textContent = event.target.innerText; //thay tên của button bằng tên của option đang được chọn
+                event.target.parentNode.previousElementSibling.firstElementChild.setAttribute("value", event.target.getAttribute('value')); ////thay value của button bằng value của option đang được chọn
+                // debugger
+
+                $(".dropbtn").next().children().css("background-color", "#fff"); //set background của tất cả option
+                $(".dropbtn").next().children().css("color", "#000"); //set text color của tất cả option
+                event.target.style.background = "#019160"; //set background của option đang được chọn
+                event.target.style.color = "#fff"; //set text color của option đang được chọn
             }
         }
     }
 }
 
-function styleOption() {
-    var optionItem = $(".option-item");
-    window.onclick = function(event) {
-        if (event.target == optionItem) {
-            console.log(optionItem)
-        }
-
-    }
-}
-
+/**
+ * Thêm mới dữ liệu nhân viên
+ * CreatedBy: PHDUONG (23/7/2021)
+ */
 function addEmployee() {
     var employee = {
         CreatedDate: "2021-07-21T08:58:26.162Z",
@@ -88,6 +87,7 @@ function addEmployee() {
     };
     employee.EmployeeCode = $('#txtEmployeeCode').val();
     employee.FullName = $('#txtFullName').val();
+    employee.DateOfBirth = $('#dDateOfBirth').val();
     // debugger
     $.ajax({
         url: "http://cukcuk.manhnv.net/v1/Employees",
@@ -104,7 +104,38 @@ function addEmployee() {
     });
 }
 /**
+ * Định dạng dữ liệu Dropdown
+ * @param {*} input 
+ * @param {*} val value của thẻ span trong button
+ * @returns Chuỗi tương ứng
+ */
+function formatGender(input, val) {
+    var gender = ["Nam", "Nữ", "Không xác định"];
+    var position = ["Giám đốc", "Nhân viên", "Phó phòng", "Trưởng phòng"];
+    var department = ["Phòng Marketting", "Phòng đào tạo", "Phòng Nhân sự", "Phòng Công nghệ"];
+
+    switch (input) {
+        case "GenderName":
+            input = gender;
+            break;
+        case "PositionName":
+            input = position;
+            break;
+        case "DepartmentName":
+            input = department;
+            break;
+        default:
+            break;
+    }
+
+    return input[val];
+
+}
+
+
+/**
  * Load du lieu len table
+ * CreatedBy: PHDUONG (23/07/2021)
  */
 function loadData() {
     $.ajax({
@@ -271,7 +302,7 @@ function getDepartment() {
         // var index = 1;
         $.each(data, function(index, item) {
 
-            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}" value="${index}">
+            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}" value="${index+1}">
                             <span class="icon" ><i class="fas fa-check"></i></span>` + item.DepartmentName + `
                         </div>`);
 
@@ -309,7 +340,7 @@ function getPosition() {
         var data = res;
         $.each(data, function(index, item) {
 
-            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}"  value="${index}">
+            var optionItem = $(`<div class="option-item" id="${item.DepartmentId}"  value="${index+1}">
                             <span class="icon" > <i class="fas fa-check"></i></span>` + item.PositionName + `
                         </div>`);
 

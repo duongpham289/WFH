@@ -196,7 +196,7 @@
                             <span>Giới tính</span>
                             <div class="dropdown">
                                 <button class="dropbtn custom-dropbtn">
-                                    <span class="text">Giới Tính</span>
+                                    <span id="intGenderName" class="text">Giới Tính</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option">
@@ -216,28 +216,28 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Số CMTND/ Căn cước(<span class="required">*</span>)</span>
-                            <input type="text" id="id-number" class="input-hint" placeholder="0123456789...">
+                            <input type="text" id="txtIdentityNumber" class="input-hint" placeholder="0123456789...">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Ngày cấp</span>
-                            <input type="date">
+                            <input type="date" id="dIdentityDate">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Nơi cấp</span>
-                            <input type="text" id="issued-by" class="input-hint" placeholder="Hà Nội...">
+                            <input type="text" id="txIdentityPlace" class="input-hint" placeholder="Hà Nội...">
                         </div>
                         <div class="info-column field-input-label"></div>
                     </div>
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Email(<span class="required">*</span>)</span>
-                            <input type="text" id="email" class="input-hint" placeholder="Example@gmail.com...">
+                            <input type="text" id="txtEmail" class="input-hint" placeholder="Example@gmail.com...">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Số điện thoại (<span class="required">*</span>)</span>
-                            <input type="text" id="phone" class="input-hint" placeholder="0123456789...">
+                            <input type="text" id="txtPhoneNumber" class="input-hint" placeholder="0123456789...">
                         </div>
                     </div>
 
@@ -250,7 +250,7 @@
                             <span>Vị trí</span>
                             <div class="dropdown">
                                 <button class="dropbtn custom-dropbtn">
-                                    <span class="text">Vị trí</span>
+                                    <span id="intPositionName" class="text">Vị trí</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option position-name">
@@ -261,7 +261,7 @@
                             <span>Phòng ban</span>
                             <div class="dropdown">
                                 <button class="dropbtn custom-dropbtn">
-                                    <span class="text">Phòng ban</span>
+                                    <span id="intDepartmentName" class="text">Phòng ban</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option department-name">
@@ -273,23 +273,23 @@
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" id="tax-number" class="input-hint" placeholder="0123456789">
+                            <input type="text" id="txPersonalTaxCode" class="input-hint" placeholder="0123456789">
                         </div>
                         <div class="info-column field-input-label">
                             <span>Mức lương cơ bản</span>
-                            <input type="text" id="basic-salary" class="input-hint" placeholder="10.000.000">
+                            <input type="text" id="txtSalary" class="input-hint" placeholder="10.000.000">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column field-input-label">
                             <span>Ngày gia nhập công ty</span>
-                            <input type="date">
+                            <input type="date" id="dJoinDate">
                         </div>
                         <div class="info-column">
                             <span>Tình trạng công việc</span>
                             <div class="dropdown">
                                 <button class="dropbtn custom-dropbtn">
-                                    <span class="text">Tình trạng công việc</span>
+                                    <span class="text" id="intWorkStatus">Tình trạng công việc</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
                                 </button>
                                 <div class="option">
