@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi-VN">
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Misa</title>
 
-    <link href="../css/common/style.css" rel="stylesheet">
     <link href="../css/common/style.css" rel="stylesheet">
     <link href="../content/font/fontawesome-5.15.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Phần Menu -->
     <div class="navbar">
         <div class="logo-site">
             <div class="toggle-icon"></div>
-            <div class="amis-logo"></div>
+            <div class="misa-logo"></div>
         </div>
         <div class="navbar-content">
             <div class="nav-item">
@@ -43,12 +45,15 @@
             </div>
         </div>
     </div>
+    <!-- Hết phần Menu -->
+
+    <!-- Phần Header -->
     <div class="header">
         <div class="header-left">
             <div class="dropdown header-dropdown">
                 <button class="dropbtn branch-name">
-                        <span class="text">Nhà Hàng Biển Đông</span>
-                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    <span class="text">Nhà Hàng Biển Đông</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
                 </button>
                 <div class="option" id="">
                     <div class="option-item">
@@ -68,15 +73,19 @@
             <div class="user-name">Phạm Hải Dương</div>
             <div class="m-icon-default icon-option"></div>
         </div>
-
     </div>
+    <!-- Hết phần Header -->
+
+    <!-- Phần Content chi tiết:
+            -Thông tin bảng được lấy từ cơ sở dữ liệu
+            - -->
     <div class="content">
         <div class="header-content">
             <div class="title">Danh sách nhân viên</div>
             <button id="myBtn" class="m-btn m-btn-icon">
                 <div class="m-icon-default icon-add"></div>
                 <div class="btn-text">Thêm nhân viên</div>
-              </button>
+            </button>
         </div>
         <div class="filter-bar">
             <input type="text" class="input-icon m-icon-default icon-search " placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
@@ -112,7 +121,7 @@
 
         </div>
         <div class="grid grid-employee">
-            <table width=100%>
+            <table>
                 <thead>
                     <tr>
                         <th>Mã nhân viên</th>
@@ -135,29 +144,30 @@
             <div class="total">Hiển thị 10/100 nhân viên</div>
             <div class="current-page">
                 <button class="prev-all">
-          <i class="fas fa-angle-double-left"></i>
-        </button>
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
                 <button class="prev"><i class="fas fa-angle-left"></i></button>
                 <button class="page">
-          <span class="number">1</span>
-        </button>
+                    <span class="number">1</span>
+                </button>
                 <button class="page">
-          <span class="number">2</span>
-        </button>
+                    <span class="number">2</span>
+                </button>
                 <button class="page">
-          <span class="number">3</span>
-        </button>
+                    <span class="number">3</span>
+                </button>
                 <button class="page">
-          <span class="number">4</span>
-        </button>
+                    <span class="number">4</span>
+                </button>
                 <button class="next"><i class="fas fa-angle-right"></i></button>
                 <button class="next-all">
-          <i class="fas fa-angle-double-right"></i>
-        </button>
+                    <i class="fas fa-angle-double-right"></i>
+                </button>
             </div>
             <div class="per-page">10 nhân viên/trang</div>
         </div>
     </div>
+    <!-- Hết phần Content -->
 
     <div id="myModal" class="popup">
         <div class="popup-body">
