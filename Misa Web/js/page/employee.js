@@ -2,6 +2,8 @@ $(document).ready(function() {
     loadData();
     modalPopup();
     clearInput();
+    getDepartment();
+    getPosition();
 })
 
 /**
@@ -29,7 +31,7 @@ function loadData() {
             var workStatus = formatWorkStatus(item['WorkStatus']);
 
             var tr = $(`<tr>
-                    <td><div><span>` + item.EmployeeCode + `</span></div></td>
+                    <td class="row-selected"><div><span>` + item.EmployeeCode + `</span></div></td>
                     <td><div title="` + fullName + `"><span>` + fullName + `</span></div></td>
                     <td><div ><span>` + genderName + `</span></div></td>
                     <td><div><span>` + dateOfBirth + `</span></div></td>
@@ -192,4 +194,80 @@ function clearInput() {
     // $(".button").on("click", function(event) {
     //     $(".input-hint").val("");
     // });
+}
+
+/**
+ * Lấy dữ liệu Phòng ban
+ *  CreatedBy: PHDUONG (23/07/2021)
+ */
+function getDepartment() {
+    $.ajax({
+        url: "http://cukcuk.manhnv.net/api/Department", //địa chỉ API
+        method: "GET", //phương thức
+        //data:'', //tham số sẽ truyền lên cho API qua bpdy request
+        //contentType:'json',//kiểu dữ liệu trả về
+        //async: true, đồng bộ/bất đồng bộ
+    }).done(function(res) {
+        var data = res;
+        $.each(data, function(index, item) {
+            var optionItem = $(`<div class="option-item" id=${item.DepartmentId}">
+                            <span class="icon" ><i class="fas fa-check"></i></span>` + item.DepartmentName + `
+                        </div>`);
+
+            $('#department-name').append(optionItem);
+
+            $(optionItem).on("click", function() {
+                console.log(1)
+            })
+
+        })
+    }).fail(function(res) {
+        //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
+        //thông thường thì:
+        //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
+        //- Mã 404 - Địa chỉ URL ko hợp lệ
+        // - 500 - lỗi từ phía backend - server 
+        alert('Có lỗi xảy ra vui lòng liên hệ MISA');
+    })
+}
+
+
+/**
+ * Lấy dữ liệu Vị trí
+ *  CreatedBy: PHDUONG (23/07/2021)
+ */
+function getPosition() {
+    $.ajax({
+        url: "http://cukcuk.manhnv.net/v1/Positions", //địa chỉ API
+        method: "GET", //phương thức
+        //data:'', //tham số sẽ truyền lên cho API qua bpdy request
+        //contentType:'json',//kiểu dữ liệu trả về
+        //async: true, đồng bộ/bất đồng bộ
+    }).done(function(res) {
+        var data = res;
+        $.each(data, function(index, item) {
+
+            var optionItem = $(`<div class="option-item" id="` + item.PositionId + `">
+                            <span class="icon" > <i class="fas fa-check"></i></span>` + item.PositionName + `
+                        </div>`);
+
+            $('.position-name').append(optionItem);
+            // debugger;
+        })
+
+    }).fail(function(res) {
+        //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
+        //thông thường thì:
+        //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
+        //- Mã 404 - Địa chỉ URL ko hợp lệ
+        // - 500 - lỗi từ phía backend - server 
+        alert('Có lỗi xảy ra vui lòng liên hệ MISA');
+    })
+}
+
+function setDropdownSelection(state) {
+    var $state = $(
+        '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+    );
+    return $state;
 }
