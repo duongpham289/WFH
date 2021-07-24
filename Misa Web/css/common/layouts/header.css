@@ -1,3 +1,4 @@
+/* Phần Header  */
 .header {
     display: flex;
     width: calc(100% - 221px);
@@ -7,32 +8,34 @@
     align-items: center;
 }
 
-.header .header-left {
-    display: flex;
-    align-items: center;
-    margin-left: 24px;
-}
+    /* Phần Tên */
+    .header .header-left {
+        display: flex;
+        align-items: center;
+    }
+        .header .header-left .header-icon {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            background: #e5e5e5;
+            color: #0075ff;
+            border-radius: 8px;
+            margin-left: 24px;
+        }
 
-.header .header-left .header-name {
-    border: none;
-    font-weight: bold;
-    font-size: medium;
-    font-family: GoogleSans-Regular;
-    margin-left: 24px;
-    padding-right: 10px;
-}
+    /* Phần Account */
+    .header .header-right {
+        display: flex;
+        padding: 0 16px;
+        align-items: center;
+        
+    }
 
-.header .header-right {
-    display: flex;
-    padding: 0 16px;
-    align-items: center;
-}
-
-.header .header-right .avatar {
-    width: 30px;
-    height: 20px;
-    margin: 0 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url('../../../content/icon/avatar-default.png');
-}
+        .header .header-right .avatar {
+            width: 30px;
+            height: 20px;
+            margin: 0 16px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url('../../../content/icon/avatar-default.png');
+        }

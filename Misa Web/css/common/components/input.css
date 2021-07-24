@@ -1,29 +1,3 @@
-/* Base Field Input */
-.field-input-base {
-    border-radius: 4px;
-    border: 1px solid #bbb;
-    font-family: GoogleSans-Regular;
-    height: 40px;
-    color: #bbb;
-}
-
-    .field-input-base::placeholder {
-        font-size: 12px;
-    }
-
-    .field-input-base:focus {
-        font-size: 13px;
-        color: #000;
-        outline: none;
-        border: 1px solid #019160;
-
-    }
-
-    .field-input-base:focus::placeholder {
-        color: transparent;
-    }
-
-
 /* Field Input có icon đứng trước text */
 .field-input-icon {
     padding: 0 0 0 40px;

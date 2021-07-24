@@ -44,13 +44,15 @@
                 <div class="nav-item-text">Thiết lập hệ thống</div>
             </div>
         </div>
+        <div class="navbar-minimize"></div>
     </div>
     <!-- Hết phần Menu -->
 
     <!-- Phần Header -->
     <div class="header">
         <div class="header-left">
-            <div class="dropdown header-dropdown">
+            <div class="header-icon">MB</div>
+            <div class="base-dropdown header-dropdown">
                 <button class="dropbtn branch-name">
                     <span class="text">Nhà Hàng Biển Đông</span>
                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
@@ -71,7 +73,7 @@
         <div class="header-right">
             <div class="avatar"></div>
             <div class="user-name">Phạm Hải Dương</div>
-            <div class="m-icon-default icon-option"></div>
+            <div class="base-icon icon-option"></div>
         </div>
     </div>
     <!-- Hết phần Header -->
@@ -82,41 +84,38 @@
     <div class="content">
         <div class="header-content">
             <div class="title">Danh sách nhân viên</div>
-            <button id="myBtn" class="m-btn m-btn-icon">
-                <div class="m-icon-default icon-add"></div>
+            <button id="myBtn" class="base-btn m-btn-icon">
+                <div class="base-icon icon-add"></div>
                 <div class="btn-text">Thêm nhân viên</div>
             </button>
         </div>
-        <div class="filter-bar">
-            <input type="text" class="field-input-base field-input-icon m-icon-default icon-search " placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+        <div class="content-filter-bar">
+            <input type="text" class="base-field-input field-input-icon base-icon icon-search"
+                placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
             <div class="filter-department">
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        <span class="text">Tất cả phòng ban</span>
-                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                    </button>
-                    <div class="option department-name hidden-field" id="department-name">
-                        <div class="option-item" value="0">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả phòng ban
+                <div class="base-combobox">
+                    <input type="text" class="combobox-input" placeholder="Tất cả phòng ban">
+                    <button class="base-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
+                    <div class="base-combobox-data  department-name" value="0">
+                        <div class="base-combobox-item" value="0">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả Phòng ban
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="filter-position">
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        <span class="text">Tất cả vị trí</span>
-                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                    </button>
-                    <div class="option position-name">
-                        <div class="option-item" value="0">
-                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả vị trí
+                <div class="base-combobox">
+                    <input type="text" class="combobox-input" placeholder="Tất cả vị trí">
+                    <button class="base-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
+                    <div class="base-combobox-data position-name" value="1">
+                        <div class="base-combobox-item" value="0">
+                            <span class="icon"> <i class="fas fa-check"></i></span>Tất cả Vị trí
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="m-btn m-btn-refresh m-icon-default icon-reload"></button>
+            <button class="base-btn m-btn-refresh base-icon icon-reload"></button>
 
 
         </div>
@@ -174,7 +173,7 @@
             <div class="popup-header">
                 <div class="popup-name">Thông tin nhân viên</div>
                 <div class="popup-close">
-                    <button class="m-btn m-second-button m-btn-close m-icon-default icon-close"></button>
+                    <button class="base-btn m-second-button m-btn-close base-icon icon-close"></button>
                 </div>
             </div>
             <div class="popup-navbar">
@@ -190,21 +189,23 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Mã nhân viên(<span class="required-input">*</span>)</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtEmployeeCode" placeholder="NV8888...">
+                            <input type="text" class="base-field-input field-input-label" id="txtEmployeeCode"
+                                placeholder="NV8888...">
                         </div>
                         <div class="info-column ">
                             <span>Họ và tên(<span class="required-input">*</span>)</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtFullName" placeholder="Nguyễn Văn A...">
+                            <input type="text" class="base-field-input field-input-label" id="txtFullName"
+                                placeholder="Nguyễn Văn A...">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Ngày sinh</span>
-                            <input type="date" class="field-input-base field-input-label" id="dDateOfBirth">
+                            <input type="date" class="base-field-input field-input-label" id="dDateOfBirth">
                         </div>
                         <div class="info-column">
                             <span>Giới tính</span>
-                            <div class="dropdown">
+                            <div class="base-dropdown">
                                 <button class="dropbtn custom-dropbtn">
                                     <span id="intGenderName" class="text">Giới Tính</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
@@ -226,28 +227,32 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Số CMTND/ Căn cước(<span class="required-input">*</span>)</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtIdentityNumber" placeholder="0123456789...">
+                            <input type="text" class="base-field-input field-input-label" id="txtIdentityNumber"
+                                placeholder="0123456789...">
                         </div>
                         <div class="info-column ">
                             <span>Ngày cấp</span>
-                            <input type="date" class="field-input-base field-input-label" id="dIdentityDate">
+                            <input type="date" class="base-field-input field-input-label" id="dIdentityDate">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Nơi cấp</span>
-                            <input type="text" class="field-input-base field-input-label" id="txIdentityPlace" placeholder="Hà Nội...">
+                            <input type="text" class="base-field-input field-input-label" id="txIdentityPlace"
+                                placeholder="Hà Nội...">
                         </div>
                         <div class="info-column "></div>
                     </div>
-                    <div class="info-row" >
+                    <div class="info-row">
                         <div class="info-column ">
                             <span>Email(<span class="required-input">*</span>)</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtEmail" placeholder="Example@gmail.com...">
+                            <input type="text" class="base-field-input field-input-label" id="txtEmail"
+                                placeholder="Example@gmail.com...">
                         </div>
                         <div class="info-column ">
                             <span>Số điện thoại (<span class="required-input">*</span>)</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtPhoneNumber" placeholder="0123456789...">
+                            <input type="text" class="base-field-input field-input-label" id="txtPhoneNumber"
+                                placeholder="0123456789...">
                         </div>
                     </div>
 
@@ -258,23 +263,20 @@
                     <div class="info-row">
                         <div class="info-column">
                             <span>Vị trí</span>
-                            <div class="dropdown">
-                                <button class="dropbtn custom-dropbtn">
-                                    <span id="intPositionName" class="text">Vị trí</span>
-                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                                </button>
-                                <div class="option position-name">
+
+                            <div class="base-combobox">
+                                <input type="text" class="combobox-input" placeholder="Chọn/Nhập thông tin">
+                                <button class="base-combobox-btn custom-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
+                                <div class="base-combobox-data position-name">
                                 </div>
                             </div>
                         </div>
                         <div class="info-column">
                             <span>Phòng ban</span>
-                            <div class="dropdown">
-                                <button class="dropbtn custom-dropbtn">
-                                    <span id="intDepartmentName" class="text">Phòng ban</span>
-                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                                </button>
-                                <div class="option department-name">
+                            <div class="base-combobox">
+                                <input type="text" class="combobox-input" placeholder="Chọn/Nhập thông tin">
+                                <button class="base-combobox-btn custom-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
+                                <div class="base-combobox-data department-name">
                                 </div>
                             </div>
 
@@ -283,21 +285,23 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" class="field-input-base field-input-label" id="txPersonalTaxCode" placeholder="0123456789">
+                            <input type="text" class="base-field-input field-input-label" id="txPersonalTaxCode"
+                                placeholder="0123456789">
                         </div>
                         <div class="info-column ">
                             <span>Mức lương cơ bản</span>
-                            <input type="text" class="field-input-base field-input-label" id="txtSalary" placeholder="10.000.000">
+                            <input type="text" class="base-field-input field-input-label" id="txtSalary"
+                                placeholder="10.000.000">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Ngày gia nhập công ty</span>
-                            <input type="date" class="field-input-base field-input-label" id="dJoinDate">
+                            <input type="date" class="base-field-input field-input-label" id="dJoinDate">
                         </div>
                         <div class="info-column">
                             <span>Tình trạng công việc</span>
-                            <div class="dropdown">
+                            <div class="base-dropdown">
                                 <button class="dropbtn custom-dropbtn">
                                     <span class="text" id="intWorkStatus">Tình trạng công việc</span>
                                     <span class="icon"><i class="fas fa-chevron-down"></i></span>
@@ -316,8 +320,8 @@
                 </div>
             </div>
             <div class="popup-foot">
-                <div class="m-btn m-second-button m-btn-cancel ">Hủy</div>
-                <div class="m-btn m-btn-icon m-btn-save" id="btnSave">
+                <div class="base-btn m-second-button m-btn-cancel ">Hủy</div>
+                <div class="base-btn m-btn-icon m-btn-save" id="btnSave">
                     <i class="far fa-save"></i>
                     <div class="btn-text">Lưu</div>
                 </div>

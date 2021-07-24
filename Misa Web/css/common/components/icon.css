@@ -1,18 +1,4 @@
-.m-icon-default{
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-
-
-.nav-item-icon{
-    width: 20px;
-    height: 20px;
-    align-self: center;
-    background-size: contain;
-    margin-right: 10px;
-}
-
+/* Icon Option */
 .icon-option{
     width: 16px;
     height: 16px;
@@ -20,6 +6,7 @@
     background-image: url('../../../content/icon/option.png');
 }
 
+/* Icon Add */
 .icon-add{
     width: 16px;
     height: 16px;
@@ -27,15 +14,19 @@
     
 }
 
+/* Icon Search */
 .icon-search{
     background-image: url('../../../content/icon/search.png');
     background-position: 16px center;
 }
 
+/* Icon Reload */
 .icon-reload{
     background-image: url('../../../content/icon/refresh.png');
     
 }
+
+/* Icon Close */
 .icon-close{
     background-image: url('../../../content/icon/x.svg');
     
