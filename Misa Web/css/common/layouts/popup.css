@@ -106,9 +106,12 @@
     width: 50%;
     margin: 5px 0 16px;
 }
+.info-column span{
+    font-family: GoogleSans-Medium;
+}
 
 .info-column input {
-    margin: 0;
+    margin: 4px 0 0;
     width: 100%;
 }
 

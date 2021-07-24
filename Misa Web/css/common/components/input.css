@@ -1,44 +1,51 @@
-.input-icon {
-    border: none;
+/* Base Field Input */
+.field-input-base {
     border-radius: 4px;
-    height: 40px;
-    font-size: 12px;
-    color: #bbb;
-    padding: 0 0 0 40px;
-    border: 1px solid #bbb;
-}
-
-input::placeholder {
-    font-size: 12px;
-}
-
-.field-input-label span {
-    color: #000;
-    font-family: GoogleSans-Medium;
-}
-
-.field-input-label .required {
-    color: red;
-}
-
-.field-input-label input {
-    border-radius: 4px;
-    padding: 0 0 0 16px;
     border: 1px solid #bbb;
     font-family: GoogleSans-Regular;
     height: 40px;
-    font-size: 11px;
-    margin-top: 4px;
     color: #bbb;
 }
 
-.field-input-label input::placeholder {
-    font-size: 11px;
+    .field-input-base::placeholder {
+        font-size: 12px;
+    }
+
+    .field-input-base:focus {
+        font-size: 13px;
+        color: #000;
+        outline: none;
+        border: 1px solid #019160;
+
+    }
+
+    .field-input-base:focus::placeholder {
+        color: transparent;
+    }
+
+
+/* Field Input có icon đứng trước text */
+.field-input-icon {
+    padding: 0 0 0 40px;
 }
 
-.field-input-label input:focus {
-    initial-value: '';
-    border: 1px solid #019160;
-    font-size: 13px;
-    color: #000;
+/* Field Input có label bên trên input */
+.field-input-label {
+    margin-top: 4px;
+    padding: 0 0 0 16px;
+}
+
+    .field-input-label::placeholder {
+        font-size: 11px;
+    }
+
+
+/* Field Input khi nhập sai */
+.error-input {
+    border: 1px solid #FF4747;
+}
+
+/* Đánh dấu đỏ những trường bắt buộc */
+.required-input {
+    color: red;
 }
