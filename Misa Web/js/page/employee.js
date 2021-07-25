@@ -410,7 +410,8 @@ function getPosition() {
             $('.position-name').append(optionItem);
 
             $(`#${item.PositionId}`).on("click", function() {
-                getEmployeeByPositionId(item.PositionId);
+                // getEmployeeByPositionId(item.PositionId);
+                console.log(item.PositionId);
             })
             index++;
         })
