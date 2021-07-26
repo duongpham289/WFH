@@ -7,8 +7,8 @@
 
     <title>Misa</title>
 
-    <link href="../css/common/StyleSheet.css" rel="stylesheet">
     <link href="../content/font/fontawesome-5.15.1/css/all.min.css" rel="stylesheet">
+    <link href="../css/common/Style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <div class="header--right">
             <div class="header__title">
                 <div class="header-icon">MB</div>
-                <div class="dropdown header-dropdown" id="dropdown__restaurant">
+                <div class="dropdown" id="dropdown__restaurant">
                     <button class="dropdown__button">
                         <span class="dropdown__title">Nhà Hàng Biển Đông</span>
                        <i class="fas fa-chevron-down"></i>
@@ -164,18 +164,22 @@
         </div>
     </div>
 
-    <div id="myModal" class="modal__container">
+    <!-- Phần Modal Popup -->
+    <div id="modalPopup" class="modal__container">
         <div class="modal">
+            <!-- Modal Popup Header -->
             <div class="modal__header">
                 <div class="modal__name">Thông tin nhân viên</div>
                 <div class="modal__button-close">
                     <button class="button--secondary button__close"></button>
                 </div>
             </div>
+            <!-- Modal Popup Avatar Holder -->
             <div class="modal__sidebar">
                 <div class="modal__avatar-holder"></div>
                 <span>(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</span>
             </div>
+            <!-- Modal Popup Content -->
             <div class="modal__content">
                 <div class="modal__general-info">
                     <div class="info-title">
@@ -186,12 +190,12 @@
                         <div class="info-column ">
                             <span>Mã nhân viên(<span class="required-input">*</span>)</span>
                             <input type="text" class="modal__field-input field-input-label" id="txtEmployeeCode"
-                                placeholder="NV8888...">
+                                placeholder="NV8888..." required>
                         </div>
                         <div class="info-column ">
                             <span>Họ và tên(<span class="required-input">*</span>)</span>
                             <input type="text" class="modal__field-input field-input-label" id="txtFullName"
-                                placeholder="Nguyễn Văn A...">
+                                placeholder="Nguyễn Văn A..." required>
                         </div>
                     </div>
                     <div class="info-row">
@@ -201,21 +205,15 @@
                         </div>
                         <div class="info-column">
                             <span>Giới tính</span>
-                            <div class="base-dropdown">
-                                <button class="dropbtn custom-dropbtn">
-                                    <span id="intGenderName" class="text">Giới Tính</span>
-                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                            <div class="dropdown">
+                                <button class="dropdown__button dropdown__modal--button">
+                                    <span class="dropdown__title">Chọn giới tính</span>
+                                    <i class="fas fa-chevron-down"></i>
                                 </button>
-                                <div class="option">
-                                    <div class="option-item" value="0">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Nam
-                                    </div>
-                                    <div class="option-item" value="1">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Nữ
-                                    </div>
-                                    <div class="option-item" value="2">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Không xác định
-                                    </div>
+                                <div class="dropdown__content dropdown__content--hidden">
+                                    <a href="#"><i class="fas fa-check"></i>Nam</a>
+                                    <a href="#"><i class="fas fa-check"></i>Nữ</a>
+                                    <a href="#"><i class="fas fa-check"></i>Khác</a>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +222,7 @@
                         <div class="info-column ">
                             <span>Số CMTND/ Căn cước(<span class="required-input">*</span>)</span>
                             <input type="text" class="modal__field-input field-input-label" id="txtIdentityNumber"
-                                placeholder="0123456789...">
+                                placeholder="0123456789..." required>
                         </div>
                         <div class="info-column ">
                             <span>Ngày cấp</span>
@@ -243,12 +241,12 @@
                         <div class="info-column ">
                             <span>Email(<span class="required-input">*</span>)</span>
                             <input type="text" class="modal__field-input field-input-label" id="txtEmail"
-                                placeholder="Example@gmail.com...">
+                                placeholder="Example@gmail.com..." required>
                         </div>
                         <div class="info-column ">
                             <span>Số điện thoại (<span class="required-input">*</span>)</span>
                             <input type="text" class="modal__field-input field-input-label" id="txtPhoneNumber"
-                                placeholder="0123456789...">
+                                placeholder="0123456789..." required>
                         </div>
                     </div>
 
@@ -296,26 +294,23 @@
                         </div>
                         <div class="info-column">
                             <span>Tình trạng công việc</span>
-                            <div class="base-dropdown">
-                                <button class="dropbtn custom-dropbtn">
-                                    <span class="text" id="intWorkStatus">Tình trạng công việc</span>
-                                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                            <div class="dropdown">
+                                <button class="dropdown__button dropdown__modal--button">
+                                    <span class="dropdown__title">Tình trạng công việc</span>
+                                    <i class="fas fa-chevron-down"></i>
                                 </button>
-                                <div class="option">
-                                    <div class="option-item" value="0">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Đang làm việc
-                                    </div>
-                                    <div class="option-item" value="1">
-                                        <span class="icon"> <i class="fas fa-check"></i></span>Đang thử việc
-                                    </div>
+                                <div class="dropdown__content dropdown__content--hidden">
+                                    <a href="#"><i class="fas fa-check"></i>Đang làm việc</a>
+                                    <a href="#"><i class="fas fa-check"></i>Đang thử việc</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Modal Popup Footer -->
             <div class="modal__foot">
-                <div class="button--secondary button__cancel">Hủy</div>
+                <div class="button--secondary button__cancel" id="btnCancel">Hủy</div>
                 <div class="button--primary button__icon button__save" id="btnSave">
                     <i class="far fa-save"></i>
                     <div class="button__text">Lưu</div>
@@ -327,8 +322,8 @@
 
 
     <script src="../lib/jquery-3.6.0.min.js"></script>
-    <script src="../js/common/common.js"></script>
-    <script src="../js/page/employee.js"></script>
+    <script src="../js/common/Common.js"></script>
+    <script src="../js/page/Employee.js"></script>
 
 </body>
 
