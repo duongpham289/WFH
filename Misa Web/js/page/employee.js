@@ -210,30 +210,35 @@ function loadData() {
         var data = res;
         $.each(data, function(index, item) {
 
-            var fullName = formatData(item['FullName']);
-            var genderName = formatData(item['GenderName']);
-            var dateOfBirth = formatDob(item['DateOfBirth']);
-            var phoneNumber = formatData(item['PhoneNumber']);
-            var email = formatData(item['Email']);
-            var positionName = formatData(item['PositionName']);
-            var departmentName = formatData(item['DepartmentName']);
-            var salary = formatMoney(item['Salary']);
-            var workStatus = formatWorkStatus(item['WorkStatus']);
-
-            var tr = $(`<tr>
-                    <td class="row-selected"><div><span>` + item.EmployeeCode + `</span></div></td>
-                    <td><div title="` + fullName + `"><span>` + fullName + `</span></div></td>
-                    <td><div ><span>` + genderName + `</span></div></td>
-                    <td><div><span>` + dateOfBirth + `</span></div></td>
-                    <td><div><span>` + phoneNumber + `</span></div></td>
-                    <td><div title="` + email + `"><span>` + email + `</span></div></td>
-                    <td><div  title="` + positionName + `"><span>` + positionName + `</span></div></td>
-                    <td><div  title="` + departmentName + `"><span>` + departmentName + `</span></div></td>
-                    <td class="salary"><div><span>` + salary + `</span></div></td>
-                    <td><div  title="` + workStatus + `"><span>` + workStatus + `</span></div></td>
-                </tr>`);
-
-            $('table tbody').append(tr);
+           const employeeCode = item['EmployeeCode'];
+            const fullName = item['FullName'];
+            const gender = item['GenderName'];
+            const dob = item['DateOfBirth'];
+            const phone = item['PhoneNumber'];
+            const email = item['Email'];
+            const position = item['PositionName'];
+            const department = item['DepartmentName'];
+            const salary = item['Salary'];
+            const workStatus = item['WorkStatus'];
+            const trHTML = $(`<tr tr-data="${item['EmployeeId']}">
+                        <td>
+                            <div class="delete-box">
+                                <input type="checkbox">
+                                <span class="misa-checkmark"></span>                    
+                            </div>                            
+                        </td>
+                        <td>`+formatData(employeeCode)+`</td>
+                        <td>`+formatData(fullName)+`</td>
+                        <td>`+formatData(gender)+`</td>
+                        <td>`+formatDob(dob)+`</td>
+                        <td>`+formatData(phone)+`</td>
+                        <td>`+formatData(email)+`</td>
+                        <td>`+formatData(position)+`</td>
+                        <td>`+formatData(department)+`</td>
+                        <td>`+formatMoney(salary)+`</td>
+                        <td>`+formatWorkStatus(workStatus)+`</td>
+                    </tr>`);+
+            $('tbody').append(trHTML);
             // debugger;
         })
 
@@ -319,7 +324,7 @@ function modalPopup() {
     var modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
+    var btn = document.getElementById("button__add-employee");
 
     // Get the <span> element that closes the modal
     var btnClose = document.getElementsByClassName("popup-close")[0];
@@ -365,7 +370,7 @@ function getDepartment() {
         // var index = 1;
         $.each(data, function(index, item) {
 
-            var optionItem = $(`<div class="base-combobox-item" id="${item.DepartmentId}" value="${index+1}">
+            var optionItem = $(`<div class="combobox__item" id="${item.DepartmentId}" value="${index+1}">
                             <span class="icon" ><i class="fas fa-check"></i></span>` + item.DepartmentName + `
                         </div>`);
 
@@ -403,7 +408,7 @@ function getPosition() {
         var data = res;
         $.each(data, function(index, item) {
 
-            var optionItem = $(`<div class="base-combobox-item" id="${item.PositionId}"  value="${index+1}">
+            var optionItem = $(`<div class="combobox__item" id="${item.PositionId}"  value="${index+1}">
                             <span class="icon" > <i class="fas fa-check"></i></span>` + item.PositionName + `
                         </div>`);
 

@@ -1,10 +1,9 @@
 
 /* Custom combobox button for popup screen */
-.base-combobox .custom-combobox-btn {
-    margin-top: 4px;
-    width: 100%;
+.combobox__custom {
+    margin:0;
 }
 
-    .base-combobox .custom-combobox-btn .icon {
-        margin-left: auto;
+    .combobox__custom .combobox__button {
+        margin-top: 4px;
     }

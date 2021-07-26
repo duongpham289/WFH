@@ -1,5 +1,5 @@
 /* Popup whole screen */
-.popup {
+.modal__container {
     display: none;
     position: fixed;
     z-index: 999;
@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
     /* Popup Main Content */
-    .popup .popup-body {
+    .modal__container .modal {
         position: relative;
         margin: auto;
         width: 45%;
@@ -26,30 +26,30 @@
         animation-duration: 0.4s
     }
         /* Popup Header */
-        .popup .popup-body .popup-header {
+        .modal__container .modal .modal__header {
             display: flex;
             /* height: 15px; */
         }
 
-            .popup .popup-body .popup-header .popup-name {
+            .modal__container .modal .modal__header .modal__name {
                 font-size: 23px;
                 text-transform: uppercase;
                 font-weight: bold;
             }
 
-            .popup .popup-body .popup-header .popup-close {
+            .modal__container .modal .modal__header .modal__button-close {
                 position: absolute;
                 top: 0;
                 right: 0;
             }
 
         /* Popup SideBar */
-        .popup .popup-body .popup-navbar {
+        .modal__container .modal .modal__sidebar {
             float: left;
             width: 200px;
         }
 
-            .popup .popup-body .popup-navbar .avatar {
+            .modal__container .modal .modal__sidebar .modal__avatar-holder {
                 background-image: url('../../../content/img/blank-avatar.png');
                 background-repeat: no-repeat;
                 background-position: center top;
@@ -59,61 +59,61 @@
                 height: 200px;
             }
 
-            .popup .popup-body .popup-navbar span {
+            .modal__container .modal .modal__sidebar span {
                 display: block;
                 text-align: center;
             }
 
         /* Popup Detail Content */
-        .popup .popup-body .popup-content {
+        .modal__container .modal .modal__content {
             display: flex;
             padding-left: 10px;
         }
 
-            .popup .popup-body .popup-content .general-info {
+            .modal__container .modal .modal__content .modal__general-info {
                 margin-top: 24px;
                 width: 100%;
             }
             
-                .popup .popup-body .popup-content .general-info .info-title {
+                .modal__container .modal .modal__content .modal__general-info .info-title {
                     font-size: 14px;
                     text-transform: uppercase;
                     font-weight: bold;
                     margin: 10px 0 0;
                 }
 
-                    .popup .popup-body .popup-content .general-info .info-title .title-layout {
+                    .modal__container .modal .modal__content .modal__general-info .info-title .title-layout {
                         background-color: #019160;
                         height: 4px;
                         width: 85px;
                         margin-top: 8px;
                     }
-                .popup .popup-body .popup-content .general-info .info-row {
+                .modal__container .modal .modal__content .modal__general-info .info-row {
                     display: flex;
                     gap: 10px;
                     width: 100%;
                 }
 
-                    .popup .popup-body .popup-content .general-info .info-row .info-column {
+                    .modal__container .modal .modal__content .modal__general-info .info-row .info-column {
                         width: 50%;
                         margin: 5px 0 16px;
                     }
-                        .popup .popup-body .popup-content .general-info .info-row .info-column span{
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column span{
                             font-family: GoogleSans-Medium;
                         }
 
-                        .popup .popup-body .popup-content .general-info .info-row .info-column input {
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column input {
                             margin: 4px 0 0;
                             width: 100%;
                         }
 
         /* Popup footer */
-        .popup .popup-foot {
+        .modal__container .modal__foot {
             position: relative;
             display: flex;
             margin: 0 -24px;
             justify-content: flex-end;
-            background-color: #e9ebee;
+            background-color: #bbb;
             height: 60px;
             margin: -24px;
             margin-top: 24px;
@@ -124,7 +124,7 @@
 
 /* Responsive (for laptop screen only) */
 @media only screen and (max-width: 1600px) {
-    .popup .popup-body {
+    .modal__container .modal {
         width: 60%;
     }
   }

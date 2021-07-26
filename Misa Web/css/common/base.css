@@ -23,7 +23,7 @@
     }
 
 /* Base Field Input */
-.base-field-input {
+.modal__field-input {
     border-radius: 4px;
     border: 1px solid #bbb;
     color: #bbb;
@@ -31,12 +31,12 @@
     height: 40px;
 }
 
-    .base-field-input::placeholder {
+    .modal__field-input::placeholder {
         font-size: 12px;
         color: #bbb;
     }
 
-    .base-field-input:focus {
+    .modal__field-input:focus {
         font-size: 13px;
         color: #000;
         outline: none;
@@ -44,17 +44,13 @@
 
     }
 
-    .base-field-input:focus::placeholder {
+    .modal__field-input:focus::placeholder {
         color: transparent;
     }
 
 
 
-/* Base Icon */
-.base-icon{
-    background-position: center;
-    background-repeat: no-repeat;
-}
+
 
 /* Base Dropdownn */
 .base-dropdown {
@@ -116,12 +112,13 @@
 }
 
 /* Base Combobox */
-.base-combobox{
+.combobox{
     position: relative;
     align-items: center;
+    margin: 0 12px;
 }
     /* Input part */
-    .base-combobox input{
+    .combobox .combobox__input{
         height: 40px;
         border: 1px solid #bbb;
         border-radius: 4px;
@@ -131,32 +128,32 @@
         padding: 0 0 0 16px;
     }
 
-        .base-combobox input::placeholder{
+        .combobox .combobox__input::placeholder{
             font-size: 11px;
             color: #bbb;
         }
         /* Những sự kiện khi input được focus */
-        .base-combobox input:focus{
+        .combobox .combobox__input:focus{
             font-size: 13px;
             color: #000;
             outline: none;
             border: 1px solid #019160;
         }
 
-            .base-combobox input:focus+.base-combobox-btn>.icon{
+            .combobox .combobox__input:focus+.combobox__button>.icon{
                 transform: rotate(180deg);
             }
 
-            .base-combobox input:focus+.base-combobox-btn{
+            .combobox .combobox__input:focus+.combobox__btn{
                 background-color: #e5e5e5;
             }
 
-            .base-combobox input:focus::placeholder{
+            .combobox .combobox__input:focus::placeholder{
                 color: transparent;
             }
 
     /* Button Part */
-    .base-combobox button.base-combobox-btn{
+    .combobox .combobox__button{
         position: absolute;
         background-color: #fff;
         border: 1px solid #bbb;
@@ -166,22 +163,22 @@
         height: 40px;
     }
 
-        .base-combobox button.base-combobox-btn:hover{
+        .combobox .combobox__button:hover{
             background-color: #E9EBEE;
             outline: none;
         }
-        .base-combobox button.base-combobox-btn:focus{
+        .combobox .combobox__button:focus{
             background-color: #e5e5e5;
             outline: none;
         }
 
 
-        .base-combobox button.base-combobox-btn:focus>.icon {
+        .combobox .combobox__button:focus>.icon {
             transform: rotate(180deg);
         }
 
     /* Data Part */
-    .base-combobox .base-combobox-data{
+    .combobox .combobox__data{
         display: none;
         position: absolute;
         width: 100%;
@@ -191,18 +188,18 @@
         z-index: 999;
     }
 
-        .base-combobox .base-combobox-item {
+        .combobox .combobox__data .combobox__item {
             display: flex;
             align-items: center;
             height: 40px;
         }
 
-        .base-combobox .base-combobox-item .icon {
+        .combobox .combobox__data .combobox__item .icon {
             padding: 0 10px;
             color: #fff;
         }
 
-        .base-combobox .base-combobox-item:hover {
+        .combobox .combobox__data .combobox__item:hover {
             background: #e9ebee;
             cursor: pointer;
         }

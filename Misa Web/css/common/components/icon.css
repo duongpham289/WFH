@@ -1,33 +1,30 @@
-/* Icon Option */
-.icon-option{
+/* Base Icon */
+.icon-default{
     width: 16px;
     height: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Icon Option */
+.-option{
     margin: 0 16px;
     background-image: url('../../../content/icon/option.png');
 }
 
 /* Icon Add */
-.icon-add{
-    width: 16px;
-    height: 16px;
+.-add{
     background-image: url('../../../content/icon/add.png');
     
 }
 
 /* Icon Search */
-.icon-search{
+.-search{
     background-image: url('../../../content/icon/search.png');
-    background-position: 16px center;
 }
 
 /* Icon Reload */
-.icon-reload{
+.-reload{
     background-image: url('../../../content/icon/refresh.png');
-    
-}
-
-/* Icon Close */
-.icon-close{
-    background-image: url('../../../content/icon/x.svg');
     
 }

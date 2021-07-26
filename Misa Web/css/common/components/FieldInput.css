@@ -1,6 +1,19 @@
+@import url('../../Color.css');
 /* Field Input có icon đứng trước text */
-.field-input-icon {
-    padding: 0 0 0 40px;
+.field-input--icon{
+    height: 40px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	border: 1px solid var(--color-hightlight);
+	padding: 0 16px;
+	outline: none;
+	display: inline-block;
+	transition: 0.2s all ease-in-out;
+}
+
+
+.field-input--icon:focus {
+	border-color: var(--color-primary);
 }
 
 /* Field Input có label bên trên input */

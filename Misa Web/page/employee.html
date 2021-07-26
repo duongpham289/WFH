@@ -12,117 +12,126 @@
 </head>
 
 <body>
-    <!-- Phần Menu -->
-    <div class="navbar">
-        <div class="logo-site">
-            <div class="toggle-icon"></div>
-            <div class="misa-logo"></div>
-        </div>
-        <div class="navbar-content">
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-dashboard"></div>
-                <div class="nav-item-text">Tổng quan</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-report"></div>
-                <div class="nav-item-text">Báo cáo</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-dashboard"></div>
-                <div class="nav-item-text">Mua hàng</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-dic-employee"></div>
-                <div class="nav-item-text">Danh mục nhân viên</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-dic-employee"></div>
-                <div class="nav-item-text">Danh mục nhân viên</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-setting"></div>
-                <div class="nav-item-text">Thiết lập hệ thống</div>
-            </div>
-        </div>
-        <div class="navbar-minimize"></div>
-    </div>
-    <!-- Hết phần Menu -->
-
     <!-- Phần Header -->
     <div class="header">
-        <div class="header-left">
-            <div class="header-icon">MB</div>
-            <div class="base-dropdown header-dropdown">
-                <button class="dropbtn branch-name">
-                    <span class="text">Nhà Hàng Biển Đông</span>
-                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
-                </button>
-                <div class="option" id="">
-                    <div class="option-item">
-                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
-                    </div>
-                    <div class="option-item">
-                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
-                    </div>
-                    <div class="option-item" active>
-                        <span class="icon"> <i class="fas fa-check"></i></span>Nhà Hàng Biển Đông
+        <div class="header--left">
+            <div class="header__toggle"></div>
+            <div class="header__logo"></div>
+        </div>
+        <div class="header--right">
+            <div class="header__title">
+                <div class="header-icon">MB</div>
+                <div class="dropdown header-dropdown" id="dropdown__restaurant">
+                    <button class="dropdown__button">
+                        <span class="dropdown__title">Nhà Hàng Biển Đông</span>
+                       <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown__content dropdown__content--hidden">
+                        <a href="#" class="dropdown__link--active"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a>
+                        <a href="#"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="header-right">
-            <div class="avatar"></div>
-            <div class="user-name">Phạm Hải Dương</div>
-            <div class="base-icon icon-option"></div>
+            <div class="header__user">
+                <div class="header__user-avatar"></div>
+                <div class="header__user-name">Phạm Hải Dương</div>
+                <div class="header__user-option"></div>
+            </div>
         </div>
     </div>
-    <!-- Hết phần Header -->
 
-    <!-- Phần Content chi tiết:
-            -Thông tin bảng được lấy từ cơ sở dữ liệu
-            - -->
-    <div class="content">
-        <div class="header-content">
-            <div class="title">Danh sách nhân viên</div>
-            <button id="myBtn" class="base-btn m-btn-icon">
-                <div class="base-icon icon-add"></div>
-                <div class="btn-text">Thêm nhân viên</div>
-            </button>
+    <!-- Phần Menu -->
+    <div class="menu">
+        <div class="menu__item">
+            <div class="menu__icon -dashboard"></div>
+            <div class="menu__item-text">Tổng quan</div>
         </div>
-        <div class="content-filter-bar">
-            <input type="text" class="base-field-input field-input-icon base-icon icon-search"
-                placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-            <div class="filter-department">
-                <div class="base-combobox">
-                    <input type="text" class="combobox-input" placeholder="Tất cả phòng ban">
-                    <button class="base-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
-                    <div class="base-combobox-data  department-name" value="0">
-                        <div class="base-combobox-item" value="0">
+        <div class="menu__item">
+            <div class="menu__icon -report"></div>
+            <div class="menu__item-text">Báo cáo</div>
+        </div>
+        <div class="menu__item">
+            <div class="menu__icon -dashboard"></div>
+            <div class="menu__item-text">Mua hàng</div>
+        </div>
+        <div class="menu__item menu__item--active">
+            <div class="menu__icon -employee"></div>
+            <div class="menu__item-text">Danh mục nhân viên</div>
+        </div>
+        <div class="menu__item">
+            <div class="menu__icon -employee"></div>
+            <div class="menu__item-text">Danh mục nhân viên</div>
+        </div>
+        <div class="menu__item">
+            <div class="menu__icon -setting"></div>
+            <div class="menu__item-text">Thiết lập hệ thống</div>
+        </div>
+        <div class="navbar-minimize"></div>
+    </div>
+
+    <!-- Phần Content -->
+    <div class="content">
+
+        <!-- Phần Header của Content chi tiết:
+                - Header Content
+                - Nút thêm nhân viên
+        -->
+
+        <div class="content__header">
+            <div class="content__header header__title">Danh sách nhân viên</div>
+            <div class="button__container">
+                <div class="button--primary button__icon" id="button__add-employee">
+                    <div class="icon-default -add"></div>
+                    <div class="button__text">Thêm nhân viên</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phần Filter của Content chi tiết:
+                - Search theo thuộc tinh của Nhân viên
+                - Filter theo Phòng ban
+                - Filter theo Vị trí
+        -->
+        <div class="content__filter">
+            <div class="content__filter--left">
+                <div class="field-input--icon">
+                    <div class="icon-default -search"></div>
+                    <label>
+                        <input type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                    </label>
+                </div>
+                <div class="combobox">
+                    <input type="text" class="combobox__input" placeholder="Tất cả phòng ban">
+                    <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
+                    <div class="combobox__data  department-name" value="0">
+                        <div class="combobox__item" value="0">
                             <span class="icon"> <i class="fas fa-check"></i></span>Tất cả Phòng ban
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="filter-position">
-                <div class="base-combobox">
-                    <input type="text" class="combobox-input" placeholder="Tất cả vị trí">
-                    <button class="base-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
-                    <div class="base-combobox-data position-name" value="1">
-                        <div class="base-combobox-item" value="0">
+                <div class="combobox">
+                    <input type="text" class="combobox__input" placeholder="Tất cả vị trí">
+                    <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
+                    <div class="combobox__data position-name" value="1">
+                        <div class="combobox__item" value="0">
                             <span class="icon"> <i class="fas fa-check"></i></span>Tất cả Vị trí
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="base-btn m-btn-refresh base-icon icon-reload"></button>
-
-
+            <div class="content__filter--right">
+                <div class="button--secondary button__icon" id="button__reload">
+                    <div class="icon-default -reload"></div>
+                </div>
+            </div>
         </div>
-        <div class="grid grid-employee">
-            <table>
-                <thead>
+
+        <!-- Phần bảng dữ liệu chính của Content -->
+        <div class="content__table-container table__employee">
+            <table class="content__table">
+                <thead class="table__header">
                     <tr>
+                        <th></th>
                         <th>Mã nhân viên</th>
                         <th>Họ và tên</th>
                         <th>Giới tính</th>
@@ -131,7 +140,7 @@
                         <th>Email</th>
                         <th>Chức vụ</th>
                         <th>Phòng ban</th>
-                        <th class="salary">Mức lương cơ bản</th>
+                        <th>Mức lương cơ bản</th>
                         <th>Tình trạng công việc</th>
                     </tr>
                 </thead>
@@ -139,49 +148,36 @@
                 </tbody>
             </table>
         </div>
-        <div class="pagination">
-            <div class="total">Hiển thị 10/100 nhân viên</div>
-            <div class="current-page">
-                <button class="prev-all">
-                    <i class="fas fa-angle-double-left"></i>
-                </button>
-                <button class="prev"><i class="fas fa-angle-left"></i></button>
-                <button class="page">
-                    <span class="number">1</span>
-                </button>
-                <button class="page">
-                    <span class="number">2</span>
-                </button>
-                <button class="page">
-                    <span class="number">3</span>
-                </button>
-                <button class="page">
-                    <span class="number">4</span>
-                </button>
-                <button class="next"><i class="fas fa-angle-right"></i></button>
-                <button class="next-all">
-                    <i class="fas fa-angle-double-right"></i>
-                </button>
+        <div class="content__footer">
+            <p>Hiển thị 1-10/10000 nhân viên</p>
+            <div class="pagination">
+                <img src="../content/icon/btn-firstpage.svg" alt="First Page" class="pagination__button" />
+                <img src="../content/icon/btn-prev-page.svg" alt="Previous Page" class="pagination__button" />
+                <div class="pagination__number active"><p>1</p></div>
+                <div class="pagination__number"><p>2</p></div>
+                <div class="pagination__number"><p>3</p></div>
+                <div class="pagination__number"><p>4</p></div>
+                <img src="../content/icon/btn-next-page.svg" alt="Next Page" class="pagination__button" />
+                <img src="../content/icon/btn-lastpage.svg" alt="Last Page" class="pagination__button" />
             </div>
-            <div class="per-page">10 nhân viên/trang</div>
+            <p>10 nhân viên/trang</p>
         </div>
     </div>
-    <!-- Hết phần Content -->
 
-    <div id="myModal" class="popup">
-        <div class="popup-body">
-            <div class="popup-header">
-                <div class="popup-name">Thông tin nhân viên</div>
-                <div class="popup-close">
-                    <button class="base-btn m-second-button m-btn-close base-icon icon-close"></button>
+    <div id="myModal" class="modal__container">
+        <div class="modal">
+            <div class="modal__header">
+                <div class="modal__name">Thông tin nhân viên</div>
+                <div class="modal__button-close">
+                    <button class="button--secondary button__close"></button>
                 </div>
             </div>
-            <div class="popup-navbar">
-                <div class="avatar"></div>
+            <div class="modal__sidebar">
+                <div class="modal__avatar-holder"></div>
                 <span>(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</span>
             </div>
-            <div class="popup-content">
-                <div class="general-info">
+            <div class="modal__content">
+                <div class="modal__general-info">
                     <div class="info-title">
                         <span>A. Thông tin chung:</span>
                         <div class="title-layout"></div>
@@ -189,19 +185,19 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Mã nhân viên(<span class="required-input">*</span>)</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtEmployeeCode"
+                            <input type="text" class="modal__field-input field-input-label" id="txtEmployeeCode"
                                 placeholder="NV8888...">
                         </div>
                         <div class="info-column ">
                             <span>Họ và tên(<span class="required-input">*</span>)</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtFullName"
+                            <input type="text" class="modal__field-input field-input-label" id="txtFullName"
                                 placeholder="Nguyễn Văn A...">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Ngày sinh</span>
-                            <input type="date" class="base-field-input field-input-label" id="dDateOfBirth">
+                            <input type="date" class="modal__field-input field-input-label" id="dDateOfBirth">
                         </div>
                         <div class="info-column">
                             <span>Giới tính</span>
@@ -227,18 +223,18 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Số CMTND/ Căn cước(<span class="required-input">*</span>)</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtIdentityNumber"
+                            <input type="text" class="modal__field-input field-input-label" id="txtIdentityNumber"
                                 placeholder="0123456789...">
                         </div>
                         <div class="info-column ">
                             <span>Ngày cấp</span>
-                            <input type="date" class="base-field-input field-input-label" id="dIdentityDate">
+                            <input type="date" class="modal__field-input field-input-label" id="dIdentityDate">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Nơi cấp</span>
-                            <input type="text" class="base-field-input field-input-label" id="txIdentityPlace"
+                            <input type="text" class="modal__field-input field-input-label" id="txIdentityPlace"
                                 placeholder="Hà Nội...">
                         </div>
                         <div class="info-column "></div>
@@ -246,12 +242,12 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Email(<span class="required-input">*</span>)</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtEmail"
+                            <input type="text" class="modal__field-input field-input-label" id="txtEmail"
                                 placeholder="Example@gmail.com...">
                         </div>
                         <div class="info-column ">
                             <span>Số điện thoại (<span class="required-input">*</span>)</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtPhoneNumber"
+                            <input type="text" class="modal__field-input field-input-label" id="txtPhoneNumber"
                                 placeholder="0123456789...">
                         </div>
                     </div>
@@ -263,19 +259,19 @@
                     <div class="info-row">
                         <div class="info-column">
                             <span>Vị trí</span>
-                            <div class="base-combobox">
-                                <input type="text" class="combobox-input" placeholder="Chọn/Nhập thông tin">
-                                <button class="base-combobox-btn custom-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
-                                <div class="base-combobox-data position-name">
+                            <div class="combobox combobox__custom">
+                                <input type="text" class="combobox__input" placeholder="Chọn/Nhập thông tin">
+                                <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
+                                <div class="combobox__data position-name">
                                 </div>
                             </div>
                         </div>
                         <div class="info-column">
                             <span>Phòng ban</span>
-                            <div class="base-combobox">
-                                <input type="text" class="combobox-input" placeholder="Chọn/Nhập thông tin">
-                                <button class="base-combobox-btn custom-combobox-btn"><i class="fas fa-chevron-down icon"></i></button>
-                                <div class="base-combobox-data department-name">
+                            <div class="combobox combobox__custom">
+                                <input type="text" class="combobox__input" placeholder="Chọn/Nhập thông tin">
+                                <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
+                                <div class="combobox__data department-name">
                                 </div>
                             </div>
 
@@ -284,19 +280,19 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" class="base-field-input field-input-label" id="txPersonalTaxCode"
+                            <input type="text" class="modal__field-input field-input-label" id="txPersonalTaxCode"
                                 placeholder="0123456789">
                         </div>
                         <div class="info-column ">
                             <span>Mức lương cơ bản</span>
-                            <input type="text" class="base-field-input field-input-label" id="txtSalary"
+                            <input type="text" class="modal__field-input field-input-label" id="txtSalary"
                                 placeholder="10.000.000">
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Ngày gia nhập công ty</span>
-                            <input type="date" class="base-field-input field-input-label" id="dJoinDate">
+                            <input type="date" class="modal__field-input field-input-label" id="dJoinDate">
                         </div>
                         <div class="info-column">
                             <span>Tình trạng công việc</span>
@@ -318,11 +314,11 @@
                     </div>
                 </div>
             </div>
-            <div class="popup-foot">
-                <div class="base-btn m-second-button m-btn-cancel ">Hủy</div>
-                <div class="base-btn m-btn-icon m-btn-save" id="btnSave">
+            <div class="modal__foot">
+                <div class="button--secondary button__cancel">Hủy</div>
+                <div class="button--primary button__icon button__save" id="btnSave">
                     <i class="far fa-save"></i>
-                    <div class="btn-text">Lưu</div>
+                    <div class="button__text">Lưu</div>
                 </div>
             </div>
         </div>

@@ -1,51 +1,80 @@
-/* Icon Button */
-.m-btn-icon{
-    text-align: left;
-    padding: 0 16px;
+@import url('../../Color.css');
+
+.button--primary,
+.button--secondary {
+    display: flex;
+	align-items: center;
+	text-align: center;
+	border-radius: 4px;
+	height: 40px;
+	width: auto;
+	padding: 0 24px;
+	cursor: pointer;
+	transition: 0.2s all ease-in-out;
+	justify-content: space-evenly;
+}
+.button--primary {
+	color: var(--color-white);
+	background-color: var(--color-primary);
 }
 
-/* Dịch phải 8px đối với text trong button icon */
-    .m-btn-icon .btn-text {
-        margin-left: 8px;
-    }
-
-/* Second button */
-.m-second-button {
-    background-color:unset;
-    color: #000000;
+.button--primary:hover {
+	background-color: var(--color-primary-hover);
 }
 
-    .m-second-button:hover {
-        background-color: #bbb;
-    }
-
-/* Button Refresh */
-.m-btn-refresh {
-    margin-left: auto;
-    justify-content: center;
-    width: 40px;
-    border: 1px solid #bbbbbb;
-    background-color: #ffffff;
+.button--primary:active {
+	background-color: var(--color-primary-active);
 }
+
+.button--secondary {
+	color: var(--color-black);
+	background-color: transparent;
+	border: 1px solid var(--color-hightlight);
+}
+
+.button--secondary:hover {
+	background-color: var(--color-secondary-hover);
+}
+
+.button--secondary:active {
+	background-color: var(--color-primary-active);
+}
+
+.button__icon {
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+}
+
+.button--primary .button__text {
+	margin-left: 8px;
+}
+
+
 
 /* Button Close Popup */
-.m-btn-close{
-    width: 40px;
-    background-image: url('../../../content/icon/x.svg');
+.button__close{
     border-radius: 0 4px 0 0;
-    background-color: #FFF;
+    border: none;
+    outline: none;
+    background-image: url('../../../content/icon/x.svg');
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: 20px;
     opacity: .7;
 }
+.button__close:hover{
+    background-color: #bbb;
+}
 
 /* Button Cancel */
-.m-btn-cancel {
+.button__cancel {
     margin: 10px 0;
     width: 100px;
     justify-content: center;
 }
 
 /* Button Save */
-.m-btn-save {
+.button__save {
     margin: 10px 24px 10px 16px;
 }
