@@ -4,19 +4,19 @@ $(document).ready(() => {
 
 
 class Variables {
-    //Biến cờ lưu tạm id của một nhân viên
+    //Biến tạm id của một nhân viên
     static employeeId = null;
 
     //Biến kiểm tra xem API đã từng được gọi chưa để load dữ liệu cho dropdown 1 lần duy nhất
-    //Author: NQMinh(22/7/2021)
+    //Author: PHDUONG(28/07/2021)
     static APIWasCalled = false;
 
     //Các element trên trang chủ
     //nút xóa nhân viên
-    // static buttonDelete = $('#button__delete-employee');
+    static buttonDelete = $('#button__delete-employee');
 
     //nút thêm nhân viên
-    static buttonAdd = $('#button__add-employee');
+    static buttonAddEmployee = $('#button__add-employee');
 
     //thanh tìm kiếm nhân viên
     // static inputSearch = $('#search-input');
@@ -27,8 +27,8 @@ class Variables {
     //nội dung chính của web (gồm các mục tìm kiếm, bảng nhân viên, etc)
     static content = $('.content');
 
-    //input tìm kiếm
-    // static textBox = $('.text-box--default input');
+    //input tìm kiếm theo thuộc tính nhân viên
+    static textBox = $('.field-input--icon input');
 
     //popup modal
     static popupModal = $('.modal__container');
@@ -62,18 +62,24 @@ class Variables {
     //Các element trên popup modal
     //Input phần thông tin chung:
     static inputEmployeeCode = $('#txtEmployeeCode');
-    static inputName = $('#txtFullName');
-    static inputDob = $('#dDateOfBirth');
-    static inputId = $('#txtIdentityNumber');
-    static inputIdDate = $('#dIdentityDate');
-    static inputIdPlace = $('#txIdentityPlace');
+    static inputFullName = $('#txtFullName');
+    static inputDateOfBirth = $('#dDateOfBirth');
+    static inputGenderName = $('#gender .dropdown__title');
+    static inputIdentityNumber = $('#txtIdentityNumber');
+    static inputIdentityDate = $('#dIdentityDate');
+    static inputIdentityPlace = $('#txtIdentityPlace');
     static inputEmail = $('#txtEmail');
-    static inputPhone = $('#txtPhoneNumber');
+    static inputPhoneNumber = $('#txtPhoneNumber');
+    static inputPositionName = $('#txtPosition .dropdown__title');
+    static inputDepartmentName = $('#txtDepartment .dropdown__title')
     static inputJoinDate = $('#dJoinDate');
 
     //Input phần thông tin công việc:
-    static inputEmployeeTax = $('#txPersonalTaxCode');
-    static inputIncome = $('#txtSalary');
+    static inputPersonalTaxCode = $('#txtPersonalTaxCode');
+    static inputSalary = $('#txtSalary');
+    static inputWorkStatus = $('#txtWorkStatus');
+
+
     static popupModalInputs = $('.modal__container input');
 
     static submitBtn = $('#btnSave');
@@ -89,6 +95,7 @@ class Variables {
 
 
     static getEmployeesApi = "http://cukcuk.manhnv.net/v1/Employees";
+    static getEmployeesByIdApi = "http://cukcuk.manhnv.net/v1/Employees";
     static getDepartmentsApi = "http://cukcuk.manhnv.net/api/Department";
     static getPositionsApi = "http://cukcuk.manhnv.net/v1/Positions";
 }

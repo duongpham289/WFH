@@ -67,30 +67,30 @@
         }
 
         .content__table tbody .delete-box .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 24px;
-        width: 24px;
-        background-color: var(--color-secondary-hover);
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: var(--color-secondary-hover);
         }
 
         .content__table tbody .delete-box:hover input ~ .checkmark {
-        background-color: var(--color-hightlight);
+            background-color: var(--color-hightlight);
         }
 
         .content__table tbody .delete-box input:checked ~ .checkmark {
-        background-color: var(--color-primary);
+            background-color: var(--color-primary);
         }
 
         .content__table tbody .delete-box .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
+            content: "";
+            position: absolute;
+            display: none;
         }
 
         .content__table tbody .delete-box input:checked ~ .checkmark:after {
-        display: block;
+            display: block;
         }
 
         .content__table tbody .delete-box .checkmark:after {

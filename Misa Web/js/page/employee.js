@@ -1,20 +1,12 @@
 $(document).ready(function () {
     new EmployeePage();
 
-    modalPopup();
     getDepartment();
     getPosition();
     dropdownOnClick();
 
     $("#btnSave").on("click", addEmployee);
     
-    var input = document.querySelectorAll('input');
-    for(i=0; i<input.length; i++){
-        if(input[i].getAttribute('placeholder') != null){
-        input[i].setAttribute('size',input[i].getAttribute('placeholder').length);
-
-        }
-    }
 
 
 })
@@ -24,8 +16,8 @@ class EmployeePage{
     listName;
 
     //Biến kiểm tra xem user khi click vào nút lưu là muốn sửa hay thêm mới nhân viên
-    //Author: NQMinh(22/7/2021)
-    static wantToCreateNewEmployee = false;
+    //Author: PHDUONG(28/07/2021)
+    static createNewEmployee = false;
 
     // //Các dropdown trên trang chủ
     // //dropdown chọn nhà hàng
@@ -48,6 +40,8 @@ class EmployeePage{
     constructor(){
         //Load dữ liệu
         GetData.getEmployees();
+
+        this.initEvent();
     }
     
     /**
@@ -59,9 +53,10 @@ class EmployeePage{
     //Hàm render dữ liệu bảng nhân viên
     //@params dữ liệu lấy từ server
     //Author: PHDUONG(27/07/2021)
-    renderTable = (tableData) => {
+    static renderTable = (tableData) => {
         // console.log(tableData);
         const self = this;
+
         tableData.forEach(employee => {
             const employeeCode = employee['EmployeeCode'];
             const fullName = employee['FullName'];
@@ -73,18 +68,18 @@ class EmployeePage{
             const department = employee['DepartmentName'];
             const salary = employee['Salary'];
             const workStatus = employee['WorkStatus'];
-            const trHTML = $(`<tr tr-data="${employee['EmployeeId']}">
+            const trHTML = $(`<tr data="${employee['EmployeeId']}">
                                 <td>
                                     <div class="delete-box">
                                         <input type="checkbox">
-                                        <span class="misa-checkmark"></span>                    
+                                        <span class="checkmark"></span>                    
                                     </div>                            
                                 </td>
-                                <td class="misa__table-code">${self.clearNull(employeeCode)}</td>
-                                <td class="misa__table-fullname">${self.clearNull(fullName)}</td>
+                                <td>${self.clearNull(employeeCode)}</td>
+                                <td>${self.clearNull(fullName)}</td>
                                 <td>${self.clearNull(gender)}</td>
-                                <td>${DataFormatter.formatDob(self.clearNull(dob), false)}</td>
-                                <td class="misa__table-phone">${self.clearNull(phone)}</td>
+                                <td>${DataFormatter.formatDate(self.clearNull(dob),false)}</td>
+                                <td>${self.clearNull(phone)}</td>
                                 <td>${self.clearNull(email)}</td>
                                 <td>${self.clearNull(position)}</td>
                                 <td>${self.clearNull(department)}</td>
@@ -95,16 +90,108 @@ class EmployeePage{
         })
     }
 
+
+    static bindingDataToModal = (data) =>{
+        Variables.inputEmployeeCode.val(data["EmployeeCode"]);
+        Variables.inputFullName.val(data["FullName"]);
+        Variables.inputDateOfBirth.val(DataFormatter.formatDate(data["DateOfBirth"],true));
+        Variables.inputGenderName.text(data["GenderName"]);
+        Variables.inputIdentityNumber.val(data["IdentityNumber"]);
+        Variables.inputIdentityDate.val(DataFormatter.formatDate(data["IdentityDate"],true));
+        Variables.inputIdentityPlace.val(data["IdentityPlace"]);
+        Variables.inputEmail.val(data["Email"]);
+        Variables.inputPhoneNumber.val(data["PhoneNumber"]);
+        Variables.inputPositionName.text(data["PositionName"] ? data["PositionName"] : "Tất cả vị trí");
+        Variables.inputDepartmentName.text(data["DepartmentName"] ? data["DepartmentName"] : "Tất cả phòng ban");
+        Variables.inputJoinDate.val(DataFormatter.formatDate(data["JoinDate"],true));
+        Variables.inputPersonalTaxCode.val(data["PersonalTaxCode"]);
+        Variables.inputSalary.val(DataFormatter.formatMoney(data["Salary"]));
+        Variables.inputWorkStatus.attr('value',DataFormatter.formatWorkStatus(data["WorkStatus"]));
+    }
+
     /**
      * Hàm xóa null
      * @param {*} data Dữ liệu đầu vào
      * CreatedBy: PHDUONG (19/07/2021)
      */
-     clearNull = (data) => {
+    static clearNull = (data) => {
         return data ? data : '';
     }
 
-   
+    initEvent(){
+        const self = this;
+
+        //Dãn input theo placeholder
+        Variables.textBox.attr('size', Variables.textBox.attr('placeholder').length);
+
+        //Mở modal khi ấn thêm nhân viên
+        Variables.buttonAddEmployee.click(() => EmployeePage.openModal());
+
+        //Đóng modal khi ấn dấu x
+        Variables.popupModalCloseBtn.click(() => this.closeModal());
+
+        //Đóng modal khi ấn hủy
+        Variables.cancelBtn.click(() => this.closeModal());
+
+        //Sự kiện hiển thị checkmark khi ấn vào từng hàng
+        Variables.employeesTable.on('click', 'tbody tr', function(){
+            self.rowActive(this);
+        })
+
+        //Sự kiện Mở modal với thông tin nhân viên khi double click
+        Variables.employeesTable.on('dblclick', 'tbody tr', function(){
+            const self = this;
+
+            EmployeePage.createNewEmployee = false;
+
+            EmployeePage.openModal();
+
+            Variables.employeeId = $(self).attr('data');
+           try {
+               $.ajax({
+                   url: Variables.getEmployeesByIdApi+'/'+Variables.employeeId,
+                   method: "GET",
+               }).done(function (res){
+                EmployeePage.bindingDataToModal(res);
+                   
+               })
+           } catch (error) {
+               
+           }
+        })
+    }
+
+    //Hàm kích hoạt checkbox của từng hàng
+    //Author: PHDUONG(28/07/2021)
+    rowActive = (self) => {
+        //chọn một lượt tất cả check box để duyệt mảng
+        const deleteBoxes = document.querySelectorAll('.delete-box input');
+        //chọn một hàng cụ thể
+        const row = $(self).children()[0];
+        //chọn checkbox từ hàng đó
+        const checkbox = $(row).children().children()[0];
+        $(checkbox).attr('checked', !$(checkbox).attr('checked'));
+
+        let allUnchecked = true;
+        deleteBoxes.forEach(box => {
+            if (box.getAttribute('checked') === 'checked') {
+                allUnchecked =  false;
+                Variables.buttonDelete.css('display', 'flex');
+            }
+            if (allUnchecked) {
+                Variables.buttonDelete.css('display', 'none');
+            }
+        })
+    }
+
+    static openModal = () => {
+        Variables.popupModalInputs.val(null);
+
+        Variables.popupModal.css("display", "block")
+    }
+    closeModal = () => {
+        Variables.popupModal.css("display", "none")
+    }
 
 
 
@@ -132,7 +219,6 @@ class EmployeePage{
  */
 function addEmployee() {
     var employee = {};
-
     employee.EmployeeCode = $('#txtEmployeeCode').val();
     employee.FullName = $('#txtFullName').val();
     employee.DateOfBirth = $('#dDateOfBirth').val();
@@ -140,7 +226,7 @@ function addEmployee() {
     employee.GenderName =  $('#gender .dropdown__title').text()  ;
     employee.IdentityNumber = $('#txtIdentityNumber').val();
     employee.IdentityDate = $('#dIdentityDate').val();
-    employee.IddentityPlace = $('#txIdentityPlace').val();
+    employee.IddentityPlace = $('#txtIdentityPlace').val();
     employee.Email = $('#txtEmail').val();
     employee.PhoneNumber = $('#txtPhoneNumber').val();
     employee.Position = $('#txtPosition').attr('value');
@@ -168,39 +254,6 @@ function addEmployee() {
     });
 }
 
-/**
- * Hiệu ứng ẩn hiện modal
- * CreatedBy: PHDUONG (21/07/2021)
- */
-
-// Get the modal
-function modalPopup() {
-    
-    var modal = document.getElementById("modalPopup");
-    // Get the button that opens the modal
-    var btn = document.getElementById("button__add-employee");
-
-    // Get the <span> element that closes the modal
-    var btnClose = document.getElementsByClassName("button__close")[0];
-    var btnCancel = document.getElementById("btnCancel");
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    btnClose.onclick = function() {
-        modal.style.display = "none";
-    }
-    btnCancel.onclick = function() {
-        // setTimeout(() => {  modal.style.display = "none"; }, 2000);
-        modal.style.display = "none"; 
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-   
-}
 
 
 /**

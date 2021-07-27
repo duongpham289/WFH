@@ -6,10 +6,10 @@ class DataFormatter{
      * @param {*} dob dữ liệu ngày sinh
      * CreatedBy: PHDUONG (19/07/2021)
      */
-    static formatDob = (dob,onModal) => {
-        if (!dob) return '';
-        if (dob.length === 0) return '';
-        var date = new Date(dob);
+    static formatDate = (str,onModal) => {
+        if (!str) return '';
+        if (str.length === 0) return '';
+        var date = new Date(str);
         return onModal ?
             `${this.dateNum(date.getFullYear())}-${this.dateNum(date.getMonth() + 1)}-${this.dateNum(date.getDate())}` :
             `${this.dateNum(date.getDate())}/${this.dateNum(date.getMonth() + 1)}/${this.dateNum(date.getFullYear())}`;
@@ -30,6 +30,7 @@ class DataFormatter{
      */
     static formatMoney = (salary)=> {
         if (!salary) return '';
+        if (salary.length === 0) return '';
         var salary = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(salary);
         return salary;
     }
@@ -41,8 +42,10 @@ class DataFormatter{
      * CreatedBy: PHDUONG (19/07/2021)
      */
     static formatWorkStatus = (workStatus) => {
+        if (!workStatus) return '';
+        if (workStatus.length === 0) return '';
         var works = ["Đang làm việc", "Đang thử việc", "Đã nghỉ việc", "Đã nghỉ hưu"]
-        if (workStatus != null && workStatus < 4) { //workStatus 5 6 chưa biết
+        if (workStatus < 4) { //workStatus 5 6 chưa biết
             return workStatus = works[workStatus];
         }
         return workStatus = '';

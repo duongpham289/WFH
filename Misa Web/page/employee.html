@@ -80,6 +80,9 @@
         <div class="content__header">
             <div class="content__header header__title">Danh sách nhân viên</div>
             <div class="button__container">
+                <div class="button--primary" id="button__delete-employee">
+                    <div class="button__text">Xóa nhân viên</div>
+                </div>
                 <div class="button--primary button__icon" id="button__add-employee">
                     <div class="icon-default -add"></div>
                     <div class="button__text">Thêm nhân viên</div>
@@ -165,7 +168,7 @@
     </div>
 
     <!-- Phần Modal Popup -->
-    <div id="modalPopup" class="modal__container">
+    <div class="modal__container">
         <div class="modal">
             <!-- Modal Popup Header -->
             <div class="modal__header">
@@ -232,7 +235,7 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Nơi cấp</span>
-                            <input type="text" class="modal__field-input field-input-label" id="txIdentityPlace"
+                            <input type="text" class="modal__field-input field-input-label" id="txtIdentityPlace"
                                 placeholder="Hà Nội...">
                         </div>
                         <div class="info-column "></div>
@@ -305,6 +308,8 @@
                                 <div class="dropdown__content dropdown__content--hidden">
                                     <div class="dropdown__option" value="0"><i class="fas fa-check"></i>Đang làm việc</div>
                                     <div class="dropdown__option" value="1"><i class="fas fa-check"></i>Đang thử việc</div>
+                                    <div class="dropdown__option" value="2"><i class="fas fa-check"></i>Đã nghỉ việc</div>
+                                    <div class="dropdown__option" value="3"><i class="fas fa-check"></i>Đang nghỉ hưu</div>
                                 </div>
                             </div>
                         </div>
@@ -326,10 +331,10 @@
     <!-- Phần Popup Mesage chi tiết:
         - Hiện ra cảnh báo người dùng trước khi xóa nhân viên 
     -->
-    <div class="popup__container">
+    <!-- <div class="popup__container">
         <div class="popup">
             <div class="popup__btn-close">
-                <!-- <img src="../assets/icon/x.svg" alt="close button" class="popup__button-close"> -->
+                <img src="../content/icon/x.svg" alt="close button" class="popup__button-close">
                 <div class="popup__button-close"></div>
             </div>
 
@@ -348,10 +353,11 @@
                 <div class="button--primary">Xóa</div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="../lib/jquery-3.6.0.min.js"></script>
     <script src="../js/common/Common.js"></script>
+    <script src="../js/common/GetData.js"></script>
     <script src="../js/common/Variables.js"></script>
     <script src="../js/common/DataFormatter.js"></script>
     <script src="../js/page/Employee.js"></script>
