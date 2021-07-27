@@ -203,17 +203,17 @@
                             <span>Ngày sinh</span>
                             <input type="date" class="modal__field-input field-input-label" id="dDateOfBirth">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column" id="gender">
                             <span>Giới tính</span>
-                            <div class="dropdown">
+                            <div class="dropdown" id="dropdown__gender">
                                 <button class="dropdown__button dropdown__modal--button">
                                     <span class="dropdown__title">Chọn giới tính</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </button>
                                 <div class="dropdown__content dropdown__content--hidden">
-                                    <a href="#"><i class="fas fa-check"></i>Nam</a>
-                                    <a href="#"><i class="fas fa-check"></i>Nữ</a>
-                                    <a href="#"><i class="fas fa-check"></i>Khác</a>
+                                    <div class="dropdown__option" value="0"><i class="fas fa-check"></i>Nữ</div>
+                                    <div class="dropdown__option" value="1"><i class="fas fa-check"></i>Nam</div>
+                                    <div class="dropdown__option" value="2"><i class="fas fa-check"></i>Khác</div>
                                 </div>
                             </div>
                         </div>
@@ -255,24 +255,27 @@
                         <div class="title-layout"></div>
                     </div>
                     <div class="info-row">
-                        <div class="info-column">
+                        <div class="info-column" id="txtPosition">
                             <span>Vị trí</span>
-                            <div class="combobox combobox__custom">
-                                <input type="text" class="combobox__input" placeholder="Chọn/Nhập thông tin">
-                                <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
-                                <div class="combobox__data position-name">
+                            <div class="dropdown">
+                                <button class="dropdown__button dropdown__modal--button">
+                                    <span class="dropdown__title">Vị trí</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="dropdown__content dropdown__content--hidden">
                                 </div>
                             </div>
                         </div>
-                        <div class="info-column">
+                        <div class="info-column" id="txtDepartment">
                             <span>Phòng ban</span>
-                            <div class="combobox combobox__custom">
-                                <input type="text" class="combobox__input" placeholder="Chọn/Nhập thông tin">
-                                <button class="combobox__button"><i class="fas fa-chevron-down icon"></i></button>
-                                <div class="combobox__data department-name">
+                            <div class="dropdown">
+                                <button class="dropdown__button dropdown__modal--button">
+                                    <span class="dropdown__title">Phòng ban</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="dropdown__content dropdown__content--hidden">
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="info-row">
@@ -292,7 +295,7 @@
                             <span>Ngày gia nhập công ty</span>
                             <input type="date" class="modal__field-input field-input-label" id="dJoinDate">
                         </div>
-                        <div class="info-column">
+                        <div class="info-column" id="txtWorkStatus">
                             <span>Tình trạng công việc</span>
                             <div class="dropdown">
                                 <button class="dropdown__button dropdown__modal--button">
@@ -300,8 +303,8 @@
                                     <i class="fas fa-chevron-down"></i>
                                 </button>
                                 <div class="dropdown__content dropdown__content--hidden">
-                                    <a href="#"><i class="fas fa-check"></i>Đang làm việc</a>
-                                    <a href="#"><i class="fas fa-check"></i>Đang thử việc</a>
+                                    <div class="dropdown__option" value="0"><i class="fas fa-check"></i>Đang làm việc</div>
+                                    <div class="dropdown__option" value="1"><i class="fas fa-check"></i>Đang thử việc</div>
                                 </div>
                             </div>
                         </div>
@@ -319,10 +322,38 @@
         </div>
 
     </div>
+        
+    <!-- Phần Popup Mesage chi tiết:
+        - Hiện ra cảnh báo người dùng trước khi xóa nhân viên 
+    -->
+    <div class="popup__container">
+        <div class="popup">
+            <div class="popup__btn-close">
+                <!-- <img src="../assets/icon/x.svg" alt="close button" class="popup__button-close"> -->
+                <div class="popup__button-close"></div>
+            </div>
 
+            <div class="popup__title">Xóa bản ghi</div>
+            <div class="popup__body">
+                <div class="popup__icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="popup__content">
+                    Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại
+                    dữ liệu.
+                </div>
+            </div>
+            <div class="popup__footer">
+                <div class="button--secondary">Hủy</div>
+                <div class="button--primary">Xóa</div>
+            </div>
+        </div>
+    </div>
 
     <script src="../lib/jquery-3.6.0.min.js"></script>
     <script src="../js/common/Common.js"></script>
+    <script src="../js/common/Variables.js"></script>
+    <script src="../js/common/DataFormatter.js"></script>
     <script src="../js/page/Employee.js"></script>
 
 </body>

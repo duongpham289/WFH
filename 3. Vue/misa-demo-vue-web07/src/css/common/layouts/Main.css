@@ -1,0 +1,53 @@
+
+
+@import url('../Color.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-hightlight);
+    border-radius: 16px;
+}
+
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../../../assets/font/GoogleSans-Regular.otf');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('../../../assets/font/GoogleSans-Bold.otf');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Italic';
+    src: url('../../../assets/font/GoogleSans-Italic.otf');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Light';
+    src: url('../../../assets/font/GoogleSans-Light.otf');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Medium';
+    src: url('../../../assets/font/GoogleSans-Medium.otf');
+}
