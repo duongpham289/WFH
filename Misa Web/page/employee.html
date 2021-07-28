@@ -27,8 +27,9 @@
                        <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="dropdown__content dropdown__content--hidden">
-                        <a href="#" class="dropdown__link--active"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a>
-                        <a href="#"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a>
+                        <div class="dropdown__option"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a></div>
+                        <div class="dropdown__option"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a></div>
+                        <div class="dropdown__option"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a></div>
                     </div>
                 </div>
             </div>
@@ -131,20 +132,20 @@
 
         <!-- Phần bảng dữ liệu chính của Content -->
         <div class="content__table-container table__employee">
-            <table class="content__table">
+            <table id="tblListDataEmployee" class="content__table">
                 <thead class="table__header">
                     <tr>
-                        <th></th>
-                        <th>Mã nhân viên</th>
-                        <th>Họ và tên</th>
-                        <th>Giới tính</th>
-                        <th>Ngày sinh</th>
-                        <th>Điện thoại</th>
-                        <th>Email</th>
-                        <th>Chức vụ</th>
-                        <th>Phòng ban</th>
-                        <th>Mức lương cơ bản</th>
-                        <th>Tình trạng công việc</th>
+                        <th ></th>
+                        <th prop-name="EmployeeCode">Mã nhân viên</th>
+                        <th prop-name="FullName">Họ và tên</th>
+                        <th prop-name="GenderName">Giới tính</th>
+                        <th prop-name="DateOfBirth" format = 'ddmmyyyy'>Ngày sinh</th>
+                        <th prop-name="PhoneNumber">Điện thoại</th>
+                        <th prop-name="Email">Email</th>
+                        <th prop-name="PositionName">Chức vụ</th>
+                        <th prop-name="DepartmentName">Phòng ban</th>
+                        <th prop-name="Salary" format = '$'>Mức lương cơ bản</th>
+                        <th prop-name="WorkStatus">Tình trạng công việc</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -284,7 +285,7 @@
                     <div class="info-row">
                         <div class="info-column ">
                             <span>Mã số thuế cá nhân</span>
-                            <input type="text" class="modal__field-input field-input-label" id="txPersonalTaxCode"
+                            <input type="text" class="modal__field-input field-input-label" id="txtPersonalTaxCode"
                                 placeholder="0123456789">
                         </div>
                         <div class="info-column ">
@@ -331,11 +332,11 @@
     <!-- Phần Popup Mesage chi tiết:
         - Hiện ra cảnh báo người dùng trước khi xóa nhân viên 
     -->
-    <!-- <div class="popup__container">
+    <div class="popup__container">
         <div class="popup">
             <div class="popup__btn-close">
                 <img src="../content/icon/x.svg" alt="close button" class="popup__button-close">
-                <div class="popup__button-close"></div>
+                <!-- <div class="popup__button-close"></div> -->
             </div>
 
             <div class="popup__title">Xóa bản ghi</div>
@@ -344,20 +345,18 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="popup__content">
-                    Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại
-                    dữ liệu.
+                    Bạn có chắc muốn xóa (các) nhân viên này hay không?
                 </div>
             </div>
             <div class="popup__footer">
-                <div class="button--secondary">Hủy</div>
-                <div class="button--primary">Xóa</div>
+                <div class="button--secondary popup__button-cancel">Hủy</div>
+                <div class="button--primary popup__button-del">Xóa</div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script src="../lib/jquery-3.6.0.min.js"></script>
-    <script src="../js/common/Common.js"></script>
-    <script src="../js/common/GetData.js"></script>
+    <script src="../js/common/Base.js"></script>
     <script src="../js/common/Variables.js"></script>
     <script src="../js/common/DataFormatter.js"></script>
     <script src="../js/page/Employee.js"></script>

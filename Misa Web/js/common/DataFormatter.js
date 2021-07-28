@@ -15,13 +15,29 @@ class DataFormatter{
             `${this.dateNum(date.getDate())}/${this.dateNum(date.getMonth() + 1)}/${this.dateNum(date.getFullYear())}`;
     }
 
-    //Hàm định dạng cụ thể ngày và tháng
-    //@params 1 con số bất kỳ
-    //@returns nếu số x có 1 chữ số thì trả về dưới dạng '0x', nếu không thì trả về đúng số đó
-    //Author: PHDUONG(27/07/2021)
+    /**
+     * Hàm định dạng cụ thể ngày và tháng
+     * @param {*} num 1 con số bất kỳ
+     * @returns nếu số x có 1 chữ số thì trả về dưới dạng '0x', nếu không thì trả về đúng số đó
+     * CreatedBy: PHDUONG(27/07/2021)
+     */
     static dateNum = (num) => {
         return num < 10 ? '0' + num : num
     };
+
+    static formatInput = (input,type) =>{
+        if (type == 'salary') {
+            $(input).val(function (index, value) {
+                return 'VND ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        }else{
+            $(input).val(function (index, value) {
+                return value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, "");
+            });
+        }
+        return input;
+    }
+
 
     /**
      * Định dạng tiền tệ
@@ -31,6 +47,9 @@ class DataFormatter{
     static formatMoney = (salary)=> {
         if (!salary) return '';
         if (salary.length === 0) return '';
+        if ($.type(salary) === 'string') {
+            return salary.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, "");
+        }
         var salary = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(salary);
         return salary;
     }

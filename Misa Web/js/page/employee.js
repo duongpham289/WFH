@@ -1,23 +1,11 @@
 $(document).ready(function () {
     new EmployeePage();
-
-    getDepartment();
-    getPosition();
     dropdownOnClick();
-
-    $("#btnSave").on("click", addEmployee);
-    
-
-
 })
 
-class EmployeePage{
+class EmployeePage extends Base{
 
     listName;
-
-    //Biến kiểm tra xem user khi click vào nút lưu là muốn sửa hay thêm mới nhân viên
-    //Author: PHDUONG(28/07/2021)
-    static createNewEmployee = false;
 
     // //Các dropdown trên trang chủ
     // //dropdown chọn nhà hàng
@@ -38,105 +26,39 @@ class EmployeePage{
     // static modalWorkStatus = new Dropdown('#dropdown__work-status');
 
     constructor(){
-        //Load dữ liệu
-        GetData.getEmployees();
+        super('#tblListDataEmployee','EmployeeId');
 
-        this.initEvent();
-    }
-    
-    /**
-     * Load du lieu len table
-     * CreatedBy: PHDUONG (23/07/2021)
-     */
-    
-
-    //Hàm render dữ liệu bảng nhân viên
-    //@params dữ liệu lấy từ server
-    //Author: PHDUONG(27/07/2021)
-    static renderTable = (tableData) => {
-        // console.log(tableData);
-        const self = this;
-
-        tableData.forEach(employee => {
-            const employeeCode = employee['EmployeeCode'];
-            const fullName = employee['FullName'];
-            const gender = employee['GenderName'];
-            const dob = employee['DateOfBirth'];
-            const phone = employee['PhoneNumber'];
-            const email = employee['Email'];
-            const position = employee['PositionName'];
-            const department = employee['DepartmentName'];
-            const salary = employee['Salary'];
-            const workStatus = employee['WorkStatus'];
-            const trHTML = $(`<tr data="${employee['EmployeeId']}">
-                                <td>
-                                    <div class="delete-box">
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>                    
-                                    </div>                            
-                                </td>
-                                <td>${self.clearNull(employeeCode)}</td>
-                                <td>${self.clearNull(fullName)}</td>
-                                <td>${self.clearNull(gender)}</td>
-                                <td>${DataFormatter.formatDate(self.clearNull(dob),false)}</td>
-                                <td>${self.clearNull(phone)}</td>
-                                <td>${self.clearNull(email)}</td>
-                                <td>${self.clearNull(position)}</td>
-                                <td>${self.clearNull(department)}</td>
-                                <td>${DataFormatter.formatMoney(self.clearNull(salary))}</td>
-                                <td>${DataFormatter.formatWorkStatus(self.clearNull(workStatus))}</td>
-                            </tr>`);
-            $('tbody').append(trHTML);
-        })
-    }
-
-
-    static bindingDataToModal = (data) =>{
-        Variables.inputEmployeeCode.val(data["EmployeeCode"]);
-        Variables.inputFullName.val(data["FullName"]);
-        Variables.inputDateOfBirth.val(DataFormatter.formatDate(data["DateOfBirth"],true));
-        Variables.inputGenderName.text(data["GenderName"]);
-        Variables.inputIdentityNumber.val(data["IdentityNumber"]);
-        Variables.inputIdentityDate.val(DataFormatter.formatDate(data["IdentityDate"],true));
-        Variables.inputIdentityPlace.val(data["IdentityPlace"]);
-        Variables.inputEmail.val(data["Email"]);
-        Variables.inputPhoneNumber.val(data["PhoneNumber"]);
-        Variables.inputPositionName.text(data["PositionName"] ? data["PositionName"] : "Tất cả vị trí");
-        Variables.inputDepartmentName.text(data["DepartmentName"] ? data["DepartmentName"] : "Tất cả phòng ban");
-        Variables.inputJoinDate.val(DataFormatter.formatDate(data["JoinDate"],true));
-        Variables.inputPersonalTaxCode.val(data["PersonalTaxCode"]);
-        Variables.inputSalary.val(DataFormatter.formatMoney(data["Salary"]));
-        Variables.inputWorkStatus.attr('value',DataFormatter.formatWorkStatus(data["WorkStatus"]));
+        this.initEvents();
+        this.validateAll();
     }
 
     /**
-     * Hàm xóa null
-     * @param {*} data Dữ liệu đầu vào
-     * CreatedBy: PHDUONG (19/07/2021)
+     * Hàm xử lý sự kiện trong trang employee
+     * CreatedBy: PHDUONG(28/07/2021)
      */
-    static clearNull = (data) => {
-        return data ? data : '';
-    }
-
-    initEvent(){
+    initEvents = () =>{
         const self = this;
 
-        //Dãn input theo placeholder
-        Variables.textBox.attr('size', Variables.textBox.attr('placeholder').length);
+        //Xử lý sự kiện nhấn nút refresh thì load lại data trong bảng
+        Variables.buttonReload.click(() => self.loadData());
 
-        //Mở modal khi ấn thêm nhân viên
-        Variables.buttonAddEmployee.click(() => EmployeePage.openModal());
+        //Sự kiện nhấn nút Lưu
+        Variables.submitBtn.click(() => self.storeEmployeeOnClick(this));
 
-        //Đóng modal khi ấn dấu x
-        Variables.popupModalCloseBtn.click(() => this.closeModal());
+        //Sự kiện định dạng ô nhập lương khi gõ
+        Variables.inputSalary.on('change click keyup input paste', function(event) {
+            DataFormatter.formatInput(this,'salary');
+        });
 
-        //Đóng modal khi ấn hủy
-        Variables.cancelBtn.click(() => this.closeModal());
+        //Sự kiện định dạng ô mã số thuế khi gõ
+        Variables.inputPersonalTaxCode.on('change click keyup input paste', function(event) {
+            DataFormatter.formatInput(this,'');
+        });
 
-        //Sự kiện hiển thị checkmark khi ấn vào từng hàng
-        Variables.employeesTable.on('click', 'tbody tr', function(){
-            self.rowActive(this);
-        })
+        //Sự kiện định dạng ô IdentityNumber khi gõ
+        Variables.inputIdentityNumber.on('change click keyup input paste', function(event) {
+            DataFormatter.formatInput(this,'');
+        });
 
         //Sự kiện Mở modal với thông tin nhân viên khi double click
         Variables.employeesTable.on('dblclick', 'tbody tr', function(){
@@ -144,195 +66,173 @@ class EmployeePage{
 
             EmployeePage.createNewEmployee = false;
 
-            EmployeePage.openModal();
+            Base.openModal();
 
             Variables.employeeId = $(self).attr('data');
+            // debugger
            try {
                $.ajax({
-                   url: Variables.getEmployeesByIdApi+'/'+Variables.employeeId,
+                   url: Variables.employeesApi+'/'+Variables.employeeId,
                    method: "GET",
                }).done(function (res){
-                EmployeePage.bindingDataToModal(res);
-                   
+                    EmployeePage.bindingDataToModal(res);
+
                })
            } catch (error) {
-               
+                console.log(error);
            }
         })
+
+        //Sự kiện click cho nút xóa, thực hiện kiểm tra các tr có checkbox active để xóa
+        //Author: NQMinh(24/07/2021)
+        Variables.alertDeleteBtn.click(() => {
+            const checkboxes = $('tbody tr .delete-box input');
+            checkboxes.each((index, box) => {
+                if (box.getAttribute('checked') === 'checked') {
+
+                    const employeeIdToDelete = $(box).parent().parent().parent().attr('data');
+                    self.deleteEmployee(employeeIdToDelete);
+                }
+            })
+            self.loadData();
+        });
     }
 
-    //Hàm kích hoạt checkbox của từng hàng
-    //Author: PHDUONG(28/07/2021)
-    rowActive = (self) => {
-        //chọn một lượt tất cả check box để duyệt mảng
-        const deleteBoxes = document.querySelectorAll('.delete-box input');
-        //chọn một hàng cụ thể
-        const row = $(self).children()[0];
-        //chọn checkbox từ hàng đó
-        const checkbox = $(row).children().children()[0];
-        $(checkbox).attr('checked', !$(checkbox).attr('checked'));
-
-        let allUnchecked = true;
-        deleteBoxes.forEach(box => {
-            if (box.getAttribute('checked') === 'checked') {
-                allUnchecked =  false;
-                Variables.buttonDelete.css('display', 'flex');
-            }
-            if (allUnchecked) {
+    //Hàm xóa nhân viên
+    //Author: NQMinh(24/07/2021)
+    deleteEmployee = (id) => {
+        try {
+            $.ajax({
+                url: `${Variables.employeesApi}/${id}`,
+                method: 'DELETE',
+            }).done(function () {
+                //xóa thành công thì ẩn cảnh báo
+                Variables.alertMessage.css('display', 'none');
+                //xóa thành công thì ẩn nút xóa
                 Variables.buttonDelete.css('display', 'none');
+            }).fail(function (res) {
+                console.log("Xóa thất bại");
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static bindingDataToModal = (data) =>{
+        Variables.inputEmployeeCode.val(data["EmployeeCode"]);
+        Variables.inputFullName.val(data["FullName"]);
+        Variables.inputDateOfBirth.val(DataFormatter.formatDate(data["DateOfBirth"],true));
+        Variables.inputGenderName.text(data["GenderName"] ? data["GenderName"] : "Chọn giới tính" );
+        Variables.inputIdentityNumber.val(data["IdentityNumber"]);
+        Variables.inputIdentityDate.val(DataFormatter.formatDate(data["IdentityDate"],true));
+        Variables.inputIdentityPlace.val(data["IdentityPlace"]);
+        Variables.inputEmail.val(data["Email"]);
+        Variables.inputPhoneNumber.val(data["PhoneNumber"]);
+        Variables.inputPositionName.text(data["PositionName"] ? data["PositionName"] : "Tất cả vị trí");
+        Variables.inputDepartmentName.text(data["DepartmentName"] ? data["DepartmentName"] : "Tất cả phòng ban");
+        Variables.inputPersonalTaxCode.val(data["PersonalTaxCode"]);
+        Variables.inputSalary.val(DataFormatter.formatMoney(data["Salary"]));
+        Variables.inputJoinDate.val(DataFormatter.formatDate(data["JoinDate"],true));
+        Variables.inputWorkStatus.text(DataFormatter.formatWorkStatus(data["WorkStatus"]));
+    }
+
+    storeEmployeeOnClick(self) {
+        let employee = {};
+
+        employee.EmployeeCode = Variables.inputEmployeeCode.val();
+        employee.FullName = Variables.inputFullName.val();
+        employee.DateOfBirth = Variables.inputDateOfBirth.val();
+        employee.Gender = $('#gender').attr('value');
+        employee.GenderName =  Variables.inputGenderName.text()  ;
+        employee.IdentityNumber = Variables.inputIdentityNumber.val();
+        employee.IdentityDate = Variables.inputIdentityDate.val();
+        employee.IddentityPlace = Variables.inputIdentityPlace.val();
+        employee.Email = Variables.inputEmail.val();
+        employee.PhoneNumber = Variables.inputPhoneNumber.val();
+        employee.PositionId = $('#txtPosition').attr('value');
+        employee.PositionName = Variables.inputPositionName.text();
+        employee.DepartmentId = $('#txtDepartment').attr('value');
+        employee.DepartmentName = Variables.inputDepartmentName.text();
+        employee.PersonalTaxCode = Variables.inputPersonalTaxCode.val();
+        employee.Salary = DataFormatter.formatMoney( Variables.inputSalary.val());
+        employee.JoinDate = Variables.inputJoinDate.val();
+        employee.WorkStatus = $('#txtWorkStatus').attr('value');
+
+        try {
+             $.ajax({
+            url: Base.createNewEmployee ? Variables.employeesApi: `${Variables.employeesApi}/$(Variables.employeeId)`,
+            method: Base.createNewEmployee ? "POST" : "PUT",
+            data: JSON.stringify(employee),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function(result) {
+                
+                debugger;
+                Base.closeModal();
+                self.loadData();
+                alert("Thêm thành công");
             }
-        })
+        });
+        } catch (error) {
+            console.log(error);
+        }
+       
     }
 
-    static openModal = () => {
-        Variables.popupModalInputs.val(null);
-
-        Variables.popupModal.css("display", "block")
-    }
-    closeModal = () => {
-        Variables.popupModal.css("display", "none")
-    }
-
-
-
-
-    validateRequired = () =>{
+    //#region các hàm liên quan đến xử lý validate trong form
+    //Hàm kiểm tra ô nhập trống
+    //Author: NQMinh(21/07/2021)
+    validateRequired = () => {
         const self = this;
         const required = $('input[required]');
-        required.blur(function(){
-            console.log($(this));
-            debugger
+        // if (required.val().trim() === '') return false;
+        required.blur(function () {
             if ($(this).val().trim() === '') {
-                
+                $(this).addClass('input--alert');
+                $(this).attr('title', 'Thông tin này bắt buộc nhập!');
+                self.showError($(this), 'Thông tin này bắt buộc nhập');
+                return false;
+            } else {
+                $(this).removeClass('input--alert');
+                $(this).removeAttr('title');
             }
         })
-    } 
-}
 
-
-
-
-
-/**
- * Thêm mới dữ liệu nhân viên
- * CreatedBy: PHDUONG (23/7/2021)
- */
-function addEmployee() {
-    var employee = {};
-    employee.EmployeeCode = $('#txtEmployeeCode').val();
-    employee.FullName = $('#txtFullName').val();
-    employee.DateOfBirth = $('#dDateOfBirth').val();
-    employee.Gender = $('#gender').attr('value');
-    employee.GenderName =  $('#gender .dropdown__title').text()  ;
-    employee.IdentityNumber = $('#txtIdentityNumber').val();
-    employee.IdentityDate = $('#dIdentityDate').val();
-    employee.IddentityPlace = $('#txtIdentityPlace').val();
-    employee.Email = $('#txtEmail').val();
-    employee.PhoneNumber = $('#txtPhoneNumber').val();
-    employee.Position = $('#txtPosition').attr('value');
-    employee.PositionName = $('#txtPosition .dropdown__title').text();
-    employee.Department = $('#txtDepartment').attr('value');
-    employee.DepartmentName = $('#txtDepartment .dropdown__title').text();
-    employee.PersonalTaxCode = $('#txPersonalTaxCode').val();
-    employee.Salary = $('#txtSalary').val();
-    employee.JoinDate = $('#dJoinDate').val();
-    employee.WorkStatus = $('#txtWorkStatus').attr('value');
-
-    debugger
-    $.ajax({
-        url: "http://cukcuk.manhnv.net/v1/Employees",
-        method: "POST",
-        data: JSON.stringify(employee),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function(result) {
-            alert("Thêm thành công");
-        },
-        fail: function(error) {
-            console.log(employee);
-        }
-    });
-}
-
-
-
-/**
- * Lấy dữ liệu Phòng ban
- *  CreatedBy: PHDUONG (23/07/2021)
- */
-function getDepartment() {
-    $.ajax({
-        url: "http://cukcuk.manhnv.net/api/Department", //địa chỉ API
-        method: "GET", //phương thức
-        //data:'', //tham số sẽ truyền lên cho API qua bpdy request
-        //contentType:'json',//kiểu dữ liệu trả về
-        //async: true, đồng bộ/bất đồng bộ
-    }).done(function(res) {
-        var data = res;
-        // var index = 1;
-        $.each(data, function(index, item) {
-
-            var dropdownItem = $(`<div class="dropdown__option" value="${item.DepartmentId}"><i class="fas fa-check"></i>${item.DepartmentName}</div>`);
-            var comboboxtem = $(`<div class="combobox__item" value="${item.DepartmentId}"">
-                                    <span class="icon" > <i class="fas fa-check"></i></span>${item.DepartmentName}
-                                </div>`);
-            $('#txtDepartment .dropdown__content').append(dropdownItem);
-            $('.department-name').append(comboboxtem);
-
-            $(`#${item.DepartmentId}`).on("click", function() {
-                console.log(1);
-            })
-            index++;
-
+        required.on('input', function () {
+            $("div").remove('.float--alert')
         })
-    }).fail(function(res) {
-        //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
-        //thông thường thì:
-        //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
-        //- Mã 404 - Địa chỉ URL ko hợp lệ
-        // - 500 - lỗi từ phía backend - server 
-        alert('Có lỗi xảy ra vui lòng liên hệ MISA');
-    })
-}
+        return true;
+    }
 
-
-/**
- * Lấy dữ liệu Vị trí
- *  CreatedBy: PHDUONG (23/07/2021)
- */
-function getPosition() {
-    $.ajax({
-        url: "http://cukcuk.manhnv.net/v1/Positions", //địa chỉ API
-        method: "GET", //phương thức
-        //data:'', //tham số sẽ truyền lên cho API qua bpdy request
-        //contentType:'json',//kiểu dữ liệu trả về
-        //async: true, đồng bộ/bất đồng bộ
-    }).done(function(res) {
-        var data = res;
-        $.each(data, function(index, item) {
-
-            var dropdownItem = $(`<div class="dropdown__option" value="${item.PositionId}"><i class="fas fa-check"></i>${item.PositionName}</div>`);
-            $('#txtPosition .dropdown__content').append(dropdownItem);
-            var comboboxtem = $(`<div class="combobox__item" value="${item.PositionId}"">
-                                    <span class="icon" > <i class="fas fa-check"></i></span>${item.PositionName}
-                                </div>`);
-            $('.position-name').append(comboboxtem);
-            $(`#${item.PositionId}`).on("click", function() {
-                // getEmployeeByPositionId(item.PositionId);
-                console.log(item.PositionId);
-            })
-            index++;
+    //TODO: kiểm tra định dạng email
+    validateEmail = () => {
+        const self = this;
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        Variables.inputEmail.on('input', function() {
+            const email = Variables.inputEmail.val();
+            if (!re.test(String(email).toLowerCase())) {
+                self.showError(Variables.inputEmail, 'Email không đúng định dạng');
+                return false;
+            }
         })
+        return true;
+    }
 
-    }).fail(function(res) {
-        //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
-        //thông thường thì:
-        //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
-        //- Mã 404 - Địa chỉ URL ko hợp lệ
-        // - 500 - lỗi từ phía backend - server 
-        alert('Có lỗi xảy ra vui lòng liên hệ MISA');
-    })
+    //Hàm hiện thông báo lỗi khi nhập sai input
+    //@params ô nhập và text thông báo cần hiện
+    //Author: NQMinh(23/07/2021)
+    showError = (input, msg) => {
+        const errorBubble = `<div class="float--alert">${msg}</div>`;
+        input.parent().append(errorBubble);
+    }
+
+    //Hàm validate tổng thế trước khi submit data
+    validateAll = () => {
+        return this.validateRequired() && this.validateEmail();
+    }
+    //#endregion
 }
+
 
 
 /**
@@ -415,6 +315,7 @@ function getPosition() {
         if (event.target != comboboxInput && event.target != comboboxBtn && event.target != comboboxOtion && event.target != comboboxBtnIcon) { //đóng dropdown khi click vào những đối tượng khác 
             if (event.target.getAttribute('value') == null) { //đóng dropdown khi click vào những đối tượng ko có value
                 if (comboboxOtion)
+                    // debugger
                     $(".combobox__input").next().next().hide(); //đóng tất cả dropdown
             } else {
                 // debugger
@@ -434,58 +335,9 @@ function getPosition() {
                     setTimeout(() => {  event.target.parentNode.style.display = "none"; }, 1000);
             }
         }
-        if (event.target == document.getElementById("modalPopup")) {
-            document.getElementById("modalPopup").style.display = "none";
+        if (event.target == Variables.popupModal[0]) {
+            Variables.popupModal.css("display", "none");
         }
     }
 }
 
-function getEmployeeByPositionId(id){
-    $.ajax({
-        url: "http://cukcuk.manhnv.net/v1/Employees/Filter?positionId=", //địa chỉ API
-        method: "GET", //phương thức
-        data: JSON.stringify(id),
-        //contentType:'json',//kiểu dữ liệu trả về
-        //async: true, đồng bộ/bất đồng bộ
-    }).done(function(res) {
-        var data = res;
-        $("table tbody tr").remove();
-
-        $.each(data, function(index, item) {
-
-            var fullName = formatData(item['FullName']);
-            var genderName = formatData(item['GenderName']);
-            var dateOfBirth = formatDob(item['DateOfBirth']);
-            var phoneNumber = formatData(item['PhoneNumber']);
-            var email = formatData(item['Email']);
-            var positionName = formatData(item['PositionName']);
-            var departmentName = formatData(item['DepartmentName']);
-            var salary = formatMoney(item['Salary']);
-            var workStatus = formatWorkStatus(item['WorkStatus']);
-
-            var tr = $(`<tr>
-                    <td class="row-selected"><div><span>` + item.EmployeeCode + `</span></div></td>
-                    <td><div title="` + fullName + `"><span>` + fullName + `</span></div></td>
-                    <td><div ><span>` + genderName + `</span></div></td>
-                    <td><div><span>` + dateOfBirth + `</span></div></td>
-                    <td><div><span>` + phoneNumber + `</span></div></td>
-                    <td><div title="` + email + `"><span>` + email + `</span></div></td>
-                    <td><div  title="` + positionName + `"><span>` + positionName + `</span></div></td>
-                    <td><div  title="` + departmentName + `"><span>` + departmentName + `</span></div></td>
-                    <td class="salary"><div><span>` + salary + `</span></div></td>
-                    <td><div  title="` + workStatus + `"><span>` + workStatus + `</span></div></td>
-                </tr>`);
-
-            $('table tbody').append(tr);
-            // debugger;
-        })
-
-    }).fail(function(res) {
-        //đưa ra thông báo lỗi cụ thể (tùy theo httpcode - 400, 404.500):
-        //thông thường thì:
-        //- Mã 400 - BadRequest -lỗi dữ liệu đầu vào từ Cilient
-        //- Mã 404 - Địa chỉ URL ko hợp lệ
-        // - 500 - lỗi từ phía backend - server 
-        console.log(res);
-    })
-}

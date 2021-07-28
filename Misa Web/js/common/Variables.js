@@ -22,7 +22,7 @@ class Variables {
     // static inputSearch = $('#search-input');
 
     //nút refresh bảng nhân viên
-    static buttonRefresh = $('#button__reload');
+    static buttonReload = $('#button__reload');
 
     //nội dung chính của web (gồm các mục tìm kiếm, bảng nhân viên, etc)
     static content = $('.content');
@@ -77,7 +77,7 @@ class Variables {
     //Input phần thông tin công việc:
     static inputPersonalTaxCode = $('#txtPersonalTaxCode');
     static inputSalary = $('#txtSalary');
-    static inputWorkStatus = $('#txtWorkStatus');
+    static inputWorkStatus = $('#txtWorkStatus .dropdown__title');
 
 
     static popupModalInputs = $('.modal__container input');
@@ -89,13 +89,12 @@ class Variables {
     //Element popup message
     static alertMessage = $('.popup__container');
     static alertCloseBtn = $('.popup__button-close');
-    static alertCancelBtn = $('.popup__footer .button--secondary');
-    static alertDeleteBtn = $('.popup__footer .button--primary');
+    static alertCancelBtn = $('.popup__button-cancel');
+    static alertDeleteBtn = $('.popup__button-del');
 
 
 
-    static getEmployeesApi = "http://cukcuk.manhnv.net/v1/Employees";
-    static getEmployeesByIdApi = "http://cukcuk.manhnv.net/v1/Employees";
+    static employeesApi = "http://cukcuk.manhnv.net/v1/Employees";
     static getDepartmentsApi = "http://cukcuk.manhnv.net/api/Department";
     static getPositionsApi = "http://cukcuk.manhnv.net/v1/Positions";
 }
