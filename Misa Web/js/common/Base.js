@@ -262,6 +262,9 @@ class Base {
     static openModal = () => {
         Variables.popupModalInputs.val(null);
 
+        Variables.popupModalInputs.removeClass('input--alert');
+        $('div').remove('.float--alert');
+
         Variables.popupModal.css("display", "block")
     }
 
@@ -271,20 +274,20 @@ class Base {
      */
     static closeModal = () => {
         Variables.popupModal.css("display", "none");
-        Base.createNewEmployee = True;
+        Base.createNewEmployee = true;
     }
-
-
-    
-
-    //Hàm mở thông báo xác nhận xóa
-    //Author: NQMinh(24/07/2021)
+     /**
+     * Hàm mở thông báo xác nhận xóa
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     openPopupAlert = () => {
         Variables.alertMessage.css('display', 'flex');
     }
 
-    //Hàm đóng thông báo xác nhận xóa
-    //Author: NQMinh(24/07/2021)
+     /**
+     * Hàm đóng thông báo xác nhận xóa
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     closePopupAlert = () => {
         Variables.alertMessage.css('display', 'none');
     }

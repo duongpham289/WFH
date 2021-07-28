@@ -84,7 +84,6 @@ class EmployeePage extends Base{
         })
 
         //Sự kiện click cho nút xóa, thực hiện kiểm tra các tr có checkbox active để xóa
-        //Author: NQMinh(24/07/2021)
         Variables.alertDeleteBtn.click(() => {
             const checkboxes = $('tbody tr .delete-box input');
             checkboxes.each((index, box) => {
@@ -98,8 +97,10 @@ class EmployeePage extends Base{
         });
     }
 
-    //Hàm xóa nhân viên
-    //Author: NQMinh(24/07/2021)
+    /**
+     * Hàm xóa nhân viên
+     * @param {*} id id của nhân viên
+     */
     deleteEmployee = (id) => {
         try {
             $.ajax({
@@ -118,6 +119,11 @@ class EmployeePage extends Base{
         }
     }
 
+    /**
+     * Đưa dữ liệu lấy được từ EmployeeId lên modal
+     * @param {*} data 
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     static bindingDataToModal = (data) =>{
         Variables.inputEmployeeCode.val(data["EmployeeCode"]);
         Variables.inputFullName.val(data["FullName"]);
@@ -136,6 +142,11 @@ class EmployeePage extends Base{
         Variables.inputWorkStatus.text(DataFormatter.formatWorkStatus(data["WorkStatus"]));
     }
 
+    /**
+     * Lưu dữ liệu tạo mới employee
+     * @param {*} self 
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     storeEmployeeOnClick(self) {
         let employee = {};
 
@@ -179,9 +190,11 @@ class EmployeePage extends Base{
        
     }
 
-    //#region các hàm liên quan đến xử lý validate trong form
-    //Hàm kiểm tra ô nhập trống
-    //Author: NQMinh(21/07/2021)
+    /**
+     * Hàm kiểm tra ô nhập trống
+     * @returns 
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     validateRequired = () => {
         const self = this;
         const required = $('input[required]');
@@ -189,7 +202,8 @@ class EmployeePage extends Base{
         required.blur(function () {
             if ($(this).val().trim() === '') {
                 $(this).addClass('input--alert');
-                $(this).attr('title', 'Thông tin này bắt buộc nhập!');
+                // $(this).attr('title', 'Thông tin này bắt buộc nhập!');
+                // debugger
                 self.showError($(this), 'Thông tin này bắt buộc nhập');
                 return false;
             } else {
@@ -198,36 +212,47 @@ class EmployeePage extends Base{
             }
         })
 
-        required.on('input', function () {
+        required.on('input click', function () {
             $("div").remove('.float--alert')
         })
         return true;
     }
 
-    //TODO: kiểm tra định dạng email
+    /**
+     * Kiểm tra định dạng email
+     * @returns boolean
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     validateEmail = () => {
         const self = this;
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        Variables.inputEmail.on('input', function() {
+        Variables.inputEmail.on('blur', function() {
             const email = Variables.inputEmail.val();
-            if (!re.test(String(email).toLowerCase())) {
+            if (email == '') {
+                self.showError($(this), 'Thông tin này bắt buộc nhập');
+            }else if (!re.test(String(email).toLowerCase())) {
                 self.showError(Variables.inputEmail, 'Email không đúng định dạng');
                 return false;
-            }
+                }
         })
         return true;
     }
-
-    //Hàm hiện thông báo lỗi khi nhập sai input
-    //@params ô nhập và text thông báo cần hiện
-    //Author: NQMinh(23/07/2021)
+    
+    /**
+     * Hàm hiện thông báo lỗi khi nhập sai input
+     * @param {*} input ô nhập 
+     * @param {*} msg text thông báo cần hiện
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     showError = (input, msg) => {
+        // debugger
         const errorBubble = `<div class="float--alert">${msg}</div>`;
         input.parent().append(errorBubble);
     }
 
     //Hàm validate tổng thế trước khi submit data
     validateAll = () => {
+        // debugger
         return this.validateRequired() && this.validateEmail();
     }
     //#endregion
