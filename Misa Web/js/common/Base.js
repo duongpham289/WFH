@@ -241,6 +241,7 @@ class Base {
         const row = $(self).children()[0];
         //chọn checkbox từ hàng đó
         const checkbox = $(row).children().children()[0];
+        // debugger
         $(checkbox).attr('checked', !$(checkbox).attr('checked'));
 
         let allUnchecked = true;

@@ -27,6 +27,15 @@
         font-weight: bold;
     }
 
+    .content .content__header .button__container {
+        display: flex;
+        gap: 16px;
+    }
+
+    .content .content__header .button__container #button__delete-employee {
+        background-color: var(--color-alert);
+    }
+
     /* Phần Filter của Content */
     .content .content__filter {
         margin-top: 16px;

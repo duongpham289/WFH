@@ -1,6 +1,5 @@
 /* Popup whole screen */
 .modal__container {
-    display: none;
     position: fixed;
     z-index: 999;
     padding-top: 50px;

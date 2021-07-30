@@ -250,7 +250,11 @@ class EmployeePage extends Base{
         input.parent().append(errorBubble);
     }
 
-    //Hàm validate tổng thế trước khi submit data
+    /**
+     * Hàm validate tổng thế trước khi submit data
+     * @returns 
+     * CreatedBy: PHDUONG(28/07/2021)
+     */
     validateAll = () => {
         // debugger
         return this.validateRequired() && this.validateEmail();

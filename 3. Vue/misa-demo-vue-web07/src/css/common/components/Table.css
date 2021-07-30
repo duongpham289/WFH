@@ -110,6 +110,7 @@
     .content__table td {
         overflow: hidden;
         text-overflow: ellipsis;
+        cursor: default;
         white-space: nowrap;
         padding-right: 24px;
     }
