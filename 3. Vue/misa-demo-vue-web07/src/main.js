@@ -7,6 +7,12 @@ import VueAxios from 'vue-axios'
 
 import Vuelidate from 'vuelidate'
 
+import {
+  BaseTable,
+} from "./components/base/table";
+
+Vue.component("base-table", BaseTable);
+
 Vue.use(VueAxios, axios, Vuelidate,$)
 Vue.config.productionTip = false
 

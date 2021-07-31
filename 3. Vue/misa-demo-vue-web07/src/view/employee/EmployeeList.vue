@@ -92,7 +92,7 @@
 
       <!-- Phần bảng dữ liệu chính của Content -->
       <div class="content__table-container table__employee">
-        <table class="content__table" >
+        <!-- <table class="content__table" >
           <thead class="table__header">
             <tr>
               <th></th>
@@ -135,7 +135,13 @@
               <td>{{ employee.WorkStatus }}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+        <base-table
+          :columns="columns"
+          :data="data"
+          @rowOnDblClick="rowOnDblClick"
+          @checkBoxOnClick="checkBoxOnClick"
+        />
       </div>
       <div class="content__footer">
         <p>Hiển thị 1-10/10000 nhân viên</p>
@@ -188,6 +194,7 @@ const $ = require("jquery");
 
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
+import { columns } from "@/view/employee/EmployeeTableCols.js";
 
 export default {
   name: "EmployeePage",
@@ -199,7 +206,7 @@ export default {
       .get("http://cukcuk.manhnv.net/v1/Employees")
       .then((res) => {
         // console.log(res.data);
-        vm.employees = res.data;
+        vm.data = res.data;
       })
       .catch((res) => {
         console.log(res);
@@ -220,7 +227,7 @@ export default {
      */
     btnReloadOnClick() {
       $("tbody").empty();
-      this.employees = [];
+      this.data = [];
       this.isHiddenButton = true;
     },
 
@@ -233,7 +240,10 @@ export default {
       this.employeeId = empId;
       this.modeFormDetail = 1;
     },
-
+    /**
+     * Hiển thị message chắc chắn xóa
+     * Author: PHDUONG(31/07/2021)
+     */
     btnDelOnClick(isHidden) {
       this.isHiddenPopupMessage = isHidden;
       this.isHiddenButton = isHidden;
@@ -244,6 +254,8 @@ export default {
      * Author: PHDUONG(29/07/2021)
      */
     checkBoxOnClick(employeeId, event) {
+
+      console.log(event.target.checked);
       const deleteBoxes = document.querySelectorAll(".delete-box input");
       event.target.setAttribute(
         "checked",
@@ -276,23 +288,27 @@ export default {
     },
   },
   watch: {
-    employees() {
+    /**
+     * Reload dữ liệu khi dữ liệu thay đổi
+     * Author: PHDUONG(31/07/2021)
+     */
+    data() {
       var vm = this;
       axios
         .get("http://cukcuk.manhnv.net/v1/Employees")
         .then((res) => {
           // console.log(res.data);
-          vm.employees = res.data;
+          vm.data = res.data;
         })
         .catch((res) => {
           console.log(res);
         });
-        // this.isHiddenButton = true;
+      // this.isHiddenButton = true;
     },
   },
   data() {
     return {
-      employees: [],
+      data: [],
       employeeId: "",
       employeesToDelete: [],
       isHiddenDialogDetail: true,
@@ -300,6 +316,7 @@ export default {
       isHiddenPopupMessage: true,
       isChecked: "",
       modeFormDetail: 0,
+      columns: columns,
     };
   },
 };
