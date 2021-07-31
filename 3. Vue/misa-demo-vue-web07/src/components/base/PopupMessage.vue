@@ -32,7 +32,7 @@
         </div>
         <div
           class="button--primary popup__button-del"
-          @click="btnDeleteEmployeeOnClick"
+          @click="btnDelDataOnClick"
         >
           Xóa
         </div>
@@ -43,6 +43,7 @@
 
 <script>
 import axios from "axios";
+const $ = require("jquery");
 
 export default {
   props: {
@@ -51,20 +52,28 @@ export default {
       default: true,
       required: true,
     },
-    employeesToDelete: {
+    datasToDelete: {
       type: Array,
       required: true,
     },
   },
   methods: {
+    /**
+     * Hàm đóng popup message
+     * Author: PHDUONG(31/07/2021)
+     */
     btnCancelOnClick() {
       this.$emit("btnDelOnClick", true);
     },
-    btnDeleteEmployeeOnClick() {
-      this.employeesToDelete.forEach((employee) => {
+    /**
+     * Hàm xóa employees
+     * Author: PHDUONG(31/07/2021)
+     */
+    btnDelDataOnClick() {
+      this.datasToDelete.forEach((data) => {
         try {
           axios
-            .delete(`http://cukcuk.manhnv.net/v1/Employees/${employee}`)
+            .delete(`http://cukcuk.manhnv.net/v1/Employees/${data}`)
             .then(() => {
               console.log("Xóa thành công");
             })
@@ -75,7 +84,11 @@ export default {
           console.log(error);
         }
       });
-    this.$emit("btnDelOnClick", true);
+
+      $(".delete-box input").each(function () {
+        this.checked = false;
+      });
+      this.$emit("btnDelOnClick", true);
     },
   },
 };

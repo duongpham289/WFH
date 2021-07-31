@@ -96,6 +96,7 @@
                     .modal__container .modal .modal__content .modal__general-info .info-row .info-column {
                         width: 50%;
                         margin: 5px 0 16px;
+                        position: relative;
                     }
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column span{
                             font-family: GoogleSans-Medium;

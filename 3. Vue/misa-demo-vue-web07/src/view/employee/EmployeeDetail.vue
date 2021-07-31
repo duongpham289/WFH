@@ -1,15 +1,15 @@
 <template>
   <!-- Phần Modal Popup -->
-  <div
-    class="modal__container"
-    v-bind:class="{ '--hidden': isHidden }"
-  >
+  <div class="modal__container" v-bind:class="{ '--hidden': isHidden }">
     <div class="modal">
       <!-- Modal Popup Header -->
       <div class="modal__header">
         <div class="modal__name">Thông tin nhân viên</div>
         <div class="modal__button-close">
-          <button class="button--secondary button__close"  @click="btnCancelOnClick"></button>
+          <button
+            class="button--secondary button__close"
+            @click="btnCancelOnClick"
+          ></button>
         </div>
       </div>
       <!-- Modal Popup Avatar Holder -->
@@ -19,7 +19,7 @@
       </div>
       <!-- Modal Popup Content -->
       <div class="modal__content">
-        <div class="modal__general-info">
+        <div class="modal__general-info" @click="onModalClick">
           <div class="info-title">
             <span>A. Thông tin chung:</span>
             <div class="title-layout"></div>
@@ -33,9 +33,10 @@
                 id="txtEmployeeCode"
                 placeholder="NV8888..."
                 required
-                v-model="employee.EmployeeCode"
+                :class="{ 'input--alert': $v.name.$error }"
+                v-model.trim="$v.employee.EmployeeCode.$model"
               />
-              <!-- <div class="error" v-if="!$v.name.required">Field is required</div> -->
+              <div class="float--alert" v-if="!$v.name.required && $v.name.$dirty">Field is required</div>
             </div>
             <div class="info-column">
               <span>Họ và tên(<span class="required-input">*</span>)</span>
@@ -63,7 +64,9 @@
               <span>Giới tính</span>
               <div class="dropdown" id="dropdown__gender">
                 <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{ employee.GenderName ? employee.GenderName : "Chọn giới tính" }}</span>
+                  <span class="dropdown__title">{{
+                    employee.GenderName ? employee.GenderName : "Chọn giới tính"
+                  }}</span>
                   <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="dropdown__content dropdown__content--hidden">
@@ -115,7 +118,18 @@
                 v-model="employee.IdentityPlace"
               />
             </div>
-            <div class="info-column"></div>
+            <div class="info-column">
+              <!-- <div
+                class="form-group"
+                :class="{ 'form-group--error': $v.name.$error }"
+              >
+                <label class="form__label">Name</label>
+                <input class="form__input" v-model.trim="$v.name.$model" />
+              </div>
+              <div class="error" v-if="!$v.name.required">
+                Field is required
+              </div> -->
+            </div>
           </div>
           <div class="info-row">
             <div class="info-column">
@@ -151,7 +165,9 @@
               <span>Vị trí</span>
               <div class="dropdown">
                 <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{ employee.PositionName ? employee.PositionName : "Vị trí" }}</span>
+                  <span class="dropdown__title">{{
+                    employee.PositionName ? employee.PositionName : "Vị trí"
+                  }}</span>
                   <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="dropdown__content dropdown__content--hidden"></div>
@@ -161,7 +177,11 @@
               <span>Phòng ban</span>
               <div class="dropdown">
                 <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{ employee.DepartmentName ? employee.DepartmentName : "Phòng ban" }}</span>
+                  <span class="dropdown__title">{{
+                    employee.DepartmentName
+                      ? employee.DepartmentName
+                      : "Phòng ban"
+                  }}</span>
                   <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="dropdown__content dropdown__content--hidden"></div>
@@ -204,7 +224,11 @@
               <span>Tình trạng công việc</span>
               <div class="dropdown">
                 <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{ employee.WorkStatus ? employee.WorkStatus : "Tình trạng công việc" }}</span>
+                  <span class="dropdown__title">{{
+                    employee.WorkStatus
+                      ? employee.WorkStatus
+                      : "Tình trạng công việc"
+                  }}</span>
                   <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="dropdown__content dropdown__content--hidden">
@@ -228,8 +252,18 @@
       </div>
       <!-- Modal Popup Footer -->
       <div class="modal__foot">
-        <div class="button--secondary button__cancel" id="btnCancel" @click="btnCancelOnClick">Hủy</div>
-        <div class="button--primary button__icon button__save" id="btnSave"  @click="btnSaveOnClick">
+        <div
+          class="button--secondary button__cancel"
+          id="btnCancel"
+          @click="btnCancelOnClick"
+        >
+          Hủy
+        </div>
+        <div
+          class="button--primary button__icon button__save"
+          id="btnSave"
+          @click="btnSaveOnClick"
+        >
           <i class="far fa-save"></i>
           <div class="button__text">Lưu</div>
         </div>
@@ -239,122 +273,149 @@
 </template>
 
 <script>
-
 import axios from "axios";
-// import { required, minLength } from 'vuelidate/lib/validators';
+
+import Common from "@/utils/Common.js";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
-  setup() {},
-  // validations: {
-  //    name: {
-  //     required,
-  //     minLength: minLength(4)
-  //   },
-  // },
+  validations: {
+    employee: {
+      required,
+      minLength: minLength(4),
+    },
+  },
   props: {
     isHidden: {
       type: Boolean,
       default: true,
-      required: true
+      required: true,
     },
     employeeId: {
       type: String,
-      required: true
+      required: true,
     },
     mode: {
       type: Number,
-      required:true,
-      default: 0 // 0 là thêm 1 là sửa
-    }
+      required: true,
+      default: 0, // 0 là thêm 1 là sửa
+    },
   },
   methods: {
     btnCancelOnClick() {
-      this.$emit('btnAddOnClick', true);
+      this.$emit("btnAddOnClick", true);
     },
     btnSaveOnClick() {
       let vm = this;
       if (this.mode == 0) {
         axios
-        .post(`http://cukcuk.manhnv.net/v1/Employees/`, vm.employee)
-        .then(() => {
+          .post(`http://cukcuk.manhnv.net/v1/Employees/`, vm.employee)
+          .then(() => {
             // console.log(res.data);
-            alert("Thêm mới thành công")
-        })
-        .catch((error) => {
-          // debugger
-          switch (error.response.data.data["Server Error Code"]) {
-            case 1048:
-                alert("Cột Họ tên ko được để trống");  // FullName null
+            alert("Thêm mới thành công");
+          })
+          .catch((error) => {
+            // debugger
+            switch (error.response.data.data["Server Error Code"]) {
+              case 1048:
+                alert("Cột Họ tên ko được để trống"); // FullName null
                 break;
-            case 1062:
-                alert("Mã nhân viên đã tồn tại");  // Trùng key
+              case 1062:
+                alert("Mã nhân viên đã tồn tại"); // Trùng key
                 break;
-            default:
-                alert(`Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`);  // end up here all the time
+              default:
+                alert(
+                  `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
+                ); // end up here all the time
                 break;
             }
-        });
+          });
       } else {
         axios
-        .put(`http://cukcuk.manhnv.net/v1/Employees/${vm.employeeId}`, vm.employee)
-        .then(() => {
+          .put(
+            `http://cukcuk.manhnv.net/v1/Employees/${vm.employeeId}`,
+            vm.employee
+          )
+          .then(() => {
             // console.log(res.data);
             // vm.employee = res.data;
-            alert("Sửa thành công")
-        })
-        .catch((error) => {
-          switch (error.response.data.data["Server Error Code"]) {
-            case 1048:
-                alert("Cột Họ tên ko được để trống");  // FullName null
+            alert("Sửa thành công");
+          })
+          .catch((error) => {
+            switch (error.response.data.data["Server Error Code"]) {
+              case 1048:
+                alert("Cột Họ tên ko được để trống"); // FullName null
                 break;
-            case 1062:
-                alert("Mã nhân viên đã tồn tại");  // Trùng key
+              case 1062:
+                alert("Mã nhân viên đã tồn tại"); // Trùng key
                 break;
-            default:
-                alert(`Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`);  // end up here all the time
+              default:
+                alert(
+                  `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
+                ); // end up here all the time
                 break;
             }
-        });
+          });
       }
     },
-    // setName(value) {
-    //   this.name = value
-    //   this.$v.name.$touch()
-    // },
+    onModalClick(){
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
+        console.log(`Name ${this.name}`);
+      }
+    }
   },
   data() {
     return {
       employee: {},
-      //  name: '',
-    }
+      name: "",
+    };
   },
-  watch:{
-    employee: function () {
-      console.log(this.employee);
+  watch: {
+    employee: {
+      deep: true,
+      handler() {
+        this.employee.DateOfBirth = Common.formatDate(
+          this.employee.DateOfBirth,
+          true
+        );
+        this.employee.IdentityDate = Common.formatDate(
+          this.employee.IdentityDate,
+          true
+        );
+        this.employee.JoinDate = Common.formatDate(
+          this.employee.JoinDate,
+          true
+        );
+        // this.employee.Salary = Common.formatMoney(this.employee.Salary)
+        console.log(this.employee);
+      },
     },
     employeeId: function (val) {
       let vm = this;
-
       axios
         .get(`http://cukcuk.manhnv.net/v1/Employees/${val}`)
         .then((res) => {
-            // console.log(res.data);
-            vm.employee = res.data;
+          // console.log(res.data);
+          vm.employee = res.data;
         })
         .catch((res) => {
-            console.log(res);
+          console.log(res);
         });
     },
     mode: function () {
       if (this.mode == 0) {
-        this.employee = {}
+        this.employee = {};
       }
-    }
+    },
+    //đối với object hoặc array:
+    //employee:{
+    //   deep: true,
+    //   handler(newVal,oldVal){
+
+    //   }
+    // }
   },
-  computed: {
-    testEmployeeId: function () {
-      return this.employeeId;
-    }
-  }
 };
 </script>

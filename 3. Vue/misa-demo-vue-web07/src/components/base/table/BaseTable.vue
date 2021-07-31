@@ -54,7 +54,7 @@ export default {
       let tmp = item;
 
       if (col.format === "date") {
-        tmp = Common.formatDate(tmp);
+        tmp = Common.formatDate(tmp,false);
       }
 
       if (col.format === "money") {

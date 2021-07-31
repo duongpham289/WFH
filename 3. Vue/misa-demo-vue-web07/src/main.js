@@ -13,7 +13,8 @@ import {
 
 Vue.component("base-table", BaseTable);
 
-Vue.use(VueAxios, axios, Vuelidate,$)
+Vue.use(VueAxios, axios,$);
+Vue.use(Vuelidate);
 Vue.config.productionTip = false
 
 new Vue({

@@ -14,7 +14,7 @@
           <div
             class="button--primary"
             id="button__delete-employee"
-            v-bind:class="{ '--hidden': isHiddenButton }"
+            v-if="this.employeesToDelete.length"
             @click="btnDelOnClick(false)"
           >
             <div class="button__text">Xóa nhân viên</div>
@@ -182,7 +182,7 @@
     />
     <PopupMessage
       :isHidden="isHiddenPopupMessage"
-      :employeesToDelete="employeesToDelete"
+      :datasToDelete="employeesToDelete"
       @btnDelOnClick="btnDelOnClick"
     />
   </div>
@@ -199,7 +199,7 @@ import { columns } from "@/view/employee/EmployeeTableCols.js";
 export default {
   name: "EmployeePage",
   components: { EmployeeDetailDialog, PopupMessage },
-  mounted() {
+  created() {
     var vm = this;
     //gọi Api lấy dữ liệu
     axios
@@ -228,7 +228,6 @@ export default {
     btnReloadOnClick() {
       $("tbody").empty();
       this.data = [];
-      this.isHiddenButton = true;
     },
 
     /**
@@ -246,7 +245,9 @@ export default {
      */
     btnDelOnClick(isHidden) {
       this.isHiddenPopupMessage = isHidden;
-      this.isHiddenButton = isHidden;
+      if (isHidden) {
+        this.employeesToDelete = [];
+      }
     },
 
     /**
@@ -254,36 +255,10 @@ export default {
      * Author: PHDUONG(29/07/2021)
      */
     checkBoxOnClick(employeeId, event) {
-
-      console.log(event.target.checked);
-      const deleteBoxes = document.querySelectorAll(".delete-box input");
-      event.target.setAttribute(
-        "checked",
-        !event.target.getAttribute("checked") ? "checked" : ""
-      );
-
-      let allUnchecked = true;
-      deleteBoxes.forEach((box) => {
-        //   debugger
-        if (box.getAttribute("checked") === "checked") {
-          allUnchecked = false;
-          this.isHiddenButton = false;
-        }
-        if (allUnchecked) {
-          this.employeesToDelete = [];
-          this.isHiddenButton = true;
-        }
-      });
-      if (!allUnchecked) {
-        if (
-          //check trùng
-          !this.employeesToDelete.some((item) => {
-            return item === employeeId;
-          })
-        ) {
-          //đưa employeeId vào 1 mảng employeeToDelete
-          this.employeesToDelete.push(employeeId);
-        }
+      if (event.target.checked) {
+        this.employeesToDelete.push(employeeId);
+      }else{
+        this.employeesToDelete.splice(this.employeesToDelete.indexOf(employeeId),1);
       }
     },
   },
@@ -312,7 +287,6 @@ export default {
       employeeId: "",
       employeesToDelete: [],
       isHiddenDialogDetail: true,
-      isHiddenButton: true,
       isHiddenPopupMessage: true,
       isChecked: "",
       modeFormDetail: 0,
