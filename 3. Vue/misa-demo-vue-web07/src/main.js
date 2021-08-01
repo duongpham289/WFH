@@ -13,6 +13,9 @@ import {
 
 Vue.component("base-table", BaseTable);
 
+
+Vue.prototype.$api = axios;
+
 Vue.use(VueAxios, axios,$);
 Vue.use(Vuelidate);
 Vue.config.productionTip = false

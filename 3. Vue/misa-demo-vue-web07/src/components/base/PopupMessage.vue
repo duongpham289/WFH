@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 const $ = require("jquery");
 
 export default {
@@ -72,7 +72,7 @@ export default {
     btnDelDataOnClick() {
       this.datasToDelete.forEach((data) => {
         try {
-          axios
+          this.$api
             .delete(`http://cukcuk.manhnv.net/v1/Employees/${data}`)
             .then(() => {
               console.log("Xóa thành công");

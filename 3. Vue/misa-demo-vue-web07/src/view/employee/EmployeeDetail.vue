@@ -19,7 +19,7 @@
       </div>
       <!-- Modal Popup Content -->
       <div class="modal__content">
-        <div class="modal__general-info" @click="onModalClick">
+        <div class="modal__general-info">
           <div class="info-title">
             <span>A. Thông tin chung:</span>
             <div class="title-layout"></div>
@@ -33,10 +33,18 @@
                 id="txtEmployeeCode"
                 placeholder="NV8888..."
                 required
-                :class="{ 'input--alert': $v.name.$error }"
+                :class="{ 'input--alert': $v.employee.EmployeeCode.$error }"
                 v-model.trim="$v.employee.EmployeeCode.$model"
               />
-              <div class="float--alert" v-if="!$v.name.required && $v.name.$dirty">Field is required</div>
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.EmployeeCode.required &&
+                  $v.employee.EmployeeCode.$dirty
+                "
+              >
+                Thông tin bắt buộc nhập
+              </div>
             </div>
             <div class="info-column">
               <span>Họ và tên(<span class="required-input">*</span>)</span>
@@ -46,8 +54,17 @@
                 id="txtFullName"
                 placeholder="Nguyễn Văn A..."
                 required
-                v-model="employee.FullName"
+                :class="{ 'input--alert': $v.employee.FullName.$error }"
+                v-model.trim="$v.employee.FullName.$model"
               />
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.FullName.required && $v.employee.FullName.$dirty
+                "
+              >
+                Thông tin bắt buộc nhập
+              </div>
             </div>
           </div>
           <div class="info-row">
@@ -94,8 +111,27 @@
                 id="txtIdentityNumber"
                 placeholder="0123456789..."
                 required
-                v-model="employee.txtIdentityNumber"
+                :class="{ 'input--alert': $v.employee.IdentityNumber.$error }"
+                v-model.trim="$v.employee.IdentityNumber.$model"
               />
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.IdentityNumber.required &&
+                  $v.employee.IdentityNumber.$dirty
+                "
+              >
+                Thông tin bắt buộc nhập
+              </div>
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.IdentityNumber.numeric &&
+                  $v.employee.IdentityNumber.$dirty
+                "
+              >
+                Field must contains only number
+              </div>
             </div>
             <div class="info-column">
               <span>Ngày cấp</span>
@@ -127,7 +163,7 @@
                 <input class="form__input" v-model.trim="$v.name.$model" />
               </div>
               <div class="error" v-if="!$v.name.required">
-                Field is required
+                Thông tin bắt buộc nhập
               </div> -->
             </div>
           </div>
@@ -140,8 +176,26 @@
                 id="txtEmail"
                 placeholder="Example@gmail.com..."
                 required
-                v-model="employee.Email"
+                :class="{
+                  'input--alert': $v.employee.Email.$error,
+                }"
+                v-model.trim="$v.employee.Email.$model"
               />
+              <div
+                class="float--alert"
+                v-if="!$v.employee.Email.required && $v.employee.Email.$dirty"
+              >
+                Thông tin bắt buộc nhập
+              </div>
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.Email.email &&
+                  $v.employee.Email.$dirty
+                "
+              >
+                Không dúng định dạng
+              </div>
             </div>
             <div class="info-column">
               <span>Số điện thoại (<span class="required-input">*</span>)</span>
@@ -151,8 +205,29 @@
                 id="txtPhoneNumber"
                 placeholder="0123456789..."
                 required
-                v-model="employee.PhoneNumber"
+                :class="{
+                  'input--alert': $v.employee.PhoneNumber.$error,
+                }"
+                v-model.trim="$v.employee.PhoneNumber.$model"
               />
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.PhoneNumber.required &&
+                  $v.employee.PhoneNumber.$dirty
+                "
+              >
+                Thông tin bắt buộc nhập
+              </div>
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.PhoneNumber.numeric &&
+                  $v.employee.PhoneNumber.$dirty
+                "
+              >
+                Không dúng định dạng
+              </div>
             </div>
           </div>
 
@@ -196,9 +271,22 @@
                 class="modal__field-input field-input-label"
                 id="txtPersonalTaxCode"
                 placeholder="0123456789"
-                v-model="employee.PersonalTaxCode"
+                 :class="{
+                  'input--alert': $v.employee.PersonalTaxCode.$error,
+                }"
+                v-model.trim="$v.employee.PersonalTaxCode.$model"
               />
+              <div
+                class="float--alert"
+                v-if="
+                  !$v.employee.PersonalTaxCode.numeric &&
+                  $v.employee.PersonalTaxCode.$dirty
+                "
+              >
+                Không dúng định dạng
+              </div>
             </div>
+            
             <div class="info-column">
               <span>Mức lương cơ bản</span>
               <input
@@ -276,13 +364,18 @@
 import axios from "axios";
 
 import Common from "@/utils/Common.js";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, numeric, email } from "vuelidate/lib/validators";
+import EmployeeModel from "@/models/EmployeeModel.js";
 
 export default {
   validations: {
     employee: {
-      required,
-      minLength: minLength(4),
+      EmployeeCode: { required },
+      FullName: { required },
+      IdentityNumber: { required, numeric },
+      Email: { required, email },
+      PhoneNumber: { required, numeric },
+      PersonalTaxCode:{numeric}
     },
   },
   props: {
@@ -306,71 +399,72 @@ export default {
       this.$emit("btnAddOnClick", true);
     },
     btnSaveOnClick() {
-      let vm = this;
-      if (this.mode == 0) {
-        axios
-          .post(`http://cukcuk.manhnv.net/v1/Employees/`, vm.employee)
-          .then(() => {
-            // console.log(res.data);
-            alert("Thêm mới thành công");
-          })
-          .catch((error) => {
-            // debugger
-            switch (error.response.data.data["Server Error Code"]) {
-              case 1048:
-                alert("Cột Họ tên ko được để trống"); // FullName null
-                break;
-              case 1062:
-                alert("Mã nhân viên đã tồn tại"); // Trùng key
-                break;
-              default:
-                alert(
-                  `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
-                ); // end up here all the time
-                break;
-            }
-          });
-      } else {
-        axios
-          .put(
-            `http://cukcuk.manhnv.net/v1/Employees/${vm.employeeId}`,
-            vm.employee
-          )
-          .then(() => {
-            // console.log(res.data);
-            // vm.employee = res.data;
-            alert("Sửa thành công");
-          })
-          .catch((error) => {
-            switch (error.response.data.data["Server Error Code"]) {
-              case 1048:
-                alert("Cột Họ tên ko được để trống"); // FullName null
-                break;
-              case 1062:
-                alert("Mã nhân viên đã tồn tại"); // Trùng key
-                break;
-              default:
-                alert(
-                  `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
-                ); // end up here all the time
-                break;
-            }
-          });
-      }
-    },
-    onModalClick(){
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        console.log(`Name ${this.name}`);
+        let vm = this;
+        if (this.mode == 0) {
+          axios
+            .post(`http://cukcuk.manhnv.net/v1/Employees/`, vm.employee)
+            .then(() => {
+              // console.log(res.data);
+              alert("Thêm mới thành công");
+            })
+            .catch((error) => {
+              // debugger
+              switch (error.response.data.data["Server Error Code"]) {
+                case 1048:
+                  alert("Họ tên ko được để trống"); // FullName null
+                  break;
+                case 1062:
+                  alert("Mã nhân viên đã tồn tại"); // Trùng key
+                  break;
+                default:
+                  alert(
+                    `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
+                  ); // end up here all the time
+                  break;
+              }
+            });
+        } else {
+          this.$api
+            .put(
+              `http://cukcuk.manhnv.net/v1/Employees/${vm.employeeId}`,
+              vm.employee
+            )
+            .then(() => {
+              // console.log(res.data);
+              // vm.employee = res.data;
+              alert("Sửa thành công");
+            })
+            .catch((error) => {
+              switch (error.response.data.data["Server Error Code"]) {
+                case 1048:
+                  alert("Họ tên ko được để trống"); // FullName null
+                  break;
+                case 1062:
+                  alert("Mã nhân viên đã tồn tại"); // Trùng key
+                  break;
+                default:
+                  alert(
+                    `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
+                  ); // end up here all the time
+                  break;
+              }
+            });
+        }
       }
-    }
+    },
+    onModalClick() {},
   },
   data() {
     return {
-      employee: {},
+      employee: EmployeeModel.initData(),
       name: "",
     };
+  },
+  created() {
+    // console.log(EmployeeModel.initData());
   },
   watch: {
     employee: {
@@ -389,7 +483,7 @@ export default {
           true
         );
         // this.employee.Salary = Common.formatMoney(this.employee.Salary)
-        console.log(this.employee);
+        // console.log(this.employee);
       },
     },
     employeeId: function (val) {

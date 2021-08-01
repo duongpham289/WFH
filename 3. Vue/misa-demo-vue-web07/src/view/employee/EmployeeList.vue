@@ -92,50 +92,6 @@
 
       <!-- Phần bảng dữ liệu chính của Content -->
       <div class="content__table-container table__employee">
-        <!-- <table class="content__table" >
-          <thead class="table__header">
-            <tr>
-              <th></th>
-              <th>Mã nhân viên</th>
-              <th>Họ và tên</th>
-              <th>Giới tính</th>
-              <th>Ngày sinh</th>
-              <th>Điện thoại</th>
-              <th>Email</th>
-              <th>Chức vụ</th>
-              <th>Phòng ban</th>
-              <th>Mức lương cơ bản</th>
-              <th>Tình trạng công việc</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="employee in employees"
-              :key="employee.EmployeeId"
-              @dblclick="rowOnDblClick(employee.EmployeeId)"
-            >
-              <td>
-                <div class="delete-box">
-                  <input
-                    type="checkbox"
-                    @click="checkBoxOnClick(employee.EmployeeId, $event)"
-                  />
-                  <span class="checkmark"></span>
-                </div>
-              </td>
-              <td>{{ employee.EmployeeCode }}</td>
-              <td>{{ employee.FullName }}</td>
-              <td>{{ employee.GenderName }}</td>
-              <td>{{ employee.DateOfBirth }}</td>
-              <td>{{ employee.PhoneNumber }}</td>
-              <td>{{ employee.Email }}</td>
-              <td>{{ employee.PositionName }}</td>
-              <td>{{ employee.DepartmentName }}</td>
-              <td>{{ employee.Salary }}</td>
-              <td>{{ employee.WorkStatus }}</td>
-            </tr>
-          </tbody>
-        </table> -->
         <base-table
           :columns="columns"
           :data="data"
@@ -189,7 +145,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 const $ = require("jquery");
 
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
@@ -202,7 +158,7 @@ export default {
   created() {
     var vm = this;
     //gọi Api lấy dữ liệu
-    axios
+    this.$api
       .get("http://cukcuk.manhnv.net/v1/Employees")
       .then((res) => {
         // console.log(res.data);
@@ -269,7 +225,7 @@ export default {
      */
     data() {
       var vm = this;
-      axios
+      this.$api
         .get("http://cukcuk.manhnv.net/v1/Employees")
         .then((res) => {
           // console.log(res.data);
