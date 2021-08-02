@@ -34,7 +34,3 @@
   name: 'Header'
 }
 </script>
-
-<style scoped>
-    @import url("../../css/common/layouts/Header.css");
-</style>

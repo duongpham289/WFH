@@ -148,6 +148,9 @@
 // import axios from "axios";
 const $ = require("jquery");
 
+import EmployeesAPI from "@/api/components/EmployeesAPI.js";
+// import PositionAPI from "@/api/components/PositionAPI.js";
+// import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
 import { columns } from "@/view/employee/EmployeeTableCols.js";
@@ -158,14 +161,13 @@ export default {
   created() {
     var vm = this;
     //gọi Api lấy dữ liệu
-    this.$api
-      .get("http://cukcuk.manhnv.net/v1/Employees")
+
+    EmployeesAPI.getAll()
       .then((res) => {
-        // console.log(res.data);
         vm.data = res.data;
       })
-      .catch((res) => {
-        console.log(res);
+      .catch((err) => {
+        console.log(err);
       });
   },
   methods: {
@@ -213,8 +215,11 @@ export default {
     checkBoxOnClick(employeeId, event) {
       if (event.target.checked) {
         this.employeesToDelete.push(employeeId);
-      }else{
-        this.employeesToDelete.splice(this.employeesToDelete.indexOf(employeeId),1);
+      } else {
+        this.employeesToDelete.splice(
+          this.employeesToDelete.indexOf(employeeId),
+          1
+        );
       }
     },
   },
@@ -225,16 +230,15 @@ export default {
      */
     data() {
       var vm = this;
-      this.$api
-        .get("http://cukcuk.manhnv.net/v1/Employees")
+      //gọi Api lấy dữ liệu
+
+      EmployeesAPI.getAll()
         .then((res) => {
-          // console.log(res.data);
           vm.data = res.data;
         })
-        .catch((res) => {
-          console.log(res);
+        .catch((err) => {
+          console.log(err);
         });
-      // this.isHiddenButton = true;
     },
   },
   data() {

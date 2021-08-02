@@ -2,16 +2,10 @@
   <div class="popup__container" :class="{ '--hidden': isHidden }">
     <div class="popup">
       <div class="popup__btn-close">
-        <!-- <img
-          src="../../assets/icon/x.svg"
-          alt="close button"
-          class="popup__button-close"
-        /> -->
         <button
           class="button--secondary button__close"
           @click="btnCancelOnClick"
         ></button>
-        <!-- <div class="popup__button-close"></div> -->
       </div>
 
       <div class="popup__title">Xóa bản ghi</div>

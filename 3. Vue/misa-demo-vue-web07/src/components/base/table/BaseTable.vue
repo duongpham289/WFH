@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Common from "@/utils/Common.js";
+import FormatData from "@/utils/format/FormatData.js";
 
 export default {
   name: "base-table",
@@ -54,14 +54,14 @@ export default {
       let tmp = item;
 
       if (col.format === "date") {
-        tmp = Common.formatDate(tmp,false);
+        tmp = FormatData.formatDate(tmp,false);
       }
 
       if (col.format === "money") {
-        tmp = Common.formatMoney(tmp);
+        tmp = FormatData.formatMoney(tmp);
       }
       if (col.format === "work") {
-        tmp = Common.formatWorkStatus(tmp);
+        tmp = FormatData.formatWorkStatus(tmp);
       }
 
       return tmp;

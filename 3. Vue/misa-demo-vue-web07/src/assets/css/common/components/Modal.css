@@ -49,7 +49,7 @@
         }
 
             .modal__container .modal .modal__sidebar .modal__avatar-holder {
-                background-image: url('../../../assets/img/blank-avatar.png');
+                background-image: url('../../../img/blank-avatar.png');
                 background-repeat: no-repeat;
                 background-position: center top;
                 background-size: contain;
@@ -98,12 +98,19 @@
                         margin: 5px 0 16px;
                         position: relative;
                     }
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .text--right{
+                            text-align-last: right;
+                        }
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .dx-widget input{
+                            
+                            font-family: GoogleSans-Italic;
+                        }
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column span{
                             font-family: GoogleSans-Medium;
                         }
 
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column input {
-                            margin: 4px 0 0;
+                            padding: 0 16px;
                             width: 100%;
                         }
 

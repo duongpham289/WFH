@@ -49,9 +49,7 @@
 /* Field Input có label bên trên input */
 .field-input-label {
     margin-top: 4px;
-    padding: 0 0 0 16px;
 }
-
     .field-input-label::placeholder {
         font-size: 11px;
     }

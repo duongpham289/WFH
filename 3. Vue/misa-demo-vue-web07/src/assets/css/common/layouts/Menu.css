@@ -58,21 +58,21 @@
 
 /* Phần icon thuộc menu */
 .-dashboard {
-    background-image: url('../../../assets/icon/dashboard.png');
+    background-image: url('../../../icon/dashboard.png');
 }
 
 .-report {
-    background-image: url('../../../assets/icon/report.png');
+    background-image: url('../../../icon/report.png');
 }
 
 .-employee {
-    background-image: url('../../../assets/icon/dic-employee.png');
+    background-image: url('../../../icon/dic-employee.png');
 }
 
 .-report {
-    background-image: url('../../../assets/icon/report.png');
+    background-image: url('../../../icon/report.png');
 }
 
 .-setting {
-    background-image: url('../../../assets/icon/setting.png');
+    background-image: url('../../../icon/setting.png');
 }

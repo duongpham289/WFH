@@ -130,7 +130,7 @@
                   $v.employee.IdentityNumber.$dirty
                 "
               >
-                Field must contains only number
+                Không dúng định dạng
               </div>
             </div>
             <div class="info-column">
@@ -154,18 +154,7 @@
                 v-model="employee.IdentityPlace"
               />
             </div>
-            <div class="info-column">
-              <!-- <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.name.$error }"
-              >
-                <label class="form__label">Name</label>
-                <input class="form__input" v-model.trim="$v.name.$model" />
-              </div>
-              <div class="error" v-if="!$v.name.required">
-                Thông tin bắt buộc nhập
-              </div> -->
-            </div>
+            <div class="info-column"></div>
           </div>
           <div class="info-row">
             <div class="info-column">
@@ -189,10 +178,7 @@
               </div>
               <div
                 class="float--alert"
-                v-if="
-                  !$v.employee.Email.email &&
-                  $v.employee.Email.$dirty
-                "
+                v-if="!$v.employee.Email.email && $v.employee.Email.$dirty"
               >
                 Không dúng định dạng
               </div>
@@ -271,7 +257,7 @@
                 class="modal__field-input field-input-label"
                 id="txtPersonalTaxCode"
                 placeholder="0123456789"
-                 :class="{
+                :class="{
                   'input--alert': $v.employee.PersonalTaxCode.$error,
                 }"
                 v-model.trim="$v.employee.PersonalTaxCode.$model"
@@ -286,16 +272,10 @@
                 Không dúng định dạng
               </div>
             </div>
-            
+
             <div class="info-column">
               <span>Mức lương cơ bản</span>
-              <input
-                type="text"
-                class="modal__field-input field-input-label"
-                id="txtSalary"
-                placeholder="10.000.000"
-                v-model="employee.Salary"
-              />
+              <DxNumberBox class="modal__field-input field-input-label text--right" v-model="employee.Salary" format="#,##0.## (VND)" />
             </div>
           </div>
           <div class="info-row">
@@ -361,13 +341,18 @@
 </template>
 
 <script>
-import axios from "axios";
 
-import Common from "@/utils/Common.js";
+
+import DxNumberBox from "devextreme-vue/number-box";
+import EmployeesAPI from "@/api/components/EmployeesAPI.js";
+import FormatData from "@/utils/format/FormatData.js";
 import { required, numeric, email } from "vuelidate/lib/validators";
 import EmployeeModel from "@/models/EmployeeModel.js";
 
 export default {
+  components: {
+    DxNumberBox,
+  },
   validations: {
     employee: {
       EmployeeCode: { required },
@@ -375,7 +360,7 @@ export default {
       IdentityNumber: { required, numeric },
       Email: { required, email },
       PhoneNumber: { required, numeric },
-      PersonalTaxCode:{numeric}
+      PersonalTaxCode: { numeric },
     },
   },
   props: {
@@ -395,17 +380,26 @@ export default {
     },
   },
   methods: {
+    /**
+     * Tắt màn hình EmployeeDetail
+     * Autthor: PHDUONG(2/8/2021)
+     */
     btnCancelOnClick() {
       this.$emit("btnAddOnClick", true);
     },
+    /**
+     * Lưu/ sửa thông tin nhân viên
+     * Autthor: PHDUONG(2/8/2021)
+     */
     btnSaveOnClick() {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
         let vm = this;
         if (this.mode == 0) {
-          axios
-            .post(`http://cukcuk.manhnv.net/v1/Employees/`, vm.employee)
+          console.log(vm.employee.Salary);
+          debugger
+          EmployeesAPI.create(vm.employee)
             .then(() => {
               // console.log(res.data);
               alert("Thêm mới thành công");
@@ -427,11 +421,7 @@ export default {
               }
             });
         } else {
-          this.$api
-            .put(
-              `http://cukcuk.manhnv.net/v1/Employees/${vm.employeeId}`,
-              vm.employee
-            )
+          EmployeesAPI.create(vm.employeeId, vm.employee)
             .then(() => {
               // console.log(res.data);
               // vm.employee = res.data;
@@ -455,7 +445,6 @@ export default {
         }
       }
     },
-    onModalClick() {},
   },
   data() {
     return {
@@ -467,18 +456,22 @@ export default {
     // console.log(EmployeeModel.initData());
   },
   watch: {
+    /**
+     * Format thông tin ngày tháng trước khi gắn lên form
+     * Autthor: PHDUONG(2/8/2021)
+     */
     employee: {
       deep: true,
       handler() {
-        this.employee.DateOfBirth = Common.formatDate(
+        this.employee.DateOfBirth = FormatData.formatDate(
           this.employee.DateOfBirth,
           true
         );
-        this.employee.IdentityDate = Common.formatDate(
+        this.employee.IdentityDate = FormatData.formatDate(
           this.employee.IdentityDate,
           true
         );
-        this.employee.JoinDate = Common.formatDate(
+        this.employee.JoinDate = FormatData.formatDate(
           this.employee.JoinDate,
           true
         );
@@ -486,18 +479,24 @@ export default {
         // console.log(this.employee);
       },
     },
-    employeeId: function (val) {
+    /**
+     * Lấy dữ liệu nhân viên từ server theo Id
+     * Autthor: PHDUONG(2/8/2021)
+     */
+    employeeId: function (id) {
       let vm = this;
-      axios
-        .get(`http://cukcuk.manhnv.net/v1/Employees/${val}`)
+      EmployeesAPI.getById(id)
         .then((res) => {
-          // console.log(res.data);
           vm.employee = res.data;
         })
         .catch((res) => {
           console.log(res);
         });
     },
+    /**
+     * Kiểm tra thêm hay sửa
+     * Autthor: PHDUONG(2/8/2021)
+     */
     mode: function () {
       if (this.mode == 0) {
         this.employee = {};

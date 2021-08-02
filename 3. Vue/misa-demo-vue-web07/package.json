@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "@types/vuelidate": "^0.7.15",
+    "@vue/composition-api": "^1.0.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "devextreme": "21.1.4",
+    "devextreme-vue": "21.1.4",
     "jquery": "^3.6.0",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",

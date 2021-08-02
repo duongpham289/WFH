@@ -24,6 +24,6 @@ export default {
 </script>
 
 <style>
-  @import url('./css/common/Style.css');
+  @import url('./assets/css/common/Style.css');
   @import url('./assets/font/fontawesome-5.15.1/css/all.min.css');
 </style>
