@@ -44,23 +44,35 @@ export default {
     },
   },
   methods: {
+    /**
+     * Mở modal khi double click
+     * Author: PHDUONG(3/8/2021)
+     */
     rowOnDblClick(id) {
       this.$emit("rowOnDblClick", id);
     },
+    /**
+     * Check box hiển thị khi nhấn
+     * Author: PHDUONG(3/8/2021)
+     */
     checkBoxOnClick(id, event) {
       this.$emit("checkBoxOnClick", id, event);
     },
+    /**
+     * Format dữ liệu trước khi gắn dữ liệu vào bảng
+     * Author: PHDUONG(3/8/2021)
+     */
     formatText(col, item) {
       let tmp = item;
 
-      if (col.format === "date") {
+      if (col.format === this.$enum.date) {
         tmp = FormatData.formatDate(tmp,false);
       }
 
-      if (col.format === "money") {
+      if (col.format === this.$enum.money) {
         tmp = FormatData.formatMoney(tmp);
       }
-      if (col.format === "work") {
+      if (col.format === this.$enum.work) {
         tmp = FormatData.formatWorkStatus(tmp);
       }
 

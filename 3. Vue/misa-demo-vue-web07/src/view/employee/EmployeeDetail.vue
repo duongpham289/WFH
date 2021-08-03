@@ -21,12 +21,15 @@
       <div class="modal__content">
         <div class="modal__general-info">
           <div class="info-title">
-            <span>A. Thông tin chung:</span>
+            <div class="model__text"><span>A. Thông tin chung:</span></div>
+
             <div class="title-layout"></div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Mã nhân viên(<span class="required-input">*</span>)</span>
+              <div class="model__text">
+                <span>Mã nhân viên(<span class="required-input">*</span>)</span>
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -47,7 +50,9 @@
               </div>
             </div>
             <div class="info-column">
-              <span>Họ và tên(<span class="required-input">*</span>)</span>
+              <div class="model__text">
+                <span>Họ và tên(<span class="required-input">*</span>)</span>
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -69,7 +74,9 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Ngày sinh</span>
+              <div class="model__text">
+                <span>Ngày sinh</span>
+              </div>
               <input
                 type="date"
                 class="modal__field-input field-input-label"
@@ -78,33 +85,25 @@
               />
             </div>
             <div class="info-column" id="gender">
-              <span>Giới tính</span>
-              <div class="dropdown" id="dropdown__gender">
-                <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{
-                    employee.GenderName ? employee.GenderName : "Chọn giới tính"
-                  }}</span>
-                  <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown__content dropdown__content--hidden">
-                  <div class="dropdown__option" value="0">
-                    <i class="fas fa-check"></i>Nữ
-                  </div>
-                  <div class="dropdown__option" value="1">
-                    <i class="fas fa-check"></i>Nam
-                  </div>
-                  <div class="dropdown__option" value="2">
-                    <i class="fas fa-check"></i>Khác
-                  </div>
-                </div>
+              <div class="model__text">
+                <span>Giới tính</span>
               </div>
+              <base-dropdown
+                @selected="selectedGender"
+                :tabindex="4"
+                :dropdown="this.$dropdownData.genderDropdown"
+                :optionDefault="employee"
+              />
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span
-                >Số CMTND/ Căn cước(<span class="required-input">*</span>)</span
-              >
+              <div class="model__text">
+                <span
+                  >Số CMTND/ Căn cước(<span class="required-input">*</span
+                  >)</span
+                >
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -134,7 +133,9 @@
               </div>
             </div>
             <div class="info-column">
-              <span>Ngày cấp</span>
+              <div class="model__text">
+                <span>Ngày cấp</span>
+              </div>
               <input
                 type="date"
                 class="modal__field-input field-input-label"
@@ -145,7 +146,9 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Nơi cấp</span>
+              <div class="model__text">
+                <span>Nơi cấp</span>
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -158,7 +161,9 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Email(<span class="required-input">*</span>)</span>
+              <div class="model__text">
+                <span>Email(<span class="required-input">*</span>)</span>
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -184,7 +189,11 @@
               </div>
             </div>
             <div class="info-column">
-              <span>Số điện thoại (<span class="required-input">*</span>)</span>
+              <div class="model__text">
+                <span
+                  >Số điện thoại (<span class="required-input">*</span>)</span
+                >
+              </div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -223,35 +232,27 @@
           </div>
           <div class="info-row">
             <div class="info-column" id="txtPosition">
-              <span>Vị trí</span>
-              <div class="dropdown">
-                <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{
-                    employee.PositionName ? employee.PositionName : "Vị trí"
-                  }}</span>
-                  <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown__content dropdown__content--hidden"></div>
-              </div>
+              <div class="model__text"><span>Vị trí</span></div>
+              <base-dropdown
+                @selected="selectedPosition"
+                :tabindex="4"
+                :dropdown="this.$dropdownData.positionDropdown"
+                :optionDefault="employee"
+              />
             </div>
             <div class="info-column" id="txtDepartment">
-              <span>Phòng ban</span>
-              <div class="dropdown">
-                <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{
-                    employee.DepartmentName
-                      ? employee.DepartmentName
-                      : "Phòng ban"
-                  }}</span>
-                  <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown__content dropdown__content--hidden"></div>
-              </div>
+              <div class="model__text"><span>Phòng ban</span></div>
+              <base-dropdown
+                @selected="selectedDepartment"
+                :tabindex="4"
+                :dropdown="this.$dropdownData.departmentDropdown"
+                :optionDefault="employee"
+              />
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Mã số thuế cá nhân</span>
+              <div class="model__text"><span>Mã số thuế cá nhân</span></div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -274,13 +275,17 @@
             </div>
 
             <div class="info-column">
-              <span>Mức lương cơ bản</span>
-              <DxNumberBox class="modal__field-input field-input-label text--right" v-model="employee.Salary" format="#,##0.## (VND)" />
+              <div class="model__text"><span>Mức lương cơ bản</span></div>
+              <DxNumberBox
+                class="modal__field-input field-input-label text--right"
+                v-model="employee.Salary"
+                format="#,##0.## (VND)"
+              />
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <span>Ngày gia nhập công ty</span>
+              <div class="model__text"><span>Ngày gia nhập công ty</span></div>
               <input
                 type="date"
                 class="modal__field-input field-input-label"
@@ -289,31 +294,13 @@
               />
             </div>
             <div class="info-column" id="txtWorkStatus">
-              <span>Tình trạng công việc</span>
-              <div class="dropdown">
-                <button class="dropdown__button dropdown__modal--button">
-                  <span class="dropdown__title">{{
-                    employee.WorkStatus
-                      ? employee.WorkStatus
-                      : "Tình trạng công việc"
-                  }}</span>
-                  <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown__content dropdown__content--hidden">
-                  <div class="dropdown__option" value="0">
-                    <i class="fas fa-check"></i>Đang làm việc
-                  </div>
-                  <div class="dropdown__option" value="1">
-                    <i class="fas fa-check"></i>Đang thử việc
-                  </div>
-                  <div class="dropdown__option" value="2">
-                    <i class="fas fa-check"></i>Đã nghỉ việc
-                  </div>
-                  <div class="dropdown__option" value="3">
-                    <i class="fas fa-check"></i>Đang nghỉ hưu
-                  </div>
-                </div>
-              </div>
+              <div class="model__text"><span>Tình trạng công việc</span></div>
+              <base-dropdown
+                @selected="selectedWorkStatus"
+                :tabindex="4"
+                :dropdown="this.$dropdownData.workStatusDropdown"
+                :optionDefault="employee"
+              />
             </div>
           </div>
         </div>
@@ -342,9 +329,10 @@
 
 <script>
 
-
 import DxNumberBox from "devextreme-vue/number-box";
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
+import PositionAPI from "@/api/components/PositionAPI.js";
+import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import FormatData from "@/utils/format/FormatData.js";
 import { required, numeric, email } from "vuelidate/lib/validators";
 import EmployeeModel from "@/models/EmployeeModel.js";
@@ -362,6 +350,24 @@ export default {
       PhoneNumber: { required, numeric },
       PersonalTaxCode: { numeric },
     },
+  },
+  created() {
+
+    PositionAPI.getAll()
+      .then((res) => {
+        this.$dropdownData.position.data = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    DepartmentAPI.getAll()
+      .then((res) => {
+        this.$dropdownData.department.data = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   props: {
     isHidden: {
@@ -388,7 +394,7 @@ export default {
       this.$emit("btnAddOnClick", true);
     },
     /**
-     * Lưu/ sửa thông tin nhân viên
+     * Lưu/sửa thông tin nhân viên
      * Autthor: PHDUONG(2/8/2021)
      */
     btnSaveOnClick() {
@@ -398,7 +404,7 @@ export default {
         let vm = this;
         if (this.mode == 0) {
           console.log(vm.employee.Salary);
-          debugger
+          debugger;
           EmployeesAPI.create(vm.employee)
             .then(() => {
               // console.log(res.data);
@@ -445,15 +451,44 @@ export default {
         }
       }
     },
+
+    /**
+     * Lấy dữ liệu gender
+     * Author: PHDUONG(3/8/2021)
+     */
+    selectedGender(value,name) {
+      this.employee.Gender = +value;
+      this.employee.GenderName = name;
+    },
+    /**
+     * Lấy dữ liệu WorkStatus vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedWorkStatus(value) {
+      this.employee.WorkStatus = +value;
+    },
+    /**
+     * Lấy dữ liệu Department vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedDepartment(value,name) {
+      this.employee.DepartmentId = value;
+      this.employee.DepartmentName = name;
+    },
+    /**
+     * Lấy dữ liệu Position vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedPosition(value,name) {
+      this.employee.PositionId = value;
+      this.employee.PositionName = name;
+    },
   },
   data() {
     return {
       employee: EmployeeModel.initData(),
       name: "",
     };
-  },
-  created() {
-    // console.log(EmployeeModel.initData());
   },
   watch: {
     /**
@@ -475,8 +510,6 @@ export default {
           this.employee.JoinDate,
           true
         );
-        // this.employee.Salary = Common.formatMoney(this.employee.Salary)
-        // console.log(this.employee);
       },
     },
     /**
@@ -502,13 +535,6 @@ export default {
         this.employee = {};
       }
     },
-    //đối với object hoặc array:
-    //employee:{
-    //   deep: true,
-    //   handler(newVal,oldVal){
-
-    //   }
-    // }
   },
 };
 </script>

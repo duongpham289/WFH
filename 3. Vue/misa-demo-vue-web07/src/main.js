@@ -8,15 +8,28 @@ import VueAxios from 'vue-axios'
 import 'devextreme/dist/css/dx.light.css';
 import Vuelidate from 'vuelidate'
 
+import Enum from "./enums/TypeEnum.js"
+import DropdownData from "./components/base/dropdown/DropdownData.js"
+
 import {
   BaseTable,
+  BasePagination
 } from "./components/base/table";
-import { BaseCombobox } from "./components/base/combobox";
+import {
+  BaseCombobox
+} from "./components/base/combobox";
+import {
+  BaseDropdown
+} from "./components/base/dropdown";
 
 Vue.component("base-table", BaseTable);
+Vue.component("base-pagination", BasePagination);
 Vue.component("combo-box", BaseCombobox);
+Vue.component("base-dropdown", BaseDropdown);
 
 Vue.prototype.$api = axios;
+Vue.prototype.$enum = Enum;
+Vue.prototype.$dropdownData = DropdownData;
 
 Vue.use(VueAxios, axios, $);
 Vue.use(Vuelidate);

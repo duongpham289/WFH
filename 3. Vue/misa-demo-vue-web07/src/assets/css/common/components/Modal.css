@@ -105,8 +105,9 @@
                             
                             font-family: GoogleSans-Italic;
                         }
-                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column span{
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .model__text{
                             font-family: GoogleSans-Medium;
+                            margin-bottom: 4px;
                         }
 
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column input {
