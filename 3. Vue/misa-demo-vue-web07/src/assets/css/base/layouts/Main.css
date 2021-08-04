@@ -1,4 +1,4 @@
-@import url('../Color.css');
+@import url('../common/Common.css');
 
 * {
     box-sizing: border-box;
@@ -8,18 +8,6 @@ body {
     margin: 0;
     font-family: GoogleSans-Regular !important;
     font-size: 13px;
-}
-
-.--hidden {
-    display: none !important;
-}
-
-.--show {
-    display: block !important;
-}
-
-.rotate-180 {
-    transform: rotate(180deg);
 }
 
 ::-webkit-scrollbar {
@@ -33,7 +21,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-hightlight);
+    background: var(--color-gray);
     border-radius: 16px;
 }
 

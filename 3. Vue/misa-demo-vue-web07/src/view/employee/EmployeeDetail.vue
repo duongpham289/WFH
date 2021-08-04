@@ -21,13 +21,13 @@
       <div class="modal__content">
         <div class="modal__general-info">
           <div class="info-title">
-            <div class="model__text"><span>A. Thông tin chung:</span></div>
+            <div class="modal__text"><span>A. Thông tin chung:</span></div>
 
             <div class="title-layout"></div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Mã nhân viên(<span class="required-input">*</span>)</span>
               </div>
               <input
@@ -47,10 +47,17 @@
                 "
               >
                 Thông tin bắt buộc nhập
-              </div>
+              </div> -->
+              <base-input
+                :label="`Mã nhân viên`"
+                :id="`txtEmployeeCode`"
+                :value="employee.EmployeeCode"
+                :placeholder="`NV-0001`"
+                required
+              />
             </div>
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Họ và tên(<span class="required-input">*</span>)</span>
               </div>
               <input
@@ -69,12 +76,18 @@
                 "
               >
                 Thông tin bắt buộc nhập
-              </div>
+              </div> -->
+              <base-input
+                :label="`Họ và tên`"
+                :id="`txtFullName`"
+                :value="employee.FullName"
+                required
+              />
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Ngày sinh</span>
               </div>
               <input
@@ -82,10 +95,17 @@
                 class="modal__field-input field-input-label"
                 id="dDateOfBirth"
                 v-model="employee.DateOfBirth"
+              /> -->
+              <base-input
+                :type="`date`"
+                :label="`Ngày sinh`"
+                :id="`txtDateOfBirth`"
+                :value="employee.DateOfBirth"
+                required
               />
             </div>
             <div class="info-column" id="gender">
-              <div class="model__text">
+              <div class="modal__text">
                 <span>Giới tính</span>
               </div>
               <base-dropdown
@@ -98,7 +118,7 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span
                   >Số CMTND/ Căn cước(<span class="required-input">*</span
                   >)</span
@@ -130,10 +150,16 @@
                 "
               >
                 Không dúng định dạng
-              </div>
+              </div> -->
+              <base-input
+                :label="`Số CMTND/ Căn cước`"
+                :id="`txtIdentityNumber`"
+                :value="employee.IdentityNumber"
+                required
+              ></base-input>
             </div>
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Ngày cấp</span>
               </div>
               <input
@@ -141,12 +167,18 @@
                 class="modal__field-input field-input-label"
                 id="dIdentityDate"
                 v-model="employee.IdentityDate"
-              />
+              /> -->
+              <base-input
+                :type="`date`"
+                :label="`Ngày cấp`"
+                :id="`txtIdentityDate`"
+                :value="employee.IdentityDate"
+              ></base-input>
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Nơi cấp</span>
               </div>
               <input
@@ -155,13 +187,19 @@
                 id="txtIdentityPlace"
                 placeholder="Hà Nội..."
                 v-model="employee.IdentityPlace"
-              />
+              /> -->
+              <base-input
+                class="custom-input"
+                :label="`Nơi cấp`"
+                :id="`txtIdentityPlace`"
+                :value="employee.IdentityPlace"
+              ></base-input>
             </div>
             <div class="info-column"></div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span>Email(<span class="required-input">*</span>)</span>
               </div>
               <input
@@ -186,10 +224,16 @@
                 v-if="!$v.employee.Email.email && $v.employee.Email.$dirty"
               >
                 Không dúng định dạng
-              </div>
+              </div> -->
+              <base-input
+                :label="`Email`"
+                :id="`txtEmail`"
+                v-model="employee.Email"
+                required
+              ></base-input>
             </div>
             <div class="info-column">
-              <div class="model__text">
+              <!-- <div class="modal__text">
                 <span
                   >Số điện thoại (<span class="required-input">*</span>)</span
                 >
@@ -222,7 +266,13 @@
                 "
               >
                 Không dúng định dạng
-              </div>
+              </div> -->
+              <base-input
+                :label="`Số điện thoại`"
+                :id="`txtPhoneNumber`"
+                :value="employee.PhoneNumber"
+                required
+              ></base-input>
             </div>
           </div>
 
@@ -232,7 +282,7 @@
           </div>
           <div class="info-row">
             <div class="info-column" id="txtPosition">
-              <div class="model__text"><span>Vị trí</span></div>
+              <div class="modal__text"><span>Vị trí</span></div>
               <base-dropdown
                 @selected="selectedPosition"
                 :tabindex="4"
@@ -241,7 +291,7 @@
               />
             </div>
             <div class="info-column" id="txtDepartment">
-              <div class="model__text"><span>Phòng ban</span></div>
+              <div class="modal__text"><span>Phòng ban</span></div>
               <base-dropdown
                 @selected="selectedDepartment"
                 :tabindex="4"
@@ -252,7 +302,7 @@
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text"><span>Mã số thuế cá nhân</span></div>
+              <!-- <div class="modal__text"><span>Mã số thuế cá nhân</span></div>
               <input
                 type="text"
                 class="modal__field-input field-input-label"
@@ -271,30 +321,55 @@
                 "
               >
                 Không dúng định dạng
-              </div>
+              </div> -->
+              <base-input
+                :label="`Mã số thuế cá nhân`"
+                :id="`txtTaxCode`"
+                :value="employee.PersonalTaxCode"
+              ></base-input>
             </div>
 
             <div class="info-column">
-              <div class="model__text"><span>Mức lương cơ bản</span></div>
-              <DxNumberBox
-                class="modal__field-input field-input-label text--right"
+              <!-- <div class="modal__text"><span>Mức lương cơ bản</span></div>
+              <input
+                type="text"
+                class="modal__field-input field-input-label"
+                id="txtSalarye"
+                placeholder="10.000.000"
                 v-model="employee.Salary"
-                format="#,##0.## (VND)"
-              />
+              /> -->
+              <base-input
+                :label="`Mức lương cơ bản`"
+                :id="`txtSalary`"
+                :value="employee.Salary"
+                :classes="`text-right`"
+                :iconRight="true"
+              >
+                <template v-slot:icon>
+                  <span class="icon">(VNĐ)</span>
+                </template>
+              </base-input>
             </div>
           </div>
           <div class="info-row">
             <div class="info-column">
-              <div class="model__text"><span>Ngày gia nhập công ty</span></div>
+              <!-- <div class="modal__text"><span>Ngày gia nhập công ty</span></div>
               <input
                 type="date"
                 class="modal__field-input field-input-label"
                 id="dJoinDate"
                 v-model="employee.JoinDate"
-              />
+              /> -->
+              <base-input
+                required
+                :type="`date`"
+                :label="`Ngày gia nhập công ty`"
+                :id="`txtJoinDate`"
+                :value="employee.JoinDate"
+              ></base-input>
             </div>
             <div class="info-column" id="txtWorkStatus">
-              <div class="model__text"><span>Tình trạng công việc</span></div>
+              <div class="modal__text"><span>Tình trạng công việc</span></div>
               <base-dropdown
                 @selected="selectedWorkStatus"
                 :tabindex="4"
@@ -328,19 +403,12 @@
 </template>
 
 <script>
-
-import DxNumberBox from "devextreme-vue/number-box";
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
-import PositionAPI from "@/api/components/PositionAPI.js";
-import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import FormatData from "@/utils/format/FormatData.js";
 import { required, numeric, email } from "vuelidate/lib/validators";
 import EmployeeModel from "@/models/EmployeeModel.js";
 
 export default {
-  components: {
-    DxNumberBox,
-  },
   validations: {
     employee: {
       EmployeeCode: { required },
@@ -350,24 +418,6 @@ export default {
       PhoneNumber: { required, numeric },
       PersonalTaxCode: { numeric },
     },
-  },
-  created() {
-
-    PositionAPI.getAll()
-      .then((res) => {
-        this.$dropdownData.position.data = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    DepartmentAPI.getAll()
-      .then((res) => {
-        this.$dropdownData.department.data = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
   props: {
     isHidden: {
@@ -392,6 +442,16 @@ export default {
      */
     btnCancelOnClick() {
       this.$emit("btnAddOnClick", true);
+      this.$nextTick(() => {
+        this.$v.$reset();
+      });
+    },
+    /**
+     * Reload lại bảng
+     * Autthor: PHDUONG(2/8/2021)
+     */
+    reloadTable() {
+      this.$emit("btnReloadOnClick");
     },
     /**
      * Lưu/sửa thông tin nhân viên
@@ -427,11 +487,16 @@ export default {
               }
             });
         } else {
-          EmployeesAPI.create(vm.employeeId, vm.employee)
+          EmployeesAPI.update(vm.employeeId, vm.employee)
             .then(() => {
-              // console.log(res.data);
+              // debugger
               // vm.employee = res.data;
-              alert("Sửa thành công");
+              this.btnCancelOnClick();
+              setTimeout(function () {
+                this.reloadTable();
+              }, 3000);
+
+              alert("Sửa thành công, xin đợi dữ liệu tải lại");
             })
             .catch((error) => {
               switch (error.response.data.data["Server Error Code"]) {
@@ -456,7 +521,7 @@ export default {
      * Lấy dữ liệu gender
      * Author: PHDUONG(3/8/2021)
      */
-    selectedGender(value,name) {
+    selectedGender(value, name) {
       this.employee.Gender = +value;
       this.employee.GenderName = name;
     },
@@ -471,7 +536,7 @@ export default {
      * Lấy dữ liệu Department vào model
      * Autthor: PHDUONG(3/8/2021)
      */
-    selectedDepartment(value,name) {
+    selectedDepartment(value, name) {
       this.employee.DepartmentId = value;
       this.employee.DepartmentName = name;
     },
@@ -479,7 +544,7 @@ export default {
      * Lấy dữ liệu Position vào model
      * Autthor: PHDUONG(3/8/2021)
      */
-    selectedPosition(value,name) {
+    selectedPosition(value, name) {
       this.employee.PositionId = value;
       this.employee.PositionName = name;
     },
@@ -510,6 +575,7 @@ export default {
           this.employee.JoinDate,
           true
         );
+        this.employee.Salary = FormatData.formatSalary(this.employee.Salary);
       },
     },
     /**

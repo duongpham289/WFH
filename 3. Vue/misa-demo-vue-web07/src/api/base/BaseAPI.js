@@ -35,7 +35,7 @@ export default class BaseAPI {
    * @param {*} body
    */
   update(id, body) {
-    return BaseAPIConfig.put(`${this.controller}/update/${id}`, body);
+    return BaseAPIConfig.put(`${this.controller}/${id}`, body);
   }
   /**
    * Hàm xóa bản ghi

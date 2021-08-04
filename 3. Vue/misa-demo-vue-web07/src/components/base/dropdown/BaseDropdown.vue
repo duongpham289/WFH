@@ -32,8 +32,30 @@
 </template>
 
 <script>
+
+import PositionAPI from "@/api/components/PositionAPI.js";
+import DepartmentAPI from "@/api/components/DepartmentAPI.js";
+
 export default {
   mounted() {
+    
+
+    PositionAPI.getAll()
+      .then((res) => {
+        this.$dropdownData.position.data = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    DepartmentAPI.getAll()
+      .then((res) => {
+        this.$dropdownData.department.data = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     document.addEventListener("click", this.close);
   },
   props: {
@@ -88,6 +110,7 @@ export default {
       select: null,
       options: null,
       dropdownName: null,
+      data: this.$dropdownData,
       selector: {
         name: "",
         value: "",
@@ -115,21 +138,34 @@ export default {
             this.select = this.$dropdownData.workStatus.select;
             this.dropdownName = "Tình trạng công việc";
             break;
-          case this.$dropdownData.departmentDropdown:
-            this.options = this.$dropdownData.department.data;
-            this.select = this.$dropdownData.department.select;
-            this.dropdownName = "Phòng ban";
-            break;
-          case this.$dropdownData.positionDropdown:
-            this.options = this.$dropdownData.position.data;
-            this.select = this.$dropdownData.position.select;
-            this.dropdownName = "Vị trí";
-            break;
+          
 
           default:
             break;
         }
       },
+    },
+    data:{
+        deep: true,
+        handler(){
+          switch (this.dropdown) {
+            case this.$dropdownData.departmentDropdown:
+            // debugger
+            this.options = this.$dropdownData.department.data;
+            this.select = this.$dropdownData.department.select;
+            this.dropdownName = "Phòng ban";
+            break;
+          case this.$dropdownData.positionDropdown:
+            // debugger
+            this.options = this.$dropdownData.position.data;
+            this.select = this.$dropdownData.position.select;
+            this.dropdownName = "Vị trí";
+            break;
+          
+            default:
+              break;
+          }
+        }
     },
     optionDefault: {
       immediate: true,

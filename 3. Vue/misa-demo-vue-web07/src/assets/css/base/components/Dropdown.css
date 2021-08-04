@@ -1,4 +1,4 @@
-@import url('../Color.css');
+/* @import url('../Color.css'); */
 
 /* Dropdown */
 .dropdown {
@@ -57,9 +57,6 @@
 			background-color: var(--color-secondary-hover);
 			color: var(--color-content-text);
 		}
-		/* .dropdown__content .dropdown__option:hover> .icon {
-			color: var(--color-secondary-hover);
-		} */
 
 		.dropdown__content .dropdown__option .icon {
 			position: absolute;

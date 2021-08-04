@@ -1,4 +1,4 @@
-@import url('../Color.css');
+/* @import url('../Color.css'); */
 
 /* Phần Header  */
 .header {
@@ -8,23 +8,22 @@
 }
 
     /* Phần Logo */
-    .header .header--left {
+    .header .header__left {
         width: 220px;
         height: 48px;
-        border-right: 1px solid var(--color-hightlight);
-        display: flex;
+        border-right: 1px solid var(--color-gray);
         align-items: center;
         transition: 0.2s all ease-in-out;
     }
 
     /* Thu nhỏ Header Left */
-    .header--left-shrink {
+    .header__left-shrink {
         width: 64px !important;
         justify-content: space-evenly;
     }
 
-    .header .header--left .header__toggle {
-        width: 24px;
+    .header .header__left .header__toggle {
+        width: 31px;
         height: 24px;
         margin: 12px 10px 12px 16px;
         background-image: url('../../../img/toggle.png');
@@ -38,7 +37,7 @@
         margin: 12px 16px 12px 16px !important;
     }
 
-    .header .header--left .header__logo {
+    .header .header__left .header__logo {
         height: 24px;
         width: 100%;
         background-image: url('../../../img/cukcuk-logo.png');
@@ -49,24 +48,18 @@
 
     /* Phần Main Header */
 
-    .header .header--right {
+    .header .header__right {
         width: calc(100% - 225px);
-        padding: 0 16px;
-        border-bottom: 1px solid var(--color-hightlight);
-        display: flex;
+        border-bottom: 1px solid var(--color-gray);
         align-items: center;
         justify-content: space-between;
         transition: 0.2s all ease-in-out;
     }
     /* Kéo giãn Header Right khi Menu thu nhỏ */
-    .header--right-extend {
+    .header__right-extend {
         width: calc(100% - 64px) !important;
     }
-
-        .header .header--right .header__title {
-            display: flex;
-        }
-        .header .header--right .header__title .header-icon {
+        .header .header__right .header__title .header-icon {
             align-items: center;
             padding: 10px 10px;
             background: #e5e5e5;
@@ -74,17 +67,6 @@
             border-radius: 8px;
             margin-left: 8px;
         }
-            .header .header--right .header__title .dropdown {
-                width: auto;
-            }
-
-                .header .header--right .header__title .dropdown .dropdown__button {
-                    border-color: transparent;
-                }
-
-                    .header .header--right .header__title .dropdown .dropdown__button:focus {
-                        border-color: var(--color-primary);
-                    }
 
     /* Phần Title */
     .header__title .dropdown__title {
@@ -94,7 +76,6 @@
 
     /* Phần User */
     .header__user {
-        display: flex;
         align-items: center;
     }
 
@@ -111,11 +92,9 @@
             width: 32px;
             height: 32px;
             background-image: url('../../../icon/avatar-default.png');
-            margin-right: 16px;
         }
 
         .header__user .header__user-option {
             background-image: url('../../../icon/option.png');
-            margin-left: 16px;
         }
     

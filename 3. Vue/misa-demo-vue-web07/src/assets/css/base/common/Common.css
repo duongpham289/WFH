@@ -1,0 +1,160 @@
+:root {
+    --color-primary: #019160;
+    --color-primary-active: #01B075;
+    --color-primary-hover: #2FBE8E;
+    --color-primary-focus: #EBF9F4;
+    --color-secondary: #E5E5E5;
+    --color-secondary-hover: #E9EBEE;
+    --color-content-text: #454545;
+    --color-alert: #F65454;
+    --color-alert-hover: #f5263a;
+    --color-info: #2971cf;
+    --color-black: #000000;
+    --color-warning: #eac926;
+    --color-gray: #BBB;
+    --color-white: #FFFFFF;
+}
+
+.border-active {
+    border: 1px solid var(--color-primary-active) !important;
+}
+
+.border-primary {
+    border: 1px solid var(--color-primary) !important;
+}
+
+.border-red {
+    border: 1px solid var(--color-alert) !important;
+}
+
+.active {
+    background: var(--color-primary) !important;
+    color: var(--color-white);
+}
+
+.text-black {
+    color: var(--color-black) !important;
+}
+
+.text-gray {
+    color: var(--color-gray) !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.mr-4 {
+    margin-right: 16px !important;
+}
+
+.ml-4 {
+    margin-left: 16px !important;
+}
+
+.mt-4 {
+    margin-top: 16px !important;
+}
+
+.mb-4 {
+    margin-bottom: 16px !important;
+}
+
+.mx-4{
+    margin: 0 16px;
+}
+.my-4{
+    margin: 16px 0;
+}
+
+.mr-6 {
+    margin-right: 24px !important;
+}
+
+.ml-6 {
+    margin-left: 24px !important;
+}
+
+.mt-6 {
+    margin-top: 24px !important;
+}
+
+.mb-6 {
+    margin-bottom: 24px !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.px-4 {
+    padding: 0 16px !important;
+}
+
+.py-4 {
+    padding: 16px 0 !important;
+}
+
+.px-6 {
+    padding: 0 24px !important;
+}
+
+.py-6 {
+    padding: 24px 0 !important;
+}
+
+.pl-12 {
+    padding-left: 40px !important;
+}
+
+.pr-12 {
+    padding-right: 40px !important;
+}
+
+.gap-4 {
+    gap: 16px !important;
+}
+
+.ml-auto {
+    margin-left: auto !important;
+}
+
+.mr-auto {
+    margin-right: auto !important;
+}
+
+.mx-auto {
+    margin: 0 auto !important;
+}
+
+.my-auto {
+    margin: auto 0 !important;
+}
+
+.--block {
+    display: block !important;
+}
+
+.--hidden {
+    display: none !important;
+}
+
+.--flex {
+    display: flex !important;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}

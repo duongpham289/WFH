@@ -101,15 +101,27 @@
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column .text--right{
                             text-align-last: right;
                         }
-                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .dx-widget input{
-                            
-                            font-family: GoogleSans-Italic;
-                        }
-                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .model__text{
+                        .modal__container .modal .modal__content .modal__general-info .info-row .info-column .modal__text{
                             font-family: GoogleSans-Medium;
                             margin-bottom: 4px;
+                            display: block;
                         }
-
+                        .modal__field-input::placeholder {
+                            font-size: 12px;
+                            color: #bbb;
+                        }
+                        
+                        .modal__field-input:focus {
+                            font-size: 13px;
+                            color: #000;
+                            outline: none;
+                            border: 1px solid #019160;
+                        
+                        }
+                        
+                        .modal__field-input:focus::placeholder {
+                            color: transparent;
+                        }
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column input {
                             padding: 0 16px;
                             width: 100%;

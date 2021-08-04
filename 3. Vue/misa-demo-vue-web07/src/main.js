@@ -21,11 +21,15 @@ import {
 import {
   BaseDropdown
 } from "./components/base/dropdown";
+import {
+  BaseInput
+} from "./components/base/input";
 
 Vue.component("base-table", BaseTable);
 Vue.component("base-pagination", BasePagination);
 Vue.component("combo-box", BaseCombobox);
 Vue.component("base-dropdown", BaseDropdown);
+Vue.component("base-input", BaseInput);
 
 Vue.prototype.$api = axios;
 Vue.prototype.$enum = Enum;

@@ -42,6 +42,7 @@
             <label>
               <input
                 type="text"
+                class=""
                 placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
               />
             </label>
@@ -106,6 +107,7 @@
       v-bind:employeeId="employeeId"
       v-bind:mode="modeFormDetail"
       @btnAddOnClick="btnAddOnClick"
+      @btnReloadOnClick="btnReloadOnClick"
     />
     <PopupMessage
       :isHidden="isHiddenPopupMessage"
@@ -117,7 +119,7 @@
 
 <script>
 // import axios from "axios";
-const $ = require("jquery");
+// const $ = require("jquery");
 
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
 // import PositionAPI from "@/api/components/PositionAPI.js";
@@ -154,7 +156,8 @@ export default {
      * Author: PHDUONG(30/07/2021)
      */
     btnReloadOnClick() {
-      $("tbody").empty();
+      // $("tbody").empty();
+      // debugger
       this.data = [];
     },
 

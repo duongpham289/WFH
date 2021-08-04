@@ -1,10 +1,10 @@
-@import url('../Color.css');
+/* @import url('../Color.css'); */
 
 /* Phần Menu  */
 .menu {
     width: 220px;
     height: calc(100vh - 49px);
-    border-right: 1px solid var(--color-hightlight);
+    border-right: 1px solid var(--color-gray);
     transition: 0.3s all ease-in-out;
 }
 

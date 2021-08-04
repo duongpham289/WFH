@@ -27,6 +27,7 @@ class DataFormatter{
 
     static formatInput = (input,type) =>{
         if (type == 'salary') {
+            debugger
             $(input).val(function (index, value) {
                 return 'VND ' + value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             });

@@ -1,0 +1,15 @@
+@import url("../base/components/Table.css");
+@import url("../base/components/PopupMessage.css");
+@import url("../base/components/Pagination.css");
+@import url("../base/components/Modal.css");
+@import url("../base/components/FieldInput.css");
+@import url("../base/components/Dropdown.css");
+@import url("../base/components/Combobox.css");
+@import url("../base/components/Button.css");
+@import url("../base/components/Icon.css");
+@import url("../base/components/Alert.css");
+@import url("../base/layouts/Content.css");
+@import url("../base/layouts/Menu.css");
+@import url("../base/layouts/Header.css");
+@import url("../base/layouts/Main.css");
+@import url("../page/Employee.css");
