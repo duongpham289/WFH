@@ -10,7 +10,7 @@
 
       <div class="content__header">
         <div class="content__header header__title">Danh sách nhân viên</div>
-        <div class="button__container">
+        <div class="button__container ">
           <div
             class="button--primary"
             id="button__delete-employee"
@@ -37,16 +37,17 @@
                 -->
       <div class="content__filter">
         <div class="content__filter--left">
-          <div class="field-input--icon">
-            <div class="icon-default -search"></div>
-            <label>
-              <input
-                type="text"
-                class=""
-                placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
-              />
-            </label>
-          </div>
+          <base-input
+            :iconLeft="true"
+            id=""
+            value=""
+            placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
+            style="width: 350px"
+          >
+            <template v-slot:icon>
+              <img src="../../assets/icon/search.png" alt="search" />
+            </template>
+          </base-input>
           <div class="combobox">
             <input
               type="text"
@@ -100,7 +101,7 @@
           @checkBoxOnClick="checkBoxOnClick"
         />
       </div>
-      <base-pagination/>
+      <base-pagination />
     </div>
     <EmployeeDetailDialog
       v-bind:isHidden="isHiddenDialogDetail"
@@ -150,6 +151,7 @@ export default {
     btnAddOnClick(isHidden) {
       this.isHiddenDialogDetail = isHidden;
       this.modeFormDetail = 0;
+      this.employeeId = "";
     },
     /**
      * Reload bảng dữ liệu sau khi xóa

@@ -19,6 +19,7 @@
     /* Table Header */
     .content__table .table__header th {
         position: sticky;
+        padding: 0 0 0 10px;
         top: 0;
         left: 0;
         background-color: var(--color-white);
@@ -26,8 +27,8 @@
     }
 
     .content__table tr {
-        height: 40px;
-        border-bottom: 1px solid var(--color-hightlight);
+        height: 48px;
+        border-bottom: 1px solid var(--color-gray);
     }
 
     /* Table Body */
@@ -46,7 +47,7 @@
         height: 24px;
         border-radius: 4px;
         overflow: hidden;
-        border: 0.1px solid var(--color-hightlight);
+        border: 0.1px solid var(--color-gray);
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -76,7 +77,7 @@
         }
 
         .content__table tbody .delete-box:hover input ~ .checkmark {
-        background-color: var(--color-hightlight);
+        background-color: var(--color-gray);
         }
 
         .content__table tbody .delete-box input:checked ~ .checkmark {
@@ -98,7 +99,7 @@
             top: 3px;
             width: 5px;
             height: 10px;
-            border: solid white;
+            border: solid var(--color-white);
             border-width: 0 3px 3px 0;
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
@@ -112,7 +113,7 @@
         text-overflow: ellipsis;
         cursor: default;
         white-space: nowrap;
-        padding-right: 24px;
+        padding: 0 0 0 10px;
     }
 
     .content__table td:nth-child() {
@@ -121,7 +122,7 @@
     }
 
     .content__table td:first-child {
-        padding-left: 25px;
+        padding: 0 0 0 16px;
     }
 
 

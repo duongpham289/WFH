@@ -21,7 +21,7 @@
       >
         <span
           class="icon"
-          :class="selector.value == item[select.value] ? '--show' : ''"
+          :class="selector.value == item[select.value] ? '--block' : ''"
         >
           <i class="fas fa-check"></i>
         </span>

@@ -9,6 +9,7 @@
 
     /* Phần Logo */
     .header .header__left {
+        display: flex;
         width: 220px;
         height: 48px;
         border-right: 1px solid var(--color-gray);
@@ -49,6 +50,8 @@
     /* Phần Main Header */
 
     .header .header__right {
+        display: flex;
+        padding: 0 16px;
         width: calc(100% - 225px);
         border-bottom: 1px solid var(--color-gray);
         align-items: center;
@@ -59,6 +62,9 @@
     .header__right-extend {
         width: calc(100% - 64px) !important;
     }
+        .header .header__right .header__title{
+            display: flex;
+        }
         .header .header__right .header__title .header-icon {
             align-items: center;
             padding: 10px 10px;
@@ -69,13 +75,18 @@
         }
 
     /* Phần Title */
+    .header__title .dropdown__button {
+        border: none;
+    }
     .header__title .dropdown__title {
+        /* display: flex; */
         font-weight: bold;
         font-size: 15px;
     }
 
     /* Phần User */
     .header__user {
+        display: flex;
         align-items: center;
     }
 

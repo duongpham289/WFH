@@ -18,7 +18,7 @@
         margin: auto;
         width: 45%;
         padding: 24px 24px 0!important;
-        background-color: #ffffff;
+        background-color: var(--color-white);
         border-radius: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         animation-name: animatetop;
@@ -82,7 +82,7 @@
                 }
 
                     .modal__container .modal .modal__content .modal__general-info .info-title .title-layout {
-                        background-color: #019160;
+                        background-color: var(--color-primary);
                         height: 4px;
                         width: 85px;
                         margin-top: 8px;
@@ -108,14 +108,14 @@
                         }
                         .modal__field-input::placeholder {
                             font-size: 12px;
-                            color: #bbb;
+                            color: var(--color-gray);
                         }
                         
                         .modal__field-input:focus {
                             font-size: 13px;
-                            color: #000;
+                            color: var(--color-black);
                             outline: none;
-                            border: 1px solid #019160;
+                            border: 1px solid var(--color-primary);
                         
                         }
                         
@@ -133,7 +133,7 @@
             display: flex;
             margin: 0 -24px;
             justify-content: flex-end;
-            background-color: #bbb;
+            background-color: var(--color-gray);
             height: 60px;
             margin: -24px;
             margin-top: 24px;

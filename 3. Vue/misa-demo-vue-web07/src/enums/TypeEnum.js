@@ -1,5 +1,7 @@
 export default {
-    date: "date",
-    money: "money",
-    work: "work"
+    DATE: "date",
+    MONEY: "money",
+    WORK: "work",
+    TEXT: "text",
+    NUMBER: "number"
 }

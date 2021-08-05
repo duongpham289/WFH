@@ -1,5 +1,7 @@
 export const columns = [{
-    id: "EmployeeId"
+    id: "EmployeeId",
+    label:"#",
+    name: null
   },
   {
     label: "Mã nhân viên",
@@ -49,7 +51,7 @@ export const columns = [{
     className: "text text--left",
   },
   {
-    label: "Mức lức cơ bản",
+    label: "Mức lương cơ bản",
     name: "Salary",
     className: "text text--right",
     format: "money",

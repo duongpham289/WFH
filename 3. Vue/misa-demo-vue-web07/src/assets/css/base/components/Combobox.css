@@ -7,7 +7,7 @@
     /* Input part */
     .combobox .combobox__input{
         height: 40px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--color-gray);
         border-radius: 4px;
         min-width: 75px;
         outline: none;
@@ -17,14 +17,14 @@
 
         .combobox .combobox__input::placeholder{
             font-size: 11px;
-            color: #bbb;
+            color: var(--color-gray);
         }
         /* Những sự kiện khi input được focus */
         .combobox .combobox__input:focus{
             font-size: 13px;
-            color: #000;
+            color: var(--color-black);
             outline: none;
-            border: 1px solid #019160;
+            border: 1px solid var(--color-primary);
         }
 
             .combobox .combobox__input:focus+.combobox__button>.icon{
@@ -32,7 +32,7 @@
             }
 
             .combobox .combobox__input:focus+.combobox__btn{
-                background-color: #e5e5e5;
+                background-color: var(--color-secondary);
             }
 
             .combobox .combobox__input:focus::placeholder{
@@ -42,8 +42,8 @@
     /* Button Part */
     .combobox .combobox__button{
         position: absolute;
-        background-color: #fff;
-        border: 1px solid #bbb;
+        background-color: var(--color-white);
+        border: 1px solid var(--color-gray);
         border-radius: 0 4px 4px 0;
         right: 0;
         width: 40px;
@@ -51,11 +51,11 @@
     }
 
         .combobox .combobox__button:hover{
-            background-color: #E9EBEE;
+            background-color: var(--color-secondary-hover);
             outline: none;
         }
         .combobox .combobox__button:focus{
-            background-color: #e5e5e5;
+            background-color: var(--color-secondary);
             outline: none;
         }
 
@@ -69,7 +69,7 @@
         display: none;
         position: absolute;
         width: 100%;
-        background: #fff;
+        background: var(--color-white);
         padding: 4px 0;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         z-index: 999;
@@ -83,11 +83,11 @@
 
         .combobox .combobox__data .combobox__item .icon {
             padding: 0 10px;
-            color: #fff;
+            color: var(--color-white);
         }
 
         .combobox .combobox__data .combobox__item:hover {
-            background: #e9ebee;
+            background: var(--color-secondary-hover);
             cursor: pointer;
         }
 

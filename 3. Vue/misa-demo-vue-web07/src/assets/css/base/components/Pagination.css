@@ -1,11 +1,3 @@
-/* Content Footer */
-.content__footer {
-	width: 100%;
-	height: 48px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
 	/* Paginate */
 	.content__footer .pagination {
 		width: 20%;

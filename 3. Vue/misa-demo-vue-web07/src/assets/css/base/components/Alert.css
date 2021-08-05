@@ -6,7 +6,7 @@
 	top: -70%;
 	transform: translate(-50%, 0);
 	max-width: 50%;
-	background-color: var(--color-alert);
+	background-color: var(--color-required);
 	padding: 12px 16px;
 	border-radius: 16px;
 	z-index: 6;
@@ -21,12 +21,12 @@
 	width: 0;
 	height: 0;
 	border: 20px solid transparent;
-	border-top-color: var(--color-alert);
+	border-top-color: var(--color-required);
 	border-bottom: 0;
 	margin-left: -20px;
 	margin-bottom: -20px;
 }
 
 .input--alert {
-    border: 1px solid var(--color-alert);
+    border: 1px solid var(--color-required);
 }

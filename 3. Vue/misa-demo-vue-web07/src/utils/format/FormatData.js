@@ -24,10 +24,40 @@ export default class FormatData {
         return num < 10 ? '0' + num : num
     };
 
-    static formatSalary = (input) => {
+    static formatSalary(val) {
+        let vm = this;
+        var num = vm.getNumber(val);
+        if (num == 0) {
+          return  val = "";
+        } else {
+           return val = num.toLocaleString()
+        }
+    }
+    static getNumber(_str) {
         // debugger
-        return input.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/^0+/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
+        if (_str) {
+            var arr = _str.split('');
+            var out = new Array();
+            for (var cnt = 0; cnt < arr.length; cnt++) {
+                if (isNaN(arr[cnt]) == false) {
+                    out.push(arr[cnt]);
+                }
+            }
+            return Number(out.join(''));
+        }
+        return "";
+
+    }
+
+    // static formatSalary = (input) => {
+    //     // debugger
+    //     if (input) {
+    //         // debugger
+    //         return input.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/^0+/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    //     }
+    //     return "";
+
+    // };
 
     /**
      * Định dạng tiền tệ

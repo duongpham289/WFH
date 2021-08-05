@@ -65,14 +65,14 @@ export default {
     formatText(col, item) {
       let tmp = item;
 
-      if (col.format === this.$enum.date) {
+      if (col.format === this.$enum.DATE) {
         tmp = FormatData.formatDate(tmp,false);
       }
 
-      if (col.format === this.$enum.money) {
+      if (col.format === this.$enum.MONEY) {
         tmp = FormatData.formatMoney(tmp);
       }
-      if (col.format === this.$enum.work) {
+      if (col.format === this.$enum.WORK) {
         tmp = FormatData.formatWorkStatus(tmp);
       }
 
