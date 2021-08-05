@@ -51,6 +51,7 @@ export default {
     rowOnDblClick(id) {
       this.$emit("rowOnDblClick", id);
     },
+    
     /**
      * Check box hiển thị khi nhấn
      * Author: PHDUONG(3/8/2021)
@@ -58,6 +59,7 @@ export default {
     checkBoxOnClick(id, event) {
       this.$emit("checkBoxOnClick", id, event);
     },
+
     /**
      * Format dữ liệu trước khi gắn dữ liệu vào bảng
      * Author: PHDUONG(3/8/2021)
@@ -70,7 +72,7 @@ export default {
       }
 
       if (col.format === this.$enum.MONEY) {
-        tmp = FormatData.formatMoney(tmp);
+        tmp = FormatData.formatMoneyOnTable(tmp);
       }
       if (col.format === this.$enum.WORK) {
         tmp = FormatData.formatWorkStatus(tmp);

@@ -119,8 +119,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-// const $ = require("jquery");
 
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
 // import PositionAPI from "@/api/components/PositionAPI.js";
@@ -144,6 +142,8 @@ export default {
       });
   },
   methods: {
+    //#region Phương thức xử lí dữ liệu
+
     /**
      * Hiển thị form chi tiết khi ấn button thêm nhân viên
      * Author: PHDUONG(29/07/2021)
@@ -153,6 +153,7 @@ export default {
       this.modeFormDetail = 0;
       this.employeeId = "";
     },
+
     /**
      * Reload bảng dữ liệu sau khi xóa
      * Author: PHDUONG(30/07/2021)
@@ -172,6 +173,7 @@ export default {
       this.employeeId = empId;
       this.modeFormDetail = 1;
     },
+
     /**
      * Hiển thị message chắc chắn xóa
      * Author: PHDUONG(31/07/2021)
@@ -197,6 +199,7 @@ export default {
         );
       }
     },
+    //#endregion
   },
   watch: {
     /**

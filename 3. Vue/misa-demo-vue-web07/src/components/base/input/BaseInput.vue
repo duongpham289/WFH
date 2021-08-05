@@ -6,12 +6,13 @@
         (<span class="required-input">*</span>)
       </span>
     </label>
-    <div class="input-group">
+    <div class="field-input">
       <input
         class="input"
         :class="[
           { 'pl-12': iconLeft === true },
           { 'pr-12': iconRight === true },
+          { 'input--alert': errorMsg && required },
           classes,
         ]"
         :type="type"
@@ -19,6 +20,15 @@
         :value="valueClone"
         @input="onChangeInput"
       />
+      <div class="float--alert" v-if="validateRequired && dirty && required">
+        Thông tin bắt buộc nhập
+      </div>
+      <div
+        class="float--alert"
+        v-if="validateEmail && dirty && required && type == 'email'"
+      >
+        Thông tin sai định dạng
+      </div>
       <div class="icon-left" v-if="iconLeft">
         <slot name="icon"></slot>
       </div>
@@ -30,21 +40,31 @@
 </template>
 
 <script>
-
 import FormatData from "@/utils/format/FormatData.js";
 
 export default {
-  name:"base-input",
+  name: "base-input",
 
   //#region props
   props: {
+    validateRequired: {
+      type: Boolean,
+    },
+    validateEmail: {
+      type: Boolean,
+    },
+    dirty: {
+      type: Boolean,
+    },
+    errorMsg: {
+      type: Boolean,
+    },
     id: {
       type: String,
       required: true,
     },
     value: {
-      type: [String,Number],
-      required: true,
+      type: [String, Number],
       default: "",
     },
     type: {
@@ -57,7 +77,6 @@ export default {
     },
     label: {
       type: String,
-      
     },
     placeholder: {
       type: String,
@@ -79,7 +98,7 @@ export default {
     },
   },
   //#endregion
-  
+
   emits: ["handle-input"],
 
   data() {
@@ -87,39 +106,43 @@ export default {
   },
 
   watch: {
+    /**
+     * Định dạng dữ liệu mỗi khi ô input thay đổi dữ liệu
+     * Author: PHDUONG(05/08/2021)
+     */
     value(newVal) {
-      debugger
       this.valueClone = this.formatData(this.type, newVal);
     },
   },
 
   methods: {
-    /*
-      Xử lý thay đổi dữ liệu
-    */
+    /**
+     * Xử lý thay đổi dữ liệu
+     * Author: PHDUONG(05/08/2021)
+     */
     onChangeInput(event) {
       let tmp = event.target.value;
-      // debugger
 
       if (this.format === this.$enum.MONEY) {
-        event.target.value = FormatData.formatSalary(event.target.value);
-        this.valueClone = FormatData.formatSalary(event.target.value);
+        event.target.value = FormatData.formatMoneyOnModal(event.target.value);
+        this.$emit("handle-input", {
+          id: this.id,
+          value: parseInt(tmp),
+        });
+      } else {
+        this.$emit("handle-input", { id: this.id, value: tmp });
       }
-
-      this.$emit("handle-input", { id: this.id, value: parseInt(tmp.replaceAll(".","")) });
     },
-
-    /*
-      định dạng dữ liệu
-    */
+    /**
+     * Định dạng dữ liệu chung
+     * Author: PHDUONG(05/08/2021)
+     */
     formatData(type, value) {
       if (type === this.$enum.DATE) {
         return FormatData.formatDate(value, true);
       }
-
       if (this.format === this.$enum.MONEY) {
-        // debugger
-        return FormatData.formatSalary(value);
+        return FormatData.formatMoneyOnModal(value);
       }
 
       return value;

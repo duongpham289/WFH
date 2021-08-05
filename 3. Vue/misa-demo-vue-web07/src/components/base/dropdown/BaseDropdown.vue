@@ -39,7 +39,6 @@ import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 export default {
   mounted() {
     
-
     PositionAPI.getAll()
       .then((res) => {
         this.$dropdownData.position.data = res.data;
