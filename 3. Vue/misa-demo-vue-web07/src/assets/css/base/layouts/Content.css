@@ -6,6 +6,7 @@
 	top: 49px;
 	left: 221px;
 	padding: 16px;
+    background-color: var(--color-secondary-hover);
 	transition: 0.2s all ease-in-out;
 }
 /* Mở rộng khi Menu thu nhỏ */

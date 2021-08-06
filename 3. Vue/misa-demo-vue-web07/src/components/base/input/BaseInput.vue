@@ -12,7 +12,7 @@
         :class="[
           { 'pl-12': iconLeft === true },
           { 'pr-12': iconRight === true },
-          { 'input--alert': errorMsg && required },
+          { 'input--alert': errorMsg },
           classes,
         ]"
         :type="type"
@@ -20,13 +20,10 @@
         :value="valueClone"
         @input="onChangeInput"
       />
-      <div class="float--alert" v-if="validateRequired && dirty && required">
+      <div class="float--alert" v-if="validateRequired && dirty">
         Thông tin bắt buộc nhập
       </div>
-      <div
-        class="float--alert"
-        v-if="validateEmail && dirty && required && type == 'email'"
-      >
+      <div class="float--alert" v-if="validateEmail && dirty">
         Thông tin sai định dạng
       </div>
       <div class="icon-left" v-if="iconLeft">
@@ -45,7 +42,7 @@ import FormatData from "@/utils/format/FormatData.js";
 export default {
   name: "base-input",
 
-  //#region props
+  // #region props
   props: {
     validateRequired: {
       type: Boolean,

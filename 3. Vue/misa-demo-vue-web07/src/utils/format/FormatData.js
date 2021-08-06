@@ -5,10 +5,9 @@ export default class FormatData {
      * @param {*} dob dữ liệu ngày sinh
      * CreatedBy: PHDUONG (19/07/2021)
      */
-    static formatDate = (str, onModal) => {
+    static formatDate(str, onModal) {
         let vm = this;
-        if (!str) return '';
-        if (str.length === 0) return '';
+        if (!str || str.length === 0) return '';
         var date = new Date(str);
         return onModal ?
             vm.dateNum(date.getFullYear()) + '-' + vm.dateNum(date.getMonth() + 1) + '-' + vm.dateNum(date.getDate()) :
@@ -86,9 +85,8 @@ export default class FormatData {
      * @returns Tình trạng công việc dạng strinng
      * CreatedBy: PHDUONG (19/07/2021)
      */
-    static formatWorkStatus = (workStatus) => {
-        if (!workStatus) return '';
-        if (workStatus.length === 0) return '';
+    static formatWorkStatus(workStatus){
+        if (workStatus === null || workStatus.length === 0) return '';
         var works = ["Đang làm việc", "Đang thử việc", "Đã nghỉ việc", "Đã nghỉ hưu"]
         if (workStatus < 4) { //workStatus 5 6 chưa biết
             return workStatus = works[workStatus];

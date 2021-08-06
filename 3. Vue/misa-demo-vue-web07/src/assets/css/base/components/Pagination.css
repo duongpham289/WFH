@@ -7,6 +7,11 @@
 	}
 		/* Button paginate */
 		.content__footer .pagination .pagination__button {
+			border-radius: 4px;
+			padding: 5px;
+		}
+		.content__footer .pagination .pagination__button:hover{
+			background-color: var(--color-white);
 			cursor: pointer;
 		}
 
@@ -14,7 +19,8 @@
 			width: 32px;
 			height: 32px;
 			border-radius: 50%;
-			background-color: var(--color-secondary);
+			background-color: var(--color-secondary-hover);
+			border: 1px solid var(--color-gray);
 			display: flex;
 			align-items: center;
 			justify-content: space-evenly;
@@ -23,7 +29,8 @@
 		}
 
 		.content__footer .pagination .pagination__number:hover {
-			background-color: var(--color-secondary-hover);
+			background-color: var(--color-white);
+			border: transparent;
 		}
 
 		.active {
@@ -33,6 +40,11 @@
 
 		@media screen and (max-width: 1280px) {
 			.content__footer .pagination {
-				width: 40%;
+				width: 40% !important;
+			}
+		}
+		@media screen and (max-width: 1530px) {
+			.content__footer .pagination {
+				width: 25%;
 			}
 		}

@@ -16,7 +16,7 @@
       >
         <td>
           <div class="delete-box">
-            <input type="checkbox" @click="checkBoxOnClick(item[columns[0].id], $event)" />
+            <input class="checkbox" type="checkbox" @click="checkBoxOnClick(item[columns[0].id],item[columns[1].name], $event)" />
             <span class="checkmark"></span>
           </div>
         </td>
@@ -56,8 +56,8 @@ export default {
      * Check box hiển thị khi nhấn
      * Author: PHDUONG(3/8/2021)
      */
-    checkBoxOnClick(id, event) {
-      this.$emit("checkBoxOnClick", id, event);
+    checkBoxOnClick(id, name, event) {
+      this.$emit("checkBoxOnClick", id, name, event);
     },
 
     /**

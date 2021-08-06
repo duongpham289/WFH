@@ -76,7 +76,7 @@
 
     /* Phần Title */
     .header__title .dropdown__button {
-        border: none;
+        border: 1px solid var(--color-white);
     }
     .header__title .dropdown__title {
         /* display: flex; */

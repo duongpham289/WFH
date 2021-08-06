@@ -10,7 +10,7 @@
 
       <div class="content__header">
         <div class="content__header header__title">Danh sách nhân viên</div>
-        <div class="button__container ">
+        <div class="button__container">
           <div
             class="button--primary"
             id="button__delete-employee"
@@ -96,7 +96,7 @@
       <div class="content__table-container table__employee">
         <base-table
           :columns="columns"
-          :data="data"
+          :data="employeesData"
           @rowOnDblClick="rowOnDblClick"
           @checkBoxOnClick="checkBoxOnClick"
         />
@@ -119,13 +119,14 @@
 </template>
 
 <script>
-
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
 // import PositionAPI from "@/api/components/PositionAPI.js";
 // import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
 import { columns } from "@/view/employee/EmployeeTableCols.js";
+
+const $ = require("jquery");
 
 export default {
   name: "EmployeePage",
@@ -135,7 +136,7 @@ export default {
 
     EmployeesAPI.getAll()
       .then((res) => {
-        vm.data = res.data;
+        vm.employeesData = res.data;
       })
       .catch((err) => {
         console.log(err);
@@ -159,9 +160,10 @@ export default {
      * Author: PHDUONG(30/07/2021)
      */
     btnReloadOnClick() {
-      // $("tbody").empty();
-      // debugger
-      this.data = [];
+      
+      $('.checkbox').prop('checked', false);
+      this.employeesToDelete =[]
+      this.employeesData = [];
     },
 
     /**
@@ -189,14 +191,15 @@ export default {
      * Hiển thị button delete và checkbox
      * Author: PHDUONG(29/07/2021)
      */
-    checkBoxOnClick(employeeId, event) {
-      if (event.target.checked) {
-        this.employeesToDelete.push(employeeId);
+    checkBoxOnClick(employeeId, employeeCode, event) {
+      // debugger
+      event.target.setAttribute("checked", event.target.checked);
+
+      if (event.target.getAttribute("checked") === "true") {
+        this.employeesToDelete.push({id:employeeId, code:employeeCode});
       } else {
-        this.employeesToDelete.splice(
-          this.employeesToDelete.indexOf(employeeId),
-          1
-        );
+        var removeIndex = this.employeesToDelete.map(function(item) { return item.id; }).indexOf(employeeId);
+        this.employeesToDelete.splice(removeIndex, 1);
       }
     },
     //#endregion
@@ -206,13 +209,13 @@ export default {
      * Reload bảng khi dữ liệu thay đổi
      * Author: PHDUONG(31/07/2021)
      */
-    data() {
+    employeesData() {
       var vm = this;
       //gọi Api lấy dữ liệu
 
       EmployeesAPI.getAll()
         .then((res) => {
-          vm.data = res.data;
+          vm.employeesData = res.data;
         })
         .catch((err) => {
           console.log(err);
@@ -221,8 +224,9 @@ export default {
   },
   data() {
     return {
-      data: [],
+      employeesData: [],
       employeeId: "",
+      employeeCode: "",
       employeesToDelete: [],
       isHiddenDialogDetail: true,
       isHiddenPopupMessage: true,

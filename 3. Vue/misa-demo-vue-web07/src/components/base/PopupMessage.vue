@@ -13,8 +13,11 @@
         <div class="popup__icon">
           <i class="fas fa-exclamation-triangle"></i>
         </div>
-        <div class="popup__content">
-          Bạn có chắc muốn xóa (các) nhân viên này hay không?
+        <div class="popup__content" v-if="datasToDelete.length > 1">
+          Bạn có chắc muốn xóa các nhân viên này không?
+        </div>
+        <div class="popup__content" v-if="datasToDelete.length == 1">
+          Bạn có chắc chắn muốn xóa nhân viên có mã {{this.datasToDelete[0].code}} không?
         </div>
       </div>
       <div class="popup__footer">
@@ -36,7 +39,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+
 const $ = require("jquery");
 
 export default {
@@ -57,6 +60,7 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnCancelOnClick() {
+      $('.checkbox').prop('checked', false);
       this.$emit("btnDelOnClick", true);
     },
     /**
@@ -64,6 +68,8 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnDelDataOnClick() {
+      console.log(this.datasToDelete.length);
+      // debugger
       this.datasToDelete.forEach((data) => {
         try {
           this.$api

@@ -124,7 +124,7 @@
                 @handle-input="onChangeInput"
                 :value="$v.employee.Email.$model"
                 :validateRequired="!$v.employee.Email.required"
-                :validateEmail="!$v.employee.PhoneNumber.email"
+                :validateEmail="!$v.employee.Email.email"
                 :dirty="$v.employee.Email.$dirty"
                 :errorMsg="$v.employee.Email.$error"
                 required

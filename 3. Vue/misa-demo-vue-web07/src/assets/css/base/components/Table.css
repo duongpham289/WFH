@@ -28,7 +28,8 @@
 
     .content__table tr {
         height: 48px;
-        border-bottom: 1px solid var(--color-gray);
+        background-color: var(--color-white);
+        border-bottom: 1px solid var(--color-secondary-hover);
     }
 
     /* Table Body */
@@ -43,8 +44,8 @@
     /* Check Box */
     .content__table tbody .delete-box {
         position: relative;
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         border-radius: 4px;
         overflow: hidden;
         border: 0.1px solid var(--color-gray);
@@ -58,8 +59,8 @@
         .content__table tbody .delete-box input {
             position: absolute;
             opacity: 0;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             margin: 0;
             top: 0;
             left: 0;
@@ -71,9 +72,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 24px;
-        width: 24px;
-        background-color: var(--color-secondary-hover);
+        height: 20px;
+        width: 20px;
+        background-color: var(--color-white);
         }
 
         .content__table tbody .delete-box:hover input ~ .checkmark {
@@ -95,8 +96,8 @@
         }
 
         .content__table tbody .delete-box .checkmark:after {
-            left: 8px;
-            top: 3px;
+            left: 5px;
+            top: 1px;
             width: 5px;
             height: 10px;
             border: solid var(--color-white);
@@ -117,8 +118,8 @@
     }
 
     .content__table td:nth-child() {
-        min-width: 100px;
-        max-width: 150px;
+        /* min-width: 100px; */
+        max-width: 100px;
     }
 
     .content__table td:first-child {
@@ -132,7 +133,7 @@
         padding-right: 16px;
     }
 
-    .content__table tr:nth-child(odd) {
+    /* .content__table tr:nth-child(odd) {
         background-color: rgba(229, 229, 229, 0.5);
-    }
+    } */
 
