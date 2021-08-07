@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "CsXb2dMdDmpyV4LLealLyY4vkjJX3bTAusBEeEgWOMuxBCoK1RzB0bnhSBvl+zNnqQNb34+TNFq5EZNGXR2Xuw==",
+  "success": true,
+  "projectFilePath": "D:\\Work\\WFH\\MISA.CukCuk\\MISA.CukCuk.Api\\MISA.CukCuk.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DUONG.PH187315\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512"
+  ],
+  "logs": []
+}
