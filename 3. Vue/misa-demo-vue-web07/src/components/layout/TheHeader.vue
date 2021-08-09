@@ -8,7 +8,8 @@
       <div class="header__title ">
         <div class="header-icon">MB</div>
         <base-dropdown
-          :dropdown="this.$dropdownData.restaurantDropdown"
+          :dropdown="'restaurant'"
+          :defaultState="true"
         />
       </div>
       <div class="header__user">

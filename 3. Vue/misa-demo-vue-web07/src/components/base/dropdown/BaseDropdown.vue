@@ -33,40 +33,21 @@
 
 <script>
 
-import PositionAPI from "@/api/components/PositionAPI.js";
-import DepartmentAPI from "@/api/components/DepartmentAPI.js";
+import DropdownData from "./DropdownData.js"
 
 export default {
   mounted() {
-    
-    PositionAPI.getAll()
-      .then((res) => {
-        this.$dropdownData.position.data = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    DepartmentAPI.getAll()
-      .then((res) => {
-        this.$dropdownData.department.data = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
     document.addEventListener("click", this.close);
   },
   props: {
-    optionDefault: {
-      type: Object,
-      default: () => {},
-    },
-    tabindex: {
-      type: Number,
-    },
     dropdown: {
       type: String,
+      required: true,
+      default: null,
+    },
+    defaultState: {
+      type: Boolean,
       required: true,
       default: null,
     },
@@ -97,7 +78,7 @@ export default {
             name: optionItem[this.select.name],
             value: optionItem[this.select.value],
           };
-          this.$emit("selected", this.selector.value,this.selector.name);
+          this.$emit("selected", this.selector.value, this.selector.name);
         }
         this.open = false;
       }
@@ -109,7 +90,7 @@ export default {
       select: null,
       options: null,
       dropdownName: null,
-      data: this.$dropdownData,
+      dropdownData: DropdownData,
       selector: {
         name: "",
         value: "",
@@ -118,64 +99,80 @@ export default {
   },
 
   watch: {
+    defaultState: function () {
+      if (this.defaultState) {
+        switch (this.dropdown) {
+          case this.$enum.GENDER:
+            this.dropdownName = "Giới tính";
+            this.selector = { name: "", value: "" };
+            break;
+          case this.$enum.WORKSTATUS:
+            this.dropdownName = "Tình trạng công việc";
+            this.selector = { name: "", value: "" };
+            break;
+          case this.$enum.DEPARTMENT:
+            // debugger
+            this.dropdownName = "Phòng ban";
+            this.selector = { name: "", value: "" };
+            break;
+          case this.$enum.POSITION:
+            // debugger
+            this.dropdownName = "Vị trí";
+            this.selector = { name: "", value: "" };
+            break;
+        }
+      }
+    },
     dropdown: {
       immediate: true,
       handler() {
         switch (this.dropdown) {
-          case this.$dropdownData.restaurantDropdown:
-            this.options = this.$dropdownData.restaurant.data;
-            this.select = this.$dropdownData.restaurant.select;
+          case this.$enum.RESTAURANT:
+            // debugger
+            this.options = DropdownData.restaurant.options;
+            this.select = DropdownData.restaurant.select;
             this.dropdownName = "Nhà Hàng Biển Đông";
             break;
-          case this.$dropdownData.genderDropdown:
-            this.options = this.$dropdownData.gender.data;
-            this.select = this.$dropdownData.gender.select;
+          case this.$enum.GENDER:
+            this.options = DropdownData.gender.options;
+            this.select = DropdownData.gender.select;
             this.dropdownName = "Giới tính";
             break;
-          case this.$dropdownData.workStatusDropdown:
-            this.options = this.$dropdownData.workStatus.data;
-            this.select = this.$dropdownData.workStatus.select;
+          case this.$enum.WORKSTATUS:
+            this.options = DropdownData.workStatus.options;
+            this.select = DropdownData.workStatus.select;
             this.dropdownName = "Tình trạng công việc";
             break;
-          
+
 
           default:
             break;
         }
       },
     },
-    data:{
-        deep: true,
-        handler(){
-          switch (this.dropdown) {
-            case this.$dropdownData.departmentDropdown:
-            // debugger
-            this.options = this.$dropdownData.department.data;
-            this.select = this.$dropdownData.department.select;
+    dropdownData: {
+      deep: true,
+      handler() {
+        switch (this.dropdown) {
+          case this.$enum.DEPARTMENT:
+            this.options = DropdownData.department.options;
+            this.select = DropdownData.department.select;
             this.dropdownName = "Phòng ban";
             break;
-          case this.$dropdownData.positionDropdown:
-            // debugger
-            this.options = this.$dropdownData.position.data;
-            this.select = this.$dropdownData.position.select;
+          case this.$enum.POSITION:
+            this.options = DropdownData.position.options;
+            this.select = DropdownData.position.select;
             this.dropdownName = "Vị trí";
             break;
-          
-            default:
-              break;
-          }
+
+          default:
+            break;
         }
-    },
-    optionDefault: {
-      immediate: true,
-      handler() {
-        if (this.optionDefault && this.select && this.options)
-          this.selected(this.optionDefault);
       },
     },
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
   },
-};
+}
 </script>

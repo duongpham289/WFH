@@ -49,7 +49,10 @@
 		margin-left: 8px;
 	}
 
-
+/* Button reload*/
+.button__reload{
+	background-color: var(--color-white);
+}
 
 /* Button Close Popup */
 .button__close{
@@ -70,7 +73,7 @@
 /* Button Cancel */
 .button__cancel {
     margin: 10px 0;
-    width: 100px;
+    /* width: 100px; */
     justify-content: center;
 }
 

@@ -5,6 +5,7 @@ class EmployeeModel {
             FullName: "",
             DateOfBirth: "",
             GenderName: "",
+            Gender: "",
             IdentityNumber: "",
             IdentityDate: "",
             IdentityPlace: "",

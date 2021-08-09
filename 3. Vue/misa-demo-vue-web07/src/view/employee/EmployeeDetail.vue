@@ -70,9 +70,8 @@
               </div>
               <base-dropdown
                 @selected="selectedGender"
-                :tabindex="4"
-                :dropdown="this.$dropdownData.genderDropdown"
-                :optionDefault="employee"
+                :dropdown="this.$enum.GENDER"
+                :defaultState="isHidden"
               />
             </div>
           </div>
@@ -98,7 +97,6 @@
                 type="date"
                 @handle-input="onChangeInput"
                 :value="employee.IdentityDate"
-                
               />
             </div>
           </div>
@@ -155,18 +153,16 @@
               <div class="modal__text"><span>Vị trí</span></div>
               <base-dropdown
                 @selected="selectedPosition"
-                :tabindex="4"
-                :dropdown="this.$dropdownData.positionDropdown"
-                :optionDefault="employee"
+                :dropdown="this.$enum.POSITION"
+                :defaultState="isHidden"
               />
             </div>
             <div class="info-column" id="txtDepartment">
               <div class="modal__text"><span>Phòng ban</span></div>
               <base-dropdown
                 @selected="selectedDepartment"
-                :tabindex="4"
-                :dropdown="this.$dropdownData.departmentDropdown"
-                :optionDefault="employee"
+                :dropdown="this.$enum.DEPARTMENT"
+                :defaultState="isHidden"
               />
             </div>
           </div>
@@ -176,7 +172,7 @@
                 label="Mã số thuế cá nhân"
                 id="PersonalTaxCode"
                 :value="employee.PersonalTaxCode"
-                @handle-input="onChangeInput" 
+                @handle-input="onChangeInput"
                 type="number"
                 placeholder="0123456789"
               />
@@ -213,9 +209,8 @@
               <div class="modal__text"><span>Tình trạng công việc</span></div>
               <base-dropdown
                 @selected="selectedWorkStatus"
-                :tabindex="4"
-                :dropdown="this.$dropdownData.workStatusDropdown"
-                :optionDefault="employee"
+                :dropdown="this.$enum.WORKSTATUS"
+                :defaultState="isHidden"
               />
             </div>
           </div>
@@ -245,7 +240,7 @@
 
 <script>
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
-import { required, numeric, email } from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 import EmployeeModel from "@/models/EmployeeModel.js";
 
 export default {
@@ -256,7 +251,6 @@ export default {
       IdentityNumber: { required },
       Email: { required, email },
       PhoneNumber: { required },
-      PersonalTaxCode: { numeric },
     },
   },
   props: {
@@ -282,7 +276,8 @@ export default {
      */
     btnCancelOnClick() {
       this.$emit("btnAddOnClick", true);
-      // this.employee = "";
+      this.employee = EmployeeModel.initData();
+      
       this.$nextTick(() => {
         this.$v.$reset();
       });
@@ -310,7 +305,7 @@ export default {
      */
     btnSaveOnClick() {
       this.$v.$touch();
-      
+
       if (!this.$v.$invalid) {
         let vm = this;
         if (this.mode == 0) {
@@ -321,19 +316,7 @@ export default {
               alert("Thêm mới thành công");
             })
             .catch((error) => {
-              switch (error.response.data.data["Server Error Code"]) {
-                case 1048:
-                  alert("Họ tên ko được để trống"); // FullName null
-                  break;
-                case 1062:
-                  alert("Mã nhân viên đã tồn tại"); // Trùng key
-                  break;
-                default:
-                  alert(
-                    `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
-                  ); // end up here all the time
-                  break;
-              }
+              console.log(error);
             });
         } else {
           EmployeesAPI.update(vm.employeeId, vm.employee)
@@ -346,56 +329,44 @@ export default {
               alert("Sửa thành công, xin đợi dữ liệu tải lại");
             })
             .catch((error) => {
-              switch (error.response.data.data["Server Error Code"]) {
-                case 1048:
-                  alert("Họ tên ko được để trống"); // FullName null
-                  break;
-                case 1062:
-                  alert("Mã nhân viên đã tồn tại"); // Trùng key
-                  break;
-                default:
-                  alert(
-                    `Đã có lỗi xảy ra, mã lỗi: ${error.response.data.data["Server Error Code"]}, chi tiết lỗi: ${error.response.data.devMsg}`
-                  ); // end up here all the time
-                  break;
-              }
+              console.log(error);
             });
         }
       }
     },
 
     //#region Gắn dữ liệu dropdown
-      /**
-       * Lấy dữ liệu gender
-       * Author: PHDUONG(3/8/2021)
-       */
-      selectedGender(value, name) {
-        this.employee.Gender = +value;
-        this.employee.GenderName = name;
-      },
-      /**
-       * Lấy dữ liệu WorkStatus vào model
-       * Autthor: PHDUONG(3/8/2021)
-       */
-      selectedWorkStatus(value) {
-        this.employee.WorkStatus = +value;
-      },
-      /**
-       * Lấy dữ liệu Department vào model
-       * Autthor: PHDUONG(3/8/2021)
-       */
-      selectedDepartment(value, name) {
-        this.employee.DepartmentId = value;
-        this.employee.DepartmentName = name;
-      },
-      /**
-       * Lấy dữ liệu Position vào model
-       * Autthor: PHDUONG(3/8/2021)
-       */
-      selectedPosition(value, name) {
-        this.employee.PositionId = value;
-        this.employee.PositionName = name;
-      },
+    /**
+     * Lấy dữ liệu gender
+     * Author: PHDUONG(3/8/2021)
+     */
+    selectedGender(value, name) {
+      this.employee.Gender = +value;
+      this.employee.GenderName = name;
+    },
+    /**
+     * Lấy dữ liệu WorkStatus vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedWorkStatus(value) {
+      this.employee.WorkStatus = +value;
+    },
+    /**
+     * Lấy dữ liệu Department vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedDepartment(value, name) {
+      this.employee.DepartmentId = value;
+      this.employee.DepartmentName = name;
+    },
+    /**
+     * Lấy dữ liệu Position vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedPosition(value, name) {
+      this.employee.PositionId = value;
+      this.employee.PositionName = name;
+    },
     //#endregion
   },
   data() {
@@ -405,7 +376,6 @@ export default {
     };
   },
   watch: {
-
     /**
      * Lấy dữ liệu nhân viên từ server theo Id
      * Autthor: PHDUONG(2/8/2021)

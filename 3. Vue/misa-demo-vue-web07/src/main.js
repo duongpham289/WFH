@@ -9,7 +9,7 @@ import 'devextreme/dist/css/dx.light.css';
 import Vuelidate from 'vuelidate'
 
 import Enum from "./enums/TypeEnum.js"
-import DropdownData from "./components/base/dropdown/DropdownData.js"
+
 
 import {
   BaseTable,
@@ -33,7 +33,6 @@ Vue.component("base-input", BaseInput);
 
 Vue.prototype.$api = axios;
 Vue.prototype.$enum = Enum;
-Vue.prototype.$dropdownData = DropdownData;
 
 Vue.use(VueAxios, axios, $);
 Vue.use(Vuelidate);

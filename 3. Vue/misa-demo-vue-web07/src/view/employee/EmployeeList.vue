@@ -48,43 +48,22 @@
               <img src="../../assets/icon/search.png" alt="search" />
             </template>
           </base-input>
-          <div class="combobox">
-            <input
-              type="text"
-              class="combobox__input"
-              placeholder="Tất cả phòng ban"
-            />
-            <button class="combobox__button">
-              <i class="fas fa-chevron-down icon"></i>
-            </button>
-            <div class="combobox__data department-name" value="0">
-              <div class="combobox__item" value="0">
-                <span class="icon"> <i class="fas fa-check"></i></span>Tất cả
-                Phòng ban
-              </div>
-            </div>
-          </div>
-          <div class="combobox">
-            <input
-              type="text"
-              class="combobox__input"
-              placeholder="Tất cả vị trí"
-            />
-            <button class="combobox__button">
-              <i class="fas fa-chevron-down icon"></i>
-            </button>
-            <div class="combobox__data position-name" value="1">
-              <div class="combobox__item" value="0">
-                <span class="icon"> <i class="fas fa-check"></i></span>Tất cả Vị
-                trí
-              </div>
-            </div>
-          </div>
+          <combo-box
+            @selected="filterDepartment"
+            :combobox="this.$enum.DEPARTMENT"
+            :defaultState="isReset"
+            placeholder="Tất cả Phòng ban"
+          />
+          <combo-box
+            @selected="filterPosition"
+            :combobox="this.$enum.POSITION"
+            :defaultState="isReset"
+            placeholder="Tất cả Vị trí"
+          />
         </div>
         <div class="content__filter--right">
           <div
-            class="button--secondary button__icon"
-            id="button__reload"
+            class="button--secondary button__icon button__reload"
             @click="btnReloadOnClick"
           >
             <div class="icon-default -reload"></div>
@@ -120,11 +99,14 @@
 
 <script>
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
-// import PositionAPI from "@/api/components/PositionAPI.js";
-// import DepartmentAPI from "@/api/components/DepartmentAPI.js";
+import PositionAPI from "@/api/components/PositionAPI.js";
+import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
 import { columns } from "@/view/employee/EmployeeTableCols.js";
+
+import ComboboxData from "../../components/base/combobox/ComboboxData.js"
+import DropdownData from "../../components/base/dropdown/DropdownData.js"
 
 const $ = require("jquery");
 
@@ -132,19 +114,60 @@ export default {
   name: "EmployeePage",
   components: { EmployeeDetailDialog, PopupMessage },
   created() {
-    var vm = this;
-
-    EmployeesAPI.getAll()
-      .then((res) => {
-        vm.employeesData = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getEmployeeData();
+    this.getDropdownData()
   },
   methods: {
     //#region Phương thức xử lí dữ liệu
 
+    /**
+     * Lấy dữ liệu nhân viên từ Api
+     * Author: PHDUONG(08/08/2021)
+     */
+    getEmployeeData() {
+      var vm = this;
+
+      EmployeesAPI.getAll()
+        .then((res) => {
+          vm.employeesData = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getDropdownData() {
+      PositionAPI.getAll()
+        .then((res) => {
+          DropdownData.position.options = res.data;
+
+          [].push.apply(ComboboxData.position.options, res.data);
+          // debugger
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      DepartmentAPI.getAll()
+        .then((res) => {
+          DropdownData.department.options = res.data;
+
+          [].push.apply(ComboboxData.department.options, res.data);
+          // debugger
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    /**
+     *
+     */
+    filterDepartment(value, name) {
+      console.log(value, name);
+    },
+    filterPosition(value, name) {
+      console.log(value, name);
+    },
     /**
      * Hiển thị form chi tiết khi ấn button thêm nhân viên
      * Author: PHDUONG(29/07/2021)
@@ -152,6 +175,7 @@ export default {
     btnAddOnClick(isHidden) {
       this.isHiddenDialogDetail = isHidden;
       this.modeFormDetail = 0;
+      $("input").val("");
       this.employeeId = "";
     },
 
@@ -160,10 +184,10 @@ export default {
      * Author: PHDUONG(30/07/2021)
      */
     btnReloadOnClick() {
-      
-      $('.checkbox').prop('checked', false);
-      this.employeesToDelete =[]
-      this.employeesData = [];
+      $(".checkbox").prop("checked", false);
+      this.employeesToDelete = [];
+      this.isReset = true;
+      this.getEmployeeData();
     },
 
     /**
@@ -194,33 +218,22 @@ export default {
     checkBoxOnClick(employeeId, employeeCode, event) {
       // debugger
       event.target.setAttribute("checked", event.target.checked);
+      console.log(event.target);
+      // debugger;
 
       if (event.target.getAttribute("checked") === "true") {
-        this.employeesToDelete.push({id:employeeId, code:employeeCode});
+        this.employeesToDelete.push({ id: employeeId, code: employeeCode });
       } else {
-        var removeIndex = this.employeesToDelete.map(function(item) { return item.id; }).indexOf(employeeId);
+        var removeIndex = this.employeesToDelete
+          .map(function (item) {
+            return item.id;
+          })
+          .indexOf(employeeId);
         this.employeesToDelete.splice(removeIndex, 1);
       }
     },
-    //#endregion
-  },
-  watch: {
-    /**
-     * Reload bảng khi dữ liệu thay đổi
-     * Author: PHDUONG(31/07/2021)
-     */
-    employeesData() {
-      var vm = this;
-      //gọi Api lấy dữ liệu
 
-      EmployeesAPI.getAll()
-        .then((res) => {
-          vm.employeesData = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    //#endregion
   },
   data() {
     return {
@@ -231,6 +244,7 @@ export default {
       isHiddenDialogDetail: true,
       isHiddenPopupMessage: true,
       isChecked: "",
+      isReset: false,
       modeFormDetail: 0,
       columns: columns,
     };

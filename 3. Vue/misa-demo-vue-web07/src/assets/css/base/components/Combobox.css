@@ -2,7 +2,7 @@
 .combobox{
     position: relative;
     align-items: center;
-    margin: 0 12px;
+    margin: 0 10px;
 }
     /* Input part */
     .combobox .combobox__input{
@@ -66,7 +66,6 @@
 
     /* Data Part */
     .combobox .combobox__data{
-        display: none;
         position: absolute;
         width: 100%;
         background: var(--color-white);

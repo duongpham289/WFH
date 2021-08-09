@@ -1,12 +1,14 @@
 	/* Paginate */
 	.content__footer .pagination {
-		width: 20%;
+		width: 25%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 		/* Button paginate */
 		.content__footer .pagination .pagination__button {
+			width: 40px;
+			height: 40px;
 			border-radius: 4px;
 			padding: 5px;
 		}
@@ -16,8 +18,8 @@
 		}
 
 		.content__footer .pagination .pagination__number {
-			width: 32px;
-			height: 32px;
+			width: 40px;
+			height: 40px;
 			border-radius: 50%;
 			background-color: var(--color-secondary-hover);
 			border: 1px solid var(--color-gray);
@@ -38,13 +40,23 @@
 			color: var(--color-white) !important;
 		}
 
-		@media screen and (max-width: 1280px) {
+		@media screen and (max-width: 1530px){
 			.content__footer .pagination {
-				width: 40% !important;
+				width: 30%;
 			}
 		}
-		@media screen and (max-width: 1530px) {
+		@media screen and (max-width: 1400px){
 			.content__footer .pagination {
-				width: 25%;
+				width: 35% !important;
+			}
+		}
+		@media screen and (max-width: 1180px){
+			.content__footer .pagination {
+				width: 45% !important;
+			}
+		}
+		@media screen and (max-width: 900px){
+			.content__footer .pagination {
+				width: 55% !important;
 			}
 		}

@@ -3,8 +3,8 @@
     width: calc(100% - 221px);
 	height: calc(100% - 49px);
 	position: absolute;
-	top: 49px;
-	left: 221px;
+	top: 48px;
+	left: 220px;
 	padding: 16px;
     background-color: var(--color-secondary-hover);
 	transition: 0.2s all ease-in-out;
@@ -32,6 +32,9 @@
     .content .content__header .button__container #button__delete-employee {
         background-color: var(--color-alert);
     }
+    .content .content__header .button__container #button__delete-employee .button__text {
+        margin: 0
+    }
 
     /* Phần Filter của Content */
     .content .content__filter {
@@ -50,7 +53,7 @@
 .content__footer {
 	width: 100%;
 	height: 56px;
-    padding: 0 24px;
+    padding: 0 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

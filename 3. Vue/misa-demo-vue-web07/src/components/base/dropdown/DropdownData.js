@@ -1,7 +1,6 @@
 export default {
-    restaurantDropdown: "restaurant",
     restaurant: {
-        data: [{
+        options: [{
                 RestaurantName: "Nhà Hàng Biển Đông",
                 Restaurant: "0"
             },
@@ -19,10 +18,9 @@ export default {
             value: "Restaurant"
         }
     },
-
-    genderDropdown: "gender",
+    
     gender: {
-        data: [{
+        options: [{
                 GenderName: "Nữ",
                 Gender: "0"
             },
@@ -40,10 +38,9 @@ export default {
             value: "Gender"
         }
     },
-    
-    workStatusDropdown: "work",
+
     workStatus: {
-        data: [{
+        options: [{
                 WorkStatusName: "Đang làm việc",
                 WorkStatus: "0"
             },
@@ -62,18 +59,16 @@ export default {
         }
     },
 
-    departmentDropdown: "department",
     department: {
-        data: [],
+        options: [],
         select: {
             name: "DepartmentName",
             value: "DepartmentId"
         }
     },
 
-    positionDropdown: "position",
     position: {
-        data: [],
+        options: [],
         select: {
             name: "PositionName",
             value: "PositionId"
