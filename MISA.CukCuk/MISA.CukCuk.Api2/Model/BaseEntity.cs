@@ -31,6 +31,7 @@ namespace MISA.CukCuk.Api.Model
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
         public string ModifiedBy { get; set; }
+
         #endregion
 
     }

@@ -8,7 +8,7 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table__body">
       <tr
         v-for="item in data"
         :key="item.id"

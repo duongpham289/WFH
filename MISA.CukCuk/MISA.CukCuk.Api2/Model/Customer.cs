@@ -40,10 +40,10 @@ namespace MISA.CukCuk.Api.Model
         public string FullName { get; set; }
 
         /// <summary>
-        /// Giới tính
+        /// Giới tính (0 - Nữ, 1 - Nam, 2 - Khác)
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public int? Gnder { get; set; }
+        public int? Gender { get; set; }
 
         /// <summary>
         /// Địa chỉ
@@ -67,6 +67,42 @@ namespace MISA.CukCuk.Api.Model
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Số tiền còn nợ
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public Double? DebitAmount { get; set; }
+
+        /// <summary>
+        /// Mã thẻ Thành viên
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string MemberCardCode { get; set; }
+
+        /// <summary>
+        /// Tên Công ty
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string CompanyName { get; set; }
+
+        /// <summary>
+        /// Mã số thuế của Công ty
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string CompanyTaxCode { get; set; }
+
+        /// <summary>
+        /// Ngừng theo dõi (true - Ngừng theo dõi)
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public bool? IsStopFollow { get; set; }
+
+        /// <summary>
+        /// Khóa chính
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public Guid CustomerGroupId { get; set; }
 
         #endregion
     }

@@ -72,7 +72,7 @@
         }
 
             .modal__container .modal .modal__content .modal__general-info {
-                margin-top: 24px;
+                margin: 24px 0 8px;
                 width: 100%;
             }
             
@@ -80,7 +80,7 @@
                     font-size: 15px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    margin: 10px 0 0;
+                    margin: 10px 0 4px;
                 }
 
                     .modal__container .modal .modal__content .modal__general-info .info-title .title-layout {
@@ -97,7 +97,7 @@
 
                     .modal__container .modal .modal__content .modal__general-info .info-row .info-column {
                         width: 50%;
-                        margin: 5px 0 16px;
+                        margin: 0 0 16px;
                         position: relative;
                     }
                         .modal__container .modal .modal__content .modal__general-info .info-row .info-column .text--right{
