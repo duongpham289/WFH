@@ -28,6 +28,7 @@
           <div class="info-row">
             <div class="info-column">
               <base-input
+                ref="EmployeeCode"
                 label="Mã nhân viên"
                 id="EmployeeCode"
                 placeholder="NV8888..."
@@ -336,6 +337,7 @@ export default {
     },
 
     //#region Gắn dữ liệu dropdown
+
     /**
      * Lấy dữ liệu gender
      * Author: PHDUONG(3/8/2021)
@@ -367,7 +369,18 @@ export default {
       this.employee.PositionId = value;
       this.employee.PositionName = name;
     },
+
     //#endregion
+    
+    /**
+     * Auto Focus vào ô EmployeeCode
+     * Autthor: PHDUONG(11/08/2021)
+     */
+    autoFocus(){
+      this.$nextTick(() =>{
+        this.$refs.EmployeeCode.$el.childNodes[1].childNodes[0].focus();
+      })
+    }
   },
   data() {
     return {

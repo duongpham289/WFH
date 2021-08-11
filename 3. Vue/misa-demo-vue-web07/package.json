@@ -17,6 +17,7 @@
     "jquery": "^3.6.0",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",
+    "vue-spinner": "^1.0.4",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {

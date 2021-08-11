@@ -1,7 +1,11 @@
 <template>
   <div class="employee-list">
     <!-- Phần Content -->
+      <BaseSpinner 
+        :loading="loading"
+      />
 
+      
     <div class="content">
       <!-- Phần Header của Content chi tiết:
                         - Header Content
@@ -86,6 +90,7 @@
       v-bind:isHidden="isHiddenDialogDetail"
       v-bind:employeeId="employeeId"
       v-bind:mode="modeFormDetail"
+      ref="EmployeeDetailDialog"
       @btnAddOnClick="btnAddOnClick"
       @btnReloadOnClick="btnReloadOnClick"
     />
@@ -93,6 +98,7 @@
       :isHidden="isHiddenPopupMessage"
       :datasToDelete="employeesToDelete"
       @btnDelOnClick="btnDelOnClick"
+      @btnReloadOnClick="btnReloadOnClick"
     />
   </div>
 </template>
@@ -107,12 +113,13 @@ import { columns } from "@/view/employee/EmployeeTableCols.js";
 
 import ComboboxData from "../../components/base/combobox/ComboboxData.js"
 import DropdownData from "../../components/base/dropdown/DropdownData.js"
+import BaseSpinner from "../../components/base/BaseSpinner.vue"
 
 const $ = require("jquery");
 
 export default {
   name: "EmployeePage",
-  components: { EmployeeDetailDialog, PopupMessage },
+  components: { EmployeeDetailDialog, PopupMessage, BaseSpinner },
   created() {
     this.getEmployeeData();
     this.getDropdownData()
@@ -126,10 +133,12 @@ export default {
      */
     getEmployeeData() {
       var vm = this;
+      vm.loading = true;
 
       EmployeesAPI.getAll()
         .then((res) => {
           vm.employeesData = res.data;
+          vm.loading = false;
         })
         .catch((err) => {
           console.log(err);
@@ -175,6 +184,7 @@ export default {
     btnAddOnClick(isHidden) {
       this.isHiddenDialogDetail = isHidden;
       this.modeFormDetail = 0;
+      this.$refs.EmployeeDetailDialog.autoFocus()
       $("input").val("");
       this.employeeId = "";
     },
@@ -187,6 +197,7 @@ export default {
       $(".checkbox").prop("checked", false);
       this.employeesToDelete = [];
       this.isReset = true;
+      this.employeesData = [];
       this.getEmployeeData();
     },
 
@@ -197,6 +208,7 @@ export default {
     rowOnDblClick(empId) {
       this.isHiddenDialogDetail = false;
       this.employeeId = empId;
+      this.$refs.EmployeeDetailDialog.autoFocus()
       this.modeFormDetail = 1;
     },
 
@@ -218,11 +230,11 @@ export default {
     checkBoxOnClick(employeeId, employeeCode, event) {
       // debugger
       event.target.setAttribute("checked", event.target.checked);
-      console.log(event.target);
       // debugger;
 
       if (event.target.getAttribute("checked") === "true") {
         this.employeesToDelete.push({ id: employeeId, code: employeeCode });
+        event.target.parentNode.parentNode.parentNode.style.backgroundColor="#EBF9F4"
       } else {
         var removeIndex = this.employeesToDelete
           .map(function (item) {
@@ -230,6 +242,7 @@ export default {
           })
           .indexOf(employeeId);
         this.employeesToDelete.splice(removeIndex, 1);
+        event.target.parentNode.parentNode.parentNode.style.backgroundColor="#fff"
       }
     },
 
@@ -247,6 +260,7 @@ export default {
       isReset: false,
       modeFormDetail: 0,
       columns: columns,
+      loading: true,
     };
   },
 };

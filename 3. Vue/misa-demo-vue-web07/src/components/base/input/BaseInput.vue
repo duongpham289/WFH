@@ -8,6 +8,7 @@
     </label>
     <div class="field-input">
       <input
+      
         class="input"
         :class="[
           { 'pl-12': iconLeft === true },

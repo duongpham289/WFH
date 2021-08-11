@@ -17,7 +17,8 @@
           Bạn có chắc muốn xóa các nhân viên này không?
         </div>
         <div class="popup__content" v-if="datasToDelete.length == 1">
-          Bạn có chắc chắn muốn xóa nhân viên có mã {{this.datasToDelete[0].code}} không?
+          Bạn có chắc chắn muốn xóa nhân viên có mã
+          {{ this.datasToDelete[0].code }} không?
         </div>
       </div>
       <div class="popup__footer">
@@ -39,7 +40,6 @@
 </template>
 
 <script>
-
 const $ = require("jquery");
 
 export default {
@@ -60,7 +60,7 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnCancelOnClick() {
-      $('.checkbox').prop('checked', false);
+      $(".checkbox").prop("checked", false);
       this.$emit("btnDelOnClick", true);
     },
     /**
@@ -68,27 +68,21 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnDelDataOnClick() {
-      console.log(this.datasToDelete.length);
       // debugger
-      this.datasToDelete.forEach((data) => {
-        try {
-          this.$api
-            .delete(`http://cukcuk.manhnv.net/v1/Employees/${data}`)
-            .then(() => {
-              console.log("Xóa thành công");
-            })
-            .catch((res) => {
-              console.log(res);
-            });
-        } catch (error) {
-          console.log(error);
-        }
+      this.datasToDelete.forEach((data, index) => {
+        this.$api
+          .delete(`http://cukcuk.manhnv.net/v1/Employees/${data.id}`)
+          .then(() => {
+            if (index == this.datasToDelete.length - 1) {
+              this.$emit("btnDelOnClick", true);
+              this.$emit("btnReloadOnClick");
+            }
+            console.log("Xóa thành công");
+          })
+          .catch((res) => {
+            console.log(res);
+          });
       });
-
-      $(".delete-box input").each(function () {
-        this.checked = false;
-      });
-      this.$emit("btnDelOnClick", true);
     },
   },
 };
