@@ -1,11 +1,8 @@
 <template>
   <div class="employee-list">
     <!-- Phần Content -->
-      <BaseSpinner 
-        :loading="loading"
-      />
+    <BaseSpinner :loading="loading" />
 
-      
     <div class="content">
       <!-- Phần Header của Content chi tiết:
                         - Header Content
@@ -111,9 +108,9 @@ import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
 import { columns } from "@/view/employee/EmployeeTableCols.js";
 
-import ComboboxData from "../../components/base/combobox/ComboboxData.js"
-import DropdownData from "../../components/base/dropdown/DropdownData.js"
-import BaseSpinner from "../../components/base/BaseSpinner.vue"
+import ComboboxData from "../../components/base/combobox/ComboboxData.js";
+import DropdownData from "../../components/base/dropdown/DropdownData.js";
+import BaseSpinner from "../../components/base/BaseSpinner.vue";
 
 const $ = require("jquery");
 
@@ -122,7 +119,7 @@ export default {
   components: { EmployeeDetailDialog, PopupMessage, BaseSpinner },
   created() {
     this.getEmployeeData();
-    this.getDropdownData()
+    this.getDropdownData();
   },
   methods: {
     //#region Phương thức xử lí dữ liệu
@@ -184,7 +181,7 @@ export default {
     btnAddOnClick(isHidden) {
       this.isHiddenDialogDetail = isHidden;
       this.modeFormDetail = 0;
-      this.$refs.EmployeeDetailDialog.autoFocus()
+      this.$refs.EmployeeDetailDialog.autoFocus();
       $("input").val("");
       this.employeeId = "";
     },
@@ -195,6 +192,7 @@ export default {
      */
     btnReloadOnClick() {
       $(".checkbox").prop("checked", false);
+      debugger;
       this.employeesToDelete = [];
       this.isReset = true;
       this.employeesData = [];
@@ -208,7 +206,7 @@ export default {
     rowOnDblClick(empId) {
       this.isHiddenDialogDetail = false;
       this.employeeId = empId;
-      this.$refs.EmployeeDetailDialog.autoFocus()
+      this.$refs.EmployeeDetailDialog.autoFocus();
       this.modeFormDetail = 1;
     },
 
@@ -220,6 +218,7 @@ export default {
       this.isHiddenPopupMessage = isHidden;
       if (isHidden) {
         this.employeesToDelete = [];
+        $("tr").css("background-color", "#FFF");
       }
     },
 
@@ -234,7 +233,8 @@ export default {
 
       if (event.target.getAttribute("checked") === "true") {
         this.employeesToDelete.push({ id: employeeId, code: employeeCode });
-        event.target.parentNode.parentNode.parentNode.style.backgroundColor="#EBF9F4"
+        event.target.parentNode.parentNode.parentNode.style.backgroundColor =
+          "#EBF9F4";
       } else {
         var removeIndex = this.employeesToDelete
           .map(function (item) {
@@ -242,7 +242,8 @@ export default {
           })
           .indexOf(employeeId);
         this.employeesToDelete.splice(removeIndex, 1);
-        event.target.parentNode.parentNode.parentNode.style.backgroundColor="#fff"
+        event.target.parentNode.parentNode.parentNode.style.backgroundColor =
+          "#fff";
       }
     },
 

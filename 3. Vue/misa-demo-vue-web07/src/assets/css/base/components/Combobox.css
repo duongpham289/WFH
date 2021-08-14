@@ -9,7 +9,7 @@
         height: 40px;
         border: 1px solid var(--color-gray);
         border-radius: 4px;
-        min-width: 75px;
+        width: 200px;
         outline: none;
         font-family: GoogleSans-Regular;
         padding: 0 0 0 16px;
@@ -21,7 +21,6 @@
         }
         /* Những sự kiện khi input được focus */
         .combobox .combobox__input:focus{
-            font-size: 13px;
             color: var(--color-black);
             outline: none;
             border: 1px solid var(--color-primary);
@@ -60,8 +59,8 @@
         }
 
 
-        .combobox .combobox__button:focus>.icon {
-            transform: rotate(180deg);
+        .combobox .combobox__button i {
+            transition: 0.2s all ease-in-out;
         }
 
     /* Data Part */
@@ -76,13 +75,17 @@
 
         .combobox .combobox__data .combobox__item {
             display: flex;
+            
+        padding: 4px 0 4px 33px;
             align-items: center;
             height: 40px;
         }
 
         .combobox .combobox__data .combobox__item .icon {
-            padding: 0 10px;
-            color: var(--color-white);
+            position: absolute;
+			left: 10px;
+			display: none;
+			color: var(--color-white);
         }
 
         .combobox .combobox__data .combobox__item:hover {

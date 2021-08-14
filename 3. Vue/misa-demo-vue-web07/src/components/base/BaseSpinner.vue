@@ -1,7 +1,10 @@
 <template>
   <div class="spinner__container" v-show="loading">
     <div class="spinner">
-      <pacman-loader :loading="loading" color="#01B075"></pacman-loader>
+      <div class="spinner__icon">
+        <pacman-loader :loading="loading" color="#01B075"></pacman-loader>
+      </div>
+
       <div class="spinner__text">Đang tải dữ liệu...</div>
     </div>
   </div>
@@ -36,7 +39,15 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.spinner__icon {
+  display: flex;
+  justify-content: center;
+  padding-right: 50px;
+}
 .spinner__text {
+  display: flex;
+  justify-content: center;
   padding: 10px 0 0 0;
   font-size: 20px;
   color: #454545;

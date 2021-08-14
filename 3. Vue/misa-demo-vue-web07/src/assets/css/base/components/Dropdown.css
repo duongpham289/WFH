@@ -58,7 +58,6 @@
 		.dropdown__content .dropdown__option .icon {
 			position: absolute;
 			left: 10px;
-			top: 13px;
 			display: none;
 			font-size: 13px;
 			color: var(--color-white);

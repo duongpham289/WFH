@@ -22,8 +22,9 @@
     }
 
     .content .content__header .header__title {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 24px;
+        font-family: GoogleSans-Bold;
+/*         font-weight: bold; */
     }
     .content .content__header .button__container{
         display: flex;
