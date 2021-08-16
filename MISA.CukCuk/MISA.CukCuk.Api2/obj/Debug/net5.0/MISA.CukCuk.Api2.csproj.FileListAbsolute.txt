@@ -31,3 +31,7 @@ D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\Dapper.dll
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MySqlConnector.dll
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\obj\Debug\net5.0\MISA.CukCuk.Api2.Properties.Resources.resources
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\obj\Debug\net5.0\MISA.CukCuk.Api2.csproj.GenerateResource.cache
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Core.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Infrastructure.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Core.pdb
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Infrastructure.pdb

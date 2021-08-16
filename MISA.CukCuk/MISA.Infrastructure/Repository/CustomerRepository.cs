@@ -1,28 +1,20 @@
-﻿using MISA.Core.Entities;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace MISA.Infrastructure.Repository
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
-        public int Add(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
 
-        public int Delete(Guid customerId)
+        public CustomerRepository(IConfiguration configuration):base(configuration)
         {
-            throw new NotImplementedException();
-        }
 
-        public List<Customer> Get()
-        {
-            throw new NotImplementedException();
         }
 
         public Customer GetById(Guid customerId)
@@ -30,7 +22,7 @@ namespace MISA.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public int Update(Customer customer, Guid customerId)
+        public int Delete(Guid customerId)
         {
             throw new NotImplementedException();
         }

@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MISA.CukCuk.Api.Models;
 using System.Data;
-using MySqlConnector;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using System.Text.RegularExpressions;
+using MISA.Core.Interfaces.Services;
+using MISA.Core.Entities;
+using MISA.Core.Interfaces.Repository;
 
 namespace MISA.CukCuk.Api2.Controllers
 {
@@ -19,18 +17,13 @@ namespace MISA.CukCuk.Api2.Controllers
     public class CustomersController : ControllerBase
     {
 
-        private readonly IConfiguration _configuration;
-        private readonly IDbConnection dbConnection;
+        ICustomerRepository _customerRepository;
+        ICustomerService _customerService;
 
-        /// <summary>
-        /// Kết nối Database
-        /// Author:PHDUONG(12/08/2021)
-        /// </summary>
-        /// <param name="configuration"></param>
-        public CustomersController(IConfiguration configuration)
+        public CustomersController(ICustomerRepository customerRepository, ICustomerService customerService)
         {
-            _configuration = configuration;
-            dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection"));
+            _customerRepository = customerRepository;
+            _customerService = customerService;
         }
 
         // GET, POST, PUT, DELETE
@@ -46,14 +39,12 @@ namespace MISA.CukCuk.Api2.Controllers
 
             try
             {
-                //3. Lay du lieu:
-                var customers = dbConnection.Query<Customer>("Proc_GetCustomers", commandType: CommandType.StoredProcedure);
+                var customers = _customerRepository.GetAll();
 
-                //4. Tra ve cho client
-                if (customers.Count() > 0)
+                //4. Trả dữ liệu cho client
+                if (customers.Count > 0)
                 {
-                    var response = StatusCode(200, customers);
-                    return response;
+                    return StatusCode(200, customers);
                 }
                 else
                 {
@@ -66,7 +57,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""
@@ -92,27 +83,25 @@ namespace MISA.CukCuk.Api2.Controllers
                 //3. Lay du lieu:
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CustomerId", customerId);
-                var customer = dbConnection.QueryFirstOrDefault<Customer>("Proc_GetCustomerById", param: parameters, commandType: CommandType.StoredProcedure);
+                //var customer = dbConnection.QueryFirstOrDefault<Customer>("Proc_GetCustomerById", param: parameters, commandType: CommandType.StoredProcedure);
 
                 //4. Tra ve cho client
-                if (customer != null)
-                {
-                    return StatusCode(200, customer);
+                //if (customer != null)
+                //{
+                //    return StatusCode(200, customer);
 
-                }
-                else
-                {
-                    return NoContent();
-                }
-                var response = StatusCode(200, customer);
-                return response;
+                //}
+                //else
+                //{
+                return NoContent();
+                //}
             }
             catch (Exception ex)
             {
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""
@@ -138,17 +127,17 @@ namespace MISA.CukCuk.Api2.Controllers
                 parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var customerPagingData = dbConnection.Query<Customer>("Proc_CustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
+                //var customerPagingData = dbConnection.Query<Customer>("Proc_CustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
 
-                if (customerPagingData.Count() > 1)
-                {
-                    //4. Tra ve cho client
-                    return StatusCode(200, customerPagingData);
-                }
-                else
-                {
-                    return NoContent();
-                }
+                //if (customerPagingData.Count() > 1)
+                //{
+                //    //4. Tra ve cho client
+                //    return StatusCode(200, customerPagingData);
+                //}
+                //else
+                //{
+                return NoContent();
+                //}
 
                 //var response = StatusCode(200, parameters.Get<Int32>("@TotalPage"));
             }
@@ -157,7 +146,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""
@@ -177,86 +166,17 @@ namespace MISA.CukCuk.Api2.Controllers
         {
             try
             {
-                //Kiểm tra thông tin của khách hàng đã hợp lệ chưa
-                //1. Mã khách hàng bắt buộc phải có
-                if (customer.CustomerCode == "" || customer.CustomerCode == null)
+                var serviceReSult = _customerService.Add(customer);
+
+                //4. Trả dữ liệu cho client
+                if (serviceReSult.IsValid == true)
                 {
-                    var errorObj = new
-                    {
-                        userMsg = "Mã khách hàng ko được phép để trống!",
-                        errorCode = "misa-001",
-                        moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
-                        traceId = ""
-                    };
-                    return BadRequest(errorObj);
-                }
-
-                //2. Email phải đúng định dạng
-
-                var emailFormat = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-
-                var isMatch = Regex.IsMatch(customer.Email, emailFormat, RegexOptions.IgnoreCase);
-
-                if (isMatch == false)
-                {
-                    var errorObj = new
-                    {
-                        userMsg = "Emil không đúng định dạng!",
-                        errorCode = "misa-001",
-                        moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
-                        traceId = ""
-                    };
-                    return BadRequest(errorObj);
-                }
-
-                //3. Mã không được trùng với mã của khách hàng khác
-
-                //Khai bao dynamicParam:
-                var dynamicParam = new DynamicParameters();
-
-
-                ////3. Them du lieu vao db:
-                //var columnsName = string.Empty;
-                //var columnsParam = string.Empty;
-
-                ////Doc tung prop cua obj:
-                var properties = customer.GetType().GetProperties();
-
-                ////Duyet tung prop:
-                foreach (var prop in properties)
-                {
-                    //lay ten cua prop
-                    var propName = prop.Name;
-
-                    //lay val cu prop
-                    var propValue = prop.GetValue(customer);
-
-                    //lay du lieu cua prop
-                    var propType = prop.PropertyType;
-
-                    //Them param tuong ung voi moi prop
-                    dynamicParam.Add($"@{propName}", propValue);
-
-                    //columnsName += $"{propName},";
-                    //columnsParam += $"@{propName},";
-                }
-
-                //columnsName = columnsName.Remove(columnsName.Length - 1, 1);
-                //columnsParam = columnsParam.Remove(columnsParam.Length - 1, 1);
-
-                //var sqlCommand = $"INSERT INTO Customer({columnsName}) VALUE({columnsParam})";
-                //Console.WriteLine(customer);
-                var rowsEffect = dbConnection.Execute("Proc_InsertCustomer", param: dynamicParam, commandType: CommandType.StoredProcedure);
-
-                //4. Tra ve cho client
-                if (rowsEffect > 0)
-                {
-                    return StatusCode(200, rowsEffect);
+                    return StatusCode(200, serviceReSult.Data);
 
                 }
                 else
                 {
-                    return NoContent();
+                    return BadRequest(serviceReSult.Data);
                 }
             }
             catch (Exception ex)
@@ -265,7 +185,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""
@@ -286,83 +206,12 @@ namespace MISA.CukCuk.Api2.Controllers
         {
             try
             {
-
-                //Kiểm tra thông tin của khách hàng đã hợp lệ chưa
-                //1. Mã khách hàng bắt buộc phải có
-                if (customer.CustomerCode == "" || customer.CustomerCode == null)
-                {
-                    var errorObj = new
-                    {
-                        userMsg = "Mã khách hàng ko được phép để trống!",
-                        errorCode = "misa-001",
-                        moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
-                        traceId = ""
-                    };
-                    return BadRequest(errorObj);
-                }
-
-                //2. Email phải đúng định dạng
-
-                var emailFormat = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-
-                var isMatch = Regex.IsMatch(customer.Email, emailFormat, RegexOptions.IgnoreCase);
-
-                if (isMatch == false)
-                {
-                    var errorObj = new
-                    {
-                        userMsg = "Emil không đúng định dạng!",
-                        errorCode = "misa-001",
-                        moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
-                        traceId = ""
-                    };
-                    return BadRequest(errorObj);
-                }
-
-                var dynamicParam = new DynamicParameters();
-
-                dynamicParam.Add("@CustomerId", customerId);
-
-                ////3. Them du lieu vao db:
-                //var columnsName = string.Empty;
-                //var columnsParam = string.Empty;
-
-                ////Doc tung prop cua obj:
-                var properties = customer.GetType().GetProperties();
-
-                ////Duyet tung prop:
-                foreach (var prop in properties)
-                {
-                    //lay ten cua prop
-                    var propName = prop.Name;
-
-                    //lay val cu prop
-                    var propValue = prop.GetValue(customer);
-
-                    //lay du lieu cua prop
-                    var propType = prop.PropertyType;
-
-                    //Them param tuong ung voi moi prop
-                    if (propValue != null && propName != "CustomerId")
-                    {
-                        dynamicParam.Add($"@{propName}", propValue);
-                        //columnsName += $"{propName},";
-                        //columnsParam += $"@{propName},";
-                    }
-
-                }
-
-                //columnsName = columnsName.Remove(columnsName.Length - 1, 1);
-                //columnsParam = columnsParam.Remove(columnsParam.Length - 1, 1);
-
-                //var sqlCommand = $"INSERT INTO Customer({columnsName}) VALUE({columnsParam})";
-                //Console.WriteLine(customer);
-                var rowsEffect = dbConnection.Execute("Proc_UpdateCustomer", param: dynamicParam, commandType: CommandType.StoredProcedure);
+                var serviceReSult = _customerService.Update(customer, customerId);
 
                 //4. Tra ve cho client
-                if (rowsEffect > 0)
+                if (serviceReSult.IsValid == true)
                 {
-                    return StatusCode(200, rowsEffect);
+                    return StatusCode(200, serviceReSult.Data);
                 }
                 else
                 {
@@ -375,7 +224,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""
@@ -402,17 +251,17 @@ namespace MISA.CukCuk.Api2.Controllers
                 //3. Lay du lieu:
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CustomerId", customerId);
-                var rowsEffect = dbConnection.Execute("Proc_DeleteCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+                //var rowsEffect = dbConnection.Execute("Proc_DeleteCustomer", param: parameters, commandType: CommandType.StoredProcedure);
 
-                //4. Tra ve cho client
-                if (rowsEffect > 0)
-                {
-                    return StatusCode(200, rowsEffect);
-                }
-                else
-                {
-                    return NoContent();
-                }
+                ////4. Tra ve cho client
+                //if (rowsEffect > 0)
+                //{
+                //    return StatusCode(200, rowsEffect);
+                //}
+                //else
+                //{
+                return NoContent();
+                //}
             }
             catch (Exception ex)
             {
@@ -420,7 +269,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Server_ErrorMsg,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""

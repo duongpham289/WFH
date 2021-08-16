@@ -14,7 +14,7 @@ namespace MISA.Core.Interfaces.Repository
         /// </summary>
         /// <returns>Danh sách khách hàng</returns>
         /// CreatedBy: PHDUONG(13/08/2021)
-        List<Customer> Get();
+        List<Customer> GetAll();
 
         /// <summary>
         /// Lấy thông tin khách hàng qua Id

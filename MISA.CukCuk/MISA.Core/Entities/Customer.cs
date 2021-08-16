@@ -100,7 +100,7 @@ namespace MISA.Core.Entities
         public bool? IsStopFollow { get; set; }
 
         /// <summary>
-        /// Khóa chính
+        /// Khóa ngoại 
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
         public Guid CustomerGroupId { get; set; }

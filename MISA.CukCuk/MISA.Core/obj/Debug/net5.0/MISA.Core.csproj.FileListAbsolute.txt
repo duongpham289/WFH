@@ -1,0 +1,15 @@
+D:\Work\WFH\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.deps.json
+D:\Work\WFH\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.dll
+D:\Work\WFH\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\ref\MISA.Core.dll
+D:\Work\WFH\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.pdb
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.csproj.AssemblyReference.cache
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.AssemblyInfoInputs.cache
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.AssemblyInfo.cs
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.csproj.CoreCompileInputs.cache
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.dll
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\ref\MISA.Core.dll
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.pdb
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.Resources.ResourceVN.resources
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.csproj.GenerateResource.cache
+D:\Work\WFH\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.Properties.Resources.resources

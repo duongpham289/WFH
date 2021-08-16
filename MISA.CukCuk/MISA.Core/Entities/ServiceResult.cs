@@ -10,7 +10,7 @@ namespace MISA.Core.Entities
     {
         public bool IsValid { get; set; } = true;
         public object Data { get; set; }
-        public string Messenger { get; set; }
+        public string Message { get; set; }
 
     }
 }
