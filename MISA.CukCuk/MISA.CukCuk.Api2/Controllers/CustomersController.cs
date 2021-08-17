@@ -81,20 +81,18 @@ namespace MISA.CukCuk.Api2.Controllers
             {
 
                 //3. Lay du lieu:
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@CustomerId", customerId);
-                //var customer = dbConnection.QueryFirstOrDefault<Customer>("Proc_GetCustomerById", param: parameters, commandType: CommandType.StoredProcedure);
+                var customer = _customerRepository.GetById(customerId);
 
-                //4. Tra ve cho client
-                //if (customer != null)
-                //{
-                //    return StatusCode(200, customer);
+                //4.tra ve cho client
+                if (customer != null)
+                {
+                    return StatusCode(200, customer);
 
-                //}
-                //else
-                //{
-                return NoContent();
-                //}
+                }
+                else
+                {
+                    return NoContent();
+                }
             }
             catch (Exception ex)
             {
@@ -120,26 +118,20 @@ namespace MISA.CukCuk.Api2.Controllers
         {
             try
             {
-                //3. Lay du lieu:
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@PageIndex", pageIndex);
-                parameters.Add("@pageSize", pageSize);
-                parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                //var customerPagingData = dbConnection.Query<Customer>("Proc_CustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
+                var customerPagingData = _customerRepository.GetPaging(pageIndex, pageSize);
 
-                //if (customerPagingData.Count() > 1)
-                //{
-                //    //4. Tra ve cho client
-                //    return StatusCode(200, customerPagingData);
-                //}
-                //else
-                //{
-                return NoContent();
-                //}
+                if ((int)customerPagingData.GetType().GetProperty("dataCount").GetValue(customerPagingData) > 1)
+                {
 
-                //var response = StatusCode(200, parameters.Get<Int32>("@TotalPage"));
+                    //4. Tra ve cho client
+                    return StatusCode(200, customerPagingData);
+                }
+                else
+                {
+                    return NoContent();
+                }
+
             }
             catch (Exception ex)
             {
@@ -249,19 +241,17 @@ namespace MISA.CukCuk.Api2.Controllers
             {
 
                 //3. Lay du lieu:
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@CustomerId", customerId);
-                //var rowsEffect = dbConnection.Execute("Proc_DeleteCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+                var rowsEffect = _customerRepository.Delete(customerId);
 
-                ////4. Tra ve cho client
-                //if (rowsEffect > 0)
-                //{
-                //    return StatusCode(200, rowsEffect);
-                //}
-                //else
-                //{
-                return NoContent();
-                //}
+                //4. Tra ve cho client
+                if (rowsEffect > 0)
+                {
+                    return StatusCode(200, rowsEffect);
+                }
+                else
+                {
+                    return NoContent();
+                }
             }
             catch (Exception ex)
             {

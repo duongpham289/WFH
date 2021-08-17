@@ -41,9 +41,13 @@ namespace MISA.Infrastructure.Repository
         /// </summary>
         /// <returns>List Thực thể</returns>
         /// CreatedBy: PHDUONG(17/08/2021)
-        public List<MISAEntity> GetById(Guid entityId)
+        public MISAEntity GetById(Guid entityId)
         {
-            throw new NotImplementedException();
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add($"@{_className}Id", entityId);
+            var entities = dbConnection.QueryFirstOrDefault<MISAEntity>($"Proc_Get{_className}ById", param: parameters, commandType: CommandType.StoredProcedure);
+
+            return entities;
         }
 
         /// <summary>
@@ -121,7 +125,11 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public int Delete(Guid entityId)
         {
-            throw new NotImplementedException();
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add($"@{_className}Id", entityId);
+            var rowsEffect = dbConnection.Execute($"Proc_Delete{_className}", param: parameters, commandType: CommandType.StoredProcedure);
+
+            return rowsEffect;
         }
     }
 }

@@ -52,20 +52,26 @@ namespace MISA.CukCuk.Api2.Controllers
         {
             try
             {
-                var res = _employeeService.Add(employee);
-                if (res.IsValid == true)
+                var serviceReSult = _employeeService.Add(employee);
+
+                if (serviceReSult.IsValid == true)
                 {
-                    return Ok(res.Data);
+                    return Ok(serviceReSult.Data);
                 }
                 else
                 {
-                    return BadRequest(res);
+                    return BadRequest(serviceReSult);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
+                };
+                return StatusCode(500, errorObj);
             }
         }
     }

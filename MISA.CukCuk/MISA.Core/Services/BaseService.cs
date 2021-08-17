@@ -25,7 +25,7 @@ namespace MISA.Core.Services
         public ServiceResult Add(MISAEntity entity)
         {
             //2. Validate du lieu va xu ly nghiep vu:
-            if (!this.ValidateCustom(entity))
+            if (!ValidateCustom(entity))
             {
                 return _serviceResult;
             }

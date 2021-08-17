@@ -21,7 +21,7 @@ namespace MISA.Core.Interfaces.Repository
         /// <param name="customerId">Mã định danh thực thể</param>
         /// <returns>Thông tin thực thể</returns>
         /// CreatedBy: PHDUONG(13/08/2021)
-        List<MISAEntity> GetById(Guid entityId);
+        MISAEntity GetById(Guid entityId);
 
         /// <summary>
         /// Thêm mới thực thể

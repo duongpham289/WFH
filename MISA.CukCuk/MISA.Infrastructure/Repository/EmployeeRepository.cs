@@ -19,21 +19,5 @@ namespace MISA.Infrastructure.Repository
         {
 
         }
-
-
-        public int Update(Employee employee, Guid employeeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer GetById(Guid employeeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(Guid employeeId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
