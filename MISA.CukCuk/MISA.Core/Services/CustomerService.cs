@@ -18,6 +18,12 @@ namespace MISA.Core.Services
 
         }
 
+        /// <summary>
+        /// Validate dữ liệu
+        /// </summary>
+        /// <param name="customer">Dữ liệu cần validate</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         protected override bool ValidateCustom(Customer customer)
         {
             //Kiểm tra thông tin của khách hàng đã hợp lệ chưa

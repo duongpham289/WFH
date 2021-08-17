@@ -12,25 +12,12 @@ using System.Threading.Tasks;
 
 namespace MISA.Infrastructure.Repository
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
-        private readonly IConfiguration _configuration;
-        private readonly IDbConnection dbConnection;
-        public EmployeeRepository(IConfiguration configuration)
-        {
-            _configuration = configuration;
-            dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection"));
-        }
-        public List<Employee> GetAll()
-        {
-            var employees = dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
 
-            return employees.AsList();
-        }
-
-        public int Add(Employee employee)
+        public EmployeeRepository(IConfiguration configuration):base(configuration)
         {
-            throw new NotImplementedException();
+
         }
 
 

@@ -15,6 +15,12 @@ namespace MISA.Core.Services
             //_employeeRepository = employeeRepository;
         }
 
+        /// <summary>
+        /// Validate dữ liệu
+        /// </summary>
+        /// <param name="customer">Dữ liệu cần validate</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         protected override bool ValidateCustom(Employee employee)
         {
             //Kiểm tra thông tin của nhân viên đã hợp lệ chưa

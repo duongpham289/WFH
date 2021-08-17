@@ -24,7 +24,11 @@ namespace MISA.Infrastructure.Repository
             _className = typeof(MISAEntity).Name;
         }
 
-
+        /// <summary>
+        /// Lấy danh sách Thực thể từ DataBase
+        /// </summary>
+        /// <returns>List Thực thể</returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         public List<MISAEntity> GetAll()
         {
             var entities = dbConnection.Query<MISAEntity>($"Proc_Get{_className}s", commandType: CommandType.StoredProcedure);
@@ -32,11 +36,21 @@ namespace MISA.Infrastructure.Repository
             return entities.AsList();
         }
 
+        /// <summary>
+        /// Lấy danh sách Thực thể từ DataBase
+        /// </summary>
+        /// <returns>List Thực thể</returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         public List<MISAEntity> GetById(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Thêm mới Thực thể vào DataBase
+        /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         public int Add(MISAEntity entity)
         {
             var dynamicParam = new DynamicParameters();
@@ -64,7 +78,11 @@ namespace MISA.Infrastructure.Repository
             return rowsEffect;
         }
 
-
+        /// <summary>
+        /// Sửa Thực thể từ DataBase
+        /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         public int Update(MISAEntity entity, Guid entityId)
         {
             var dynamicParam = new DynamicParameters();
@@ -96,6 +114,11 @@ namespace MISA.Infrastructure.Repository
             return rowsEffect;
         }
 
+        /// <summary>
+        /// Xóa Thực thể từ DataBase
+        /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
         public int Delete(Guid entityId)
         {
             throw new NotImplementedException();
