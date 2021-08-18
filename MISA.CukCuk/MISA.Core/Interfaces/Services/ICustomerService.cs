@@ -20,7 +20,7 @@ namespace MISA.Core.Interfaces.Services
         /// <param name="customerGroupId">Mã định danh nhóm khách hàng</param>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
-        ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId);
+        ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid? customerGroupId);
         #endregion
     }
 }

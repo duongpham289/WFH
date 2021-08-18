@@ -79,6 +79,15 @@ namespace MISA.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã khách hàng đã tồn tại!.
+        /// </summary>
+        public static string EmployeeCodeDuplicateValidateError_Msg {
+            get {
+                return ResourceManager.GetString("EmployeeCodeDuplicateValidateError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã nhân viên ko được phép để trống!.
         /// </summary>
         public static string EmployeeCodeValidateError_Msg {

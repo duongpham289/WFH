@@ -6,28 +6,24 @@ using System.Threading.Tasks;
 
 namespace MISA.Core.Entities
 {
-    public class CustomerGroup : BaseEntity
+    public class Qualification
     {
-        #region BaseProperty
         /// <summary>
         /// Khóa chính
-        /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public Guid CustomerGroupId { get; set; }
+        /// CreatedBY: PHDUONG(18/08/2021)
+        public Guid QualificationId { get; set; }
 
         /// <summary>
-        /// Tên nhóm khách hàng
-        /// Author:PHDUONG(07/08/2021)
+        /// Trình độ học vấn
         /// </summary>
-        public string CustomerGroupName { get; set; }
+        /// CreatedBY: PHDUONG(18/08/2021)
+        public string QualificationName { get; set; }
 
         /// <summary>
         /// Mô tả
-        /// Author:PHDUONG(07/08/2021)
         /// </summary>
+        /// CreatedBY: PHDUONG(18/08/2021)
         public string Description { get; set; }
-
-        #endregion
-
     }
 }

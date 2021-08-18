@@ -23,7 +23,7 @@ namespace MISA.CukCuk.Api2.Controllers
         #endregion
 
         #region Constructor
-        public CustomersController(ICustomerService customerService, IBaseService<Customer> baseService, IBaseRepository<Customer> baseRepository) : base(baseService, baseRepository)
+        public CustomersController(ICustomerService customerService, IBaseRepository<Customer> baseRepository) : base(customerService, baseRepository)
         {
             //_customerRepository = customerRepository;
             _customerService = customerService;
@@ -38,17 +38,17 @@ namespace MISA.CukCuk.Api2.Controllers
         /// <returns>Dữ liệu phân trang</returns>
         /// CreatedBy:PHDUONG(07/08/2021)
         [HttpGet("paging")]
-        public IActionResult GetCustomersPaging([FromQuery] int pageIndex, [FromQuery] int pageSize, string customerFilter, Guid customerGroupId)
+        public IActionResult GetCustomersPaging([FromQuery] int pageIndex, [FromQuery] int pageSize, [FromQuery] string customerFilter, [FromQuery] Guid? customerGroupId)
         {
             try
             {
 
                 var serviceResult = _customerService.GetPaging(pageIndex, pageSize, customerFilter, customerGroupId);
 
-                if (serviceResult.Data.ToString() != String.Empty)
+                if ((int)serviceResult.Data.GetType().GetProperty("totalRecord").GetValue(serviceResult.Data) != 0)
                 {
                     //4. Tra ve cho client
-                    return StatusCode(200, serviceResult);
+                    return StatusCode(200, serviceResult.Data);
                 }
                 else
                 {

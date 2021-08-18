@@ -46,6 +46,14 @@ namespace MISA.Core.Interfaces.Repository
         /// <param name="entityId">Mã định danh của entity</param>
         /// CreatedBy: PHDUONG(13/08/2021)
         int Delete(Guid entityId);
+
+        /// <summary>
+        /// Check trùng code
+        /// </summary>
+        /// <param name="entityCode">Mã thực thể</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(18/08/2021)
+        bool CheckEntityCodeDuplicate(string entityCode);
         #endregion
     }
 }

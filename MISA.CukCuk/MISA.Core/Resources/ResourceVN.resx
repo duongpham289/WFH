@@ -123,6 +123,9 @@
   <data name="EmailValidateError_Msg" xml:space="preserve">
     <value>Email không đúng định dạng!</value>
   </data>
+  <data name="EmployeeCodeDuplicateValidateError_Msg" xml:space="preserve">
+    <value>Mã khách hàng đã tồn tại!</value>
+  </data>
   <data name="EmployeeCodeValidateError_Msg" xml:space="preserve">
     <value>Mã nhân viên ko được phép để trống!</value>
   </data>

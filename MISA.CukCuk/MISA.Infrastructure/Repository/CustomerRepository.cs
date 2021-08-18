@@ -4,7 +4,6 @@ using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
 using MySqlConnector;
 using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace MISA.Infrastructure.Repository
@@ -25,20 +24,20 @@ namespace MISA.Infrastructure.Repository
         /// </summary>
         /// <returns>Danh sách khách hàng và dữ liệu phân trang</returns>
         /// CreatedBy: PHDUONG(17/08/2021)
-        public Object GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId)
+        public Object GetPaging(int pageIndex, int pageSize, string customerFilter, Guid? customerGroupId)
         {
             using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
 
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@CustomerFilter", customerFilter);
+                parameters.Add("@CustomerFilter", customerFilter != null ? customerFilter : String.Empty);
                 parameters.Add("@CustomerGroupId", customerGroupId);
                 parameters.Add("@PageIndex", pageIndex);
-                parameters.Add("@pageSize", pageSize);
+                parameters.Add("@PageSize", pageSize);
                 parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var data = _dbConnection.Query<Customer>($"Proc_GetCustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
+                var data = _dbConnection.Query<Customer>($"Proc_GetCustomerFilterPaging", param: parameters, commandType: CommandType.StoredProcedure);
 
                 var totalPage = parameters.Get<Int32>("@TotalPage");
                 var totalRecord = parameters.Get<Int32>("@TotalRecord");

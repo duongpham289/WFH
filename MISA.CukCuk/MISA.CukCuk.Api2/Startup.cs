@@ -43,10 +43,14 @@ namespace MISA.CukCuk.Api2
             //Services DI:
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IPositionService, PositionService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
 
             //Repository DI:
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IPositionRepository, PositionRepository>();
 
             //Base DI:
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));

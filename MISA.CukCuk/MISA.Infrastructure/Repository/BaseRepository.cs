@@ -5,9 +5,6 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MISA.Infrastructure.Repository
 {
@@ -75,7 +72,7 @@ namespace MISA.Infrastructure.Repository
         {
             using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                var transaction = _dbConnection.BeginTransaction();
+                //var transaction = _dbConnection.BeginTransaction();
                 var dynamicParam = new DynamicParameters();
 
                 ////3. Them du lieu vao db:
@@ -97,7 +94,7 @@ namespace MISA.Infrastructure.Repository
                 }
                 
                 var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
-                transaction.Commit();
+                //transaction.Commit();
 
                 return rowsEffect;
             }
@@ -155,9 +152,29 @@ namespace MISA.Infrastructure.Repository
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add($"@{_className}Id", entityId);
-                var rowsEffect = _dbConnection.Execute($"Proc_Delete{_className}", param: parameters, commandType: CommandType.StoredProcedure);
+                var rowsEffect = _dbConnection.Execute($"Proc_Delete{_className}ById", param: parameters, commandType: CommandType.StoredProcedure);
 
                 return rowsEffect;
+            }
+        }
+
+        /// <summary>
+        /// Check trùng code
+        /// </summary>
+        /// <param name="entityCode">Mã thực thể</param>
+        /// <returns>true - Có mã trùng, false - Ko có mã trùng</returns>
+        /// CreatedBy: PHDUONG(18/08/2021)
+        public bool CheckEntityCodeDuplicate(string entityCode)
+        {
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add($"@{_className}Code", entityCode);
+                parameters.Add("@IsExist", dbType:DbType.Boolean, direction: ParameterDirection.Output);
+
+                _dbConnection.Execute($"Proc_Check{_className}CodeDuplicate", param: parameters, commandType: CommandType.StoredProcedure);
+
+                return parameters.Get<Boolean>("@IsExist");
             }
         }
         #endregion

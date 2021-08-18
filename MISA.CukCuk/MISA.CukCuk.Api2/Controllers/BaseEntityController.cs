@@ -71,10 +71,10 @@ namespace MISA.CukCuk.Api2.Controllers
         /// <summary>
         /// Lấy thông tin Khách hàng theo Id
         /// </summary>
-        /// <param name="customerId">Id của khách hàng</param>
+        /// <param name="entityId">Id của khách hàng</param>
         /// <returns>Thông tin Khách hàng dạng Json</returns>
         /// CreatedBy: PHDUONG(07/08/2021)
-        [HttpGet("{customerId}")]
+        [HttpGet("{entityId}")]
         public virtual IActionResult GetById(Guid entityId)
         {
             try
@@ -144,8 +144,6 @@ namespace MISA.CukCuk.Api2.Controllers
                 };
                 return StatusCode(500, errorObj);
             }
-
-
         }
 
         /// <summary>
@@ -153,7 +151,7 @@ namespace MISA.CukCuk.Api2.Controllers
         /// </summary>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(07/08/2021)
-        [HttpPut("{customerId}")]
+        [HttpPut("{entityId}")]
         public virtual IActionResult Update(MISAEntity entity, Guid entityId)
         {
             try
@@ -195,7 +193,7 @@ namespace MISA.CukCuk.Api2.Controllers
         /// <param name="entityId"></param>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(07/08/2021)
-        [HttpDelete("{customerId}")]
+        [HttpDelete("{entityId}")]
         public virtual IActionResult Delete(Guid entityId)
         {
             try

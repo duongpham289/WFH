@@ -34,7 +34,7 @@ namespace MISA.Core.Services
         /// <param name="customerGroupId">Mã định danh nhóm khách hàng</param>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
-        public ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId)
+        public ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid? customerGroupId)
         {
             _serviceResult.Data = _customerRepository.GetPaging(pageIndex, pageSize, customerFilter, customerGroupId);
 

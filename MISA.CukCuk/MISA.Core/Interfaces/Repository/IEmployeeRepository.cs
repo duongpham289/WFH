@@ -22,6 +22,7 @@ namespace MISA.Core.Interfaces.Repository
         /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
         Object GetPaging(int pageIndex, int pageSize, string employeeFilter, Guid? departmentId, Guid? positionId);
+
         #endregion
     }
 }

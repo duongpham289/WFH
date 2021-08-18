@@ -17,7 +17,7 @@ namespace MISA.CukCuk.Api2.Controllers
         #endregion
 
         #region Constructor
-        public EmployeesController(IEmployeeService employeeService, IBaseService<Employee> baseService, IBaseRepository<Employee> baseRepository) : base(baseService, baseRepository)
+        public EmployeesController(IEmployeeService employeeService, IBaseRepository<Employee> baseRepository) : base(employeeService, baseRepository)
         {
             //_employeeRepository = employeeRepository;
             _employeeService = employeeService;
@@ -41,11 +41,10 @@ namespace MISA.CukCuk.Api2.Controllers
 
                 var serviceResult = _employeeService.GetPaging(pageIndex, pageSize, employeeFilter, departmentId, positionId);
 
-                if (serviceResult.Data.ToString() != String.Empty)
+                if ((int)serviceResult.Data.GetType().GetProperty("totalRecord").GetValue(serviceResult.Data) != 0)
                 {
-
                     //4. Tra ve cho client
-                    return StatusCode(200, serviceResult);
+                    return StatusCode(200, serviceResult.Data);
                 }
                 else
                 {

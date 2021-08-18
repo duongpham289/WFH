@@ -63,6 +63,20 @@ namespace MISA.Core.Services
             }
             //2. Mã nhân viên không được phép trùng
 
+            if (_employeeRepository.CheckEntityCodeDuplicate(employee.EmployeeCode))
+            {
+                var errorObj = new
+                {
+                    userMsg = Resources.ResourceVN.EmployeeCodeDuplicateValidateError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
+                };
+                _serviceResult.IsValid = false;
+                _serviceResult.Data = errorObj;
+                return _serviceResult.IsValid;
+            }
+
             //3. Email phải đúng định dạng
 
             var emailFormat = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
