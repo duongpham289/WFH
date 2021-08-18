@@ -9,15 +9,19 @@ namespace MISA.Core.Interfaces.Repository
 {
     public interface ICustomerRepository : IBaseRepository<Customer>
     {
+        #region Methods
 
         /// <summary>
-        /// Lấy thông tin thực thể qua Id
+        /// Lấy danh sách khách hàng phân trang
         /// </summary>
-        /// <param name="customerId">Mã định danh thực thể</param>
-        /// <returns>Thông tin thực thể</returns>
+        /// <param name="pageIndex">Trang hiện tại</param>
+        /// <param name="pageSize">Số bản ghi/trang</param>
+        /// <param name="customerFilter">Dữ liệu lọc phân trang</param>
+        /// <param name="customerGroupId">Mã định danh nhóm khách hàng</param>
+        /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
-        Object GetPaging(int pageIndex, int PageSize);
+        Object GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId);
+        #endregion
     }
-
 
 }

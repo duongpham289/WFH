@@ -8,41 +8,44 @@ namespace MISA.Core.Interfaces.Repository
 {
     public interface IBaseRepository<MISAEntity>
     {
+        #region Methods
+
         /// <summary>
-        /// Lấy danh sách thực thể
+        /// Lấy danh sách entity
         /// </summary>
-        /// <returns>Danh sách thực thể</returns>
+        /// <returns>Danh sách entity</returns>
         /// CreatedBy: PHDUONG(13/08/2021)
         List<MISAEntity> GetAll();
 
         /// <summary>
-        /// Lấy thông tin thực thể qua Id
+        /// Lấy thông tin entity qua Id
         /// </summary>
-        /// <param name="customerId">Mã định danh thực thể</param>
-        /// <returns>Thông tin thực thể</returns>
+        /// <param name="entityId">Mã định danh entity</param>
+        /// <returns>Thông tin entity</returns>
         /// CreatedBy: PHDUONG(13/08/2021)
         MISAEntity GetById(Guid entityId);
 
         /// <summary>
-        /// Thêm mới thực thể
+        /// Thêm mới entity
         /// </summary>
-        /// <param name="customer">Thông tin thực thể</param>
+        /// <param name="entity">Thông tin entity</param>
         /// CreatedBy: PHDUONG(13/08/2021)
         int Add(MISAEntity entity);
 
         /// <summary>
-        /// Sửa thông tin thực thể
+        /// Sửa thông tin entity
         /// </summary>
-        /// <param name="customer">Thông tin thực thể</param>
-        /// <param name="customerId">Mã định danh của thực thể</param>
+        /// <param name="entity">Thông tin entity</param>
+        /// <param name="entityId">Mã định danh của entity</param>
         /// CreatedBy: PHDUONG(13/08/2021)
         int Update(MISAEntity entity, Guid entityId);
 
         /// <summary>
-        /// Xóa thực thể
+        /// Xóa entity
         /// </summary>
-        /// <param name="customer">Mã định danh của thực thể</param>
+        /// <param name="entityId">Mã định danh của entity</param>
         /// CreatedBy: PHDUONG(13/08/2021)
         int Delete(Guid entityId);
+        #endregion
     }
 }

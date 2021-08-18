@@ -103,7 +103,7 @@ namespace MISA.Core.Entities
         /// Khóa ngoại 
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public Guid CustomerGroupId { get; set; }
+        public Guid? CustomerGroupId { get; set; }
 
         #endregion
 

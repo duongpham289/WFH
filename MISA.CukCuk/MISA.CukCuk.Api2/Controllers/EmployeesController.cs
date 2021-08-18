@@ -8,71 +8,66 @@ namespace MISA.CukCuk.Api2.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : BaseEntityController<Employee>
     {
-        IEmployeeRepository _employeeRepository;
-        IEmployeeService _employeeService;
+        #region DECLARE
 
-        public EmployeesController(IEmployeeRepository employeeRepository, IEmployeeService employeeService)
+        //IEmployeeRepository _employeeRepository;
+        IEmployeeService _employeeService;
+        #endregion
+
+        #region Constructor
+        public EmployeesController(IEmployeeService employeeService, IBaseService<Employee> baseService, IBaseRepository<Employee> baseRepository) : base(baseService, baseRepository)
         {
-            _employeeRepository = employeeRepository;
+            //_employeeRepository = employeeRepository;
             _employeeService = employeeService;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        #endregion
+
+
+        #region Methods
+
+        /// <summary>
+        /// Lấy thông tin phân trang nhân viên
+        /// </summary>
+        /// <returns>Dữ liệu phân trang</returns>
+        /// CreatedBy:PHDUONG(07/08/2021)
+        [HttpGet("paging")]
+        public IActionResult GetCustomersPaging([FromQuery] int pageIndex, [FromQuery] int pageSize, [FromQuery] string employeeFilter, [FromQuery] Guid? departmentId, [FromQuery] Guid? positionId)
         {
             try
             {
 
-                var employees = _employeeRepository.GetAll();
-                if (employees.Count > 0)
+                var serviceResult = _employeeService.GetPaging(pageIndex, pageSize, employeeFilter, departmentId, positionId);
+
+                if (serviceResult.Data.ToString() != String.Empty)
                 {
-                    return StatusCode(200, employees);
+
+                    //4. Tra ve cho client
+                    return StatusCode(200, serviceResult);
                 }
                 else
                 {
                     return NoContent();
                 }
+
             }
             catch (Exception ex)
             {
-
                 var errorObj = new
                 {
                     devMsg = ex.Message,
                     userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
                 };
                 return StatusCode(500, errorObj);
             }
+
         }
+        #endregion
 
-        [HttpPost]
-        public IActionResult Add(Employee employee)
-        {
-            try
-            {
-                var serviceReSult = _employeeService.Add(employee);
-
-                if (serviceReSult.IsValid == true)
-                {
-                    return Ok(serviceReSult.Data);
-                }
-                else
-                {
-                    return BadRequest(serviceReSult);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                var errorObj = new
-                {
-                    devMsg = ex.Message,
-                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
-                };
-                return StatusCode(500, errorObj);
-            }
-        }
     }
 }

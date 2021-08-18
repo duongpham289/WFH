@@ -12,11 +12,39 @@ namespace MISA.Core.Services
 {
     public class CustomerService : BaseService<Customer>, ICustomerService
     {
+        #region DECLARE
+        ICustomerRepository _customerRepository;
+        #endregion
 
-        public CustomerService(IBaseRepository<Customer> baseRepository):base(baseRepository)
+        #region Constructor
+        public CustomerService(ICustomerRepository customerRepository, IBaseRepository<Customer> baseRepository) : base(baseRepository)
         {
-
+            _customerRepository = customerRepository;
         }
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Xử lí dữ liệu khách hàng phân trang
+        /// </summary>
+        /// <param name="pageIndex">Trang hiện tại</param>
+        /// <param name="pageSize">Số bản ghi/trang</param>
+        /// <param name="customerFilter">Dữ liệu lọc phân trang</param>
+        /// <param name="customerGroupId">Mã định danh nhóm khách hàng</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(13/08/2021)
+        public ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId)
+        {
+            _serviceResult.Data = _customerRepository.GetPaging(pageIndex, pageSize, customerFilter, customerGroupId);
+
+            return _serviceResult;
+        }
+        #endregion
+
+
+
+        #region ValidateMethods
 
         /// <summary>
         /// Validate dữ liệu
@@ -65,5 +93,7 @@ namespace MISA.Core.Services
             return _serviceResult.IsValid;
 
         }
+        #endregion
+
     }
 }

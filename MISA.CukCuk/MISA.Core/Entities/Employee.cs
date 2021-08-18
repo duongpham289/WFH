@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.Core.MISAAttribute;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace MISA.Core.Entities
         /// </summary>
         public Guid EmployeeId { get; set; }
 
+        [MISARequired("Mã nhân viên")]
         /// <summary>
         /// Mã khách hàng
         /// Author:PHDUONG(07/08/2021)
@@ -32,6 +34,7 @@ namespace MISA.Core.Entities
         /// </summary>
         public string LastName { get; set; }
 
+        [MISARequired("Họ và tên")]
         /// <summary>
         /// Họ và tên
         /// Author:PHDUONG(07/08/2021)
@@ -45,11 +48,18 @@ namespace MISA.Core.Entities
         public int? Gender { get; set; }
 
         /// <summary>
+        /// Giới tính 
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string GenderName { get; set; }
+
+        /// <summary>
         /// Ngày sinh
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
         public DateTime? DateOfBirth { get; set; }
 
+        [MISARequired("Số điện thoại")]
         /// <summary>
         /// Số điện thoại
         /// Author:PHDUONG(07/08/2021)
@@ -107,19 +117,31 @@ namespace MISA.Core.Entities
         /// Khóa ngoại
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public Guid QualificationId { get; set; }
+        public Guid? QualificationId { get; set; }
 
         /// <summary>
         /// Khóa ngoại
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public Guid DepartmentId { get; set; }
+        public Guid? DepartmentId { get; set; }
+
+        /// <summary>
+        /// Tên phòng ban
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string DepartmentName { get; set; }
 
         /// <summary>
         /// Khóa ngoại 
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
-        public Guid PositionId { get; set; }
+        public Guid? PositionId { get; set; }
+
+        /// <summary>
+        ///Tên vị trí
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string PositionName { get; set; }
 
         /// <summary>
         /// Tình trạng công việc

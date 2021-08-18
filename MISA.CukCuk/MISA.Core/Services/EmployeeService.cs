@@ -8,12 +8,35 @@ namespace MISA.Core.Services
 {
     public class EmployeeService : BaseService<Employee>, IEmployeeService
     {
-        //IEmployeeRepository _employeeRepository;
+        #region DECLARE
 
-        public EmployeeService(IBaseRepository<Employee> baseRepository):base(baseRepository)
+        IEmployeeRepository _employeeRepository;
+        #endregion
+
+        #region Constructor
+        public EmployeeService(IEmployeeRepository employeeRepository, IBaseRepository<Employee> baseRepository) : base(baseRepository)
         {
-            //_employeeRepository = employeeRepository;
+            _employeeRepository = employeeRepository;
         }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Lấy danh sách nhân viên phân trang từ DataBase
+        /// </summary>
+        /// <returns>Danh sách nhân viên và dữ liệu phân trang</returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
+        public ServiceResult GetPaging(int pageIndex, int pageSize, string employeeFilter, Guid? departmentId, Guid? positionId)
+        {
+
+            _serviceResult.Data = _employeeRepository.GetPaging(pageIndex, pageSize, employeeFilter, departmentId, positionId);
+
+            return _serviceResult;
+        }
+        #endregion
+
+
+        #region ValidateData
 
         /// <summary>
         /// Validate dữ liệu
@@ -38,8 +61,9 @@ namespace MISA.Core.Services
                 _serviceResult.Data = errorObj;
                 return _serviceResult.IsValid;
             }
+            //2. Mã nhân viên không được phép trùng
 
-            //2. Email phải đúng định dạng
+            //3. Email phải đúng định dạng
 
             var emailFormat = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
@@ -62,5 +86,7 @@ namespace MISA.Core.Services
             return _serviceResult.IsValid;
 
         }
+        #endregion
+
     }
 }

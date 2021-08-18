@@ -13,16 +13,24 @@ namespace MISA.Infrastructure.Repository
 {
     public class BaseRepository<MISAEntity> : IBaseRepository<MISAEntity>
     {
+        #region DECLARE
 
-        private readonly IConfiguration _configuration;
-        protected IDbConnection dbConnection;
+        protected readonly IConfiguration _configuration;
+        protected IDbConnection _dbConnection;
         string _className;
+        #endregion
+
+        #region Constructor
         public BaseRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection"));
+
             _className = typeof(MISAEntity).Name;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Lấy danh sách Thực thể từ DataBase
@@ -31,9 +39,13 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public List<MISAEntity> GetAll()
         {
-            var entities = dbConnection.Query<MISAEntity>($"Proc_Get{_className}s", commandType: CommandType.StoredProcedure);
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
 
-            return entities.AsList();
+                var entities = _dbConnection.Query<MISAEntity>($"Proc_Get{_className}s", commandType: CommandType.StoredProcedure);
+
+                return entities.AsList();
+            }
         }
 
         /// <summary>
@@ -43,11 +55,15 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public MISAEntity GetById(Guid entityId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add($"@{_className}Id", entityId);
-            var entities = dbConnection.QueryFirstOrDefault<MISAEntity>($"Proc_Get{_className}ById", param: parameters, commandType: CommandType.StoredProcedure);
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
 
-            return entities;
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add($"@{_className}Id", entityId);
+                var entities = _dbConnection.QueryFirstOrDefault<MISAEntity>($"Proc_Get{_className}ById", param: parameters, commandType: CommandType.StoredProcedure);
+
+                return entities;
+            }
         }
 
         /// <summary>
@@ -57,29 +73,34 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public int Add(MISAEntity entity)
         {
-            var dynamicParam = new DynamicParameters();
-
-            ////3. Them du lieu vao db:
-
-            ////Doc tung prop cua obj:
-            var properties = entity.GetType().GetProperties();
-
-            ////Duyet tung prop:
-            foreach (var prop in properties)
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                //lay ten cua prop
-                var propName = prop.Name;
+                var transaction = _dbConnection.BeginTransaction();
+                var dynamicParam = new DynamicParameters();
 
-                //lay val cu prop
-                var propValue = prop.GetValue(entity);
+                ////3. Them du lieu vao db:
 
-                //Them param tuong ung voi moi prop
-                dynamicParam.Add($"@{propName}", propValue);
+                ////Doc tung prop cua obj:
+                var properties = entity.GetType().GetProperties();
+
+                ////Duyet tung prop:
+                foreach (var prop in properties)
+                {
+                    //lay ten cua prop
+                    var propName = prop.Name;
+
+                    //lay val cu prop
+                    var propValue = prop.GetValue(entity);
+
+                    //Them param tuong ung voi moi prop
+                    dynamicParam.Add($"@{propName}", propValue);
+                }
+                
+                var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
+                transaction.Commit();
+
+                return rowsEffect;
             }
-
-            var rowsEffect = dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
-
-            return rowsEffect;
         }
 
         /// <summary>
@@ -89,33 +110,37 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public int Update(MISAEntity entity, Guid entityId)
         {
-            var dynamicParam = new DynamicParameters();
-
-            ////3. Them du lieu vao db:
-
-            ////Doc tung prop cua obj:
-            var properties = entity.GetType().GetProperties();
-
-            ////Duyet tung prop:
-            foreach (var prop in properties)
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                //lay ten cua prop
-                var propName = prop.Name;
 
-                //lay val cu prop
-                var propValue = prop.GetValue(entity);
+                var dynamicParam = new DynamicParameters();
 
-                //Them param tuong ung voi moi prop
-                if (propValue != null)
+                ////3. Them du lieu vao db:
+
+                ////Doc tung prop cua obj:
+                var properties = entity.GetType().GetProperties();
+
+                ////Duyet tung prop:
+                foreach (var prop in properties)
                 {
-                    dynamicParam.Add($"@{propName}", propValue);
+                    //lay ten cua prop
+                    var propName = prop.Name;
+
+                    //lay val cu prop
+                    var propValue = prop.GetValue(entity);
+
+                    //Them param tuong ung voi moi prop
+                    if (propValue != null)
+                    {
+                        dynamicParam.Add($"@{propName}", propValue);
+                    }
+
                 }
 
+                var rowsEffect = _dbConnection.Execute($"Proc_Update{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
+
+                return rowsEffect;
             }
-
-            var rowsEffect = dbConnection.Execute($"Proc_Update{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
-
-            return rowsEffect;
         }
 
         /// <summary>
@@ -125,11 +150,16 @@ namespace MISA.Infrastructure.Repository
         /// CreatedBy: PHDUONG(17/08/2021)
         public int Delete(Guid entityId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add($"@{_className}Id", entityId);
-            var rowsEffect = dbConnection.Execute($"Proc_Delete{_className}", param: parameters, commandType: CommandType.StoredProcedure);
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
 
-            return rowsEffect;
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add($"@{_className}Id", entityId);
+                var rowsEffect = _dbConnection.Execute($"Proc_Delete{_className}", param: parameters, commandType: CommandType.StoredProcedure);
+
+                return rowsEffect;
+            }
         }
+        #endregion
     }
 }

@@ -11,43 +11,51 @@ namespace MISA.Infrastructure.Repository
 {
     public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
-
-        public CustomerRepository(IConfiguration configuration):base(configuration)
+        #region Constructor
+        public CustomerRepository(IConfiguration configuration) : base(configuration)
         {
 
         }
+        #endregion
 
-
+        #region Methods
 
         /// <summary>
-        /// Lấy danh sách Thực thể từ DataBase
+        /// Lấy danh sách khách hàng phân trang từ DataBase
         /// </summary>
-        /// <returns>List Thực thể</returns>
+        /// <returns>Danh sách khách hàng và dữ liệu phân trang</returns>
         /// CreatedBy: PHDUONG(17/08/2021)
-        public Object GetPaging(int pageIndex, int pageSize)
+        public Object GetPaging(int pageIndex, int pageSize, string customerFilter, Guid customerGroupId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@PageIndex", pageIndex);
-            parameters.Add("@pageSize", pageSize);
-            parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
-            parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-            var data = dbConnection.Query<Customer>($"Proc_GetCustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
-            var dataCount = data.AsList().Count;
-
-            var totalPage = parameters.Get<Int32>("@TotalPage");
-            var totalRecord = parameters.Get<Int32>("@TotalRecord");
-
-
-            var pagingData = new
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                totalPage,
-                totalRecord,
-                dataCount,
-                data
-            };
 
-            return pagingData;
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@CustomerFilter", customerFilter);
+                parameters.Add("@CustomerGroupId", customerGroupId);
+                parameters.Add("@PageIndex", pageIndex);
+                parameters.Add("@pageSize", pageSize);
+                parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                var data = _dbConnection.Query<Customer>($"Proc_GetCustomersPaging", param: parameters, commandType: CommandType.StoredProcedure);
+
+                var totalPage = parameters.Get<Int32>("@TotalPage");
+                var totalRecord = parameters.Get<Int32>("@TotalRecord");
+
+
+                var pagingData = new
+                {
+                    totalPage,
+                    totalRecord,
+                    data
+                };
+
+                return pagingData;
+            }
         }
+        #endregion
+
+
     }
 }
