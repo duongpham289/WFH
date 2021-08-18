@@ -105,6 +105,10 @@
               "target": "Package",
               "version": "[2.0.90, )"
             },
+            "Microsoft.Extensions.PlatformAbstractions": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "MySqlConnector": {
               "target": "Package",
               "version": "[1.3.11, )"

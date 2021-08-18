@@ -8,15 +8,10 @@
     </label>
     <div class="field-input">
       <input
-      
         class="input"
-        :class="[
-          { 'pl-12': iconLeft === true },
-          { 'pr-12': iconRight === true },
-          { 'input--alert': errorMsg },
-          classes,
-        ]"
+        :class="customClass"
         :type="type"
+        :max="maxDate"
         :placeholder="placeholder"
         :value="valueClone"
         @input="onChangeInput"
@@ -100,7 +95,16 @@ export default {
   emits: ["handle-input"],
 
   data() {
-    return { valueClone: "" };
+    return {
+      valueClone: "",
+      customClass: [
+        { "pl-12": this.iconLeft === true },
+        { "pr-12": this.iconRight === true },
+        { "input--alert": this.errorMsg },
+        this.classes,
+      ],
+      maxDate: this.type == 'date' ? new Date().toISOString().split('T')[0] : null
+    };
   },
 
   watch: {
@@ -111,6 +115,8 @@ export default {
     value(newVal) {
       this.valueClone = this.formatData(this.type, newVal);
     },
+
+
   },
 
   methods: {

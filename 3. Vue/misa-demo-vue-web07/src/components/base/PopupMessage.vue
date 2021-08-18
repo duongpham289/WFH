@@ -40,7 +40,7 @@
 </template>
 
 <script>
-const $ = require("jquery");
+// const $ = require("jquery");
 
 export default {
   props: {
@@ -60,7 +60,7 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnCancelOnClick() {
-      $(".checkbox").prop("checked", false);
+      // $(".checkbox").prop("checked", false);
       this.$emit("btnDelOnClick", true);
     },
     /**
@@ -75,7 +75,7 @@ export default {
           .then(() => {
             if (index == this.datasToDelete.length - 1) {
               this.$emit("btnDelOnClick", true);
-              this.$emit("btnReloadOnClick");
+              // this.$emit("btnReloadOnClick");
             }
             console.log("Xóa thành công");
           })

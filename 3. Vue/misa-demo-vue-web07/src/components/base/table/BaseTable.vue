@@ -2,7 +2,12 @@
   <table class="content__table">
     <thead class="table__header">
       <tr>
-        <th></th>
+        <th>
+          <div class="delete-box">
+            <input class="checkbox" type="checkbox" @click="checkAll" />
+            <span class="checkmark"></span>
+          </div>
+        </th>
         <th v-for="col in columns" :key="col.name" :class="col.className">
           {{ col.label }}
         </th>
@@ -16,7 +21,12 @@
       >
         <td>
           <div class="delete-box">
-            <input class="checkbox" type="checkbox" @click="checkBoxOnClick(item[columns[0].id],item[columns[1].name], $event)" />
+            <input
+              class="checkbox"
+              type="checkbox"
+              v-model="checkedId"
+              :value="{ id: item[columns[0].id], code: item[columns[1].name] }"
+            />
             <span class="checkmark"></span>
           </div>
         </td>
@@ -31,6 +41,8 @@
 <script>
 import FormatData from "@/utils/format/FormatData.js";
 
+const $ = require("jquery");
+
 export default {
   name: "base-table",
   props: {
@@ -43,6 +55,12 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      checkedId: [],
+      checked: 0,
+    };
+  },
   methods: {
     /**
      * Mở modal khi double click
@@ -51,13 +69,25 @@ export default {
     rowOnDblClick(id) {
       this.$emit("rowOnDblClick", id);
     },
-    
-    /**
-     * Check box hiển thị khi nhấn
-     * Author: PHDUONG(3/8/2021)
-     */
-    checkBoxOnClick(id, name, event) {
-      this.$emit("checkBoxOnClick", id, name, event);
+
+    checkAll() {
+      var vm = this;
+      vm.checked++;
+      if (vm.checked == 1) {
+        $(".checkbox").prop("checked", true);
+        for (let index = 0; index <= vm.data.length - 1; index++) {
+          vm.checkedId.push({
+            id: vm.data[index].id,
+            code: vm.data[index].name,
+          });
+        }
+        vm.$emit("checkBoxOnClick", vm.checkedId);
+      } else {
+        $(".checkbox").prop("checked", false);
+        vm.checkedId = [];
+        vm.$emit("checkBoxOnClick", vm.checkedId);
+        vm.checked = 0;
+      }
     },
 
     /**
@@ -68,7 +98,7 @@ export default {
       let tmp = item;
 
       if (col.format === this.$enum.DATE) {
-        tmp = FormatData.formatDate(tmp,false);
+        tmp = FormatData.formatDate(tmp, false);
       }
 
       if (col.format === this.$enum.MONEY) {
@@ -79,6 +109,13 @@ export default {
       }
 
       return tmp;
+    },
+  },
+
+  watch: {
+    checkedId: function () {
+
+      this.$emit("checkBoxOnClick", this.checkedId);
     },
   },
 };

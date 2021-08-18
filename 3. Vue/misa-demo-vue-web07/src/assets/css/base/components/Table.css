@@ -45,7 +45,7 @@
     }
 
     /* Check Box */
-    .content__table .table__body .delete-box {
+    .content__table .delete-box {
         position: relative;
         width: 20px;
         height: 20px;
@@ -59,7 +59,7 @@
         cursor: pointer;
     }
 
-        .content__table .table__body .delete-box input {
+        .content__table .delete-box input {
             position: absolute;
             opacity: 0;
             width: 20px;
@@ -71,7 +71,7 @@
             cursor: pointer;
         }
 
-        .content__table .table__body .delete-box .checkmark {
+        .content__table .delete-box .checkmark {
             position: absolute;
             top: 0;
             left: 0;
@@ -80,25 +80,25 @@
             background-color: var(--color-white);
         }
 
-        .content__table .table__body .delete-box:hover input ~ .checkmark {
+        .content__table .delete-box:hover input ~ .checkmark {
             background-color: var(--color-gray);
         }
 
-        .content__table .table__body .delete-box input:checked ~ .checkmark {
+        .content__table .delete-box input:checked ~ .checkmark {
             background-color: var(--color-primary);
         }
 
-        .content__table .table__body .delete-box .checkmark:after {
+        .content__table .delete-box .checkmark:after {
         content: "";
         position: absolute;
         display: none;
         }
 
-        .content__table .table__body .delete-box input:checked ~ .checkmark:after {
+        .content__table .delete-box input:checked ~ .checkmark:after {
         display: block;
         }
 
-        .content__table .table__body .delete-box .checkmark:after {
+        .content__table .delete-box .checkmark:after {
             left: 5px;
             top: 1px;
             width: 5px;

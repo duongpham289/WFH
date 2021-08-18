@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 using MISA.Core.Interfaces.Repository;
 using MISA.Core.Interfaces.Services;
@@ -13,7 +14,9 @@ using MISA.Core.Services;
 using MISA.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Api2
@@ -26,15 +29,25 @@ namespace MISA.CukCuk.Api2
         }
 
         public IConfiguration Configuration { get; }
+        static string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddControllers();
 
-            services.AddSwaggerGen();
-
+            services.AddSwaggerGen(options => {
+                options.IncludeXmlComments(XmlCommentsFilePath);
+            });
             services.AddControllers().AddJsonOptions(jsonOptions =>
             {
                 jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;

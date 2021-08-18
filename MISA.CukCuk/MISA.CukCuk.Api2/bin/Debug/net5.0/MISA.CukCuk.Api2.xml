@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MISA.CukCuk.Api2</name>
+    </assembly>
+    <members>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Get">
+            <summary>
+            Lấy toàn bộ dữ liệu
+            </summary>
+            <returns>Danh sách Thực thể dạng Json</returns>
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.GetById(System.Guid)">
+            <summary>
+            Lấy theo Id
+            </summary>
+            <param name="entityId">Id của Thực thể</param>
+            <returns>Thông tin Thực thể dạng Json</returns>
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Insert(`0)">
+            <summary>
+            Thêm mới 1 bản ghi vào cơ sở dữ liệu
+            </summary>
+            <returns></returns>
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Update(`0,System.Guid)">
+            <summary>
+            Sửa thông tin của đối tượng
+            </summary>
+            <returns></returns>
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Delete(System.Guid)">
+            <summary>
+            Xóa một đối tượng theo khóa chính
+            </summary>
+            <param name="entityId"></param>
+            <returns></returns>
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.CustomersController.GetCustomersPaging(System.Int32,System.Int32,System.String,System.Nullable{System.Guid})">
+            <summary>
+            Lấy thông tin phân trang Khách hàng
+            </summary>
+            <returns>Dữ liệu phân trang</returns>
+            CreatedBy:PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.EmployeesController.GetCustomersPaging(System.Int32,System.Int32,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
+            <summary>
+            Lấy thông tin phân trang nhân viên
+            </summary>
+            <returns>Dữ liệu phân trang</returns>
+            CreatedBy:PHDUONG(07/08/2021)
+        </member>
+        <member name="T:MISA.CukCuk.Api2.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MISA.CukCuk.Api2.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MISA.CukCuk.Api2.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MISA.CukCuk.Api2.Properties.Resources.Server_ErrorMsg">
+            <summary>
+              Looks up a localized string similar to Có lỗi xảy ra, vui lòng liên hệ MISA.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -192,7 +192,6 @@ export default {
      */
     btnReloadOnClick() {
       $(".checkbox").prop("checked", false);
-      debugger;
       this.employeesToDelete = [];
       this.isReset = true;
       this.employeesData = [];
@@ -217,8 +216,8 @@ export default {
     btnDelOnClick(isHidden) {
       this.isHiddenPopupMessage = isHidden;
       if (isHidden) {
-        this.employeesToDelete = [];
-        $("tr").css("background-color", "#FFF");
+        // this.employeesToDelete = [];
+        // $("tr").css("background-color", "#FFF");
       }
     },
 
@@ -226,24 +225,19 @@ export default {
      * Hiển thị button delete và checkbox
      * Author: PHDUONG(29/07/2021)
      */
-    checkBoxOnClick(employeeId, employeeCode, event) {
-      // debugger
-      event.target.setAttribute("checked", event.target.checked);
-      // debugger;
+    checkBoxOnClick(checkedId) {
+      if (checkedId.length > 0) {
+        // debugger;
+        this.employeesToDelete = [];
 
-      if (event.target.getAttribute("checked") === "true") {
-        this.employeesToDelete.push({ id: employeeId, code: employeeCode });
-        event.target.parentNode.parentNode.parentNode.style.backgroundColor =
-          "#EBF9F4";
+        for (let index = 0; index <= checkedId.length - 1; index++) {
+          this.employeesToDelete.push({
+            id: checkedId[index].id,
+            code: checkedId[index].code,
+          });
+        }
       } else {
-        var removeIndex = this.employeesToDelete
-          .map(function (item) {
-            return item.id;
-          })
-          .indexOf(employeeId);
-        this.employeesToDelete.splice(removeIndex, 1);
-        event.target.parentNode.parentNode.parentNode.style.backgroundColor =
-          "#fff";
+        this.employeesToDelete = [];
       }
     },
 

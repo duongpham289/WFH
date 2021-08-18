@@ -29,9 +29,9 @@ namespace MISA.CukCuk.Api2.Controllers
         #region Methods
 
         /// <summary>
-        /// Lấy danh sách Khách hàng
+        /// Lấy toàn bộ dữ liệu
         /// </summary>
-        /// <returns>Danh sách khách hàng dạng Json</returns>
+        /// <returns>Danh sách Thực thể dạng Json</returns>
         /// CreatedBy: PHDUONG(07/08/2021)
         [HttpGet]
         public virtual IActionResult Get()
@@ -69,10 +69,10 @@ namespace MISA.CukCuk.Api2.Controllers
         }
 
         /// <summary>
-        /// Lấy thông tin Khách hàng theo Id
+        /// Lấy theo Id
         /// </summary>
-        /// <param name="entityId">Id của khách hàng</param>
-        /// <returns>Thông tin Khách hàng dạng Json</returns>
+        /// <param name="entityId">Id của Thực thể</param>
+        /// <returns>Thông tin Thực thể dạng Json</returns>
         /// CreatedBy: PHDUONG(07/08/2021)
         [HttpGet("{entityId}")]
         public virtual IActionResult GetById(Guid entityId)
@@ -109,7 +109,7 @@ namespace MISA.CukCuk.Api2.Controllers
         }
 
         /// <summary>
-        /// Thêm Khách Hàng vào cơ sở dữ liệu
+        /// Thêm mới 1 bản ghi vào cơ sở dữ liệu
         /// </summary>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(07/08/2021)
@@ -147,7 +147,7 @@ namespace MISA.CukCuk.Api2.Controllers
         }
 
         /// <summary>
-        /// Sửa Khách Hàng
+        /// Sửa thông tin của đối tượng
         /// </summary>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(07/08/2021)
@@ -188,7 +188,7 @@ namespace MISA.CukCuk.Api2.Controllers
 
 
         /// <summary>
-        /// Xóa Khách hàng 
+        /// Xóa một đối tượng theo khóa chính
         /// </summary>
         /// <param name="entityId"></param>
         /// <returns></returns>
