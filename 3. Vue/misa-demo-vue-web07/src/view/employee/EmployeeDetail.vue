@@ -29,6 +29,7 @@
             <div class="info-column">
               <base-input
                 ref="EmployeeCode"
+                :readonly="mode"
                 label="Mã nhân viên"
                 id="EmployeeCode"
                 placeholder="NV8888..."
@@ -43,6 +44,7 @@
             </div>
             <div class="info-column">
               <base-input
+                ref="FullName"
                 label="Họ và tên"
                 id="FullName"
                 placeholder="Nguyễn Văn A..."
@@ -310,8 +312,6 @@ export default {
       if (!this.$v.$invalid) {
         let vm = this;
         if (this.mode == 0) {
-          console.log(vm.employee.Salary);
-          debugger;
           EmployeesAPI.create(vm.employee)
             .then(() => {
               alert("Thêm mới thành công");
@@ -376,9 +376,15 @@ export default {
      * Auto Focus vào ô EmployeeCode
      * Autthor: PHDUONG(11/08/2021)
      */
-    autoFocus(){
+    autoFocusWhenAdd(){
       this.$nextTick(() =>{
         this.$refs.EmployeeCode.$el.childNodes[1].childNodes[0].focus();
+      })
+    },
+
+    autoFocusWhenUpdate(){
+      this.$nextTick(() =>{
+        this.$refs.FullName.$el.childNodes[1].childNodes[0].focus();
       })
     }
   },

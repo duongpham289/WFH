@@ -39,13 +39,26 @@ namespace MISA.CukCuk.Api2
             }
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllers();
 
-            services.AddSwaggerGen(options => {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:8080")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
+
+            services.AddSwaggerGen(options =>
+            {
                 options.IncludeXmlComments(XmlCommentsFilePath);
             });
             services.AddControllers().AddJsonOptions(jsonOptions =>
@@ -79,6 +92,8 @@ namespace MISA.CukCuk.Api2
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MISA.CukCuk.Api2 v1"));
             }
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 

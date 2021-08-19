@@ -5,6 +5,9 @@
 		align-items: center;
 		justify-content: space-between;
 	}
+		.content__footer .first-page{
+			background-image: "@/assets/icon/btn-firstpage.svg";
+		}
 		/* Button paginate */
 		.content__footer .pagination .pagination__button {
 			width: 40px;
@@ -16,7 +19,6 @@
 			background-color: var(--color-white);
 			cursor: pointer;
 		}
-
 		.content__footer .pagination .pagination__number {
 			width: 40px;
 			height: 40px;

@@ -35,7 +35,12 @@ namespace MISA.Core.Services
         public ServiceResult Add(MISAEntity entity)
         {
             //2. Validate du lieu va xu ly nghiep vu:
-            if (!ValidateCustom(entity))
+            if (!ValidateData(entity))
+            {
+                _serviceResult.IsValid = ValidateData(entity); 
+                return _serviceResult;
+            }
+            else if (!ValidateCustom(entity))
             {
                 return _serviceResult;
             }
@@ -56,7 +61,12 @@ namespace MISA.Core.Services
         public ServiceResult Update(MISAEntity entity, Guid entityId)
         {
             //validate du lieu va xu ly nghiep vu:
-            if (!ValidateCustom(entity))
+            if (!ValidateData(entity))
+            {
+                _serviceResult.IsValid = ValidateData(entity);
+                return _serviceResult;
+            }
+            else if (!ValidateCustom(entity))
             {
                 return _serviceResult;
             }
@@ -84,7 +94,7 @@ namespace MISA.Core.Services
             // 1. Lay thong tin cac properties:
             var properties = typeof(MISAEntity).GetProperties();
 
-            //2. Xac dinh  viec validate dua tre attribute: (MISARequired - bat buoc check thong tin, khong duoc phep null  hoac de trong)
+            //2. Xac dinh  viec validate dựa trên attribute: (MISARequired - bat buoc check thong tin, khong duoc phep null  hoac de trong)
 
             foreach (var prop in properties)
             {
@@ -97,11 +107,11 @@ namespace MISA.Core.Services
                 var propMISARequireds = prop.GetCustomAttributes(typeof(MISARequired), true);
                 if (propMISARequireds.Length > 0)
                 {
-                    var fieldName = (propMISARequireds[0] as MISARequired).FieldName;
+                    var message = (propMISARequireds[0] as MISARequired)._message;
                     if (prop.PropertyType == typeof(string) && (propValue ==null || propValue.ToString() == string.Empty))
                     {
                         isValid = false;
-                        _serviceResult.Message = $"Thông tin {fieldName} không được để trống!";
+                        _serviceResult.Message = message;
                         return isValid;
                     }
                 }

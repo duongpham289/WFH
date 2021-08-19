@@ -9,6 +9,7 @@
     <div class="field-input">
       <input
         class="input"
+        :readonly="readonly!=0 ? true: false"
         :class="customClass"
         :type="type"
         :max="maxDate"
@@ -51,6 +52,10 @@ export default {
     },
     errorMsg: {
       type: Boolean,
+    },
+    readonly:{
+      type: Number,
+      default: 0
     },
     id: {
       type: String,

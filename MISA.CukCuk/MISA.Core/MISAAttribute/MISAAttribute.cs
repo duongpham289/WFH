@@ -15,11 +15,14 @@ namespace MISA.Core.MISAAttribute
     [AttributeUsage(AttributeTargets.Property)]
     public class MISARequired : Attribute
     {
-        public string FieldName = string.Empty;
+        public string _fieldName = string.Empty;
+        public string _message = string.Empty;
 
         public MISARequired(string fieldName)
         {
-            FieldName = fieldName;
+            _message = $"Thông tin {fieldName} không được để trống!";
+            _fieldName = fieldName;
+
         }
     }
 }

@@ -3,10 +3,10 @@
     <thead class="table__header">
       <tr>
         <th>
-          <div class="delete-box">
+          <!-- <div class="delete-box">
             <input class="checkbox" type="checkbox" @click="checkAll" />
             <span class="checkmark"></span>
-          </div>
+          </div> -->
         </th>
         <th v-for="col in columns" :key="col.name" :class="col.className">
           {{ col.label }}
@@ -16,7 +16,8 @@
     <tbody class="table__body">
       <tr
         v-for="item in data"
-        :key="item.id"
+        :key="item[columns[0].id]"
+        :check="changeColorOnClick(item[columns[0].id])"
         @dblclick="rowOnDblClick(item[columns[0].id])"
       >
         <td>
@@ -41,8 +42,6 @@
 <script>
 import FormatData from "@/utils/format/FormatData.js";
 
-const $ = require("jquery");
-
 export default {
   name: "base-table",
   props: {
@@ -59,6 +58,7 @@ export default {
     return {
       checkedId: [],
       checked: 0,
+      // isCheckAll: false
     };
   },
   methods: {
@@ -70,25 +70,44 @@ export default {
       this.$emit("rowOnDblClick", id);
     },
 
-    checkAll() {
-      var vm = this;
-      vm.checked++;
-      if (vm.checked == 1) {
-        $(".checkbox").prop("checked", true);
-        for (let index = 0; index <= vm.data.length - 1; index++) {
-          vm.checkedId.push({
-            id: vm.data[index].id,
-            code: vm.data[index].name,
-          });
+    /**
+     * Thay đổi màu của row khi click vào checkbox
+     * CreatedBy: PHDUONG(19/08/2021)
+     */
+    changeColorOnClick(id) {
+      var isTrue = false;
+      this.checkedId.find((item)=>{
+        if(item.id===id){
+         isTrue = true
         }
-        vm.$emit("checkBoxOnClick", vm.checkedId);
-      } else {
-        $(".checkbox").prop("checked", false);
-        vm.checkedId = [];
-        vm.$emit("checkBoxOnClick", vm.checkedId);
-        vm.checked = 0;
-      }
+      });
+      return isTrue || this.isCheckAll;
     },
+
+    // /**
+    //  * Chọn tất cả bản ghi
+    //  * CreatedBy: PHDUONG(19/08/2021)
+    //  */
+    // checkAll() {
+    //   var vm = this;
+    //   vm.checked++;
+    //   this.isCheckAll = !this.isCheckAll;
+    //   if (vm.checked == 1) {
+    //     $(".checkbox").prop("checked", true);
+    //     for (let index = 0; index <= vm.data.length - 1; index++) {
+    //       vm.checkedId.push({
+    //         id: vm.data[index].id,
+    //         code: vm.data[index].name,
+    //       });
+    //     }
+    //     vm.$emit("checkBoxOnClick", vm.checkedId);
+    //   } else {
+    //     $(".checkbox").prop("checked", false);
+    //     vm.checkedId = [];
+    //     vm.$emit("checkBoxOnClick", vm.checkedId);
+    //     vm.checked = 0;
+    //   }
+    // },
 
     /**
      * Format dữ liệu trước khi gắn dữ liệu vào bảng
@@ -114,7 +133,6 @@ export default {
 
   watch: {
     checkedId: function () {
-
       this.$emit("checkBoxOnClick", this.checkedId);
     },
   },

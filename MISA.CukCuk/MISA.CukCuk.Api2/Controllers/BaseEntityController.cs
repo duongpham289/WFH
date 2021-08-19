@@ -121,7 +121,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var serviceReSult = _baseService.Add(entity);
 
                 //4. Trả dữ liệu cho client
-                if (serviceReSult.IsValid == true)
+                if ((int)serviceReSult.Data > 0)
                 {
                     return StatusCode(201, serviceReSult.Data);
 
@@ -159,7 +159,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var serviceReSult = _baseService.Update(entity, entityId);
 
                 //4. Tra ve cho client
-                if (serviceReSult.IsValid == true)
+                if ((int)serviceReSult.Data > 0)
                 {
                     return StatusCode(200, serviceReSult.Data);
                 }

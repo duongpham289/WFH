@@ -21,6 +21,14 @@
         background-color: var(--color-white);
     }
 
+    .content__table tr[check=true]{
+        background-color: var(--color-primary-focus);
+    }
+
+    .content__table tr[check=true]:hover{
+        background-color:  var(--color-primary-focus) !important;
+    }
+
     /* Table Header */
     .content__table .table__header th {
         position: sticky;

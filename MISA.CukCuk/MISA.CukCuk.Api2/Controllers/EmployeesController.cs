@@ -66,6 +66,14 @@ namespace MISA.CukCuk.Api2.Controllers
             }
 
         }
+
+
+        [HttpDelete("del")]
+        public IActionResult Delete(dynamic listId)
+        {
+
+            return NoContent();
+        }
         #endregion
 
     }

@@ -26,8 +26,8 @@ export default class BaseAPI {
    * Hàm lấy dữ liệu phân trang
    * @param {*} payload
    */
-  paging(payload) {
-    return BaseAPIConfig.post(`${this.controller}/paging`, payload);
+  paging(pageIndex, pageSize, entityFilter) {
+    return BaseAPIConfig.get(`${this.controller}/paging?pageIndex=${pageIndex}&pageSize=${pageSize}&entityFilter=${entityFilter}`);
   }
   /**
    * Hàm cập nhật dữ liệu
@@ -41,7 +41,7 @@ export default class BaseAPI {
    * Hàm xóa bản ghi
    * @param {*} id
    */
-  delete(id) {
-    return BaseAPIConfig.delete(`${this.controller}/delete/${id}`);
+  delete(listId) {
+    return BaseAPIConfig.delete(`${this.controller}/del`,listId);
   }
 }

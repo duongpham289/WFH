@@ -81,7 +81,13 @@
           @checkBoxOnClick="checkBoxOnClick"
         />
       </div>
-      <base-pagination />
+      <base-pagination
+        :pageIndex="pageIndex"
+        @getPageSize="getPageSize"
+        :totalPage="totalPage"
+        :totalRecord="totalRecord"
+        @pagingOnChange="pagingOnChange"
+      />
     </div>
     <EmployeeDetailDialog
       v-bind:isHidden="isHiddenDialogDetail"
@@ -118,7 +124,7 @@ export default {
   name: "EmployeePage",
   components: { EmployeeDetailDialog, PopupMessage, BaseSpinner },
   created() {
-    this.getEmployeeData();
+    this.getEmployeePagingData(this.pageIndex, this.pageSize);
     this.getDropdownData();
   },
   methods: {
@@ -128,18 +134,31 @@ export default {
      * Lấy dữ liệu nhân viên từ Api
      * Author: PHDUONG(08/08/2021)
      */
-    getEmployeeData() {
+    getEmployeePagingData(pageIndex, pageSize, employeeFilter) {
       var vm = this;
       vm.loading = true;
 
-      EmployeesAPI.getAll()
+      EmployeesAPI.paging(pageIndex, pageSize, employeeFilter)
         .then((res) => {
-          vm.employeesData = res.data;
+          vm.employeesData = res.data.data;
+          vm.totalPage = res.data.totalPage;
+          vm.totalRecord = res.data.totalRecord;
           vm.loading = false;
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+
+    pagingOnChange(pageIndex, pageSize) {
+      this.pageIndex = pageIndex;
+      this.pageSize = pageSize;
+      this.getEmployeePagingData(pageIndex, pageSize);
+    },
+
+    getPageSize(pageIndex,pageSize) {
+      this.pageSize = pageSize;
+      this.getEmployeePagingData(pageIndex,this.pageSize)
     },
 
     getDropdownData() {
@@ -181,7 +200,7 @@ export default {
     btnAddOnClick(isHidden) {
       this.isHiddenDialogDetail = isHidden;
       this.modeFormDetail = 0;
-      this.$refs.EmployeeDetailDialog.autoFocus();
+      this.$refs.EmployeeDetailDialog.autoFocusWhenAdd();
       $("input").val("");
       this.employeeId = "";
     },
@@ -195,7 +214,7 @@ export default {
       this.employeesToDelete = [];
       this.isReset = true;
       this.employeesData = [];
-      this.getEmployeeData();
+      this.getEmployeePagingData(this.pageIndex, this.pageSize);
     },
 
     /**
@@ -205,7 +224,7 @@ export default {
     rowOnDblClick(empId) {
       this.isHiddenDialogDetail = false;
       this.employeeId = empId;
-      this.$refs.EmployeeDetailDialog.autoFocus();
+      this.$refs.EmployeeDetailDialog.autoFocusWhenUpdate();
       this.modeFormDetail = 1;
     },
 
@@ -245,6 +264,11 @@ export default {
   },
   data() {
     return {
+      pageIndex: 1,
+      pageSize: 10,
+      totalPage: 0,
+      totalRecord: 0,
+      employeeFilter: null,
       employeesData: [],
       employeeId: "",
       employeeCode: "",

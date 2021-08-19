@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import EmployeesAPI from "@/api/components/EmployeesAPI.js";
 // const $ = require("jquery");
 
 export default {
@@ -53,6 +54,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      // listId:[]
+    };
   },
   methods: {
     /**
@@ -68,21 +74,35 @@ export default {
      * Author: PHDUONG(31/07/2021)
      */
     btnDelDataOnClick() {
-      // debugger
-      this.datasToDelete.forEach((data, index) => {
-        this.$api
-          .delete(`http://cukcuk.manhnv.net/v1/Employees/${data.id}`)
-          .then(() => {
-            if (index == this.datasToDelete.length - 1) {
-              this.$emit("btnDelOnClick", true);
-              // this.$emit("btnReloadOnClick");
-            }
-            console.log("Xóa thành công");
-          })
-          .catch((res) => {
-            console.log(res);
-          });
+      var listId = [];
+      this.datasToDelete.forEach((data) => {
+        listId.push(data.id);
       });
+
+      // console.log(listId);
+      // console.log(JSON.stringify({ listId }));
+      // console.log({ listId });
+      // debugger
+      EmployeesAPI.delete(listId)
+        .then(() => {
+          debugger;
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+      // this.datasToDelete.forEach((data, index) => {
+      //   EmployeesAPI.delete(data.id)
+      //     .then(() => {
+      //       if (index == this.datasToDelete.length - 1) {
+      //         this.$emit("btnDelOnClick", true);
+      //         // this.$emit("btnReloadOnClick");
+      //       }
+      //       console.log("Xóa thành công");
+      //     })
+      //     .catch((res) => {
+      //       console.log(res);
+      //     });
+      // });
     },
   },
 };

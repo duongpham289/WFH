@@ -1,32 +1,189 @@
 <template>
   <div class="content__footer">
-    <p>Hiển thị 1-10/10000 nhân viên</p>
+    <p>
+      Hiển thị
+      <span style="font-weight: bold">
+        {{ (currentPage - 1) * pageSize + 1 }}-{{ pageSize }}/{{
+          totalRecord
+        }}</span
+      >
+      nhân viên
+    </p>
     <div class="pagination">
-      <img
+      <button
         src="@/assets/icon/btn-firstpage.svg"
-        alt="First Page"
-        class="pagination__button"
-      />
-      <img
+        class="pagination__button first-page"
+        :disabled="isInFirstPage"
+        @click="onClickFirstPage"
+      ></button>
+      <button
         src="@/assets/icon/btn-prev-page.svg"
-        alt="Previous Page"
         class="pagination__button"
-      />
-      <div class="pagination__number active"><p>1</p></div>
-      <div class="pagination__number"><p>2</p></div>
-      <div class="pagination__number"><p>3</p></div>
-      <div class="pagination__number"><p>4</p></div>
-      <img
+        :disabled="isInFirstPage"
+        @click="onClickPrevPage"
+      ></button>
+      <button
+        class="pagination__number active"
+        v-for="page in pages"
+        :key="page.name"
+        @click="selectPage(page.name)"
+        :disabled="page.isDisabled"
+      >
+        <p>{{ page.name }}</p>
+      </button>
+      <button
         src="@/assets/icon/btn-next-page.svg"
-        alt="Next Page"
         class="pagination__button"
-      />
-      <img
+        :disabled="isInLastPage"
+        @click="onClickNextPage"
+      ></button>
+      <button
         src="@/assets/icon/btn-lastpage.svg"
-        alt="Last Page"
         class="pagination__button"
-      />
+        :disabled="isInLastPage"
+        @click="onClickLastPage"
+      ></button>
     </div>
-    <p>10 nhân viên/trang</p>
+    <div>
+      <select v-model="pageSize">
+        <option>10</option>
+        <option>15</option>
+        <option>20</option>
+        <option>25</option>
+        <option>30</option>
+        <option>35</option>
+      </select>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentPage: 1,
+      maxVisibleButtons: 4,
+      pageSize: 10,
+    };
+  },
+  props: {
+    pageIndex: {
+      type: Number,
+      required: true,
+    },
+    // pageSize: {
+    //   type: Number,
+    //   required: true,
+    // },
+    totalPage: {
+      type: Number,
+      required: true,
+    },
+    totalRecord: {
+      type: Number,
+      required: true,
+    },
+  },
+  computed: {
+    // nếu đang ở index đầu (===1) thì disable btn
+    isInFirstPage: function () {
+      return this.currentPage === 1;
+    },
+
+    // nếu đang ở index cuối(===totalPage) thì disable btn
+    isInLastPage: function () {
+      return this.currentPage === this.totalPage;
+    },
+
+    //tạo index đầu
+    startPage: function () {
+      if (this.currentPage === 1) {
+        return 1;
+      }
+
+      if (this.currentPage === this.totalPage) {
+        return this.totalPage - this.maxVisibleButtons + 1;
+      }
+
+      // if (this.totalPage - this.currentPage < this.maxVisibleButtons) {
+      //   return this.totalPage - this.maxVisibleButtons + 1;
+      // }
+
+      return this.currentPage - 1;
+    },
+
+    //tạo index cuối
+    endPage: function () {
+      return Math.min(
+        this.startPage + this.maxVisibleButtons - 1,
+        this.totalPage
+      );
+    },
+
+    // tạo các index từ index đầu(startPage) đến index cuối(endPage)
+    pages: function () {
+      const range = [];
+
+      for (let i = this.startPage; i <= this.endPage; i += 1) {
+        range.push({
+          name: i,
+          isDisabled: i === this.currentPage,
+        });
+      }
+
+      return range;
+    },
+  },
+
+  methods: {
+    // chọn index trang đầu tiên(=1)
+    onClickFirstPage() {
+      this.currentPage = 1;
+    },
+
+    getEmployeePagingData(page, pageSize) {
+      this.$emit("pagingOnChange", page, pageSize);
+    },
+    // chọn index trang cuối cùng(=totalPage)
+    onClickLastPage() {
+      this.currentPage = this.totalPage;
+    },
+
+    // Chọn index trang ngẫu nhiễn từ range
+    selectPage(page) {
+      this.getEmployeePagingData(page, this.pageSize);
+      this.currentPage = page;
+    },
+
+    // chọn index trang tiếp theo của index hiện tại
+
+    onClickNextPage() {
+      this.currentPage = this.currentPage + 1;
+    },
+
+    // chọn index trang phía sau index hiện tại
+    onClickPrevPage() {
+      this.currentPage -= 1;
+    },
+
+    // xét index trang chọn thì class active
+    // isPageActive: function (page) {
+    //   let tmp = "btn--border margin-left--10";
+
+    //   if (this.currentPage === page) {
+    //     tmp += " btn--active";
+    //   } else tmp += " color-bg";
+
+    //   return tmp;
+    // },
+  },
+  watch: {
+    pageIndex: function () {
+      this.currentPage = this.pageIndex;
+    },
+    pageSize: function () {
+      this.$emit("getPageSize", this.pageIndex, this.pageSize);
+    },
+  },
+};
+</script>
