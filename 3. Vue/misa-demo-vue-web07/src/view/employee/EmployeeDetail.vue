@@ -33,7 +33,7 @@
                 label="Mã nhân viên"
                 id="EmployeeCode"
                 placeholder="NV8888..."
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="$v.employee.EmployeeCode.$model"
                 :validateRequired="!$v.employee.EmployeeCode.required"
                 :dirty="$v.employee.EmployeeCode.$dirty"
@@ -48,7 +48,7 @@
                 label="Họ và tên"
                 id="FullName"
                 placeholder="Nguyễn Văn A..."
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="$v.employee.FullName.$model"
                 :validateRequired="!$v.employee.FullName.required"
                 :dirty="$v.employee.FullName.$dirty"
@@ -63,7 +63,7 @@
                 label="Ngày sinh"
                 id="DateOfBirth"
                 type="date"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="employee.DateOfBirth"
               />
             </div>
@@ -85,7 +85,7 @@
                 id="IdentityNumber"
                 type="number"
                 placeholder="0123456789..."
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="$v.employee.IdentityNumber.$model"
                 :validateRequired="!$v.employee.IdentityNumber.required"
                 :dirty="$v.employee.IdentityNumber.$dirty"
@@ -98,7 +98,7 @@
                 label="Ngày cấp"
                 id="IdentityDate"
                 type="date"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="employee.IdentityDate"
               />
             </div>
@@ -109,7 +109,7 @@
                 label="Nơi cấp"
                 id="IdentityPlace"
                 :value="employee.IdentityPlace"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 placeholder="Hà Nội..."
               />
             </div>
@@ -122,7 +122,7 @@
                 id="Email"
                 type="email"
                 placeholder="Example@gmail.com..."
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="$v.employee.Email.$model"
                 :validateRequired="!$v.employee.Email.required"
                 :validateEmail="!$v.employee.Email.email"
@@ -137,7 +137,7 @@
                 id="PhoneNumber"
                 type="number"
                 placeholder="0123456789..."
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 :value="$v.employee.PhoneNumber.$model"
                 :validateRequired="!$v.employee.PhoneNumber.required"
                 :dirty="$v.employee.PhoneNumber.$dirty"
@@ -175,7 +175,7 @@
                 label="Mã số thuế cá nhân"
                 id="PersonalTaxCode"
                 :value="employee.PersonalTaxCode"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 type="number"
                 placeholder="0123456789"
               />
@@ -186,7 +186,7 @@
                 label="Mức lương cơ bản"
                 id="Salary"
                 :value="employee.Salary"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
                 format="money"
                 classes="text-right"
                 :iconRight="true"
@@ -205,7 +205,7 @@
                 label="Ngày gia nhập công ty"
                 id="JoinDate"
                 :value="employee.JoinDate"
-                @handle-input="onChangeInput"
+                @handleInput="onChangeInput"
               />
             </div>
             <div class="info-column" id="txtWorkStatus">
@@ -308,7 +308,7 @@ export default {
      */
     btnSaveOnClick() {
       this.$v.$touch();
-
+      console.log(this.employee);
       if (!this.$v.$invalid) {
         let vm = this;
         if (this.mode == 0) {

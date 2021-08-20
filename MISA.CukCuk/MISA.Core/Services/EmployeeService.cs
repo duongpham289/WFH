@@ -63,11 +63,26 @@ namespace MISA.Core.Services
             }
             //2. Mã nhân viên không được phép trùng
 
-            if (_employeeRepository.CheckEntityCodeDuplicate(employee.EmployeeCode))
+            if (_employeeRepository.IsDuplicated(employee.EmployeeCode,string.Empty))
             {
                 var errorObj = new
                 {
                     userMsg = Resources.ResourceVN.EmployeeCodeDuplicateValidateError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
+                };
+                _serviceResult.IsValid = false;
+                _serviceResult.Data = errorObj;
+                return _serviceResult.IsValid;
+            }
+            //3. Số chứng minh thư nhân dân không được phép trùng
+
+            if (_employeeRepository.IsDuplicated(string.Empty, employee.IdentityNumber))
+            {
+                var errorObj = new
+                {
+                    userMsg = Resources.ResourceVN.EmployeeIdentityDuplicateValidateError_Msg,
                     errorCode = "misa-001",
                     moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
                     traceId = ""

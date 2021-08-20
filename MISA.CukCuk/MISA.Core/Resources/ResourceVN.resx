@@ -120,14 +120,29 @@
   <data name="CustomerCodeValidateError_Msg" xml:space="preserve">
     <value>Mã khách hàng ko được phép để trống!</value>
   </data>
+  <data name="CustomerImportDuplicateInFileError_Msg" xml:space="preserve">
+    <value> đã trùng với khách hàng khác trong tệp nhập khẩu!</value>
+  </data>
+  <data name="CustomerImportDuplicateInServerError_Msg" xml:space="preserve">
+    <value> đã tồn tại trong hệ thống!</value>
+  </data>
+  <data name="CustomerImportEmptyError_Msg" xml:space="preserve">
+    <value> không được phép để trống!</value>
+  </data>
+  <data name="CustomerImportNotFoundInServerError_Msg" xml:space="preserve">
+    <value> không có trong hệ thống!</value>
+  </data>
   <data name="EmailValidateError_Msg" xml:space="preserve">
     <value>Email không đúng định dạng!</value>
   </data>
   <data name="EmployeeCodeDuplicateValidateError_Msg" xml:space="preserve">
-    <value>Mã khách hàng đã tồn tại!</value>
+    <value>Mã  nhân viên đã tồn tại!</value>
   </data>
   <data name="EmployeeCodeValidateError_Msg" xml:space="preserve">
     <value>Mã nhân viên ko được phép để trống!</value>
+  </data>
+  <data name="EmployeeIdentityDuplicateValidateError_Msg" xml:space="preserve">
+    <value>Số chứng minh thư nhân dân đã tồn tại!</value>
   </data>
   <data name="EmptyValidateError_Msg" xml:space="preserve">
     <value>Thông tin này không được phép để trống</value>

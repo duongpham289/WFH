@@ -51,9 +51,10 @@ namespace MISA.Core.Interfaces.Repository
         /// Check trùng code
         /// </summary>
         /// <param name="entityCode">Mã thực thể</param>
+        /// <param name="entityProperty">Thuộc tính thực thể</param>
         /// <returns></returns>
         /// CreatedBy: PHDUONG(18/08/2021)
-        bool CheckEntityCodeDuplicate(string entityCode);
+        bool IsDuplicated(string entityCode, string entityProperty);
         #endregion
     }
 }

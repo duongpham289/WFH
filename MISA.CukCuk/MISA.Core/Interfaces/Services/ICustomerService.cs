@@ -1,8 +1,10 @@
-﻿using MISA.Core.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using MISA.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MISA.Core.Interfaces.Services
@@ -21,6 +23,8 @@ namespace MISA.Core.Interfaces.Services
         /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
         ServiceResult GetPaging(int pageIndex, int pageSize, string customerFilter, Guid? customerGroupId);
+
+        ServiceResult ImportCustomer(IFormFile form, CancellationToken cancellationToken);
         #endregion
     }
 }

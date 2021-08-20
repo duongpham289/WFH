@@ -48,12 +48,28 @@
             <returns>Dữ liệu phân trang</returns>
             CreatedBy:PHDUONG(07/08/2021)
         </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.CustomersController.Import(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>
+            Thêm danh sách Khách hàng từ file Excel
+            </summary>
+            <param name="formFile"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            CreatedBy: PHDUONG(20/08/2021)
+        </member>
         <member name="M:MISA.CukCuk.Api2.Controllers.EmployeesController.GetCustomersPaging(System.Int32,System.Int32,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
             Lấy thông tin phân trang nhân viên
             </summary>
             <returns>Dữ liệu phân trang</returns>
             CreatedBy:PHDUONG(07/08/2021)
+        </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.EmployeesController.Delete(System.Collections.Generic.List{System.String})">
+            <summary>
+            Delete nhiều bản ghi theo ListId
+            </summary>
+            <param name="listId"></param>
+            <returns></returns>
         </member>
         <member name="T:MISA.CukCuk.Api2.Properties.Resources">
             <summary>

@@ -3,6 +3,7 @@ using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
 using MISA.Core.Interfaces.Services;
 using System;
+using System.Collections.Generic;
 
 namespace MISA.CukCuk.Api2.Controllers
 {
@@ -67,12 +68,15 @@ namespace MISA.CukCuk.Api2.Controllers
 
         }
 
-
-        [HttpDelete("del")]
-        public IActionResult Delete(dynamic listId)
+        /// <summary>
+        /// Delete nhiều bản ghi theo ListId
+        /// </summary>
+        /// <param name="listId"></param>
+        /// <returns></returns>
+        [HttpPost("delete")]
+        public IActionResult Delete(List<string> listId)
         {
-
-            return NoContent();
+            return Ok(listId);
         }
         #endregion
 

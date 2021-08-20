@@ -21,6 +21,15 @@ namespace MISA.Core.Interfaces.Repository
         /// <returns></returns>
         /// CreatedBy: PHDUONG(13/08/2021)
         Object GetPaging(int pageIndex, int pageSize, string customerFilter, Guid? customerGroupId);
+
+
+        /// <summary>
+        /// Thêm nhiều khách hàng dựa trên file nhập khẩu
+        /// </summary>
+        /// <param name="customers">Các khách hàng cần thêm</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(20/08/2021)
+        int AddList(List<Customer> customers);
         #endregion
     }
 

@@ -10,11 +10,16 @@
       <input
         class="input"
         :readonly="readonly!=0 ? true: false"
-        :class="customClass"
+        :class="[
+          { 'pl-12': iconLeft === true },
+          { 'pr-12': iconRight === true },
+          { 'input--alert': errorMsg },
+          classes,
+        ]"
         :type="type"
         :max="maxDate"
         :placeholder="placeholder"
-        :value="valueClone"
+        :value="attachValue"
         @input="onChangeInput"
       />
       <div class="float--alert" v-if="validateRequired && dirty">
@@ -52,6 +57,7 @@ export default {
     },
     errorMsg: {
       type: Boolean,
+      default: false,
     },
     readonly:{
       type: Number,
@@ -102,26 +108,24 @@ export default {
   data() {
     return {
       valueClone: "",
-      customClass: [
-        { "pl-12": this.iconLeft === true },
-        { "pr-12": this.iconRight === true },
-        { "input--alert": this.errorMsg },
-        this.classes,
-      ],
       maxDate: this.type == 'date' ? new Date().toISOString().split('T')[0] : null
     };
   },
 
-  watch: {
-    /**
-     * Định dạng dữ liệu mỗi khi ô input thay đổi dữ liệu
-     * Author: PHDUONG(05/08/2021)
-     */
-    value(newVal) {
-      this.valueClone = this.formatData(this.type, newVal);
-    },
+  // watch: {
+  //   /**
+  //    * Định dạng dữ liệu mỗi khi ô input thay đổi dữ liệu
+  //    * Author: PHDUONG(05/08/2021)
+  //    */
+  //   value(newVal) {
+  //     this.valueClone = newVal;
+  //   },
+  // },
 
-
+  computed:{
+      attachValue: function(){
+        return this.formatData(this.type, this.value);
+      }
   },
 
   methods: {
@@ -134,12 +138,15 @@ export default {
 
       if (this.format === this.$enum.MONEY) {
         event.target.value = FormatData.formatMoneyOnModal(event.target.value);
-        this.$emit("handle-input", {
+        this.valueClone = event.target.value;
+        tmp = event.target.value.toString().replaceAll(".","");
+        this.$emit("handleInput", {
           id: this.id,
           value: parseInt(tmp),
         });
       } else {
-        this.$emit("handle-input", { id: this.id, value: tmp });
+        this.valueClone =tmp;
+        this.$emit("handleInput", { id: this.id, value: tmp });
       }
     },
     /**

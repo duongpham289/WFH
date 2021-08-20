@@ -4,6 +4,7 @@ using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
 using MySqlConnector;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace MISA.Infrastructure.Repository
@@ -51,6 +52,53 @@ namespace MISA.Infrastructure.Repository
                 };
 
                 return pagingData;
+            }
+        }
+
+
+        /// <summary>
+        /// Thêm nhiều khách hàng  
+        /// </summary>
+        /// <param name="customers">List các khách hàng</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(20/08/2021)
+        public int AddList(List<Customer> customers)
+        {
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
+                _dbConnection.Open();
+                var transaction = _dbConnection.BeginTransaction();
+
+                var rowsEffect = 0;
+                foreach (var customer in customers)
+                {
+
+                    var dynamicParam = new DynamicParameters();
+
+                    ////3. Them du lieu vao db:
+
+                    ////Doc tung prop cua obj:
+                    var properties = customer.GetType().GetProperties();
+
+                    ////Duyet tung prop:
+                    foreach (var prop in properties)
+                    {
+                        //lay ten cua prop
+                        var propName = prop.Name;
+
+                        //lay val cu prop
+                        var propValue = prop.GetValue(customer);
+
+                        //Them param tuong ung voi moi prop
+                        dynamicParam.Add($"@{propName}", propValue);
+                    }
+
+                    rowsEffect += _dbConnection.Execute($"Proc_InsertCustomer", param: dynamicParam, transaction: transaction, commandType: CommandType.StoredProcedure);
+                }
+
+                transaction.Commit();
+
+                return rowsEffect;
             }
         }
         #endregion

@@ -70,6 +70,42 @@ namespace MISA.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  đã trùng với khách hàng khác trong tệp nhập khẩu!.
+        /// </summary>
+        public static string CustomerImportDuplicateInFileError_Msg {
+            get {
+                return ResourceManager.GetString("CustomerImportDuplicateInFileError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  đã tồn tại trong hệ thống!.
+        /// </summary>
+        public static string CustomerImportDuplicateInServerError_Msg {
+            get {
+                return ResourceManager.GetString("CustomerImportDuplicateInServerError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  không được phép để trống!.
+        /// </summary>
+        public static string CustomerImportEmptyError_Msg {
+            get {
+                return ResourceManager.GetString("CustomerImportEmptyError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  không có trong hệ thống!.
+        /// </summary>
+        public static string CustomerImportNotFoundInServerError_Msg {
+            get {
+                return ResourceManager.GetString("CustomerImportNotFoundInServerError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email không đúng định dạng!.
         /// </summary>
         public static string EmailValidateError_Msg {
@@ -79,7 +115,7 @@ namespace MISA.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng đã tồn tại!.
+        ///   Looks up a localized string similar to Mã  nhân viên đã tồn tại!.
         /// </summary>
         public static string EmployeeCodeDuplicateValidateError_Msg {
             get {
@@ -93,6 +129,15 @@ namespace MISA.Core.Resources {
         public static string EmployeeCodeValidateError_Msg {
             get {
                 return ResourceManager.GetString("EmployeeCodeValidateError_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số chứng minh thư nhân dân đã tồn tại!.
+        /// </summary>
+        public static string EmployeeIdentityDuplicateValidateError_Msg {
+            get {
+                return ResourceManager.GetString("EmployeeIdentityDuplicateValidateError_Msg", resourceCulture);
             }
         }
         

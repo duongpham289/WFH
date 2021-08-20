@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Data;
-using Dapper;
-using Microsoft.Extensions.Configuration;
 using MISA.Core.Interfaces.Services;
 using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
+using System.Threading;
 
 namespace MISA.CukCuk.Api2.Controllers
 {
@@ -69,6 +66,37 @@ namespace MISA.CukCuk.Api2.Controllers
                 return StatusCode(500, errorObj);
             }
 
+        }
+
+
+        /// <summary>
+        /// Thêm danh sách Khách hàng từ file Excel
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(20/08/2021)
+        [HttpPost("import")]
+        public IActionResult Import(IFormFile formFile, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var serviceResult = _customerService.ImportCustomer(formFile, cancellationToken);
+                return StatusCode(200, serviceResult.Data);
+            }
+            catch (Exception ex)
+            {
+
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
+                };
+                return StatusCode(500, errorObj);
+            }
         }
         #endregion
 

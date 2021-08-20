@@ -3,7 +3,7 @@
     <p>
       Hiển thị
       <span style="font-weight: bold">
-        {{ (currentPage - 1) * pageSize + 1 }}-{{ pageSize }}/{{
+        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage*pageSize }}/{{
           totalRecord
         }}</span
       >

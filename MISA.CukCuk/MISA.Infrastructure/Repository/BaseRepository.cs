@@ -72,7 +72,7 @@ namespace MISA.Infrastructure.Repository
         {
             using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                //var transaction = _dbConnection.BeginTransaction();
+                var transaction = _dbConnection.BeginTransaction();
                 var dynamicParam = new DynamicParameters();
 
                 ////3. Them du lieu vao db:
@@ -92,9 +92,8 @@ namespace MISA.Infrastructure.Repository
                     //Them param tuong ung voi moi prop
                     dynamicParam.Add($"@{propName}", propValue);
                 }
-                
-                var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
-                //transaction.Commit();
+                var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, transaction: transaction, commandType: CommandType.StoredProcedure);
+                transaction.Commit();
 
                 return rowsEffect;
             }
@@ -164,15 +163,22 @@ namespace MISA.Infrastructure.Repository
         /// <param name="entityCode">Mã thực thể</param>
         /// <returns>true - Có mã trùng, false - Ko có mã trùng</returns>
         /// CreatedBy: PHDUONG(18/08/2021)
-        public bool CheckEntityCodeDuplicate(string entityCode)
+        public bool IsDuplicated(string entityCode, string entityProperty)
         {
             using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add($"@{_className}Code", entityCode);
-                parameters.Add("@IsExist", dbType:DbType.Boolean, direction: ParameterDirection.Output);
+                parameters.Add($"@{_className}Code", entityCode != null ? entityCode : String.Empty);
 
-                _dbConnection.Execute($"Proc_Check{_className}CodeDuplicate", param: parameters, commandType: CommandType.StoredProcedure);
+                if (_className == "Employee")
+                    parameters.Add($"@{_className}IdentityNumber", entityProperty != null ? entityProperty : String.Empty);
+                else if(_className == "Customer")
+                    parameters.Add($"@{_className}GroupName", entityProperty != null ? entityProperty : String.Empty);
+
+                parameters.Add($"@PhoneNumber", entityProperty != null ? entityProperty : String.Empty);
+                parameters.Add("@IsExist", dbType: DbType.Boolean, direction: ParameterDirection.Output);
+
+                _dbConnection.Execute($"Proc_Check{_className}PropertyDuplicate", param: parameters, commandType: CommandType.StoredProcedure);
 
                 return parameters.Get<Boolean>("@IsExist");
             }

@@ -42,6 +42,6 @@ export default class BaseAPI {
    * @param {*} id
    */
   delete(listId) {
-    return BaseAPIConfig.delete(`${this.controller}/del`,listId);
+    return BaseAPIConfig.post(`${this.controller}/delete`,listId);
   }
 }

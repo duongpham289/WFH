@@ -126,10 +126,22 @@ namespace MISA.Core.Entities
         public Guid? DepartmentId { get; set; }
 
         /// <summary>
+        /// Tên phòng ban
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
         /// Khóa ngoại 
         /// Author:PHDUONG(07/08/2021)
         /// </summary>
         public Guid? PositionId { get; set; }
+
+        /// <summary>
+        /// Tên vị trí
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string PositionName { get; set; }
 
         /// <summary>
         /// Tình trạng công việc

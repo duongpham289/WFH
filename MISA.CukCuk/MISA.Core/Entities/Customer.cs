@@ -105,6 +105,14 @@ namespace MISA.Core.Entities
         /// </summary>
         public Guid? CustomerGroupId { get; set; }
 
+        /// <summary>
+        /// Tên nhóm khách hàng
+        /// Author:PHDUONG(07/08/2021)
+        /// </summary>
+        public string CustomerGroupName { get; set; }
+
+        public List<string> ImportError { get; set; } = new List<string>();
+
         #endregion
 
     }

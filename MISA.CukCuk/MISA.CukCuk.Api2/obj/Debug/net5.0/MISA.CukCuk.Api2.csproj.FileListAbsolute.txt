@@ -37,3 +37,9 @@ D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Core.pdb
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.Infrastructure.pdb
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\MISA.CukCuk.Api2.xml
 D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\EPPlus.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\System.Xml.XPath.XmlDocument.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+D:\Work\WFH\MISA.CukCuk\MISA.CukCuk.Api2\bin\Debug\net5.0\System.IO.Pipelines.dll
