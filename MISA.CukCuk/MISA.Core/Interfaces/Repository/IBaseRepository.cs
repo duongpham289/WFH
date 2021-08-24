@@ -48,6 +48,13 @@ namespace MISA.Core.Interfaces.Repository
         int Delete(Guid entityId);
 
         /// <summary>
+        /// Xóa list entity
+        /// </summary>
+        /// <param name="listId">List mã định danh của entity</param>
+        /// CreatedBy: PHDUONG(23/08/2021)
+        int DeleteList(List<Guid> listId);
+
+        /// <summary>
         /// Check trùng code
         /// </summary>
         /// <param name="entityCode">Mã thực thể</param>
@@ -55,6 +62,15 @@ namespace MISA.Core.Interfaces.Repository
         /// <returns></returns>
         /// CreatedBy: PHDUONG(18/08/2021)
         bool IsDuplicated(string entityCode, string entityProperty);
+        
+        /// <summary>
+        /// Check trùng code
+        /// </summary>
+        /// <param name="entityCode">Mã thực thể</param>
+        /// <param name="entityProperty">Thuộc tính thực thể</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(18/08/2021)
+        List<string> GetAllProp(string columnName);
         #endregion
     }
 }

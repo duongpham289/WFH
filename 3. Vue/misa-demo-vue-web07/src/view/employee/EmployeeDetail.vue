@@ -18,7 +18,7 @@
         <span>(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)</span>
       </div>
       <!-- Modal Popup Content -->
-      <div class="modal__content">
+      <div class="modal__content" ref="dropdownContent">
         <div class="modal__general-info">
           <div class="info-title">
             <div class="modal__text"><span>A. Thông tin chung:</span></div>
@@ -214,6 +214,7 @@
                 @selected="selectedWorkStatus"
                 :dropdown="this.$enum.WORKSTATUS"
                 :defaultState="isHidden"
+                @contentOnOverflow="contentOnOverflow"
               />
             </div>
           </div>
@@ -262,8 +263,8 @@ export default {
       default: true,
       required: true,
     },
-    employeeId: {
-      type: String,
+    employeeGetById: {
+      type: Object,
       required: true,
     },
     mode: {
@@ -280,7 +281,7 @@ export default {
     btnCancelOnClick() {
       this.$emit("btnAddOnClick", true);
       this.employee = EmployeeModel.initData();
-      
+
       this.$nextTick(() => {
         this.$v.$reset();
       });
@@ -292,6 +293,11 @@ export default {
      */
     reloadTable() {
       this.$emit("btnReloadOnClick");
+    },
+
+    contentOnOverflow() {
+      var el = this.$refs.dropdownContent;
+      el.scrollTop = el.scrollHeight;
     },
 
     /**
@@ -308,29 +314,30 @@ export default {
      */
     btnSaveOnClick() {
       this.$v.$touch();
-      console.log(this.employee);
       if (!this.$v.$invalid) {
         let vm = this;
-        if (this.mode == 0) {
+        if (vm.mode == 0) {
+          console.log(vm.employee);
           EmployeesAPI.create(vm.employee)
-            .then(() => {
-              alert("Thêm mới thành công");
+            .then((res) => {
+              vm.$emit("responseHandler", 3, res)
             })
-            .catch((error) => {
-              console.log(error);
+            .catch((err) => {
+              console.log(err);
+              vm.$emit("responseHandler", 1, err)
             });
         } else {
-          EmployeesAPI.update(vm.employeeId, vm.employee)
-            .then(() => {
-              this.btnCancelOnClick();
+          EmployeesAPI.update(vm.employee.EmployeeId, vm.employee)
+            .then((res) => {
+              vm.btnCancelOnClick();
               setTimeout(function () {
-                this.reloadTable();
+                vm.reloadTable();
               }, 3000);
 
-              alert("Sửa thành công, xin đợi dữ liệu tải lại");
+              vm.$emit("responseHandler", 4, res)
             })
-            .catch((error) => {
-              console.log(error);
+            .catch((err) => {
+              vm.$emit("responseHandler", 1, err)
             });
         }
       }
@@ -342,9 +349,9 @@ export default {
      * Lấy dữ liệu gender
      * Author: PHDUONG(3/8/2021)
      */
-    selectedGender(value, name) {
+    selectedGender(value) {
       this.employee.Gender = +value;
-      this.employee.GenderName = name;
+      // this.employee.GenderName = name;
     },
     /**
      * Lấy dữ liệu WorkStatus vào model
@@ -357,61 +364,51 @@ export default {
      * Lấy dữ liệu Department vào model
      * Autthor: PHDUONG(3/8/2021)
      */
-    selectedDepartment(value, name) {
+    selectedDepartment(value) {
       this.employee.DepartmentId = value;
-      this.employee.DepartmentName = name;
+      // this.employee.DepartmentName = name;
     },
     /**
      * Lấy dữ liệu Position vào model
      * Autthor: PHDUONG(3/8/2021)
      */
-    selectedPosition(value, name) {
+    selectedPosition(value) {
       this.employee.PositionId = value;
-      this.employee.PositionName = name;
+      // this.employee.PositionName = name;
     },
 
     //#endregion
-    
+
     /**
-     * Auto Focus vào ô EmployeeCode
+     * Auto Focus vào ô EmployeeCode khi thêm
      * Autthor: PHDUONG(11/08/2021)
      */
-    autoFocusWhenAdd(){
-      this.$nextTick(() =>{
+    autoFocusWhenAdd() {
+      this.$nextTick(() => {
         this.$refs.EmployeeCode.$el.childNodes[1].childNodes[0].focus();
-      })
+      });
     },
 
-    autoFocusWhenUpdate(){
-      this.$nextTick(() =>{
+    /**
+     * Auto Focus vào ô EmployeeCode khi sửa
+     * Autthor: PHDUONG(11/08/2021)
+     */
+    autoFocusWhenUpdate() {
+      this.$nextTick(() => {
         this.$refs.FullName.$el.childNodes[1].childNodes[0].focus();
-      })
-    }
+      });
+    },
   },
   data() {
     return {
-      employee: EmployeeModel.initData(),
-      name: "",
-    };
+      employee : EmployeeModel.initData()
+    }
   },
   watch: {
-    /**
-     * Lấy dữ liệu nhân viên từ server theo Id
-     * Autthor: PHDUONG(2/8/2021)
-     */
-    employeeId: function (id) {
-      if (id) {
-        let vm = this;
-        EmployeesAPI.getById(id)
-          .then((res) => {
-            vm.employee = res.data;
-          })
-          .catch((res) => {
-            console.log(res);
-          });
-      }
+    
+    employeeGetById: function() {
+      this.employee = this.employeeGetById;
     },
-
     /**
      * Kiểm tra hành động hiện tai là thêm hay sửa
      * Autthor: PHDUONG(2/8/2021)
@@ -420,7 +417,7 @@ export default {
       if (this.mode == 0) {
         this.employee = {};
       }
-    },
-  },
+    }
+  }
 };
 </script>

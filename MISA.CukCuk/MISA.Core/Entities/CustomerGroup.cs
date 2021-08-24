@@ -11,20 +11,20 @@ namespace MISA.Core.Entities
         #region BaseProperty
         /// <summary>
         /// Khóa chính
-        /// Author:PHDUONG(07/08/2021)
         /// </summary>
+        /// CreatedBy:PHDUONG(07/08/2021)
         public Guid CustomerGroupId { get; set; }
 
         /// <summary>
         /// Tên nhóm khách hàng
-        /// Author:PHDUONG(07/08/2021)
         /// </summary>
+        /// CreatedBy:PHDUONG(07/08/2021)
         public string CustomerGroupName { get; set; }
 
         /// <summary>
         /// Mô tả
-        /// Author:PHDUONG(07/08/2021)
         /// </summary>
+        /// CreatedBy:PHDUONG(07/08/2021)
         public string Description { get; set; }
 
         #endregion

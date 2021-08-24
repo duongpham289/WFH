@@ -107,20 +107,9 @@ export default {
 
   data() {
     return {
-      valueClone: "",
       maxDate: this.type == 'date' ? new Date().toISOString().split('T')[0] : null
     };
   },
-
-  // watch: {
-  //   /**
-  //    * Định dạng dữ liệu mỗi khi ô input thay đổi dữ liệu
-  //    * Author: PHDUONG(05/08/2021)
-  //    */
-  //   value(newVal) {
-  //     this.valueClone = newVal;
-  //   },
-  // },
 
   computed:{
       attachValue: function(){
@@ -138,14 +127,12 @@ export default {
 
       if (this.format === this.$enum.MONEY) {
         event.target.value = FormatData.formatMoneyOnModal(event.target.value);
-        this.valueClone = event.target.value;
         tmp = event.target.value.toString().replaceAll(".","");
         this.$emit("handleInput", {
           id: this.id,
           value: parseInt(tmp),
         });
       } else {
-        this.valueClone =tmp;
         this.$emit("handleInput", { id: this.id, value: tmp });
       }
     },

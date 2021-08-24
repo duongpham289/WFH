@@ -75,34 +75,23 @@ export default {
      */
     btnDelDataOnClick() {
       var listId = [];
-      this.datasToDelete.forEach((data) => {
+      var vm = this;
+      vm.datasToDelete.forEach((data) => {
         listId.push(data.id);
       });
 
-      // console.log(listId);
-      // console.log(JSON.stringify({ listId }));
-      // console.log({ listId });
-      // debugger
       EmployeesAPI.delete(listId)
-        .then(() => {
-          debugger;
+        .then((res) => {
+
+          vm.$emit("btnDelOnClick", true);
+          vm.$emit("btnReloadOnClick");
+
+          vm.$emit("responseHandler", 5, res)
+          
         })
-        .catch((res) => {
-          console.log(res);
+        .catch((err) => {
+          vm.$emit("responseHandler", 1, err)
         });
-      // this.datasToDelete.forEach((data, index) => {
-      //   EmployeesAPI.delete(data.id)
-      //     .then(() => {
-      //       if (index == this.datasToDelete.length - 1) {
-      //         this.$emit("btnDelOnClick", true);
-      //         // this.$emit("btnReloadOnClick");
-      //       }
-      //       console.log("Xóa thành công");
-      //     })
-      //     .catch((res) => {
-      //       console.log(res);
-      //     });
-      // });
     },
   },
 };

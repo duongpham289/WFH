@@ -72,7 +72,6 @@ namespace MISA.Infrastructure.Repository
         {
             using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
             {
-                var transaction = _dbConnection.BeginTransaction();
                 var dynamicParam = new DynamicParameters();
 
                 ////3. Them du lieu vao db:
@@ -92,8 +91,7 @@ namespace MISA.Infrastructure.Repository
                     //Them param tuong ung voi moi prop
                     dynamicParam.Add($"@{propName}", propValue);
                 }
-                var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, transaction: transaction, commandType: CommandType.StoredProcedure);
-                transaction.Commit();
+                var rowsEffect = _dbConnection.Execute($"Proc_Insert{_className}", param: dynamicParam, commandType: CommandType.StoredProcedure);
 
                 return rowsEffect;
             }
@@ -158,6 +156,38 @@ namespace MISA.Infrastructure.Repository
         }
 
         /// <summary>
+        /// Xóa nhiều bản ghi
+        /// </summary>
+        /// <param name="listId">Danh sách Id</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(23/08/2021)
+        public int DeleteList(List<Guid> listId)
+        {
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
+                _dbConnection.Open();
+                var transaction = _dbConnection.BeginTransaction();
+
+                var rowsEffect = 0;
+                foreach (var id in listId)
+                {
+
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add($"@{_className}Id", id.ToString());
+                    rowsEffect += _dbConnection.Execute($"Proc_Delete{_className}ById", param: parameters, transaction: transaction, commandType: CommandType.StoredProcedure);
+                }
+
+                transaction.Commit();
+
+                if (rowsEffect == listId.Count)
+                    return rowsEffect;
+                else
+                    return 0;
+
+            }
+        }
+
+        /// <summary>
         /// Check trùng code
         /// </summary>
         /// <param name="entityCode">Mã thực thể</param>
@@ -172,7 +202,7 @@ namespace MISA.Infrastructure.Repository
 
                 if (_className == "Employee")
                     parameters.Add($"@{_className}IdentityNumber", entityProperty != null ? entityProperty : String.Empty);
-                else if(_className == "Customer")
+                else if (_className == "Customer")
                     parameters.Add($"@{_className}GroupName", entityProperty != null ? entityProperty : String.Empty);
 
                 parameters.Add($"@PhoneNumber", entityProperty != null ? entityProperty : String.Empty);
@@ -181,6 +211,20 @@ namespace MISA.Infrastructure.Repository
                 _dbConnection.Execute($"Proc_Check{_className}PropertyDuplicate", param: parameters, commandType: CommandType.StoredProcedure);
 
                 return parameters.Get<Boolean>("@IsExist");
+            }
+        }
+
+        public List<string> GetAllProp(string columnName)
+        {
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add($"@ColumnName", columnName);
+                parameters.Add($"@ViewName", _className);
+
+                var listProp = _dbConnection.Query<string>($"Proc_GetAllProp", param: parameters, commandType: CommandType.StoredProcedure);
+
+                return listProp.AsList();
             }
         }
         #endregion

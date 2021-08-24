@@ -1,4 +1,5 @@
 @import url("../base/components/Table.css");
+@import url("../base/components/ToastMessage.css");
 @import url("../base/components/PopupMessage.css");
 @import url("../base/components/Pagination.css");
 @import url("../base/components/Modal.css");

@@ -32,13 +32,11 @@
 </template>
 
 <script>
-
-import DropdownData from "./DropdownData.js"
+import DropdownData from "./DropdownData.js";
 
 export default {
   mounted() {
-
-    document.addEventListener("click", this.close);
+    window.addEventListener("click", this.close);
   },
   props: {
     dropdown: {
@@ -99,6 +97,11 @@ export default {
   },
 
   watch: {
+    open: function () {
+      if (this.open) {
+        this.$emit("contentOnOverflow");
+      }
+    },
     defaultState: function () {
       if (this.defaultState) {
         switch (this.dropdown) {
@@ -144,7 +147,6 @@ export default {
             this.dropdownName = "Tình trạng công việc";
             break;
 
-
           default:
             break;
         }
@@ -172,7 +174,7 @@ export default {
     },
   },
   beforeDestroy() {
-    document.removeEventListener("click", this.close);
+    window.removeEventListener("click", this.close);
   },
-}
+};
 </script>

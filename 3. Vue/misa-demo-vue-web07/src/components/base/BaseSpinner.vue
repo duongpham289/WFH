@@ -5,7 +5,7 @@
         <pacman-loader :loading="loading" color="#01B075"></pacman-loader>
       </div>
 
-      <div class="spinner__text">Đang tải dữ liệu...</div>
+      <div class="spinner__text">Đang tải dữ liệu, vui lòng chờ...</div>
     </div>
   </div>
 </template>

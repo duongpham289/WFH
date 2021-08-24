@@ -3,20 +3,17 @@ class EmployeeModel {
         return  {
             EmployeeCode: "",
             FullName: "",
-            DateOfBirth: "",
-            GenderName: "",
-            Gender: "",
+            DateOfBirth: null,
+            Gender: 1,
             IdentityNumber: "",
-            IdentityDate: "",
+            IdentityDate: null,
             IdentityPlace: "",
             Email: "",
             PhoneNumber: "",
-            PositionName: "",
-            DepartmentName: "",
             PersonalTaxCode: "",
-            Salary: "",
-            JoinDate: "",
-            WorkStatus: "",
+            Salary: null,
+            JoinDate: null,
+            WorkStatus: null,
         }
     }
 }

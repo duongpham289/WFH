@@ -66,7 +66,7 @@ namespace MISA.Core.Services
                 _serviceResult.Data = errorObj;
                 return _serviceResult;
             }
-            //Check file co hop le khong (file cos dinh dang xls hoac xlsx)
+            //Check file co hop le khong (file có dinh dang xls hoac xlsx)
 
             //Check do lon cua file (gioi han 100M)
 
@@ -79,11 +79,17 @@ namespace MISA.Core.Services
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                     var rowCount = worksheet.Dimension.Rows;
+                    var columnCount = worksheet.Dimension.Columns;
 
-                    //Tạo 2 mảng chứa tất cả customerCode và phoneNumber
+                    //Tạo 2 mảng chứa tất cả customerCode và phoneNumber trong file xlsx
                     var customerCodesInFile = new List<string>();
-                    //var customerCodesInServer = new List<string>();
                     var customerPhoneNumbersInFile = new List<string>();
+
+                    //Tạo 3 mảng chứa tất cả customerCode, phoneNumber, và customerGroupName trong database
+                    var customerCodesInServer = _customerRepository.GetAllProp("CustomerCode");
+                    var customerGroupNamesInServer = _customerRepository.GetAllProp("CustomerGroupName");
+                    var customerPhoneNumbersInServer = _customerRepository.GetAllProp("PhoneNumber");
+
 
                     //Duyệt tất cả sheet, add customerCode và phoneNumber vào 2 mảng customerCodes và customerPhoneNumbers
                     for (int row = 3; row <= rowCount; row++)
@@ -99,67 +105,81 @@ namespace MISA.Core.Services
 
                         if (customerPhoneNumber != null)
                         {
-                            customerPhoneNumbersInFile.Add(customerPhoneNumber.ToString());
+                            customerPhoneNumbersInFile.Add(customerPhoneNumber.ToString().Replace(".", "").Replace(" ", ""));
                         };
                     }
 
+
+                    //tạo 2 Enum chứa các duplicate val
+                    var duplicateCustomerCodes = customerCodesInFile.GroupBy(x => x)
+                                        .Where(g => g.Count() > 1)
+                                        .Select(x => x.Key);
+                    var duplicateCustomerPhoneNumbers = customerPhoneNumbersInFile.GroupBy(x => x)
+                                        .Where(g => g.Count() > 1)
+                                        .Select(x => x.Key);
                     //Duyệt tất cả sheet, validate dữ liệu từng dòng
                     for (int row = 3; row <= rowCount; row++)
                     {
                         var customer = new Customer();
-                        for (int index = 1; index <= 10; index++)
+                        for (int index = 1; index <= columnCount; index++)
                         {
                             var item = worksheet.Cells[row, index].Value;
 
                             if (item != null)
                             {
                                 //Validate từng cột của mỗi dòng
-                                switch (index)
+                                switch (worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim())
                                 {
 
-                                    case 1:
-                                        if (customerCodesInFile.IndexOf(item.ToString()) != -1)
+                                    case "Mã khách hàng":
+                                        if (duplicateCustomerCodes.Contains(item.ToString()) == true)
                                         {
                                             var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportDuplicateInFileError_Msg;
                                             customer.ImportError.Add(msgError);
+                                            customer.IsValid = false;
                                         }
-                                        if (_customerRepository.IsDuplicated(item.ToString(), string.Empty))
+                                        if (customerCodesInServer.IndexOf(item.ToString()) != -1)
                                         {
                                             var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportDuplicateInServerError_Msg;
                                             customer.ImportError.Add(msgError);
+                                            customer.IsValid = false;
                                         }
                                         customer.CustomerCode = item.ToString();
                                         break;
-                                    case 2:
+                                    case "Tên khách hàng":
                                         customer.FullName = item.ToString();
                                         break;
-                                    case 3:
+                                    case "Mã thẻ thành viên":
                                         customer.MemberCardCode = item.ToString();
                                         break;
-                                    case 4:
+                                    case "Nhóm khách hàng":
                                         // Check Nhóm khách hàng tồn tại
-                                        if (!_customerRepository.IsDuplicated(string.Empty, item.ToString()))
+                                        if (customerGroupNamesInServer.IndexOf(item.ToString()) == -1)
                                         {
                                             var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportNotFoundInServerError_Msg;
                                             customer.ImportError.Add(msgError);
+                                            customer.IsValid = false;
                                         }
                                         customer.CustomerGroupName = item.ToString();
                                         break;
-                                    case 5:
+                                    case "Số điện thoại":
                                         // Check trùng số điện thoại
-                                        if (customerPhoneNumbersInFile.IndexOf(item.ToString()) != -1)
+                                        var phoneNumber = item.ToString().Replace(".", "").Replace(" ", "");
+                                        if (duplicateCustomerPhoneNumbers.Contains(phoneNumber) == true)
                                         {
                                             var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportDuplicateInFileError_Msg;
                                             customer.ImportError.Add(msgError);
+                                            customer.IsValid = false;
                                         }
-                                        if (_customerRepository.IsDuplicated(string.Empty, item.ToString()))
+                                        if (customerPhoneNumbersInServer.IndexOf(phoneNumber) != -1)
                                         {
                                             var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportDuplicateInServerError_Msg;
                                             customer.ImportError.Add(msgError);
+                                            customer.IsValid = false;
                                         }
-                                        customer.PhoneNumber = item.ToString();
+                                        customer.PhoneNumber = phoneNumber;
                                         break;
-                                    case 6:
+                                    case "Ngày sinh":
                                         if (Regex.IsMatch(item.ToString().Trim(), @"^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"))
                                         {
                                             customer.DateOfBirth = DateTime.ParseExact(item.ToString().Trim(), "dd/MM/yyyy", null);
@@ -173,16 +193,16 @@ namespace MISA.Core.Services
                                             customer.DateOfBirth = DateTime.ParseExact("01/01/" + item.ToString().Trim(), "dd/MM/yyyy", null);
                                         }
                                         break;
-                                    case 7:
+                                    case "Tên công ty":
                                         customer.CompanyName = item.ToString();
                                         break;
-                                    case 8:
+                                    case "Mã số thuế":
                                         customer.CompanyTaxCode = item.ToString();
                                         break;
-                                    case 9:
+                                    case "Email":
                                         customer.Email = item.ToString();
                                         break;
-                                    case 10:
+                                    case "Địa chỉ":
                                         customer.Address = item.ToString();
                                         break;
 
@@ -196,6 +216,7 @@ namespace MISA.Core.Services
                                 {
                                     var msgError = worksheet.Cells[2, index].Value.ToString().Replace("(*)", "").Trim() + Resources.ResourceVN.CustomerImportEmptyError_Msg;
                                     customer.ImportError.Add(msgError);
+                                    customer.IsValid = false;
                                 }
 
                             }

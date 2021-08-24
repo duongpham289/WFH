@@ -61,9 +61,9 @@ namespace MISA.Core.Services
                 _serviceResult.Data = errorObj;
                 return _serviceResult.IsValid;
             }
-            //2. Mã nhân viên không được phép trùng
+            //2. Mã nhân viên không được phép trùng 
 
-            if (_employeeRepository.IsDuplicated(employee.EmployeeCode,string.Empty))
+            if (employee.EmployeeId == Guid.Empty && _employeeRepository.IsDuplicated(employee.EmployeeCode,string.Empty))
             {
                 var errorObj = new
                 {
@@ -78,7 +78,7 @@ namespace MISA.Core.Services
             }
             //3. Số chứng minh thư nhân dân không được phép trùng
 
-            if (_employeeRepository.IsDuplicated(string.Empty, employee.IdentityNumber))
+            if (employee.EmployeeId == Guid.Empty && _employeeRepository.IsDuplicated(string.Empty, employee.IdentityNumber))
             {
                 var errorObj = new
                 {

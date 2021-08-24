@@ -41,6 +41,13 @@
             <returns></returns>
             CreatedBy: PHDUONG(07/08/2021)
         </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Delete(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Delete nhiều bản ghi theo ListId
+            </summary>
+            <param name="listId"></param>
+            <returns></returns>
+        </member>
         <member name="M:MISA.CukCuk.Api2.Controllers.CustomersController.GetCustomersPaging(System.Int32,System.Int32,System.String,System.Nullable{System.Guid})">
             <summary>
             Lấy thông tin phân trang Khách hàng
@@ -63,13 +70,6 @@
             </summary>
             <returns>Dữ liệu phân trang</returns>
             CreatedBy:PHDUONG(07/08/2021)
-        </member>
-        <member name="M:MISA.CukCuk.Api2.Controllers.EmployeesController.Delete(System.Collections.Generic.List{System.String})">
-            <summary>
-            Delete nhiều bản ghi theo ListId
-            </summary>
-            <param name="listId"></param>
-            <returns></returns>
         </member>
         <member name="T:MISA.CukCuk.Api2.Properties.Resources">
             <summary>

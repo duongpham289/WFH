@@ -6,7 +6,16 @@
 		justify-content: space-between;
 	}
 		.content__footer .first-page{
-			background-image: "@/assets/icon/btn-firstpage.svg";
+			background-image: url('../../../icon/btn-firstpage.svg');
+		}
+		.content__footer .prev-page{
+			background-image: url('../../../icon/btn-prev-page.svg');
+		}
+		.content__footer .next-page{
+			background-image: url('../../../icon/btn-next-page.svg');
+		}
+		.content__footer .last-page{
+			background-image: url('../../../icon/btn-lastpage.svg');
 		}
 		/* Button paginate */
 		.content__footer .pagination .pagination__button {
@@ -14,6 +23,10 @@
 			height: 40px;
 			border-radius: 4px;
 			padding: 5px;
+			background-repeat: no-repeat;
+			background-position: center;
+			outline: none;
+			border: none;
 		}
 		.content__footer .pagination .pagination__button:hover{
 			background-color: var(--color-white);

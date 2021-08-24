@@ -121,7 +121,7 @@ namespace MISA.CukCuk.Api2.Controllers
                 var serviceReSult = _baseService.Add(entity);
 
                 //4. Trả dữ liệu cho client
-                if ((int)serviceReSult.Data > 0)
+                if (serviceReSult.IsValid == true)
                 {
                     return StatusCode(201, serviceReSult.Data);
 
@@ -159,13 +159,13 @@ namespace MISA.CukCuk.Api2.Controllers
                 var serviceReSult = _baseService.Update(entity, entityId);
 
                 //4. Tra ve cho client
-                if ((int)serviceReSult.Data > 0)
+                if (serviceReSult.IsValid == true)
                 {
                     return StatusCode(200, serviceReSult.Data);
                 }
                 else
                 {
-                    return NoContent();
+                    return BadRequest(serviceReSult.Data);
                 }
             }
             catch (Exception ex)
@@ -226,6 +226,45 @@ namespace MISA.CukCuk.Api2.Controllers
                 return StatusCode(500, errorObj);
             }
 
+        }
+
+        /// <summary>
+        /// Delete nhiều bản ghi theo ListId
+        /// </summary>
+        /// <param name="listId"></param>
+        /// <returns></returns>
+        [HttpPost("delete")]
+        public virtual IActionResult Delete(List<Guid> listId)
+        {
+            try
+            {
+
+                //3. Lay du lieu:
+                var rowsEffect = _baseRepository.DeleteList(listId);
+
+                //4. Tra ve cho client
+                if (rowsEffect > 0)
+                {
+                    return StatusCode(200, rowsEffect);
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
+                };
+                return StatusCode(500, errorObj);
+            }
         }
         #endregion
     }

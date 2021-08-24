@@ -13,12 +13,12 @@ namespace MISA.CukCuk.Api2.Controllers
     {
         #region DECLARE
 
-        //IEmployeeRepository _employeeRepository;
+        IEmployeeRepository _employeeRepository;
         IEmployeeService _employeeService;
         #endregion
 
         #region Constructor
-        public EmployeesController(IEmployeeService employeeService, IBaseRepository<Employee> baseRepository) : base(employeeService, baseRepository)
+        public EmployeesController(IEmployeeService employeeService, IEmployeeRepository employeeRepository) : base(employeeService, employeeRepository)
         {
             //_employeeRepository = employeeRepository;
             _employeeService = employeeService;
@@ -66,17 +66,6 @@ namespace MISA.CukCuk.Api2.Controllers
                 return StatusCode(500, errorObj);
             }
 
-        }
-
-        /// <summary>
-        /// Delete nhiều bản ghi theo ListId
-        /// </summary>
-        /// <param name="listId"></param>
-        /// <returns></returns>
-        [HttpPost("delete")]
-        public IActionResult Delete(List<string> listId)
-        {
-            return Ok(listId);
         }
         #endregion
 

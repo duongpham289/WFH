@@ -4,6 +4,7 @@ using MISA.Core.Entities;
 using MISA.Core.Interfaces.Repository;
 using MySqlConnector;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace MISA.Infrastructure.Repository
@@ -36,17 +37,14 @@ namespace MISA.Infrastructure.Repository
                 parameters.Add("@PageIndex", pageIndex);
                 parameters.Add("@PageSize", pageSize);
                 parameters.Add("@TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                parameters.Add("@TotalPage", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 var data = _dbConnection.Query<Employee>($"Proc_GetEmployeeFilterPaging", param: parameters, commandType: CommandType.StoredProcedure);
 
-                var totalPage = parameters.Get<Int32>("@TotalPage");
                 var totalRecord = parameters.Get<Int32>("@TotalRecord");
 
 
                 var pagingData = new
                 {
-                    totalPage,
                     totalRecord,
                     data
                 };

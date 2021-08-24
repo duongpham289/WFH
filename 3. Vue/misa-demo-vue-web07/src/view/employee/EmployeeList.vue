@@ -90,18 +90,24 @@
       />
     </div>
     <EmployeeDetailDialog
-      v-bind:isHidden="isHiddenDialogDetail"
-      v-bind:employeeId="employeeId"
-      v-bind:mode="modeFormDetail"
+      :isHidden="isHiddenDialogDetail"
+      :mode="modeFormDetail"
       ref="EmployeeDetailDialog"
+      :employeeGetById="employeeGetById"
       @btnAddOnClick="btnAddOnClick"
       @btnReloadOnClick="btnReloadOnClick"
+      @responseHandler="responseHandler"
     />
     <PopupMessage
       :isHidden="isHiddenPopupMessage"
       :datasToDelete="employeesToDelete"
       @btnDelOnClick="btnDelOnClick"
       @btnReloadOnClick="btnReloadOnClick"
+    />
+    <BaseToastMessage
+      :isShowToast="isShowToast"
+      :toastMessageState="toastMessageState"
+      :erorMsg="errorMsg"
     />
   </div>
 </template>
@@ -112,6 +118,8 @@ import PositionAPI from "@/api/components/PositionAPI.js";
 import DepartmentAPI from "@/api/components/DepartmentAPI.js";
 import EmployeeDetailDialog from "../employee/EmployeeDetail.vue";
 import PopupMessage from "../../components/base/PopupMessage.vue";
+import BaseToastMessage from "../../components/base/BaseToastMessage.vue";
+import EmployeeModel from "@/models/EmployeeModel.js";
 import { columns } from "@/view/employee/EmployeeTableCols.js";
 
 import ComboboxData from "../../components/base/combobox/ComboboxData.js";
@@ -122,7 +130,12 @@ const $ = require("jquery");
 
 export default {
   name: "EmployeePage",
-  components: { EmployeeDetailDialog, PopupMessage, BaseSpinner },
+  components: {
+    EmployeeDetailDialog,
+    PopupMessage,
+    BaseSpinner,
+    BaseToastMessage,
+  },
   created() {
     this.getEmployeePagingData(this.pageIndex, this.pageSize);
     this.getDropdownData();
@@ -141,13 +154,98 @@ export default {
       EmployeesAPI.paging(pageIndex, pageSize, employeeFilter)
         .then((res) => {
           vm.employeesData = res.data.data;
-          vm.totalPage = res.data.totalPage;
           vm.totalRecord = res.data.totalRecord;
-          vm.loading = false;
+          vm.totalPage = Math.ceil(vm.totalRecord / vm.pageSize);
+          vm.responseHandler(2, "");
         })
         .catch((err) => {
-          console.log(err);
+          vm.responseHandler(1, err);
         });
+    },
+
+    responseHandler(status, err) {
+      let vm = this;
+      if (status == 1) {
+        switch (err.response.status) {
+          case 400:
+            vm.loading = false;
+            vm.toastMessageState = status;
+
+            if (err.response.data.userMsg)
+              vm.errorMsg = err.response.data.userMsg;
+            else vm.errorMsg = err.response.status + " Sai cú pháp URL";
+
+            setTimeout(function () {
+              vm.isShowToast = true;
+            }, 400);
+            setTimeout(function () {
+              vm.isShowToast = false;
+            }, 5000);
+
+            break;
+
+          case 404:
+            vm.loading = false;
+            vm.toastMessageState = status;
+
+            if (err.response.data.userMsg)
+              vm.errorMsg = err.response.data.userMsg;
+            else
+              vm.errorMsg = err.response.status + " Không tìm thấy đường dẫn";
+
+            setTimeout(function () {
+              vm.isShowToast = true;
+            }, 400);
+            setTimeout(function () {
+              vm.isShowToast = false;
+            }, 5000);
+
+            break;
+
+          case 500:
+            vm.loading = false;
+            vm.toastMessageState = status;
+
+            if (err.response.data.userMsg)
+              vm.errorMsg = err.response.data.userMsg;
+            else
+              vm.errorMsg =
+                err.response.status + " Lỗi hệ thống, vui lòng liên hệ MISA";
+
+            setTimeout(function () {
+              vm.isShowToast = true;
+            }, 400);
+            setTimeout(function () {
+              vm.isShowToast = false;
+            }, 5000);
+
+            break;
+
+          default:
+            if (err.response.data.userMsg) {
+              vm.loading = false;
+              vm.toastMessageState = status;
+
+              vm.errorMsg = err.response.data.userMsg;
+              setTimeout(function () {
+                vm.isShowToast = true;
+              }, 400);
+              setTimeout(function () {
+                vm.isShowToast = false;
+              }, 5000);
+            }
+            break;
+        }
+      } else {
+        vm.loading = false;
+        vm.toastMessageState = status;
+        setTimeout(function () {
+          vm.isShowToast = true;
+        }, 400);
+        setTimeout(function () {
+          vm.isShowToast = false;
+        }, 2000);
+      }
     },
 
     pagingOnChange(pageIndex, pageSize) {
@@ -156,12 +254,13 @@ export default {
       this.getEmployeePagingData(pageIndex, pageSize);
     },
 
-    getPageSize(pageIndex,pageSize) {
+    getPageSize(pageIndex, pageSize) {
       this.pageSize = pageSize;
-      this.getEmployeePagingData(pageIndex,this.pageSize)
+      this.getEmployeePagingData(pageIndex, this.pageSize);
     },
 
     getDropdownData() {
+      var vm = this;
       PositionAPI.getAll()
         .then((res) => {
           DropdownData.position.options = res.data;
@@ -170,7 +269,7 @@ export default {
           // debugger
         })
         .catch((err) => {
-          console.log(err);
+          vm.responseHandler(0, err);
         });
 
       DepartmentAPI.getAll()
@@ -181,7 +280,7 @@ export default {
           // debugger
         })
         .catch((err) => {
-          console.log(err);
+          vm.responseHandler(0, err);
         });
     },
     /**
@@ -193,6 +292,7 @@ export default {
     filterPosition(value, name) {
       console.log(value, name);
     },
+
     /**
      * Hiển thị form chi tiết khi ấn button thêm nhân viên
      * Author: PHDUONG(29/07/2021)
@@ -222,10 +322,18 @@ export default {
      * Author: PHDUONG(29/07/2021)
      */
     rowOnDblClick(empId) {
-      this.isHiddenDialogDetail = false;
-      this.employeeId = empId;
-      this.$refs.EmployeeDetailDialog.autoFocusWhenUpdate();
-      this.modeFormDetail = 1;
+      let vm = this;
+
+      EmployeesAPI.getById(empId)
+        .then((res) => {
+          vm.employeeGetById = res.data;
+          vm.isHiddenDialogDetail = false;
+          vm.$refs.EmployeeDetailDialog.autoFocusWhenUpdate();
+          vm.modeFormDetail = 1;
+        })
+        .catch((err) => {
+          vm.responseHandler(0, err);
+        });
     },
 
     /**
@@ -234,10 +342,6 @@ export default {
      */
     btnDelOnClick(isHidden) {
       this.isHiddenPopupMessage = isHidden;
-      if (isHidden) {
-        // this.employeesToDelete = [];
-        // $("tr").css("background-color", "#FFF");
-      }
     },
 
     /**
@@ -268,14 +372,15 @@ export default {
       pageSize: 10,
       totalPage: 0,
       totalRecord: 0,
+      isShowToast: false,
+      toastMessageState: 0,
+      errorMsg: "",
       employeeFilter: null,
       employeesData: [],
-      employeeId: "",
-      employeeCode: "",
+      employeeGetById: EmployeeModel.initData(),
       employeesToDelete: [],
       isHiddenDialogDetail: true,
       isHiddenPopupMessage: true,
-      isChecked: "",
       isReset: false,
       modeFormDetail: 0,
       columns: columns,
