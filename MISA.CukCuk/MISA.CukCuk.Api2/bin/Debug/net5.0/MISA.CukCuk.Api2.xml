@@ -19,6 +19,9 @@
             <returns>Thông tin Thực thể dạng Json</returns>
             CreatedBy: PHDUONG(07/08/2021)
         </member>
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.GetAllCode">
+            CreatedBy: PHDUONG(07/08/2021)
+        </member>
         <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Insert(`0)">
             <summary>
             Thêm mới 1 bản ghi vào cơ sở dữ liệu
@@ -41,7 +44,7 @@
             <returns></returns>
             CreatedBy: PHDUONG(07/08/2021)
         </member>
-        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.Delete(System.Collections.Generic.List{System.Guid})">
+        <member name="M:MISA.CukCuk.Api2.Controllers.BaseEntityController`1.DeleteList(System.Collections.Generic.List{System.Guid})">
             <summary>
             Delete nhiều bản ghi theo ListId
             </summary>

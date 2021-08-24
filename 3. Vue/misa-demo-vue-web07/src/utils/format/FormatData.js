@@ -82,7 +82,7 @@ export default class FormatData {
     /**
      * Định dạng Tình trạng công việc
      * @param {*} workStatus Tình trạng công việc dạng int
-     * @returns Tình trạng công việc dạng strinng
+     * @returns Tình trạng công việc dạng string
      * CreatedBy: PHDUONG (19/07/2021)
      */
     static formatWorkStatus(workStatus){
@@ -91,6 +91,21 @@ export default class FormatData {
         if (workStatus < 4) { //workStatus 5 6 chưa biết
             return workStatus = works[workStatus];
         }
-        return workStatus = '';
+        return workStatus = 'Không có dữ liệu';
+    }
+
+    /**
+     * Định dạng Giới tính
+     * @param {*} gender Giới tính dạng int
+     * @returns  Giới tính dạng string
+     * CreatedBy: PHDUONG (19/07/2021)
+     */
+    static formatGender(gender){
+        if (gender === null || gender.length === 0) return '';
+        var genders = ["Nữ", "Nam", "Khác"]
+        if (gender < 3) {
+            return gender = genders[gender];
+        }
+        return gender = 'Không có dữ liệu';
     }
 }

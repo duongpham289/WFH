@@ -320,11 +320,16 @@ export default {
           console.log(vm.employee);
           EmployeesAPI.create(vm.employee)
             .then((res) => {
-              vm.$emit("responseHandler", 3, res)
+              vm.btnCancelOnClick();
+              setTimeout(function () {
+                vm.reloadTable();
+              }, 3000);
+              
+              vm.$emit("responseHandler", 3, res);
             })
             .catch((err) => {
               console.log(err);
-              vm.$emit("responseHandler", 1, err)
+              vm.$emit("responseHandler", 1, err);
             });
         } else {
           EmployeesAPI.update(vm.employee.EmployeeId, vm.employee)
@@ -334,10 +339,10 @@ export default {
                 vm.reloadTable();
               }, 3000);
 
-              vm.$emit("responseHandler", 4, res)
+              vm.$emit("responseHandler", 4, res);
             })
             .catch((err) => {
-              vm.$emit("responseHandler", 1, err)
+              vm.$emit("responseHandler", 1, err);
             });
         }
       }
@@ -401,12 +406,12 @@ export default {
   },
   data() {
     return {
-      employee : EmployeeModel.initData()
-    }
+      employee: EmployeeModel.initData(),
+      employeeCode: "",
+    };
   },
   watch: {
-    
-    employeeGetById: function() {
+    employeeGetById: function () {
       this.employee = this.employeeGetById;
     },
     /**
@@ -417,7 +422,20 @@ export default {
       if (this.mode == 0) {
         this.employee = {};
       }
-    }
-  }
+    },
+    isHidden: function () {
+      let vm = this;
+      if (vm.isHidden == false && vm.mode == 0) {
+        vm.employee = EmployeeModel.initData();
+        EmployeesAPI.getNewCode()
+          .then((res) => {
+            vm.employee.EmployeeCode = res.data.Data;
+          })
+          .catch((err) => {
+            vm.$emit("responseHandler", 1, err);
+          });
+      }
+    },
+  },
 };
 </script>

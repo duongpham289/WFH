@@ -117,6 +117,7 @@ namespace MISA.Core.Services
                     var duplicateCustomerPhoneNumbers = customerPhoneNumbersInFile.GroupBy(x => x)
                                         .Where(g => g.Count() > 1)
                                         .Select(x => x.Key);
+
                     //Duyệt tất cả sheet, validate dữ liệu từng dòng
                     for (int row = 3; row <= rowCount; row++)
                     {

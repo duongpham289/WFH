@@ -162,7 +162,11 @@ export default {
           vm.responseHandler(1, err);
         });
     },
-
+    
+    /**
+     * Xử lý dữ liệu trả về
+     * CreatedBy: PHDUONG(24/08/2021)
+     */
     responseHandler(status, err) {
       let vm = this;
       if (status == 1) {
@@ -247,18 +251,30 @@ export default {
         }, 2000);
       }
     },
-
+    
+    /**
+     * Xử lý chuyển trang
+     * CreatedBy: PHDUONG(24/08/2021)
+     */
     pagingOnChange(pageIndex, pageSize) {
       this.pageIndex = pageIndex;
       this.pageSize = pageSize;
       this.getEmployeePagingData(pageIndex, pageSize);
     },
 
+    /**
+     * Xử lý đổi số nhân viên/trang
+     * CreatedBy: PHDUONG(24/08/2021)
+     */
     getPageSize(pageIndex, pageSize) {
       this.pageSize = pageSize;
       this.getEmployeePagingData(pageIndex, this.pageSize);
     },
 
+    /**
+     * Xử lý lấy dữ liệu dropdown
+     * CreatedBy: PHDUONG(24/08/2021)
+     */
     getDropdownData() {
       var vm = this;
       PositionAPI.getAll()
@@ -269,7 +285,7 @@ export default {
           // debugger
         })
         .catch((err) => {
-          vm.responseHandler(0, err);
+          vm.responseHandler(1, err);
         });
 
       DepartmentAPI.getAll()
@@ -280,9 +296,10 @@ export default {
           // debugger
         })
         .catch((err) => {
-          vm.responseHandler(0, err);
+          vm.responseHandler(1, err);
         });
     },
+
     /**
      *
      */
@@ -302,7 +319,6 @@ export default {
       this.modeFormDetail = 0;
       this.$refs.EmployeeDetailDialog.autoFocusWhenAdd();
       $("input").val("");
-      this.employeeId = "";
     },
 
     /**
@@ -332,7 +348,7 @@ export default {
           vm.modeFormDetail = 1;
         })
         .catch((err) => {
-          vm.responseHandler(0, err);
+          vm.responseHandler(1, err);
         });
     },
 

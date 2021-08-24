@@ -27,6 +27,23 @@ namespace MISA.Core.Services
         #region Methods
 
         /// <summary>
+        /// Lấy dữ liệu Mã entity
+        /// </summary>
+        /// <param name="columnName">Tên cột EntityCode</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
+        public ServiceResult GetNewCode(string columnName)
+        {
+            var entityCodes = _baseRepository.GetAllProp(columnName);
+
+            entityCodes.Sort((x, y) => y.CompareTo(x));
+
+            _serviceResult.Data = entityCodes[0].Substring(0, 2) + (Int32.Parse(entityCodes[0].Substring(2)) + 1).ToString();
+
+            return _serviceResult;
+        }
+
+        /// <summary>
         /// Thêm mới dữ liệu
         /// </summary>
         /// <param name="entity">Dữ liệu truyền vào</param>

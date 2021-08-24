@@ -17,6 +17,14 @@ export default class BaseAPI {
     return BaseAPIConfig.get(`${this.controller}/${id}`);
   }
   /**
+   * Phương thức lấy code mới
+   * @param {*} propName 
+   * @returns 
+   */
+  getNewCode(){
+    return BaseAPIConfig.get(`${this.controller}/getCode`);
+  }
+  /**
    * Phương thức thêm mới dữ liệu
    */
   create(body) {

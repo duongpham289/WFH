@@ -16,6 +16,7 @@ namespace MISA.CukCuk.Api2.Controllers
         #region DECLARE
         IBaseService<MISAEntity> _baseService;
         IBaseRepository<MISAEntity> _baseRepository;
+        string _className;
         #endregion
 
         #region Constructor
@@ -23,6 +24,7 @@ namespace MISA.CukCuk.Api2.Controllers
         {
             _baseService = baseService;
             _baseRepository = baseRepository;
+            _className = typeof(MISAEntity).Name;
         }
         #endregion
 
@@ -87,6 +89,42 @@ namespace MISA.CukCuk.Api2.Controllers
                 if (entity != null)
                 {
                     return StatusCode(200, entity);
+
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = MISA.Core.Resources.ResourceVN.ExceptionError_Msg,
+                    errorCode = "misa-001",
+                    moreInfo = "https://openapi.misa.com.vn/errorcode/misa-001",
+                    traceId = ""
+                };
+                return StatusCode(500, errorObj);
+            }
+        }
+
+
+        /// CreatedBy: PHDUONG(07/08/2021)
+        [HttpGet("getCode")]
+        public virtual IActionResult GetAllCode()
+        {
+            try
+            {
+
+                //3. Lay du lieu:
+                var entityCode = _baseService.GetNewCode($"{_className}Code");
+
+                //4.tra ve cho client
+                if (entityCode != null)
+                {
+                    return StatusCode(200, entityCode);
 
                 }
                 else
@@ -234,7 +272,7 @@ namespace MISA.CukCuk.Api2.Controllers
         /// <param name="listId"></param>
         /// <returns></returns>
         [HttpPost("delete")]
-        public virtual IActionResult Delete(List<Guid> listId)
+        public virtual IActionResult DeleteList(List<Guid> listId)
         {
             try
             {

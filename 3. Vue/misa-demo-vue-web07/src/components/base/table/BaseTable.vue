@@ -76,9 +76,9 @@ export default {
      */
     changeColorOnClick(id) {
       var isTrue = false;
-      this.checkedId.find((item)=>{
-        if(item.id===id){
-         isTrue = true
+      this.checkedId.find((item) => {
+        if (item.id === id) {
+          isTrue = true;
         }
       });
       return isTrue || this.isCheckAll;
@@ -125,6 +125,9 @@ export default {
       }
       if (col.format === this.$enum.WORK) {
         tmp = FormatData.formatWorkStatus(tmp);
+      }
+      if (col.format === this.$enum.GENDER) {
+        tmp = FormatData.formatGender(tmp);
       }
 
       return tmp;

@@ -64,6 +64,26 @@ namespace MISA.Infrastructure.Repository
         }
 
         /// <summary>
+        /// Lấy dữ liệu Mã entity
+        /// </summary>
+        /// <param name="columnName">Tên cột EntityCode</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(17/08/2021)
+        public List<string> GetAllProp(string columnName)
+        {
+            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add($"@ColumnName", columnName);
+                parameters.Add($"@ViewName", _className);
+
+                var listProp = _dbConnection.Query<string>($"Proc_GetAllProp", param: parameters, commandType: CommandType.StoredProcedure);
+
+                return listProp.AsList();
+            }
+        }
+
+        /// <summary>
         /// Thêm mới Thực thể vào DataBase
         /// </summary>
         /// <returns></returns>
@@ -124,10 +144,7 @@ namespace MISA.Infrastructure.Repository
                     var propValue = prop.GetValue(entity);
 
                     //Them param tuong ung voi moi prop
-                    if (propValue != null)
-                    {
-                        dynamicParam.Add($"@{propName}", propValue);
-                    }
+                    dynamicParam.Add($"@{propName}", propValue);
 
                 }
 
@@ -211,20 +228,6 @@ namespace MISA.Infrastructure.Repository
                 _dbConnection.Execute($"Proc_Check{_className}PropertyDuplicate", param: parameters, commandType: CommandType.StoredProcedure);
 
                 return parameters.Get<Boolean>("@IsExist");
-            }
-        }
-
-        public List<string> GetAllProp(string columnName)
-        {
-            using (_dbConnection = new MySqlConnection(_configuration.GetConnectionString("SqlConnection")))
-            {
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add($"@ColumnName", columnName);
-                parameters.Add($"@ViewName", _className);
-
-                var listProp = _dbConnection.Query<string>($"Proc_GetAllProp", param: parameters, commandType: CommandType.StoredProcedure);
-
-                return listProp.AsList();
             }
         }
         #endregion

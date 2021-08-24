@@ -10,6 +10,13 @@ namespace MISA.Core.Interfaces.Services
     public interface IBaseService<MISAEntity>
     {
         #region Methods
+        /// <summary>
+        /// Lấy dữ liệu Mã entity
+        /// </summary>
+        /// <param name="columnName">Tên cột</param>
+        /// <returns></returns>
+        /// CreatedBy: PHDUONG(16/08/2021)
+        ServiceResult GetNewCode(string columnName);
 
         /// <summary>
         /// Thêm mới dữ liệu
