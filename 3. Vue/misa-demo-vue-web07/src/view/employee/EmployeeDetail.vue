@@ -74,6 +74,7 @@
               <base-dropdown
                 @selected="selectedGender"
                 :dropdown="this.$enum.GENDER"
+                :valOnClick="employee.Gender"
                 :defaultState="isHidden"
               />
             </div>
@@ -157,6 +158,7 @@
               <base-dropdown
                 @selected="selectedPosition"
                 :dropdown="this.$enum.POSITION"
+                :valOnClick="employee.PositionId"
                 :defaultState="isHidden"
               />
             </div>
@@ -165,6 +167,7 @@
               <base-dropdown
                 @selected="selectedDepartment"
                 :dropdown="this.$enum.DEPARTMENT"
+                :valOnClick="employee.DepartmentId"
                 :defaultState="isHidden"
               />
             </div>
@@ -214,6 +217,7 @@
                 @selected="selectedWorkStatus"
                 :dropdown="this.$enum.WORKSTATUS"
                 :defaultState="isHidden"
+                :valOnClick="employee.WorkStatus"
                 :styleCustom="true"
               />
             </div>
@@ -246,6 +250,8 @@
 import EmployeesAPI from "@/api/components/EmployeesAPI.js";
 import { required, email } from "vuelidate/lib/validators";
 import EmployeeModel from "@/models/EmployeeModel.js";
+
+import FormatData from "@/utils/format/FormatData.js";
 
 export default {
   validations: {
@@ -300,7 +306,10 @@ export default {
      * Autthor: PHDUONG(06/08/2021)
      */
     onChangeInput({ id, value }) {
-      this.employee[id] = value;
+      if (this.employee[id] != value) {
+        this.employee[id] = value;
+        this.checkUpdateData = true;
+      }
     },
 
     /**
@@ -312,14 +321,13 @@ export default {
       if (!this.$v.$invalid) {
         let vm = this;
         if (vm.mode == 0) {
-          console.log(vm.employee);
           EmployeesAPI.create(vm.employee)
             .then((res) => {
               vm.btnCancelOnClick();
               setTimeout(function () {
                 vm.reloadTable();
               }, 3000);
-              
+
               vm.$emit("responseHandler", 3, res);
             })
             .catch((err) => {
@@ -327,20 +335,23 @@ export default {
               vm.$emit("responseHandler", 1, err);
             });
         } else {
-          console.log(vm.employee);
-          debugger
-          EmployeesAPI.update(vm.employee.EmployeeId, vm.employee)
-            .then((res) => {
-              vm.btnCancelOnClick();
-              setTimeout(function () {
-                vm.reloadTable();
-              }, 3000);
+          if (this.checkUpdateData) {
+            EmployeesAPI.update(vm.employee.EmployeeId, vm.employee)
+              .then((res) => {
+                vm.btnCancelOnClick();
+                setTimeout(function () {
+                  vm.reloadTable();
+                }, 3000);
 
-              vm.$emit("responseHandler", 4, res);
-            })
-            .catch((err) => {
-              vm.$emit("responseHandler", 1, err);
-            });
+                vm.$emit("responseHandler", 4, res);
+              })
+              .catch((err) => {
+                vm.$emit("responseHandler", 1, err);
+              });
+          } else {
+            // vm.$emit("responseHandler", 1, "");
+            console.log(1);
+          }
         }
       }
     },
@@ -405,11 +416,24 @@ export default {
     return {
       employee: EmployeeModel.initData(),
       employeeCode: "",
+      checkUpdateData: false,
     };
   },
   watch: {
     employeeGetById: function () {
       this.employee = this.employeeGetById;
+      this.employee.DateOfBirth = FormatData.formatDate(
+        this.employee.DateOfBirth,
+        true
+      );
+      this.employee.IndentityDate = FormatData.formatDate(
+        this.employee.IndentityDate,
+        true
+      );
+      this.employee.JoinDate = FormatData.formatDate(
+        this.employee.JoinDate,
+        true
+      );
     },
     /**
      * Kiểm tra hành động hiện tai là thêm hay sửa

@@ -6,16 +6,18 @@
       :class="open ? 'border-active' : ''"
     >
       <span class="dropdown__title" :value="selector.value">
-        <span style="font-weight: bold">{{pageSize}}</span>{{
-        selector.name ? selector.name : dropdownName
-      }}
+        <span style="font-weight: bold">{{ pageSize }}</span
+        >{{ selector.name ? selector.name : dropdownName }}
       </span>
       <i class="fas fa-chevron-down" :class="open ? 'rotate-180' : ''"></i>
     </button>
-    <div :class="[
-          { 'dropdown__content': true },
-          { 'dropdown__content--up': pageSize != null || styleCustom },
-        ]"  v-show="open">
+    <div
+      :class="[
+        { dropdown__content: true },
+        { 'dropdown__content--up': pageSize != null || styleCustom },
+      ]"
+      v-show="open"
+    >
       <div
         v-for="item in options"
         :key="item[select.value]"
@@ -30,7 +32,9 @@
         >
           <i class="fas fa-check"></i>
         </span>
-        <span class="text">{{pageSize ? item[select.value] :""}}{{ item[select.name] }}</span>
+        <span class="text"
+          >{{ pageSize ? item[select.value] : "" }}{{ item[select.name] }}</span
+        >
       </div>
     </div>
   </div>
@@ -54,12 +58,16 @@ export default {
       required: true,
       default: null,
     },
-    pageSize:{
-      type:Number
+    valOnClick: {
+      type: [String, Number],
+      default: null,
     },
-    styleCustom:{
-      type:Boolean
-    }
+    pageSize: {
+      type: Number,
+    },
+    styleCustom: {
+      type: Boolean,
+    },
   },
   methods: {
     /**
@@ -125,14 +133,39 @@ export default {
             this.selector = { name: "", value: "" };
             break;
           case this.$enum.DEPARTMENT:
-            // debugger
             this.dropdownName = "Phòng ban";
             this.selector = { name: "", value: "" };
             break;
           case this.$enum.POSITION:
-            // debugger
             this.dropdownName = "Vị trí";
             this.selector = { name: "", value: "" };
+            break;
+        }
+      } else {
+        switch (this.dropdown) {
+          case this.$enum.GENDER:
+            this.selector.name = this.options[this.valOnClick].GenderName;
+            break;
+          case this.$enum.WORKSTATUS:
+            this.selector.name = this.options[this.valOnClick]
+              ? this.options[this.valOnClick].WorkStatusName
+              : "Không có dữ liệu";
+            break;
+          case this.$enum.DEPARTMENT:
+            var valIndexDepartment = this.options
+              .map(function (item) {
+                return item.DepartmentId;
+              })
+              .indexOf(this.valOnClick);
+            this.selector.name = this.options[valIndexDepartment].DepartmentName;
+            break;
+          case this.$enum.POSITION:
+            var valIndexPosition = this.options
+              .map(function (item) {
+                return item.PositionId;
+              })
+              .indexOf(this.valOnClick);
+            this.selector.name = this.options[valIndexPosition].PositionName;
             break;
         }
       }
@@ -142,7 +175,6 @@ export default {
       handler() {
         switch (this.dropdown) {
           case this.$enum.RESTAURANT:
-            // debugger
             this.options = DropdownData.restaurant.options;
             this.select = DropdownData.restaurant.select;
             this.dropdownName = "Nhà Hàng Biển Đông";

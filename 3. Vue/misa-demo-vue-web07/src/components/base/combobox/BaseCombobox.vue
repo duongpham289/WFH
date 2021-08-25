@@ -49,9 +49,6 @@ export default {
     },
     placeholder:{
       type: String,
-    },
-    defaultState:{
-      type: Boolean,
     }
   },
   methods: {
@@ -104,11 +101,12 @@ export default {
       handler() {
         switch (this.combobox) {
           case this.$enum.DEPARTMENT:
+            this.selector = { name: "Tất cả Phòng ban", value: "" };
             this.options = ComboboxData.department.options;
             this.select = ComboboxData.department.select;
             break;
           case this.$enum.POSITION:
-            // debugger
+            this.selector = { name: "Tất cả Vị trí", value: "" };
             this.options = ComboboxData.position.options;
             this.select = ComboboxData.position.select;
             break;
@@ -117,21 +115,6 @@ export default {
             break;
         }
       },
-    },
-    defaultState: function(){
-      if (this.defaultState) {
-        switch (this.combobox) {
-          case this.$enum.DEPARTMENT:
-            this.selector = { name: "", value: "" };
-            break;
-          case  this.$enum.POSITION:
-            this.selector = { name: "", value: "" };
-            break;
-
-          default:
-            break;
-        }
-      }
     }
   },
   beforeDestroy() {

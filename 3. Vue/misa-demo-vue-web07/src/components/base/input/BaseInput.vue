@@ -100,6 +100,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    mode: {
+      type: Number,
+    },
   },
   //#endregion
 
@@ -113,7 +116,7 @@ export default {
 
   computed:{
       attachValue: function(){
-        return this.formatData(this.type, this.value);
+        return  this.value;
       }
   },
 
@@ -140,10 +143,7 @@ export default {
      * Định dạng dữ liệu chung
      * Author: PHDUONG(05/08/2021)
      */
-    formatData(type, value) {
-      if (type === this.$enum.DATE) {
-        return FormatData.formatDate(value, true);
-      }
+    formatData(value) {
       if (this.format === this.$enum.MONEY) {
         return FormatData.formatMoneyOnModal(value);
       }

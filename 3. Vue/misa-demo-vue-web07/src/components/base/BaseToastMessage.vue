@@ -57,6 +57,9 @@ export default {
         case 5:
           this.textToastMessage = "Xóa thành công";
           break;
+        case 6:
+          this.textToastMessage ="Không có dữ liệu";
+          break;
 
         default:
           break;

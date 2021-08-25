@@ -53,13 +53,11 @@
           <combo-box
             @selected="filterDepartment"
             :combobox="this.$enum.DEPARTMENT"
-            :defaultState="isReset"
             placeholder="Tất cả Phòng ban"
           />
           <combo-box
             @selected="filterPosition"
             :combobox="this.$enum.POSITION"
-            :defaultState="isReset"
             placeholder="Tất cả Vị trí"
           />
         </div>
@@ -174,9 +172,14 @@ export default {
       )
         .then((res) => {
           vm.employeesData = res.data.data;
+          vm.pageIndex = pageIndex;
           vm.totalRecord = res.data.totalRecord;
           vm.totalPage = Math.ceil(vm.totalRecord / vm.pageSize);
-          vm.responseHandler(2, "");
+          if (res.data.data) {
+            vm.responseHandler(2, "");
+          } else {
+            vm.responseHandler(6, "");
+          }
         })
         .catch((err) => {
           vm.responseHandler(1, err);
@@ -242,7 +245,6 @@ export default {
             setTimeout(function () {
               vm.isShowToast = false;
             }, 5000);
-
             break;
 
           default:
@@ -347,23 +349,29 @@ export default {
     },
 
     /**
-     *
+     * Lọc dữ liệu Phòng ban
+     * CreatedBy: PHDUONG(25/08/2021)
      */
     filterDepartment(value) {
       this.search.departmentId = value;
       this.getEmployeePagingData(
-        this.pageIndex,
+        1,
         this.pageSize,
         this.search.employeeFilter,
         this.search.departmentId,
         this.search.positionId
       );
     },
+
+    /**
+     * Lọc dữ liệu Vị trí
+     * CreatedBy: PHDUONG(25/08/2021)
+     */
     filterPosition(value) {
       console.log(value);
       this.search.positionId = value;
       this.getEmployeePagingData(
-        this.pageIndex,
+        1,
         this.pageSize,
         this.search.employeeFilter,
         this.search.departmentId,
@@ -389,7 +397,6 @@ export default {
     btnReloadOnClick() {
       $(".checkbox").prop("checked", false);
       this.employeesToDelete = [];
-      this.isReset = true;
       this.employeesData = [];
       this.getEmployeePagingData(
         this.pageIndex,
@@ -468,7 +475,6 @@ export default {
       employeesToDelete: [],
       isHiddenDialogDetail: true,
       isHiddenPopupMessage: true,
-      isReset: false,
       modeFormDetail: 0,
       columns: columns,
       loading: true,

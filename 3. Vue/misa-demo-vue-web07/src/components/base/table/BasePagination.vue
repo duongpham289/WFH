@@ -3,7 +3,7 @@
     <p>
       Hiển thị
       <span style="font-weight: bold">
-        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage * pageSize }}/{{
+        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage == totalPage ? totalRecord : currentPage * pageSize}}/{{
           totalRecord
         }}</span
       >
@@ -58,7 +58,6 @@ export default {
     return {
       currentPage: 1,
       maxVisibleButtons: 4,
-      // pageSize: 10,
     };
   },
   props: {
@@ -69,6 +68,7 @@ export default {
     pageSize: {
       type: Number,
       required: true,
+      default: null
     },
     totalPage: {
       type: Number,
@@ -77,6 +77,7 @@ export default {
     totalRecord: {
       type: Number,
       required: true,
+      default:0
     },
   },
   computed: {
@@ -98,14 +99,9 @@ export default {
 
       if (this.currentPage === this.totalPage) {
         if (this.totalPage - this.maxVisibleButtons < 0) {
-          return  1;
-        }else
-          return this.totalPage - this.maxVisibleButtons + 1;
+          return 1;
+        } else return this.totalPage - this.maxVisibleButtons + 1;
       }
-
-      // if (this.totalPage - this.currentPage < this.maxVisibleButtons) {
-      //   return this.totalPage - this.maxVisibleButtons + 1;
-      // }
 
       return this.currentPage - 1;
     },
@@ -130,9 +126,8 @@ export default {
       }
 
       return range;
-    },
+    }
   },
-
   methods: {
     // chọn index trang đầu tiên(=1)
     onClickFirstPage() {
@@ -169,7 +164,7 @@ export default {
     },
 
     /**
-     * Lấy dữ liệu WorkStatus vào model
+     * Lấy dữ liệu
      * Autthor: PHDUONG(3/8/2021)
      */
     selectedPageSize(value) {
@@ -191,7 +186,12 @@ export default {
   watch: {
     pageIndex: function () {
       this.currentPage = this.pageIndex;
-    }
+    },
+    totalRecord: function () {
+      if (this.totalRecord < this.pageSize || this.totalRecord == 0) {
+        this.getEmployeePagingData(1, this.pageSize);
+      }
+    },
   },
 };
 </script>
