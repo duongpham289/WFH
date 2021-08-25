@@ -3,7 +3,7 @@
     <p>
       Hiển thị
       <span style="font-weight: bold">
-        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage*pageSize }}/{{
+        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage * pageSize }}/{{
           totalRecord
         }}</span
       >
@@ -42,14 +42,12 @@
       ></button>
     </div>
     <div>
-      <select v-model="pageSize">
-        <option>10</option>
-        <option>15</option>
-        <option>20</option>
-        <option>25</option>
-        <option>30</option>
-        <option>35</option>
-      </select>
+      <base-dropdown
+        @selected="selectedPageSize"
+        :dropdown="this.$enum.PAGINATE"
+        :pageSize="pageSize"
+        :defaultState="true"
+      />
     </div>
   </div>
 </template>
@@ -60,7 +58,7 @@ export default {
     return {
       currentPage: 1,
       maxVisibleButtons: 4,
-      pageSize: 10,
+      // pageSize: 10,
     };
   },
   props: {
@@ -68,10 +66,10 @@ export default {
       type: Number,
       required: true,
     },
-    // pageSize: {
-    //   type: Number,
-    //   required: true,
-    // },
+    pageSize: {
+      type: Number,
+      required: true,
+    },
     totalPage: {
       type: Number,
       required: true,
@@ -99,7 +97,10 @@ export default {
       }
 
       if (this.currentPage === this.totalPage) {
-        return this.totalPage - this.maxVisibleButtons + 1;
+        if (this.totalPage - this.maxVisibleButtons < 0) {
+          return  1;
+        }else
+          return this.totalPage - this.maxVisibleButtons + 1;
       }
 
       // if (this.totalPage - this.currentPage < this.maxVisibleButtons) {
@@ -167,6 +168,15 @@ export default {
       this.currentPage -= 1;
     },
 
+    /**
+     * Lấy dữ liệu WorkStatus vào model
+     * Autthor: PHDUONG(3/8/2021)
+     */
+    selectedPageSize(value) {
+      this.pageSize = +value;
+      this.currentPage = 1;
+      this.$emit("getPageSize", 1, this.pageSize);
+    },
     // xét index trang chọn thì class active
     isPageActive: function (page) {
       let tmp = "";
@@ -181,11 +191,7 @@ export default {
   watch: {
     pageIndex: function () {
       this.currentPage = this.pageIndex;
-    },
-    pageSize: function () {
-      this.currentPage = 1;
-      this.$emit("getPageSize", 1, this.pageSize);
-    },
+    }
   },
 };
 </script>

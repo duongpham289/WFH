@@ -20,7 +20,7 @@ namespace MISA.CukCuk.Api2.Controllers
         #region Constructor
         public EmployeesController(IEmployeeService employeeService, IEmployeeRepository employeeRepository) : base(employeeService, employeeRepository)
         {
-            //_employeeRepository = employeeRepository;
+            _employeeRepository = employeeRepository;
             _employeeService = employeeService;
         }
 

@@ -2,7 +2,7 @@ export default {
   department: {
     options: [{
       DepartmentName: "Tất cả Phòng ban",
-      DepartmentId: "0"
+      DepartmentId: ""
     }],
     select: {
       name: "DepartmentName",
@@ -13,7 +13,7 @@ export default {
   position: {
     options: [{
       PositionName: "Tất cả Vị trí",
-      PositionId: "0"
+      PositionId: ""
     }],
     select: {
       name: "PositionName",

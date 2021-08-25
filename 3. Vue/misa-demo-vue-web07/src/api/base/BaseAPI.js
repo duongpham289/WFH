@@ -31,13 +31,6 @@ export default class BaseAPI {
     return BaseAPIConfig.post(`${this.controller}`, body);
   }
   /**
-   * Hàm lấy dữ liệu phân trang
-   * @param {*} payload
-   */
-  paging(pageIndex, pageSize, entityFilter) {
-    return BaseAPIConfig.get(`${this.controller}/paging?pageIndex=${pageIndex}&pageSize=${pageSize}&entityFilter=${entityFilter}`);
-  }
-  /**
    * Hàm cập nhật dữ liệu
    * @param {*} id
    * @param {*} body

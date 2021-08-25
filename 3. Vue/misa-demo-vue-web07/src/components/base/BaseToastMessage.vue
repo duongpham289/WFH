@@ -46,7 +46,7 @@ export default {
           this.textToastMessage = this.erorMsg;
           break;
         case 2:
-          this.textToastMessage = "Dữ liệu đã tải xong";
+          this.textToastMessage = "Dữ liệu đã tải thành công";
           break;
         case 3:
           this.textToastMessage = "Thêm mới thành công";

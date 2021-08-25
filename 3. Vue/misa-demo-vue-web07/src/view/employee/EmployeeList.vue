@@ -41,8 +41,9 @@
           <base-input
             :iconLeft="true"
             id=""
-            value=""
             placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
+            @handleInput="onChangeInput"
+            :value="search.employeeFilter"
             style="width: 350px"
           >
             <template v-slot:icon>
@@ -83,6 +84,7 @@
       </div>
       <base-pagination
         :pageIndex="pageIndex"
+        :pageSize="pageSize"
         @getPageSize="getPageSize"
         :totalPage="totalPage"
         :totalRecord="totalRecord"
@@ -137,7 +139,13 @@ export default {
     BaseToastMessage,
   },
   created() {
-    this.getEmployeePagingData(this.pageIndex, this.pageSize);
+    this.getEmployeePagingData(
+      this.pageIndex,
+      this.pageSize,
+      this.search.employeeFilter,
+      this.search.departmentId,
+      this.search.positionId
+    );
     this.getDropdownData();
   },
   methods: {
@@ -147,11 +155,23 @@ export default {
      * Lấy dữ liệu nhân viên từ Api
      * Author: PHDUONG(08/08/2021)
      */
-    getEmployeePagingData(pageIndex, pageSize, employeeFilter) {
+    getEmployeePagingData(
+      pageIndex,
+      pageSize,
+      employeeFilter,
+      departmentId,
+      positionId
+    ) {
       var vm = this;
       vm.loading = true;
 
-      EmployeesAPI.paging(pageIndex, pageSize, employeeFilter)
+      EmployeesAPI.paging(
+        pageIndex,
+        pageSize,
+        employeeFilter,
+        departmentId,
+        positionId
+      )
         .then((res) => {
           vm.employeesData = res.data.data;
           vm.totalRecord = res.data.totalRecord;
@@ -162,7 +182,7 @@ export default {
           vm.responseHandler(1, err);
         });
     },
-    
+
     /**
      * Xử lý dữ liệu trả về
      * CreatedBy: PHDUONG(24/08/2021)
@@ -251,7 +271,7 @@ export default {
         }, 2000);
       }
     },
-    
+
     /**
      * Xử lý chuyển trang
      * CreatedBy: PHDUONG(24/08/2021)
@@ -259,7 +279,13 @@ export default {
     pagingOnChange(pageIndex, pageSize) {
       this.pageIndex = pageIndex;
       this.pageSize = pageSize;
-      this.getEmployeePagingData(pageIndex, pageSize);
+      this.getEmployeePagingData(
+        pageIndex,
+        pageSize,
+        this.search.employeeFilter,
+        this.search.departmentId,
+        this.search.positionId
+      );
     },
 
     /**
@@ -268,7 +294,13 @@ export default {
      */
     getPageSize(pageIndex, pageSize) {
       this.pageSize = pageSize;
-      this.getEmployeePagingData(pageIndex, this.pageSize);
+      this.getEmployeePagingData(
+        pageIndex,
+        this.pageSize,
+        this.search.employeeFilter,
+        this.search.departmentId,
+        this.search.positionId
+      );
     },
 
     /**
@@ -300,14 +332,43 @@ export default {
         });
     },
 
+    onChangeInput({ value }) {
+      clearTimeout(this.timeoutItem);
+      this.timeoutItem = setTimeout(() => {
+        this.search.employeeFilter = value;
+        this.getEmployeePagingData(
+          this.pageIndex,
+          this.pageSize,
+          this.search.employeeFilter,
+          this.search.departmentId,
+          this.search.positionId
+        );
+      }, 500);
+    },
+
     /**
      *
      */
-    filterDepartment(value, name) {
-      console.log(value, name);
+    filterDepartment(value) {
+      this.search.departmentId = value;
+      this.getEmployeePagingData(
+        this.pageIndex,
+        this.pageSize,
+        this.search.employeeFilter,
+        this.search.departmentId,
+        this.search.positionId
+      );
     },
-    filterPosition(value, name) {
-      console.log(value, name);
+    filterPosition(value) {
+      console.log(value);
+      this.search.positionId = value;
+      this.getEmployeePagingData(
+        this.pageIndex,
+        this.pageSize,
+        this.search.employeeFilter,
+        this.search.departmentId,
+        this.search.positionId
+      );
     },
 
     /**
@@ -330,7 +391,13 @@ export default {
       this.employeesToDelete = [];
       this.isReset = true;
       this.employeesData = [];
-      this.getEmployeePagingData(this.pageIndex, this.pageSize);
+      this.getEmployeePagingData(
+        this.pageIndex,
+        this.pageSize,
+        this.search.employeeFilter,
+        this.search.departmentId,
+        this.search.positionId
+      );
     },
 
     /**
@@ -385,13 +452,17 @@ export default {
   data() {
     return {
       pageIndex: 1,
-      pageSize: 10,
+      pageSize: 15,
       totalPage: 0,
       totalRecord: 0,
       isShowToast: false,
       toastMessageState: 0,
+      search: {
+        departmentId: "",
+        positionId: "",
+        employeeFilter: "",
+      },
       errorMsg: "",
-      employeeFilter: null,
       employeesData: [],
       employeeGetById: EmployeeModel.initData(),
       employeesToDelete: [],

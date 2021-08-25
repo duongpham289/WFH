@@ -214,7 +214,7 @@
                 @selected="selectedWorkStatus"
                 :dropdown="this.$enum.WORKSTATUS"
                 :defaultState="isHidden"
-                @contentOnOverflow="contentOnOverflow"
+                :styleCustom="true"
               />
             </div>
           </div>
@@ -295,11 +295,6 @@ export default {
       this.$emit("btnReloadOnClick");
     },
 
-    contentOnOverflow() {
-      var el = this.$refs.dropdownContent;
-      el.scrollTop = el.scrollHeight;
-    },
-
     /**
      * Đưa dữ liệu tương ứng vào object employee khi nhập input từ modal
      * Autthor: PHDUONG(06/08/2021)
@@ -332,6 +327,8 @@ export default {
               vm.$emit("responseHandler", 1, err);
             });
         } else {
+          console.log(vm.employee);
+          debugger
           EmployeesAPI.update(vm.employee.EmployeeId, vm.employee)
             .then((res) => {
               vm.btnCancelOnClick();

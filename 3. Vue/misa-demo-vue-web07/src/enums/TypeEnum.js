@@ -8,5 +8,6 @@ export default {
     DEPARTMENT: "department",
     POSITION: "position",
     GENDER: "gender",
-    WORKSTATUS: "workstatus"
+    WORKSTATUS: "workstatus",
+    PAGINATE: "paginate"
 }

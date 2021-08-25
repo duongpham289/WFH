@@ -13,7 +13,7 @@
 		align-items: center;
 		justify-content: space-between;
 		color: var(--color-black);
-		background-color: transparent;
+		background-color: var(--color-white);
 		padding: 0 12px 0 16px;
 		border-radius: 4px;
 		box-sizing: border-box;
@@ -30,7 +30,7 @@
 	/* Dropdown Content */
 	.dropdown__content {
 		width: 100%;
-		position: relative;
+		position: absolute;
 		z-index: 8;
 		padding: 4px 0;
 		background-color: var(--color-white);
@@ -62,3 +62,8 @@
 			font-size: 13px;
 			color: var(--color-white);
 		}
+
+.dropdown__content--up{
+	box-shadow: 0 -10px 24px -8px rgba(0, 0, 0, 0.25);
+	bottom: 100%;
+} 

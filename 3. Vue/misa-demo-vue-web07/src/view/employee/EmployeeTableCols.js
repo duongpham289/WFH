@@ -16,16 +16,16 @@ export const columns = [{
     format: "text",
   },
   {
-    label: "Ngày sinh",
-    name: "DateOfBirth",
-    className: "text text--center",
-    format: "date",
-  },
-  {
     label: "Giới tính",
     name: "Gender",
     className: "text text--left",
     format: "gender",
+  },
+  {
+    label: "Ngày sinh",
+    name: "DateOfBirth",
+    className: "text text--center",
+    format: "date",
   },
   {
     label: "Điện thoại",

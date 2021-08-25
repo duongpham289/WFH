@@ -59,6 +59,30 @@ export default {
         }
     },
 
+    paginate: {
+        options: [{
+                PageSizeName: " nhân viên/trang",
+                PageSizeVal: "25"
+            },
+            {
+                PageSizeName: " nhân viên/trang",
+                PageSizeVal: "20"
+            },
+            {
+                PageSizeName: " nhân viên/trang",
+                PageSizeVal: "15"
+            },
+            {
+                PageSizeName: " nhân viên/trang",
+                PageSizeVal: "10"
+            }
+        ],
+        select: {
+            name: "PageSizeName",
+            value: "PageSizeVal"
+        }
+    },
+
     department: {
         options: [],
         select: {

@@ -5,12 +5,17 @@
       @click="open = !open"
       :class="open ? 'border-active' : ''"
     >
-      <span class="dropdown__title" :value="selector.value">{{
+      <span class="dropdown__title" :value="selector.value">
+        <span style="font-weight: bold">{{pageSize}}</span>{{
         selector.name ? selector.name : dropdownName
-      }}</span>
+      }}
+      </span>
       <i class="fas fa-chevron-down" :class="open ? 'rotate-180' : ''"></i>
     </button>
-    <div class="dropdown__content" v-show="open">
+    <div :class="[
+          { 'dropdown__content': true },
+          { 'dropdown__content--up': pageSize != null || styleCustom },
+        ]"  v-show="open">
       <div
         v-for="item in options"
         :key="item[select.value]"
@@ -25,7 +30,7 @@
         >
           <i class="fas fa-check"></i>
         </span>
-        <span class="text">{{ item[select.name] }}</span>
+        <span class="text">{{pageSize ? item[select.value] :""}}{{ item[select.name] }}</span>
       </div>
     </div>
   </div>
@@ -49,6 +54,12 @@ export default {
       required: true,
       default: null,
     },
+    pageSize:{
+      type:Number
+    },
+    styleCustom:{
+      type:Boolean
+    }
   },
   methods: {
     /**
@@ -145,6 +156,11 @@ export default {
             this.options = DropdownData.workStatus.options;
             this.select = DropdownData.workStatus.select;
             this.dropdownName = "Tình trạng công việc";
+            break;
+          case this.$enum.PAGINATE:
+            this.options = DropdownData.paginate.options;
+            this.select = DropdownData.paginate.select;
+            this.dropdownName = " nhân viên/trang";
             break;
 
           default:
