@@ -3,7 +3,7 @@
     <p>
       Hiển thị
       <span style="font-weight: bold">
-        {{ (currentPage - 1) * pageSize + 1 }}-{{ currentPage == totalPage ? totalRecord : currentPage * pageSize}}/{{
+        {{ totalRecord == 0 ? totalRecord : (currentPage - 1) * pageSize + 1 }}-{{ currentPage == totalPage || totalRecord == 0 ? totalRecord : currentPage * pageSize}}/{{
           totalRecord
         }}</span
       >
@@ -93,6 +93,7 @@ export default {
 
     //tạo index đầu
     startPage: function () {
+
       if (this.currentPage === 1) {
         return 1;
       }

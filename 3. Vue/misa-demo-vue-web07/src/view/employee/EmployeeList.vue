@@ -105,9 +105,12 @@
       @btnReloadOnClick="btnReloadOnClick"
     />
     <BaseToastMessage
-      :isShowToast="isShowToast"
-      :toastMessageState="toastMessageState"
-      :erorMsg="errorMsg"
+      v-for="(item,index) in toastList"
+      :index="index"
+      :key="item.id"
+      :type="item.type"
+      :message="item.message"
+      @close="closeToast(item.id)"
     />
   </div>
 </template>
@@ -125,6 +128,7 @@ import { columns } from "@/view/employee/EmployeeTableCols.js";
 import ComboboxData from "../../components/base/combobox/ComboboxData.js";
 import DropdownData from "../../components/base/dropdown/DropdownData.js";
 import BaseSpinner from "../../components/base/BaseSpinner.vue";
+import { v4 as uuidv4 } from "uuid";
 
 const $ = require("jquery");
 
@@ -173,16 +177,27 @@ export default {
         .then((res) => {
           vm.employeesData = res.data.data;
           vm.pageIndex = pageIndex;
-          vm.totalRecord = res.data.totalRecord;
-          vm.totalPage = Math.ceil(vm.totalRecord / vm.pageSize);
-          if (res.data.data) {
-            vm.responseHandler(2, "");
+
+          if (res.data) {
+            vm.totalRecord = res.data.totalRecord;
+            vm.totalPage = Math.ceil(vm.totalRecord / vm.pageSize);
           } else {
-            vm.responseHandler(6, "");
+            vm.totalRecord = 0;
+            vm.totalPage = 1;
+          }
+
+          this.loading = false;
+          if (res.data.data) {
+            this.setToast("success", "Tải dữ liệu thành công");
+            // vm.responseHandler(2, "");
+          } else {
+            this.setToast("info", "Không có dữ liệu");
+            // vm.responseHandler(6, "");
           }
         })
         .catch((err) => {
-          vm.responseHandler(1, err);
+          var message = vm.responseHandler(err);
+          this.setToast("fail", message);
         });
     },
 
@@ -190,88 +205,69 @@ export default {
      * Xử lý dữ liệu trả về
      * CreatedBy: PHDUONG(24/08/2021)
      */
-    responseHandler(status, err) {
-      let vm = this;
-      if (status == 1) {
-        switch (err.response.status) {
-          case 400:
-            vm.loading = false;
-            vm.toastMessageState = status;
+    responseHandler(err) {
+      // let vm = this;
+      // if (status == 1) {
+      this.loading = false;
+      switch (err.response.status) {
+        case 400:
+          this.toastMessageState = status;
 
-            if (err.response.data.userMsg)
-              vm.errorMsg = err.response.data.userMsg;
-            else vm.errorMsg = err.response.status + " Sai cú pháp URL";
+          if (err.response.data.userMsg) return err.response.data.userMsg;
+          else return "Sai cú pháp URL";
 
-            setTimeout(function () {
-              vm.isShowToast = true;
-            }, 400);
-            setTimeout(function () {
-              vm.isShowToast = false;
-            }, 5000);
+        case 404:
+          this.toastMessageState = status;
 
-            break;
+          if (err.response.data.userMsg) return err.response.data.userMsg;
+          else return "Không tìm thấy đường dẫn";
 
-          case 404:
-            vm.loading = false;
-            vm.toastMessageState = status;
+        case 500:
+          this.toastMessageState = status;
 
-            if (err.response.data.userMsg)
-              vm.errorMsg = err.response.data.userMsg;
-            else
-              vm.errorMsg = err.response.status + " Không tìm thấy đường dẫn";
+          if (err.response.data.userMsg) return err.response.data.userMsg;
+          else return "Lỗi hệ thống, vui lòng liên hệ MISA";
 
-            setTimeout(function () {
-              vm.isShowToast = true;
-            }, 400);
-            setTimeout(function () {
-              vm.isShowToast = false;
-            }, 5000);
-
-            break;
-
-          case 500:
-            vm.loading = false;
-            vm.toastMessageState = status;
-
-            if (err.response.data.userMsg)
-              vm.errorMsg = err.response.data.userMsg;
-            else
-              vm.errorMsg =
-                err.response.status + " Lỗi hệ thống, vui lòng liên hệ MISA";
-
-            setTimeout(function () {
-              vm.isShowToast = true;
-            }, 400);
-            setTimeout(function () {
-              vm.isShowToast = false;
-            }, 5000);
-            break;
-
-          default:
-            if (err.response.data.userMsg) {
-              vm.loading = false;
-              vm.toastMessageState = status;
-
-              vm.errorMsg = err.response.data.userMsg;
-              setTimeout(function () {
-                vm.isShowToast = true;
-              }, 400);
-              setTimeout(function () {
-                vm.isShowToast = false;
-              }, 5000);
-            }
-            break;
-        }
-      } else {
-        vm.loading = false;
-        vm.toastMessageState = status;
-        setTimeout(function () {
-          vm.isShowToast = true;
-        }, 400);
-        setTimeout(function () {
-          vm.isShowToast = false;
-        }, 2000);
+        default:
+          console.log(err.response.status);
+          break;
       }
+      //   setTimeout(function () {
+      //     vm.isShowToast = true;
+      //   }, 400);
+      //   setTimeout(function () {
+      //     vm.isShowToast = false;
+      //   }, 5000);
+      // } else {
+      //   vm.loading = false;
+      //   vm.toastMessageState = status;
+      //   setTimeout(function () {
+      //     vm.isShowToast = true;
+      //   }, 400);
+      //   setTimeout(function () {
+      //     vm.isShowToast = false;
+      //   }, 2000);
+      // }
+    },
+
+    /**
+        Truyền nội dung toast message
+    */
+    setToast(type, message) {
+      this.toastList.push({
+        id: uuidv4(),
+        type: type,
+        message: message,
+        isShowed: true,
+      });
+    },
+    /** 
+      Đóng toast message
+    */
+    closeToast(id) {
+      this.toastList = this.toastList.filter((item) => {
+        return !(item.id === id);
+      });
     },
 
     /**
@@ -462,21 +458,27 @@ export default {
       pageSize: 15,
       totalPage: 0,
       totalRecord: 0,
+
       isShowToast: false,
       toastMessageState: 0,
+      errorMsg: "",
+      toastList: [],
+
       search: {
         departmentId: "",
         positionId: "",
         employeeFilter: "",
       },
-      errorMsg: "",
+
       employeesData: [],
       employeeGetById: EmployeeModel.initData(),
       employeesToDelete: [],
-      isHiddenDialogDetail: true,
-      isHiddenPopupMessage: true,
-      modeFormDetail: 0,
       columns: columns,
+
+      isHiddenDialogDetail: true,
+      modeFormDetail: 0,
+
+      isHiddenPopupMessage: true,
       loading: true,
     };
   },

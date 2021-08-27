@@ -15,12 +15,14 @@
     "devextreme": "21.1.4",
     "devextreme-vue": "21.1.4",
     "jquery": "^3.6.0",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",
     "vue-spinner": "^1.0.4",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.1",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",

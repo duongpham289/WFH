@@ -36,7 +36,15 @@ namespace MISA.Core.Services
         {
             var entityCodes = _baseRepository.GetAllProp(columnName);
 
-            entityCodes.Sort((x, y) => y.CompareTo(x));
+            entityCodes.Sort(delegate (string x, string y)
+            {
+                if (y.Length == x.Length)
+                {
+                    return y.CompareTo(x);
+                }
+                else
+                    return y.Length.CompareTo(x.Length);
+            });
 
             _serviceResult.Data = entityCodes[0].Substring(0, 2) + (Int32.Parse(entityCodes[0].Substring(2)) + 1).ToString();
 
@@ -54,7 +62,7 @@ namespace MISA.Core.Services
             //2. Validate du lieu va xu ly nghiep vu:
             if (!ValidateData(entity))
             {
-                _serviceResult.IsValid = ValidateData(entity); 
+                _serviceResult.IsValid = ValidateData(entity);
                 return _serviceResult;
             }
             else if (!ValidateCustom(entity))
@@ -125,7 +133,7 @@ namespace MISA.Core.Services
                 if (propMISARequireds.Length > 0)
                 {
                     var message = (propMISARequireds[0] as MISARequired)._message;
-                    if (prop.PropertyType == typeof(string) && (propValue ==null || propValue.ToString() == string.Empty))
+                    if (prop.PropertyType == typeof(string) && (propValue == null || propValue.ToString() == string.Empty))
                     {
                         isValid = false;
                         _serviceResult.Message = message;

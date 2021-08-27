@@ -32,6 +32,6 @@
     color: var(--color-primary-active);
 }
 
-.toast-warning {
+.toast-fail {
     color: var(--color-alert);
 }

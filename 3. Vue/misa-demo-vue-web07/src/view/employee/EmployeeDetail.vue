@@ -422,14 +422,17 @@ export default {
   watch: {
     employeeGetById: function () {
       this.employee = this.employeeGetById;
+
       this.employee.DateOfBirth = FormatData.formatDate(
         this.employee.DateOfBirth,
         true
       );
+
       this.employee.IndentityDate = FormatData.formatDate(
         this.employee.IndentityDate,
         true
       );
+
       this.employee.JoinDate = FormatData.formatDate(
         this.employee.JoinDate,
         true
@@ -441,7 +444,7 @@ export default {
      */
     mode: function () {
       if (this.mode == 0) {
-        this.employee = {};
+        this.employee = EmployeeModel.initData();
       }
     },
     isHidden: function () {
